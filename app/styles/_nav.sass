@@ -1,0 +1,29 @@
+nav
+ background: $nav-bg
+ box-shadow: 0 0 5px #aaa
+ color: white
+ margin-bottom: 10px
+ padding: 10px
+
+ #search
+   border-radius: 5px
+   font-size: 20px
+   margin-left: 0
+   &:focus
+     background: lighten($nav-bg, 40%)
+     outline: none
+
+.fa-search
+  color: rgba(50, 50, 50, 0.5)
+  left: 15px
+  position: absolute
+  top: 17px
+
+#add-button
+  background: lighten($nav-bg, 5%)
+  border-radius: 50%
+  box-shadow: 0 0 5px darken($nav-bg, 10%)
+  color: white
+  cursor: pointer
+  margin-left: 8px
+  padding: 2px 5px
