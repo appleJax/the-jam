@@ -6,7 +6,10 @@ class RecipeList extends React.Component {
     let recipes = this.props.recipes.map(
                     r => (
                       <li key={r.id}>
-                        <Recipe recipe={r} />
+                        <Recipe
+                          recipe={r}
+                          handleClick={this.props.handleClick}
+                        />
                       </li>
                     )
                   );

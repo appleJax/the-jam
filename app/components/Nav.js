@@ -9,12 +9,7 @@ class Nav extends React.Component {
         <i className="fa fa-search fa-lg"></i>
         <span
           id="add-button"
-          onClick={() => {
-            this.props.handleClick({
-              name: 'New Recipe',
-              type: 'ADD_RECIPE'
-            })}
-          }
+          onClick={this.props.newRecipe}
         >
           <i className="fa fa-plus"></i>
         </span>

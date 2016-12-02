@@ -1,0 +1,46 @@
+.new-recipe-modal
+  background: rgba(0,0,0,0.7)
+  font-family: sans-serif
+  position: absolute
+  left: 0
+  top: 0
+  height: 100vh
+  width: 100vw
+  z-index: 1
+
+.new-recipe-form
+  background: #fff1de
+  border-radius: 10px
+  margin: 10% auto 0
+  padding: 25px 15px
+  width: 80vw
+  input, textarea
+    border-radius: 5px
+    display: block
+    margin: 5px 0 15px
+    padding: 5px
+    width: 95%
+  .new-recipe-form__servings,
+    display: inline
+    margin: 0 0 15px 10px
+    width: 25px
+  textarea[name='directions']
+    margin-bottom: 30px
+
+.new-recipe-form__save,
+.new-recipe-form__cancel
+    border-radius: 50%
+    box-shadow: 0 0 5px #000
+    color: #fff
+    cursor: pointer
+    font-weight: bold
+    width: 50px
+
+.new-recipe-form__save
+  background: green
+  padding: 8px 8px
+
+.new-recipe-form__cancel
+  background: red
+  margin-left: 25px
+  padding: 5px 8px
