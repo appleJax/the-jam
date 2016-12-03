@@ -3,33 +3,45 @@ let React = require('react');
 
 class Recipe extends React.Component {
   render() {
-    let id = this.props.recipe.id;
-    let tags = this.props.recipe.tags ?
-                 this.props.recipe.tags.map(
-                   (tag, i) => <li key={i}>{tag}</li>
-                 ) :
-                 '';
+    let {
+      id,
+      name,
+      tags,
+      servings,
+      ingredients,
+      directions,
+      showDetails
+    } = this.props.recipe;
 
-    let ingredients = this.props.recipe.ingredients ?
-                        this.props.recipe.ingredients.map(
-                          (ingredient, i) => <li key={i}>{ingredient}</li>
-                        ) :
-                        <li>None</li>;
+    const {
+      recipe,
+      handleClick,
+      editRecipe
+    } = this.props;
 
-    let directions = this.props.recipe.directions ?
-                       this.props.recipe.directions.map(
-                         (direction, i) => <li key={i}>{direction}</li>
-                       ) :
-                       <li>None</li>;
+    tags = tags.map(
+             (tag, i) =>
+               <li key={i}>{tag}</li>
+           );
 
-    let details = this.props.recipe.showDetails ?
+    ingredients = ingredients.map(
+                    (ingredient, i) =>
+                      <li key={i}>{ingredient}</li>
+                  );
+
+    directions = directions.map(
+                   (direction, i) =>
+                     <li key={i}>{direction}</li>
+                 );
+
+    let details = showDetails ?
       (
       <div>
         <div className='ingredients'>
           <h3>Ingredients:</h3>
           <span className='servings'>
-          {this.props.recipe.servings} {this.props.recipe.servings ? 'serving' : ''}
-          {this.props.recipe.servings > 1 ? 's' : ''}
+          {servings} {servings ? 'serving' : ''}
+          {servings > 1 ? 's' : ''}
           </span>
           <ul>
             {ingredients}
@@ -45,7 +57,7 @@ class Recipe extends React.Component {
           className='edit'
           onClick={() => {
             document.body.classList.add('no-scroll');
-            this.props.editRecipe(this.props.recipe);
+            editRecipe(recipe);
           }}
         >
           <i className='fa fa-pencil'></i>
@@ -59,7 +71,7 @@ class Recipe extends React.Component {
           <span
             className='delete'
             onClick={() =>
-              this.props.handleClick({
+              handleClick({
                 type: 'DELETE_RECIPE',
                 id
               })
@@ -68,7 +80,7 @@ class Recipe extends React.Component {
             <i className='fa fa-times'></i>
           </span>
           <h2 className='recipe__name'>
-            {this.props.recipe.name}
+            {name}
           </h2>
           <ul className='tags'>
              {tags}
@@ -76,14 +88,14 @@ class Recipe extends React.Component {
         </div>
         <i
           onClick={() =>
-            this.props.handleClick({
+            handleClick({
               type: 'TOGGLE_DETAILS',
               id
             })
           }
           id='expand-toggle'
           className={
-            this.props.recipe.showDetails ?
+            showDetails ?
             'fa fa-toggle-up' :
             'fa fa-ellipsis-h'
           }>

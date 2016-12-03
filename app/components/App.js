@@ -21,21 +21,26 @@ class App extends React.Component {
   }
 
   render() {
+    const {
+      store,
+      updateStore
+    } = this.props;
+
     return (
       <div className="container">
         <Nav
           newRecipe={this.toggleModal.bind(this)}
-          updateStore={this.props.updateStore}
+          updateStore={updateStore}
         />
         <RecipeList
-          handleClick={this.props.updateStore}
-          recipes={this.props.state}
+          handleClick={updateStore}
+          recipes={store}
           editRecipe={this.populateModal.bind(this)}
         />
         {
           this.state.showModal ?
           <RecipeModal
-            saveRecipe={this.props.updateStore}
+            saveRecipe={updateStore}
             closeModal={this.toggleModal.bind(this)}
             editRecipe={this.state.showModal}
           /> : ''

@@ -3,15 +3,19 @@ let React = require('react');
 
 class Nav extends React.Component {
   render() {
+    const {
+      newRecipe
+    } = this.props;
+    
     return (
       <nav>
-        <input type="search" id="search" />
         <i className="fa fa-search fa-lg"></i>
+        <input type="search" id="search" />
         <span
           id="add-button"
           onClick={() => {
             document.body.classList.add('no-scroll');
-            this.props.newRecipe();
+            newRecipe();
           }}
         >
           <i className="fa fa-plus"></i>

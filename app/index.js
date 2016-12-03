@@ -91,7 +91,7 @@ const modifyRecipes = (state = initialRecipeList, action) => {
 const render = () => {
   ReactDOM.render(
     <App
-      state={store.getState()}
+      store={store.getState()}
       updateStore={store.dispatch}
     />,
     document.getElementById('app')
@@ -109,7 +109,7 @@ if (module.hot) {
 
     ReactDOM.render(
       <NextRootContainer
-        state={store.getState()}
+        store={store.getState()}
         updateStore={store.dispatch}
       />,
       document.getElementById('app')

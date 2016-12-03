@@ -4,18 +4,23 @@ nav
  color: white
  margin-bottom: 10px
  padding: 10px
+ position: relative
+ text-align: center
 
- #search
-   border-radius: 5px
-   font-size: 20px
-   margin-left: 0
-   &:focus
-     background: lighten($nav-bg, 40%)
-     outline: none
+#search
+ border-radius: 5px
+ font-size: 20px
+ margin-left: 0
+ padding-left: 30px
+ width: 90%
+ max-width: 668px
+ &:focus
+   background: lighten($nav-bg, 40%)
+   outline: none
 
 .fa-search
   color: rgba(50, 50, 50, 0.5)
-  left: 15px
+  padding-left: 5px
   position: absolute
   top: 17px
 
