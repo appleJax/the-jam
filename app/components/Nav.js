@@ -9,7 +9,10 @@ class Nav extends React.Component {
         <i className="fa fa-search fa-lg"></i>
         <span
           id="add-button"
-          onClick={this.props.newRecipe}
+          onClick={() => {
+            document.body.classList.add('no-scroll');
+            this.props.newRecipe();
+          }}
         >
           <i className="fa fa-plus"></i>
         </span>

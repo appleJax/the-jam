@@ -53,6 +53,7 @@ class RecipeModal extends React.Component {
       recipe: recipe
     };
 
+    document.body.classList.remove('no-scroll');
     this.props.closeModal();
     this.props.saveRecipe(newAction);
   }
@@ -125,7 +126,10 @@ class RecipeModal extends React.Component {
           </span>
           <span
             className='recipe-form__cancel'
-            onClick={this.props.closeModal}
+            onClick={() => {
+              document.body.classList.remove('no-scroll');
+              this.props.closeModal();
+            }}
           >
             <i className='fa fa-times'></i>
           </span>

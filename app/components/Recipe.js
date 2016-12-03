@@ -43,8 +43,10 @@ class Recipe extends React.Component {
         </div>
         <span
           className="edit"
-          onClick={() =>
-            this.props.editRecipe(this.props.recipe)}
+          onClick={() => {
+            document.body.classList.add('no-scroll');
+            this.props.editRecipe(this.props.recipe);
+          }}
         >
           <i className="fa fa-pencil"></i>
         </span>
