@@ -1,16 +1,16 @@
-let React = require('react');
+const React = require('react');
 
 class RecipeModal extends React.Component {
   constructor(props) {
     super(props);
     let editRecipe = {};
-    if (typeof props.editRecipe == 'object') {
-      editRecipe.tags = props.editRecipe.tags.join(',');
-      editRecipe.ingredients = props.editRecipe.ingredients.join(',');
-      editRecipe.directions = props.editRecipe.directions.join(';');
+    if (typeof props.modal == 'object') {
+      editRecipe.tags = props.modal.tags.join(',');
+      editRecipe.ingredients = props.modal.ingredients.join(',');
+      editRecipe.directions = props.modal.directions.join(';');
       this.state = Object.assign(
         {},
-        props.editRecipe,
+        props.modal,
         editRecipe
       );
 
@@ -29,41 +29,50 @@ class RecipeModal extends React.Component {
   save() {
     let recipe = this.state;
     recipe.name = recipe.name.trim() || 'New Recipe';
+
     recipe.tags = recipe.tags ?
       recipe.tags.split(',')
         .map(tag =>
           tag.toLowerCase()
              .trim())
         .filter(tag => tag !== '') : [];
+
     recipe.servings = recipe.servings || 1;
+
     recipe.ingredients = recipe.ingredients ?
       recipe.ingredients.split(',')
         .map(ingredient =>
           ingredient.trim())
         .filter(ingredient => ingredient !== '') : [];
+
     recipe.directions = recipe.directions ?
       recipe.directions.split(';')
         .map(direction =>
           direction.trim())
         .filter(direction => direction !== '') : [];
-    let action = typeof this.props.editRecipe == 'object' ?
+
+    const action = typeof this.props.modal == 'object' ?
           'EDIT_RECIPE' : 'ADD_RECIPE'
-    let newAction = {
-      type: action,
-      recipe: recipe
-    };
 
     document.body.classList.remove('no-scroll');
-    this.props.closeModal();
-    this.props.saveRecipe(newAction);
+    this.props.updateStore({type: 'TOGGLE_MODAL'});
+    this.props.updateStore({
+      type: action,
+      recipe
+    });
   }
 
   render() {
+    const {
+      modal,
+      updateStore
+    } = this.props;
+
     return (
       <div className='recipe-modal'>
         <form className='recipe-form'>
           <h2 className="recipe-form__title">
-            {typeof this.props.editRecipe == 'object' ? 'Edit': 'New'} Recipe
+            {typeof modal == 'object' ? 'Edit': 'New'} Recipe
           </h2>
           <label htmlFor='title'>Name:</label>
           <input
@@ -128,7 +137,7 @@ class RecipeModal extends React.Component {
             className='recipe-form__cancel'
             onClick={() => {
               document.body.classList.remove('no-scroll');
-              this.props.closeModal();
+              updateStore({type: 'TOGGLE_MODAL'});
             }}
           >
             <i className='fa fa-times'></i>

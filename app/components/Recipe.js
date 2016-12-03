@@ -16,7 +16,6 @@ class Recipe extends React.Component {
     const {
       recipe,
       handleClick,
-      editRecipe
     } = this.props;
 
     tags = tags.map(
@@ -57,7 +56,10 @@ class Recipe extends React.Component {
           className='edit'
           onClick={() => {
             document.body.classList.add('no-scroll');
-            editRecipe(recipe);
+            handleClick({
+              type: 'POPULATE_MODAL',
+              recipe
+            });
           }}
         >
           <i className='fa fa-pencil'></i>

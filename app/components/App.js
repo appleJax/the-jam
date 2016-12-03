@@ -5,42 +5,21 @@ const React = require('react'),
     Footer = require('./Footer');
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      showModal: false
-    };
-  }
-
-  toggleModal() {
-    this.setState({showModal: !this.state.showModal});
-  }
-
-  populateModal(recipe) {
-    this.setState({showModal: recipe});
-  }
-
   render() {
-    const {
-      updateStore
-    } = this.props;
-
+    const { modal } = this.props;
+    
     return (
       <div className="container">
         <Nav
-          newRecipe={this.toggleModal.bind(this)}
           {...this.props}
         />
         <RecipeList
           {...this.props}
-          editRecipe={this.populateModal.bind(this)}
         />
         {
-          this.state.showModal ?
+          modal ?
           <RecipeModal
-            saveRecipe={updateStore}
-            closeModal={this.toggleModal.bind(this)}
-            editRecipe={this.state.showModal}
+            {...this.props}
           /> : ''
         }
         <div className="spacer"></div>

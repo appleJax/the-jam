@@ -4,7 +4,6 @@ const React = require('react');
 class Nav extends React.Component {
   render() {
     const {
-      newRecipe,
       updateStore
     } = this.props;
 
@@ -27,7 +26,9 @@ class Nav extends React.Component {
           id="add-button"
           onClick={() => {
             document.body.classList.add('no-scroll');
-            newRecipe();
+            updateStore({
+              type: 'TOGGLE_MODAL'
+            });
           }}
         >
           <i className="fa fa-plus"></i>

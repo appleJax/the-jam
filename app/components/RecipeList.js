@@ -7,7 +7,6 @@ class RecipeList extends React.Component {
       recipes,
       filter,
       updateStore,
-      editRecipe
     } = this.props;
 
     const visibleRecipes = recipes.filter(
@@ -28,7 +27,6 @@ class RecipeList extends React.Component {
                           <Recipe
                             recipe={r}
                             handleClick={updateStore}
-                            editRecipe={editRecipe}
                           />
                         </li>
                       )

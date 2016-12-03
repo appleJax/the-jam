@@ -89,6 +89,17 @@ const recipes = (state = initialRecipeList, action) => {
   }
 };
 
+const modal = (state = false, action) => {
+  switch (action.type) {
+    case 'TOGGLE_MODAL':
+      return !state;
+    case 'POPULATE_MODAL':
+      return action.recipe;
+    default:
+      return state;
+  }
+};
+
 const filter = (state = /.+/, action) => {
   switch (action.type) {
     case 'SET_FILTER':
@@ -108,8 +119,13 @@ const render = () => {
   );
 };
 
-const recipeBox = combineReducers({recipes, filter}),
-      store = createStore(recipeBox);
+const recipeBox = combineReducers({
+  recipes,
+  filter,
+  modal
+});
+
+const store = createStore(recipeBox);
 store.subscribe(render);
 
 render();
