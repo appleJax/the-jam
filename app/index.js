@@ -2,12 +2,13 @@ require('normalize-scss/sass/_normalize.scss');
 require('./index.sass');
 require('react-hot-loader/patch');
 
-let React = require('react'),
-    ReactDOM = require('react-dom'),
-    App = require('./components/App'),
-    createStore = require('redux').createStore;
+const React = require('react'),
+      ReactDOM = require('react-dom'),
+      App = require('./components/App'),
+      createStore = require('redux').createStore,
+      combineReducers = require('redux').combineReducers;
 
-let initialRecipeList = [
+const initialRecipeList = [
   {
     id: 1,
     name: 'Margherita Pizza',
@@ -28,7 +29,7 @@ let initialRecipeList = [
   }
 ];
 
-const modifyRecipe = (state = {}, action) => {
+const recipe = (state = {}, action) => {
   switch (action.type) {
     case 'ADD_RECIPE':
       return {
@@ -62,27 +63,36 @@ const modifyRecipe = (state = {}, action) => {
   }
 };
 
-const modifyRecipes = (state = initialRecipeList, action) => {
+const recipes = (state = initialRecipeList, action) => {
   switch (action.type) {
     case 'ADD_RECIPE':
       return [
         ...state,
-        modifyRecipe(undefined, action)
+        recipe(undefined, action)
       ];
     case 'EDIT_RECIPE':
       return state.map(
-        recipe =>
-          modifyRecipe(recipe, action)
+        r =>
+          recipe(r, action)
         );
     case 'DELETE_RECIPE':
       return state.filter(
-        recipe => recipe.id !== action.id
+        r => r.id !== action.id
       );
     case 'TOGGLE_DETAILS':
       return state.map(
-        recipe =>
-        modifyRecipe(recipe, action)
+        r =>
+        recipe(r, action)
       );
+    default:
+      return state;
+  }
+};
+
+const filter = (state = /.+/, action) => {
+  switch (action.type) {
+    case 'SET_FILTER':
+      return action.filter;
     default:
       return state;
   }
@@ -91,14 +101,15 @@ const modifyRecipes = (state = initialRecipeList, action) => {
 const render = () => {
   ReactDOM.render(
     <App
-      store={store.getState()}
+      {...store.getState()}
       updateStore={store.dispatch}
     />,
     document.getElementById('app')
   );
 };
 
-let store = createStore(modifyRecipes);
+const recipeBox = combineReducers({recipes, filter}),
+      store = createStore(recipeBox);
 store.subscribe(render);
 
 render();
@@ -109,7 +120,7 @@ if (module.hot) {
 
     ReactDOM.render(
       <NextRootContainer
-        store={store.getState()}
+        {...store.getState()}
         updateStore={store.dispatch}
       />,
       document.getElementById('app')

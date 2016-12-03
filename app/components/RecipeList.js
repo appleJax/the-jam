@@ -1,19 +1,33 @@
-let React = require('react'),
+const React = require('react'),
     Recipe = require('./Recipe');
 
 class RecipeList extends React.Component {
   render() {
     const {
       recipes,
-      handleClick,
+      filter,
+      updateStore,
       editRecipe
     } = this.props;
-    let recipeList = recipes.map(
+
+    const visibleRecipes = recipes.filter(
+            recipe => {
+              const text = recipe.name +
+                recipe.tags.join(' ') +
+                recipe.servings +
+                recipe.ingredients.join(' ') +
+                recipe.directions.join(' ');
+
+              return text.match(filter);
+            }
+          );
+
+    const recipeList = visibleRecipes.map(
                       r => (
                         <li key={r.id}>
                           <Recipe
                             recipe={r}
-                            handleClick={handleClick}
+                            handleClick={updateStore}
                             editRecipe={editRecipe}
                           />
                         </li>

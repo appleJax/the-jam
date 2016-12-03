@@ -1,4 +1,4 @@
-let React = require('react'),
+const React = require('react'),
     Nav = require('./Nav'),
     RecipeList = require('./RecipeList'),
     RecipeModal = require('./RecipeModal'),
@@ -22,7 +22,6 @@ class App extends React.Component {
 
   render() {
     const {
-      store,
       updateStore
     } = this.props;
 
@@ -30,11 +29,10 @@ class App extends React.Component {
       <div className="container">
         <Nav
           newRecipe={this.toggleModal.bind(this)}
-          updateStore={updateStore}
+          {...this.props}
         />
         <RecipeList
-          handleClick={updateStore}
-          recipes={store}
+          {...this.props}
           editRecipe={this.populateModal.bind(this)}
         />
         {

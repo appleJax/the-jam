@@ -1,5 +1,5 @@
 require('font-awesome/scss/font-awesome.scss');
-let React = require('react');
+const React = require('react');
 
 class Recipe extends React.Component {
   render() {

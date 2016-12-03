@@ -1,16 +1,28 @@
 require('font-awesome/scss/font-awesome.scss');
-let React = require('react');
+const React = require('react');
 
 class Nav extends React.Component {
   render() {
     const {
-      newRecipe
+      newRecipe,
+      updateStore
     } = this.props;
-    
+
     return (
       <nav>
         <i className="fa fa-search fa-lg"></i>
-        <input type="search" id="search" />
+        <input
+          type="search"
+          id="search"
+          onChange={e => {
+            const val = e.target.value.trim(),
+                  filter = new RegExp(val, 'i');
+            updateStore({
+              type: 'SET_FILTER',
+              filter
+            });
+          }}
+        />
         <span
           id="add-button"
           onClick={() => {
