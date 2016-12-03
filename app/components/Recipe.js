@@ -43,7 +43,8 @@ class Recipe extends React.Component {
         </div>
         <span
           className="edit"
-          onClick={this.props.toggleModal}
+          onClick={() =>
+            this.props.editRecipe(this.props.recipe)}
         >
           <i className="fa fa-pencil"></i>
         </span>
@@ -52,13 +53,14 @@ class Recipe extends React.Component {
 
     return (
       <div className="recipe">
-        <span className="delete"
-              onClick={() =>
-                this.props.handleClick({
-                  type: 'DELETE_RECIPE',
-                  id
-                })
-              }
+        <span
+          className="delete"
+          onClick={() =>
+            this.props.handleClick({
+              type: 'DELETE_RECIPE',
+              id
+            })
+          }
         >
           <i className="fa fa-times"></i>
         </span>

@@ -16,6 +16,10 @@ class App extends React.Component {
     this.setState({showModal: !this.state.showModal});
   }
 
+  populateModal(recipe) {
+    this.setState({showModal: recipe});
+  }
+
   render() {
     return (
       <div className="container">
@@ -26,13 +30,16 @@ class App extends React.Component {
         <RecipeList
           handleClick={this.props.updateStore}
           recipes={this.props.state}
-          editRecipe={this.toggleModal.bind(this)}
+          editRecipe={this.populateModal.bind(this)}
         />
-        {this.state.showModal ?
+        {
+          this.state.showModal ?
           <RecipeModal
             saveRecipe={this.props.updateStore}
             closeModal={this.toggleModal.bind(this)}
-          /> : ''}
+            editRecipe={this.state.showModal}
+          /> : ''
+        }
         <div className="spacer"></div>
         <Footer />
       </div>

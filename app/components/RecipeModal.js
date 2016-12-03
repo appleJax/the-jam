@@ -3,38 +3,55 @@ let React = require('react');
 class RecipeModal extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      id: new Date().getTime(),
-      name: '',
-      tags: '',
-      servings: 1,
-      ingredients: '',
-      directions: '',
-    };
+    let editRecipe = {};
+    if (typeof props.editRecipe == 'object') {
+      editRecipe.tags = props.editRecipe.tags.join(',');
+      editRecipe.ingredients = props.editRecipe.ingredients.join(',');
+      editRecipe.directions = props.editRecipe.directions.join(';');
+      this.state = Object.assign(
+        {},
+        props.editRecipe,
+        editRecipe
+      );
+
+    } else {
+      this.state = {
+        id: new Date().getTime(),
+        name: '',
+        tags: '',
+        servings: 1,
+        ingredients: '',
+        directions: '',
+      };
+    }
   }
 
   save() {
     let recipe = this.state;
-    recipe.name = recipe.name.trim();
+    recipe.name = recipe.name.trim() || 'New Recipe';
     recipe.tags = recipe.tags ?
       recipe.tags.split(',')
         .map(tag =>
           tag.toLowerCase()
-             .trim()) : [];
+             .trim())
+        .filter(tag => tag !== '') : [];
     recipe.servings = recipe.servings || 1;
     recipe.ingredients = recipe.ingredients ?
       recipe.ingredients.split(',')
         .map(ingredient =>
-          ingredient.trim()) : [];
+          ingredient.trim())
+        .filter(ingredient => ingredient !== '') : [];
     recipe.directions = recipe.directions ?
       recipe.directions.split(';')
         .map(direction =>
-          direction.trim()) : [];
-    let newAction = Object.assign(
-      {},
-      recipe,
-      {type: 'ADD_RECIPE'}
-    );
+          direction.trim())
+        .filter(direction => direction !== '') : [];
+    let action = typeof this.props.editRecipe == 'object' ?
+          'EDIT_RECIPE' : 'ADD_RECIPE'
+    let newAction = {
+      type: action,
+      recipe: recipe
+    };
 
     this.props.closeModal();
     this.props.saveRecipe(newAction);
@@ -44,7 +61,9 @@ class RecipeModal extends React.Component {
     return (
       <div className='recipe-modal'>
         <form className='recipe-form'>
-          <h2>New Recipe</h2>
+          <h2>
+            {typeof this.props.editRecipe == 'object' ? 'Edit': 'New'} Recipe
+          </h2>
           <label htmlFor='title'>Name:</label>
           <input
             type='text'

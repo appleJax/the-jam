@@ -32,17 +32,17 @@ const modifyRecipe = (state = {}, action) => {
   switch (action.type) {
     case 'ADD_RECIPE':
       return {
-        id: action.id,
-        name: action.name,
-        tags: action.tags,
-        servings: action.servings,
-        ingredients: action.ingredients,
-        directions: action.directions,
+        id: action.recipe.id,
+        name: action.recipe.name,
+        tags: action.recipe.tags,
+        servings: action.recipe.servings,
+        ingredients: action.recipe.ingredients,
+        directions: action.recipe.directions,
         showDetails: true
       };
 
     case 'EDIT_RECIPE':
-      if (state.id == action.id) {
+      if (state.id == action.recipe.id) {
         return action.recipe;
       }
       return state;
@@ -71,15 +71,18 @@ const modifyRecipes = (state = initialRecipeList, action) => {
       ];
     case 'EDIT_RECIPE':
       return state.map(
-        recipe => {
+        recipe =>
           modifyRecipe(recipe, action)
-      });
+        );
     case 'DELETE_RECIPE':
       return state.filter(
         recipe => recipe.id !== action.id
       );
     case 'TOGGLE_DETAILS':
-      return state.map(recipe => modifyRecipe(recipe, action));
+      return state.map(
+        recipe =>
+        modifyRecipe(recipe, action)
+      );
     default:
       return state;
   }
@@ -106,7 +109,7 @@ if (module.hot) {
 
     ReactDOM.render(
       <NextRootContainer
-        store={store.getState()}
+        state={store.getState()}
         updateStore={store.dispatch}
       />,
       document.getElementById('app')
