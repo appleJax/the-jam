@@ -25,9 +25,9 @@ class Recipe extends React.Component {
     let details = this.props.recipe.showDetails ?
       (
       <div>
-        <div className="ingredients">
+        <div className='ingredients'>
           <h3>Ingredients:</h3>
-          <span className="servings">
+          <span className='servings'>
           {this.props.recipe.servings} {this.props.recipe.servings ? 'serving' : ''}
           {this.props.recipe.servings > 1 ? 's' : ''}
           </span>
@@ -35,43 +35,45 @@ class Recipe extends React.Component {
             {ingredients}
           </ul>
         </div>
-        <div className="directions">
+        <div className='directions'>
           <h3>Directions:</h3>
           <ol>
             {directions}
           </ol>
         </div>
         <span
-          className="edit"
+          className='edit'
           onClick={() => {
             document.body.classList.add('no-scroll');
             this.props.editRecipe(this.props.recipe);
           }}
         >
-          <i className="fa fa-pencil"></i>
+          <i className='fa fa-pencil'></i>
         </span>
       </div>
       ) : '';
 
     return (
-      <div className="recipe">
-        <span
-          className="delete"
-          onClick={() =>
-            this.props.handleClick({
-              type: 'DELETE_RECIPE',
-              id
-            })
-          }
-        >
-          <i className="fa fa-times"></i>
-        </span>
-        <h2 className="recipe-name">
-          {this.props.recipe.name}
-        </h2>
-        <ul className="tags">
-           {tags}
-        </ul>
+      <div className='recipe'>
+        <div className='recipe__header'>
+          <span
+            className='delete'
+            onClick={() =>
+              this.props.handleClick({
+                type: 'DELETE_RECIPE',
+                id
+              })
+            }
+          >
+            <i className='fa fa-times'></i>
+          </span>
+          <h2 className='recipe__name'>
+            {this.props.recipe.name}
+          </h2>
+          <ul className='tags'>
+             {tags}
+          </ul>
+        </div>
         <i
           onClick={() =>
             this.props.handleClick({
@@ -79,11 +81,11 @@ class Recipe extends React.Component {
               id
             })
           }
-          id="expand-toggle"
+          id='expand-toggle'
           className={
             this.props.recipe.showDetails ?
-            "fa fa-toggle-up" :
-            "fa fa-ellipsis-h"
+            'fa fa-toggle-up' :
+            'fa fa-ellipsis-h'
           }>
           </i>
         {details}

@@ -62,7 +62,7 @@ class RecipeModal extends React.Component {
     return (
       <div className='recipe-modal'>
         <form className='recipe-form'>
-          <h2>
+          <h2 className="recipe-form__title">
             {typeof this.props.editRecipe == 'object' ? 'Edit': 'New'} Recipe
           </h2>
           <label htmlFor='title'>Name:</label>
