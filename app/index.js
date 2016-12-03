@@ -32,13 +32,13 @@ const modifyRecipe = (state = {}, action) => {
   switch (action.type) {
     case 'ADD_RECIPE':
       return {
-        id: new Date().getTime(),
+        id: action.id,
         name: action.name,
         tags: action.tags,
         servings: action.servings,
         ingredients: action.ingredients,
         directions: action.directions,
-        showDetails: false
+        showDetails: true
       };
 
     case 'EDIT_RECIPE':

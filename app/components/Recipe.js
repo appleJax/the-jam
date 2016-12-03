@@ -28,7 +28,8 @@ class Recipe extends React.Component {
         <div className="ingredients">
           <h3>Ingredients:</h3>
           <span className="servings">
-          {this.props.recipe.servings} {this.props.recipe.servings ? 'servings' : ''}
+          {this.props.recipe.servings} {this.props.recipe.servings ? 'serving' : ''}
+          {this.props.recipe.servings > 1 ? 's' : ''}
           </span>
           <ul>
             {ingredients}
@@ -40,7 +41,12 @@ class Recipe extends React.Component {
             {directions}
           </ol>
         </div>
-        <span className="edit"><i className="fa fa-pencil"></i></span>
+        <span
+          className="edit"
+          onClick={this.props.toggleModal}
+        >
+          <i className="fa fa-pencil"></i>
+        </span>
       </div>
       ) : '';
 

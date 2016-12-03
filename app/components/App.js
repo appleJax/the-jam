@@ -1,7 +1,7 @@
 let React = require('react'),
     Nav = require('./Nav'),
     RecipeList = require('./RecipeList'),
-    NewRecipeModal = require('./NewRecipeModal'),
+    RecipeModal = require('./RecipeModal'),
     Footer = require('./Footer');
 
 class App extends React.Component {
@@ -26,11 +26,12 @@ class App extends React.Component {
         <RecipeList
           handleClick={this.props.updateStore}
           recipes={this.props.state}
+          editRecipe={this.toggleModal.bind(this)}
         />
         {this.state.showModal ?
-          <NewRecipeModal
-            saveRecipe={this.props.handleClick}
-            cancelRecipe={this.toggleModal.bind(this)}
+          <RecipeModal
+            saveRecipe={this.props.updateStore}
+            closeModal={this.toggleModal.bind(this)}
           /> : ''}
         <div className="spacer"></div>
         <Footer />

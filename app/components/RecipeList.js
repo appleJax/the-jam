@@ -9,6 +9,7 @@ class RecipeList extends React.Component {
                         <Recipe
                           recipe={r}
                           handleClick={this.props.handleClick}
+                          toggleModal={this.props.editRecipe}
                         />
                       </li>
                     )
