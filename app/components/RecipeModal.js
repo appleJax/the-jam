@@ -69,8 +69,19 @@ class RecipeModal extends React.Component {
     } = this.props;
 
     return (
-      <div className='recipe-modal'>
-        <form className='recipe-form'>
+      <div
+        className='recipe-modal'
+        onClick={() => {
+          document.body.classList.remove('no-scroll');
+          updateStore({type: 'TOGGLE_MODAL'});
+        }}
+      >
+        <form
+          className='recipe-form'
+          onClick={e =>
+            e.stopPropagation()
+          }
+        >
           <h2 className="recipe-form__title">
             {typeof modal == 'object' ? 'Edit': 'New'} Recipe
           </h2>

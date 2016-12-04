@@ -34,7 +34,7 @@ module.exports = {
     ]
   },
   output: {
-    filename: 'transformed.js',
+    filename: 'index.js',
     path: __dirname + '/build'
   },
   plugins: [
