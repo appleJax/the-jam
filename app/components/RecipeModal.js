@@ -6,7 +6,7 @@ class RecipeModal extends React.Component {
     let editRecipe = {};
     if (typeof props.modal == 'object') {
       editRecipe.tags = props.modal.tags.join(',');
-      editRecipe.ingredients = props.modal.ingredients.join(',');
+      editRecipe.ingredients = props.modal.ingredients.join(';');
       editRecipe.directions = props.modal.directions.join(';');
       this.state = Object.assign(
         {},
@@ -40,7 +40,7 @@ class RecipeModal extends React.Component {
     recipe.servings = recipe.servings || 1;
 
     recipe.ingredients = recipe.ingredients ?
-      recipe.ingredients.split(',')
+      recipe.ingredients.split(';')
         .map(ingredient =>
           ingredient.trim())
         .filter(ingredient => ingredient !== '') : [];
@@ -119,7 +119,7 @@ class RecipeModal extends React.Component {
           <br />
 
           <label htmlFor='ingredients'>
-            Ingredients (separated by commas):
+            Ingredients (separated by semicolons):
           </label>
           <textarea
             rows='6'

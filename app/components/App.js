@@ -27,7 +27,7 @@ class App extends React.Component {
     if (storageAvailable('localStorage')) {
       localStorage.setItem('recipes', JSON.stringify(recipes));
     }
-    console.log(recipes.toString());
+
     return (
       <div className="container">
         <Nav
