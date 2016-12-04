@@ -9,6 +9,8 @@ class RecipeList extends React.Component {
       updateStore,
     } = this.props;
 
+    const regex = filter.filter(val => val !== '').join('|');
+
     const visibleRecipes = recipes.filter(
             recipe => {
               const text = recipe.name +
@@ -17,7 +19,7 @@ class RecipeList extends React.Component {
                 recipe.ingredients.join(' ') +
                 recipe.directions.join(' ');
 
-              return text.match(new RegExp(filter, 'i'));
+              return text.match(new RegExp(regex, 'i'));
             }
           );
 
@@ -26,6 +28,7 @@ class RecipeList extends React.Component {
                         <li key={r.id}>
                           <Recipe
                             recipe={r}
+                            filter={filter}
                             handleClick={updateStore}
                           />
                         </li>

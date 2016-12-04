@@ -14,6 +14,7 @@ class Recipe extends React.Component {
     } = this.props.recipe;
 
     const {
+      filter,
       recipe,
       handleClick,
     } = this.props;
@@ -25,7 +26,7 @@ class Recipe extends React.Component {
                  onClick={e =>
                    handleClick({
                      type: 'SET_FILTER',
-                     filter: e.target.innerHTML
+                     filter: filter.concat(e.target.innerHTML)
                    })
                  }
                >

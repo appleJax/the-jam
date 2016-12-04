@@ -14,10 +14,10 @@ class Nav extends React.Component {
         <input
           type='search'
           id='search'
-          value={filter}
+          value={filter.join(' ')}
           onChange={e => {
-            const val = e.target.value.trim(),
-                  filter = val;
+            const filter = e.target.value.split(' ');
+
             updateStore({
               type: 'SET_FILTER',
               filter
