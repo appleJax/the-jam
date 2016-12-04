@@ -17,7 +17,7 @@ class RecipeList extends React.Component {
                 recipe.ingredients.join(' ') +
                 recipe.directions.join(' ');
 
-              return text.match(filter);
+              return text.match(new RegExp(filter, 'i'));
             }
           );
 

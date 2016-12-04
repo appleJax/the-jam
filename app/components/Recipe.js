@@ -20,7 +20,17 @@ class Recipe extends React.Component {
 
     tags = tags.map(
              (tag, i) =>
-               <li key={i}>{tag}</li>
+               <li
+                 key={i}
+                 onClick={e =>
+                   handleClick({
+                     type: 'SET_FILTER',
+                     filter: e.target.innerHTML
+                   })
+                 }
+               >
+                 {tag}
+               </li>
            );
 
     ingredients = ingredients.map(

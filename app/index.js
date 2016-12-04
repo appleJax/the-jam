@@ -100,7 +100,7 @@ const modal = (state = false, action) => {
   }
 };
 
-const filter = (state = /.+/, action) => {
+const filter = (state = '', action) => {
   switch (action.type) {
     case 'SET_FILTER':
       return action.filter;

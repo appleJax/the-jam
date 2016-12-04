@@ -4,18 +4,20 @@ const React = require('react');
 class Nav extends React.Component {
   render() {
     const {
+      filter,
       updateStore
     } = this.props;
 
     return (
       <nav>
-        <i className="fa fa-search fa-lg"></i>
+        <i className='fa fa-search fa-lg'></i>
         <input
-          type="search"
-          id="search"
+          type='search'
+          id='search'
+          value={filter}
           onChange={e => {
             const val = e.target.value.trim(),
-                  filter = new RegExp(val, 'i');
+                  filter = val;
             updateStore({
               type: 'SET_FILTER',
               filter
@@ -23,7 +25,7 @@ class Nav extends React.Component {
           }}
         />
         <span
-          id="add-button"
+          id='add-button'
           onClick={() => {
             document.body.classList.add('no-scroll');
             updateStore({
@@ -31,7 +33,7 @@ class Nav extends React.Component {
             });
           }}
         >
-          <i className="fa fa-plus"></i>
+          <i className='fa fa-plus'></i>
         </span>
       </nav>
     );
