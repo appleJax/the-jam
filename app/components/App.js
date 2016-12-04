@@ -6,8 +6,28 @@ const React = require('react'),
 
 class App extends React.Component {
   render() {
-    const { modal } = this.props;
-    
+    function storageAvailable(type) {
+      try {
+        var storage = window[type],
+          x = '__storage_test__';
+        storage.setItem(x, x);
+        storage.removeItem(x);
+        return true;
+      }
+      catch(e) {
+        return false;
+      }
+    }
+
+    const {
+      modal,
+      recipes
+    } = this.props;
+
+    if (storageAvailable('localStorage')) {
+      localStorage.setItem('recipes', JSON.stringify(recipes));
+    }
+    console.log(recipes.toString());
     return (
       <div className="container">
         <Nav

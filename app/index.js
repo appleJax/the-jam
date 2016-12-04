@@ -8,7 +8,7 @@ const React = require('react'),
       createStore = require('redux').createStore,
       combineReducers = require('redux').combineReducers;
 
-const initialRecipeList = [
+let initialRecipeList = [
   {
     id: 1,
     name: 'Margherita Pizza',
@@ -28,6 +28,25 @@ const initialRecipeList = [
     showDetails: false
   }
 ];
+
+function storageAvailable(type) {
+  try {
+    var storage = window[type],
+      x = '__storage_test__';
+    storage.setItem(x, x);
+    storage.removeItem(x);
+    return true;
+  }
+  catch(e) {
+    return false;
+  }
+}
+
+if (storageAvailable('localStorage')) {
+  if (localStorage.getItem('recipes')) {
+    initialRecipeList = JSON.parse(localStorage.getItem('recipes'));
+  }
+}
 
 const recipe = (state = {}, action) => {
   switch (action.type) {
