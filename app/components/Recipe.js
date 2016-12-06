@@ -7,6 +7,7 @@ class Recipe extends React.Component {
       id,
       name,
       tags,
+      stars,
       servings,
       ingredients,
       directions,
@@ -44,7 +45,7 @@ class Recipe extends React.Component {
                      <li key={i}>{direction}</li>
                  );
 
-    let details = showDetails ?
+    const details = showDetails ?
       (
       <div>
         <div className='ingredients'>
@@ -77,6 +78,49 @@ class Recipe extends React.Component {
         </span>
       </div>
       ) : '';
+
+      const starIcons = [];
+
+      for (let i = 1; i <= 5; i++) {
+        if (i <= stars) {
+          starIcons.unshift(
+            <i className='fa fa-star fa-lg'
+               key={i}
+               data-value={i}
+               onClick={(e) => {
+                 const editedRecipe = recipe,
+                       newStars = e.target.dataset.value;
+                 if (newStars == 1) {
+                   editedRecipe.stars = 0;
+                 } else {
+                   editedRecipe.stars = newStars;
+                 }
+                 handleClick({
+                   type: 'EDIT_RECIPE',
+                   recipe: editedRecipe
+                 });
+               }}
+            >
+            </i>
+          );
+        } else {
+          starIcons.unshift(
+            <i className='fa fa-star-o fa-lg'
+               key={i}
+               data-value={i}
+               onClick={(e) => {
+                 const editedRecipe = recipe;
+                 editedRecipe.stars = e.target.dataset.value;
+                 handleClick({
+                   type: 'EDIT_RECIPE',
+                   recipe: editedRecipe
+                 });
+               }}
+            >
+            </i>
+          );
+        }
+      }
 
     return (
       <div className='recipe'>
@@ -111,8 +155,10 @@ class Recipe extends React.Component {
             showDetails ?
             'fa fa-toggle-up' :
             'fa fa-ellipsis-h'
-          }>
-          </i>
+          }
+        >
+        </i>
+        {starIcons}
         {details}
       </div>
     );

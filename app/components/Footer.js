@@ -4,7 +4,7 @@ class Footer extends React.Component {
   render() {
     return (
       <footer>
-        © 2016 RecipeBox
+        © 2016 theJam
       </footer>
     );
   }

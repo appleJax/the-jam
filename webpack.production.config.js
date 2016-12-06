@@ -7,11 +7,7 @@ let HTMLWebpackPlugin = require('html-webpack-plugin'),
     webpack = require('webpack');
 
 module.exports = {
-  entry: [
-    'webpack-dev-server/client?http://localhost:8080', // WebpackDevServer host and port
-    'webpack/hot/only-dev-server',
-    __dirname + '/app/index.js',
-  ],
+  entry: __dirname + '/app/index.js',
   module: {
     loaders: [
       {test: /\.scss?$/, loaders: ['style', 'css', 'sass']},
@@ -35,11 +31,9 @@ module.exports = {
   },
   output: {
     filename: 'bundle.js',
-    path: __dirname + '/build'
+    path: '../nodeServer/public'
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    HTMLWebpackPluginConfig,
-    new webpack.optimize.DedupePlugin()
+    HTMLWebpackPluginConfig
   ]
 };

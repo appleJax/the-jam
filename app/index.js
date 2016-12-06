@@ -1,6 +1,6 @@
 require('normalize-scss/sass/_normalize.scss');
 require('./index.sass');
-require('react-hot-loader/patch');
+//require('react-hot-loader/patch');
 
 const React = require('react'),
       ReactDOM = require('react-dom'),
@@ -13,6 +13,7 @@ let initialRecipeList = [
     id: 1,
     name: 'Margherita Pizza',
     tags: ['pizza', 'vegetarian', 'cheese', 'tomatoes'],
+    stars: 4,
     servings: 2,
     ingredients: ['1 cup flour', '1 cup beer', '1 Tbsp salt', '1 Tbsp yeast',
       '1 1/2 cups tomato sauce', '1 1/2 cups mozzarella cheese',
@@ -31,6 +32,7 @@ let initialRecipeList = [
     id: 2,
     name: 'Buffalo Chicken Dip',
     tags: ['chicken', 'appetizer', 'spicy', 'snack'],
+    stars: 0,
     servings: 4,
     ingredients: ['2 chicken breasts (cooked and shredded)', '4oz Philadelphia cream cheese',
       '1/2 cup colby jack shredded cheese', '1/2 cup Buffalo Wild Wing sauce',
@@ -42,6 +44,7 @@ let initialRecipeList = [
     id: 3,
     name: 'Cheesy Chicken Tortilla Soup',
     tags: ['chicken', 'cheese', 'soup', 'sides', 'mexican'],
+    stars: 3,
     servings: 4,
     ingredients: ['1 package fajita mix', '1 pound chicken breast, shredded',
       '1 medium onion (chopped)', '1 stick butter', '1/3 cup flour', '2 cans chicken broth',
@@ -57,25 +60,6 @@ let initialRecipeList = [
   }
 ];
 
-function storageAvailable(type) {
-  try {
-    var storage = window[type],
-      x = '__storage_test__';
-    storage.setItem(x, x);
-    storage.removeItem(x);
-    return true;
-  }
-  catch(e) {
-    return false;
-  }
-}
-
-if (storageAvailable('localStorage')) {
-  if (localStorage.getItem('recipes')) {
-    initialRecipeList = JSON.parse(localStorage.getItem('recipes'));
-  }
-}
-
 const recipe = (state = {}, action) => {
   switch (action.type) {
     case 'ADD_RECIPE':
@@ -83,10 +67,10 @@ const recipe = (state = {}, action) => {
         id: action.recipe.id,
         name: action.recipe.name,
         tags: action.recipe.tags,
+        stars: action.recipe.stars,
         servings: action.recipe.servings,
         ingredients: action.recipe.ingredients,
-        directions: action.recipe.directions,
-        showDetails: true
+        directions: action.recipe.directions
       };
 
     case 'EDIT_RECIPE':
@@ -176,7 +160,7 @@ const store = createStore(recipeBox);
 store.subscribe(render);
 
 render();
-
+/*
 if (module.hot) {
   module.hot.accept('./components/App.js', () => {
     const NextRootContainer = require('./components/App.js');
@@ -190,3 +174,4 @@ if (module.hot) {
     );
   });
 }
+*/

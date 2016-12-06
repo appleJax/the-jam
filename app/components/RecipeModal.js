@@ -3,7 +3,7 @@ const React = require('react');
 class RecipeModal extends React.Component {
   constructor(props) {
     super(props);
-    let editRecipe = {};
+    const editRecipe = {};
     if (typeof props.modal == 'object') {
       editRecipe.tags = props.modal.tags.join(',');
       editRecipe.ingredients = props.modal.ingredients.join(';');
@@ -16,12 +16,13 @@ class RecipeModal extends React.Component {
 
     } else {
       this.state = {
-        id: new Date().getTime(),
         name: '',
         tags: '',
+        stars: 0,
         servings: 1,
         ingredients: '',
         directions: '',
+        showDetails: false
       };
     }
   }
@@ -54,12 +55,31 @@ class RecipeModal extends React.Component {
     const action = typeof this.props.modal == 'object' ?
           'EDIT_RECIPE' : 'ADD_RECIPE'
 
+    if (action == 'ADD_RECIPE') {
+      let xhr = new XMLHttpRequest(),
+          url = 'https://thejam.herokuapp.com/new-recipe',
+          data = JSON.stringify(recipe);
+      xhr.responseType = 'json';
+      xhr.open('POST', url);
+      xhr.setRequestHeader('Content-type', 'application/json');
+      xhr.onreadystatechange = () => {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+          this.props.updateStore({
+            type: action,
+            recipe: xhr.response.ops[0]
+          });
+        }
+      }
+      xhr.send(data);
+    } else {
+      this.props.updateStore({
+        type: action,
+        recipe
+      });
+    }
+
     document.body.classList.remove('no-scroll');
     this.props.updateStore({type: 'TOGGLE_MODAL'});
-    this.props.updateStore({
-      type: action,
-      recipe
-    });
   }
 
   render() {
