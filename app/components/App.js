@@ -1,7 +1,7 @@
 const React = require('react'),
     Nav = require('./Nav'),
     RecipeList = require('./RecipeList'),
-    RecipeModal = require('./RecipeModal'),
+    ModalOverlay = require('./ModalOverlay'),
     Footer = require('./Footer');
 
 class App extends React.Component {
@@ -20,8 +20,8 @@ class App extends React.Component {
           {...this.props}
         />
         {
-          modal ?
-          <RecipeModal
+          modal.show ?
+          <ModalOverlay
             {...this.props}
           /> : ''
         }

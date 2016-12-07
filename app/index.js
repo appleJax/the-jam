@@ -120,12 +120,27 @@ const recipes = (state = initialRecipeList, action) => {
   }
 };
 
-const modal = (state = false, action) => {
+const modal = (
+  state = {
+    show: false,
+    dialogue: '',
+    content: ''
+  },
+  action
+) => {
   switch (action.type) {
-    case 'TOGGLE_MODAL':
-      return !state;
+    case 'CLOSE_MODAL':
+      return {
+        show: false,
+        dialogue: '',
+        content: ''
+      };
     case 'POPULATE_MODAL':
-      return action.recipe;
+      return {
+        show: true,
+        dialogue: action.dialogue,
+        content: action.content
+      };
     default:
       return state;
   }
@@ -140,11 +155,75 @@ const filter = (state = [''], action) => {
   }
 };
 
+const updateDB = (action) => {
+  let url = '',
+      data = '';
+  function makeRequest(url, data, done) {
+    const xhr = new XMLHttpRequest();
+    xhr.responseType = 'json';
+    xhr.open('POST', url);
+    xhr.setRequestHeader('Content-type', 'application/json');
+    xhr.onload = () => done(null, xhr.response);
+    xhr.onerror = () => console.log(xhr.response);
+    xhr.send(data);
+  }
+
+  switch (action.type) {
+    case 'ADD_RECIPE':
+      url = 'https://thejam.herokuapp.com/new',
+      data = JSON.stringify(action.recipe);
+      makeRequest(
+        url,
+        data,
+        (err, response) => {
+          if (err) throw err;
+          console.log('Response: ', response);
+      });
+      store.dispatch(action);
+      return;
+
+    case 'EDIT_RECIPE':
+      const newRecipe = Object.assign(
+        {},
+        action.recipe,
+        {showDetails: false}
+      );
+      url = 'https://thejam.herokuapp.com/edit',
+      data = JSON.stringify(newRecipe);
+      makeRequest(
+        url,
+        data,
+        (err, response) => {
+          if (err) throw err;
+          console.log('Edit response: ', response);
+      });
+      store.dispatch(action);
+      return;
+
+    case 'DELETE_RECIPE':
+      url = 'https://thejam.herokuapp.com/delete',
+      data = JSON.stringify({id: action.id});
+      makeRequest(
+        url,
+        data,
+        (err, response) => {
+          if (err) throw err;
+          console.log('Delete respones: ', response);
+      });
+      store.dispatch(action);
+      return;
+
+    default:
+      store.dispatch(action);
+      return;
+  }
+}
+
 const render = () => {
   ReactDOM.render(
     <App
       {...store.getState()}
-      updateStore={store.dispatch}
+      updateStore={updateDB}
     />,
     document.getElementById('app')
   );

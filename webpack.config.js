@@ -34,7 +34,7 @@ module.exports = {
     ]
   },
   output: {
-    filename: 'bundle.js',
+    filename: 'index.js',
     path: __dirname + '/build'
   },
   plugins: [

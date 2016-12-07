@@ -29,7 +29,9 @@ class Nav extends React.Component {
           onClick={() => {
             document.body.classList.add('no-scroll');
             updateStore({
-              type: 'TOGGLE_MODAL'
+              type: 'POPULATE_MODAL',
+              dialogue: 'recipe',
+              content: 'new'
             });
           }}
         >

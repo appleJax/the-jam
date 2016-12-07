@@ -1,41 +1,31 @@
-.recipe-modal
-  background: rgba(0,0,0,0.7)
-  font-family: sans-serif
-  overflow-y: auto
-  position: fixed
-  left: 0
-  top: 0
-  height: 100vh
-  width: 100vw
-  z-index: 1
-  @media screen and (min-width: 992px)
-    padding-top: 5%
-
 .recipe-form
   background: lighten($nav-bg, 40%)
   border-radius: 10px
   margin: 0 auto
   max-width: 700px
   padding: 5px 15px 20px 15px
-  .recipe-form__title
-    background: lighten($nav-bg, 10%)
-    border-radius: 10px 10px 0 0
-    color: white
-    text-shadow: 1px 1px black
-    padding: 20px 10px 10px
-    margin: -5px -15px 15px
   input, textarea
     border-radius: 5px
     display: block
     margin: 5px 0 15px
     padding: 5px
+    resize: vertical
     width: 95%
-  .recipe-form__servings,
-    display: inline
-    margin: 0 0 15px 10px
-    width: 35px
   textarea[name='directions']
     margin-bottom: 30px
+
+.recipe-form__title
+  background: lighten($nav-bg, 10%)
+  border-radius: 10px 10px 0 0
+  color: white
+  margin: -5px -15px 15px
+  padding: 20px 10px 10px
+  text-shadow: 1px 1px darken($nav-bg, 40%)
+
+.recipe-form__servings,
+  display: inline
+  margin: 0 0 15px 10px
+  width: 35px
 
 .recipe-form__save,
 .recipe-form__cancel
