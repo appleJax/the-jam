@@ -4,7 +4,7 @@ const React = require('react');
 class Nav extends React.Component {
   render() {
     const {
-      filter,
+      visibilityFilter,
       updateStore
     } = this.props;
 
@@ -14,13 +14,15 @@ class Nav extends React.Component {
         <input
           type='search'
           id='search'
-          value={filter.join(' ')}
+          value={visibilityFilter.join(' ')}
           onChange={e => {
-            const filter = e.target.value.split(' ');
+            const filter = e.target.value
+              .split(' ')
+              .filter(val => val !== '')
 
             updateStore({
-              type: 'SET_FILTER',
-              filter
+              type: 'SET_VISIBILITY_FILTER',
+              visibilityFilter
             });
           }}
         />

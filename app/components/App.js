@@ -1,29 +1,17 @@
-const React = require('react'),
-    Nav = require('./Nav'),
-    RecipeList = require('./RecipeList'),
-    ModalOverlay = require('./ModalOverlay'),
-    Footer = require('./Footer');
+import React from 'react'
+import Nav from './Nav'
+import VisibleRecipeList from '../containers/VisibleRecipeList'
+import Modal from '..containers/Modal'
+import Footer from './Footer'
 
-class App extends React.Component {
+const App = ({ modal }) => {
   render() {
-    const {
-      modal,
-      recipes
-    } = this.props;
-
     return (
       <div className="container">
-        <Nav
-          {...this.props}
-        />
-        <RecipeList
-          {...this.props}
-        />
+        <Nav />
+        <VisibleRecipeList />
         {
-          modal.show ?
-          <ModalOverlay
-            {...this.props}
-          /> : ''
+          modal.show ? <Modal /> : ''
         }
         <div className="spacer"></div>
         <Footer />

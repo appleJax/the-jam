@@ -2,11 +2,12 @@ require('normalize-scss/sass/_normalize.scss');
 require('./index.sass');
 //require('react-hot-loader/patch');
 
-const React = require('react'),
-      ReactDOM = require('react-dom'),
-      App = require('./components/App'),
-      createStore = require('redux').createStore,
-      combineReducers = require('redux').combineReducers;
+import React from 'react'
+import { render } from 'react-dom'
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
+import theJam from './reducers'
+import App from './components/App'
 
 let initialRecipeList = [
   {
@@ -59,101 +60,6 @@ let initialRecipeList = [
     showDetails: false
   }
 ];
-
-const recipe = (state = {}, action) => {
-  switch (action.type) {
-    case 'ADD_RECIPE':
-      return {
-        id: action.recipe.id,
-        name: action.recipe.name,
-        tags: action.recipe.tags,
-        stars: action.recipe.stars,
-        servings: action.recipe.servings,
-        ingredients: action.recipe.ingredients,
-        directions: action.recipe.directions
-      };
-
-    case 'EDIT_RECIPE':
-      if (state.id == action.recipe.id) {
-        return action.recipe;
-      }
-      return state;
-
-    case 'TOGGLE_DETAILS':
-      if (state.id == action.id) {
-        return Object.assign(
-          {},
-          state,
-          {showDetails: !state.showDetails}
-        );
-      }
-      return state;
-
-    default:
-      return state;
-  }
-};
-
-const recipes = (state = initialRecipeList, action) => {
-  switch (action.type) {
-    case 'ADD_RECIPE':
-      return [
-        ...state,
-        recipe(undefined, action)
-      ];
-    case 'EDIT_RECIPE':
-      return state.map(
-        r =>
-          recipe(r, action)
-        );
-    case 'DELETE_RECIPE':
-      return state.filter(
-        r => r.id !== action.id
-      );
-    case 'TOGGLE_DETAILS':
-      return state.map(
-        r =>
-        recipe(r, action)
-      );
-    default:
-      return state;
-  }
-};
-
-const modal = (
-  state = {
-    show: false,
-    dialogue: '',
-    content: ''
-  },
-  action
-) => {
-  switch (action.type) {
-    case 'CLOSE_MODAL':
-      return {
-        show: false,
-        dialogue: '',
-        content: ''
-      };
-    case 'POPULATE_MODAL':
-      return {
-        show: true,
-        dialogue: action.dialogue,
-        content: action.content
-      };
-    default:
-      return state;
-  }
-};
-
-const filter = (state = [''], action) => {
-  switch (action.type) {
-    case 'SET_FILTER':
-      return action.filter;
-    default:
-      return state;
-  }
-};
 
 const updateDB = (action) => {
   let url = '',
@@ -219,26 +125,15 @@ const updateDB = (action) => {
   }
 }
 
-const render = () => {
-  ReactDOM.render(
-    <App
-      {...store.getState()}
-      updateStore={updateDB}
-    />,
-    document.getElementById('app')
-  );
-};
+let store = createStore(recipeBox);
 
-const recipeBox = combineReducers({
-  recipes,
-  filter,
-  modal
-});
+render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('app')
+}
 
-const store = createStore(recipeBox);
-store.subscribe(render);
-
-render();
 /*
 if (module.hot) {
   module.hot.accept('./components/App.js', () => {
