@@ -26,9 +26,9 @@ export const toggleDetails = (id) => {
   }
 }
 
-export const setFilter = (filter) => {
+export const setVisibilityFilter = (filter) => {
   return {
-    type: 'SET_FILTER',
+    type: 'SET_VISIBILITY_FILTER',
     filter
   }
 }

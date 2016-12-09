@@ -1,5 +1,6 @@
-require('normalize-scss/sass/_normalize.scss');
-require('./index.sass');
+import 'normalize-scss/sass/_normalize.scss'
+import './index.sass'
+import 'font-awesome/scss/font-awesome.scss'
 //require('react-hot-loader/patch');
 
 import React from 'react'

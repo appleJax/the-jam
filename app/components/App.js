@@ -1,5 +1,5 @@
 import React from 'react'
-import Nav from './Nav'
+import NavContainer from '../containers/NavContainer'
 import VisibleRecipeList from '../containers/VisibleRecipeList'
 import Modal from '..containers/Modal'
 import Footer from './Footer'
@@ -8,7 +8,7 @@ const App = ({ modal }) => {
   render() {
     return (
       <div className="container">
-        <Nav />
+        <NavContainer />
         <VisibleRecipeList />
         {
           modal.show ? <Modal /> : ''

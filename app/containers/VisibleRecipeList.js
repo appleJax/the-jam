@@ -1,7 +1,8 @@
 import { connect } from 'react-redux'
 import {
-  editRecipe,
   populateModal,
+  setVisibilityFilter,
+  editRecipe,
   toggleDetails
 } from '../actions'
 import RecipeList from '../components/RecipeList'
@@ -26,15 +27,20 @@ const getVisibleRecipes = (recipes, filter) => {
 
 const mapStateToProps = (state) => {
   return {
-    recipes: getVisibleRecipes(state.recipes, state.visibilityFilter)
+    recipes: getVisibleRecipes(state.recipes, state.visibilityFilter),
+    visibilityFilter: state.visibilityFilter
   }
 }
 
 const mapDispatchTProps = (dispatch) => {
   return {
+    populateModal: (dialogue, content) => {
+      dispatch(populateModal(dialogue, content))
+      document.body.classList.add('no-scroll')
+    },
+    setVisibilityFilter: (filter) => dispatch(setVisibilityFilter()),
     editRecipe: (recipe) => dispatch(editRecipe(recipe)),
-    confirmDelete: (dialogue, recipe) => dispatch(populateModal(dialogue, recipe)),
-    toggleDetails: (id) => dispatch(toggleDetails(id))
+    toggleDetails: (id) => dispatch(toggleDetails(id)
   }
 }
 
