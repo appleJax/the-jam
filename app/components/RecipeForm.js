@@ -1,11 +1,15 @@
-const React = require('react');
+import React from 'react'
 
 class RecipeForm extends React.Component {
   constructor(props) {
     super(props);
     const {
-      content
-    } = props.modal;
+      content,
+      addRecipe,
+      editRecipe,
+      deleteRecipe,
+      closeModal
+    } = props
 
     const editRecipe = {};
     if (typeof content == 'object') {
@@ -57,15 +61,13 @@ class RecipeForm extends React.Component {
           direction.trim())
         .filter(direction => direction !== '') : [];
 
-    const action = typeof this.props.modal.content == 'object' ?
-          'EDIT_RECIPE' : 'ADD_RECIPE'
+    if (typeof content == 'object') {
+      editRecipe(recipe)
+    } else {
+      addRecipe(recipe)
+    }
 
-    this.props.updateStore({
-      type: action,
-      recipe
-    });
-    document.body.classList.remove('no-scroll');
-    this.props.updateStore({type: 'CLOSE_MODAL'});
+    closeModal()
   }
 
   render() {
@@ -145,10 +147,7 @@ class RecipeForm extends React.Component {
         </span>
         <span
           className='recipe-form__cancel'
-          onClick={() => {
-            document.body.classList.remove('no-scroll');
-            updateStore({type: 'CLOSE_MODAL'});
-          }}
+          onClick={closeModal}
         >
           <i className='fa fa-times'></i>
         </span>

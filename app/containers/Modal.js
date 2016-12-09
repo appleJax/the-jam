@@ -1,30 +1,28 @@
 import { connect } from 'react-redux'
 import {
+  addRecipe,
   editRecipe,
   deleteRecipe,
   closeModal
 } from '../actions'
 import ModalOverlay from '../components/ModalOverlay'
-import ConfirmDialogue from '../components/ConfirmDialogue'
-import RecipeForm from '../components/RecipeForm'
-
-const getModalContent = (dialogue) => {
-  return dialogue == 'confirm' ?
-    <ConfirmDialogue /> :
-    <RecipeForm />
-}
 
 const mapStateToProps = (state) => {
   return {
-    content: getModalContent(state.modal.dialogue)
+    dialogue: state.modal.dialogue,
+    content: state.modal.content
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    addRecipe: (recipe) => dispatch(addRecipe(recipe)),
     editRecipe: (recipe) => dispatch(editRecipe(recipe)),
     deleteRecipe: (id) => dispatch(deleteRecipe(id)),
-    closeModal: () => dispatch(closeModal())
+    closeModal: () => {
+      dispatch(closeModal())
+      document.body.classList.remove('no-scroll')
+    }
   }
 }
 

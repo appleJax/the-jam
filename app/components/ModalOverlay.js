@@ -1,34 +1,36 @@
-const React = require('react'),
-      RecipeForm = require('./RecipeForm'),
-      ConfirmDialogue = require('./ConfirmDialogue');
+import React from 'react'
+import ConfirmDialogue from '../components/ConfirmDialogue'
+import RecipeForm from '../components/RecipeForm'
 
-const ModalOverlay = () => {
-  // render() {
-    // const {
-    //   dialogue
-    // } = this.props.modal;
-    //
-    // const {
-    //   updateStore
-    // } = this.props;
-    //
-    // const content = (dialogue == 'confirm') ?
-    //   <ConfirmDialogue
-    //     {...this.props}
-    //   /> :
-    //   <RecipeForm
-    //     {...this.props}
-    //   />;
-    //
+const ModalOverlay = ({
+  dialogue,
+  content,
+  editRecipe,
+  deleteRecipe,
+  closeModal
+}) => {
+  const  dialogueBox = dialogue == 'confirm' ?
+      <ConfirmDialogue
+        id={content.id}
+        deleteRecipe={() => deleteRecipe(id)}
+        closeModal={closeModal}
+      /> :
+      <RecipeForm
+        content={content}
+        addRecipe={addRecipe}
+        editRecipe={editRecipe}
+        deleteRecipe={deleteRecipe}
+        closeModal={closeModal}
+      />
+  }
+
   return (
     <div
       className='modal-overlay'
-      onClick={() => {
-        document.body.classList.remove('no-scroll');
-        updateStore({type: 'CLOSE_MODAL'});
+      onClick={props.closeModal}
       }}
     >
-      {this.props.content}
+      {dialogueBox}
     </div>
   )
 }
