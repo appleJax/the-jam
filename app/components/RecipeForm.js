@@ -10,6 +10,7 @@ class RecipeForm extends React.Component {
     this.addRecipe = props.addRecipe
     this.editRecipe = props.editRecipe
     this.closeModal = props.closeModal
+    this.save = this.save.bind(this)
 
     const tempRecipe = {};
     if (typeof content == 'object') {
@@ -24,7 +25,7 @@ class RecipeForm extends React.Component {
 
     } else {
       this.state = {
-        id: new Date().getTime(),
+        id: Date.now(),
         name: '',
         tags: '',
         stars: 0,
@@ -140,7 +141,7 @@ class RecipeForm extends React.Component {
 
         <span
           className='recipe-form__save'
-          onClick={this.save.bind(this)}
+          onClick={this.save}
         >
           <i className='fa fa-check'></i>
         </span>
