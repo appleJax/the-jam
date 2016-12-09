@@ -13,8 +13,9 @@ const RecipeList = ({
     <ul className="recipe-list">
       {recipes.map(recipe =>
         <Recipe
-          key={recipe.id}>
-          {...recipe}
+          key={recipe.id}
+          recipe={recipe}
+          visibilityFilter={visibilityFilter}
           confirmDelete={() => populateModal('confirm', recipe.id)}
           setVisibilityFilter={setVisibilityFilter}
           editRecipe={editRecipe}

@@ -15,7 +15,6 @@ const Nav = ({
         onChange={ e => {
           const filter = e.target.value
             .split(' ')
-            .filter(val => val !== '')
 
           setVisibilityFilter(filter)
         }}

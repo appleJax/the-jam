@@ -20,8 +20,8 @@ const mapDispatchToProps = (dispatch) => {
     editRecipe: (recipe) => dispatch(editRecipe(recipe)),
     deleteRecipe: (id) => dispatch(deleteRecipe(id)),
     closeModal: () => {
-      dispatch(closeModal())
       document.body.classList.remove('no-scroll')
+      dispatch(closeModal())
     }
   }
 }

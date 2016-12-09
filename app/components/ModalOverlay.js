@@ -5,14 +5,14 @@ import RecipeForm from '../components/RecipeForm'
 const ModalOverlay = ({
   dialogue,
   content,
+  addRecipe,
   editRecipe,
   deleteRecipe,
   closeModal
 }) => {
   const  dialogueBox = dialogue == 'confirm' ?
       <ConfirmDialogue
-        id={content.id}
-        deleteRecipe={() => deleteRecipe(id)}
+        deleteRecipe={() => deleteRecipe(content)}
         closeModal={closeModal}
       /> :
       <RecipeForm
@@ -22,13 +22,11 @@ const ModalOverlay = ({
         deleteRecipe={deleteRecipe}
         closeModal={closeModal}
       />
-  }
 
   return (
     <div
       className='modal-overlay'
-      onClick={props.closeModal}
-      }}
+      onClick={closeModal}
     >
       {dialogueBox}
     </div>

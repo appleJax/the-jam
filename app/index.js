@@ -1,5 +1,5 @@
 import 'normalize-scss/sass/_normalize.scss'
-import ('./index.sass'
+import './index.sass'
 import 'font-awesome/scss/font-awesome.scss'
 //require('react-hot-loader/patch');
 
@@ -8,7 +8,7 @@ import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import theJam from './reducers'
-import App from './components/App'
+import App from './containers/App'
 
 const updateDB = (action) => {
   let url = '',
@@ -74,14 +74,14 @@ const updateDB = (action) => {
   }
 }
 
-let store = createStore(recipeBox);
+let store = createStore(theJam);
 
 render(
   <Provider store={store}>
     <App />
   </Provider>,
   document.getElementById('app')
-}
+)
 
 /*
 if (module.hot) {

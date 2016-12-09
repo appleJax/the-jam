@@ -8,7 +8,9 @@ import {
 import RecipeList from '../components/RecipeList'
 
 const getVisibleRecipes = (recipes, filter) => {
-  const regex = filter.join('|')
+  const regex = filter
+                .filter(val => val !== '')
+                .join('|')
 
   return recipes.filter(
     recipe => {
@@ -16,7 +18,7 @@ const getVisibleRecipes = (recipes, filter) => {
         recipe.name,
         ...recipe.tags,
         recipe.servings,
-        ...recipe.ingredients
+        ...recipe.ingredients,
         ...recipe.directions
       ].join(' ')
 
@@ -35,12 +37,12 @@ const mapStateToProps = (state) => {
 const mapDispatchTProps = (dispatch) => {
   return {
     populateModal: (dialogue, content) => {
-      dispatch(populateModal(dialogue, content))
       document.body.classList.add('no-scroll')
+      dispatch(populateModal(dialogue, content))
     },
-    setVisibilityFilter: (filter) => dispatch(setVisibilityFilter()),
+    setVisibilityFilter: (filter) => dispatch(setVisibilityFilter(filter)),
     editRecipe: (recipe) => dispatch(editRecipe(recipe)),
-    toggleDetails: (id) => dispatch(toggleDetails(id)
+    toggleDetails: (id) => dispatch(toggleDetails(id))
   }
 }
 

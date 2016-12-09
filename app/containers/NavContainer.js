@@ -15,8 +15,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     setVisibilityFilter: (filter) => dispatch(setVisibilityFilter(filter)),
     populateModal: () => {
-      dispatch(populateModal('recipe', 'new'))
       document.body.classList.add('no-scroll')
+      dispatch(populateModal('recipe', 'new'))
     }
   }
 }

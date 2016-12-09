@@ -1,7 +1,6 @@
 import React from 'react'
 
 const ConfirmDialogue = ({
-  id,
   deleteRecipe,
   closeModal
 }) => {
@@ -20,7 +19,7 @@ const ConfirmDialogue = ({
       <span
         className='confirm-dialogue__delete'
         onClick={() => {
-          deleteRecipe(id)
+          deleteRecipe()
           closeModal()
         }}
       >

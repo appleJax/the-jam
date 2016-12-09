@@ -1,28 +1,32 @@
-require('font-awesome/scss/font-awesome.scss');
 import React from 'react'
 
 const Recipe = ({
-  id,
-  name,
-  tags,
-  stars,
-  servings,
-  ingredients,
-  directions,
-  showDetails,
+  recipe,
+  visibilityFilter,
   confirmDelete,
   setVisibilityFilter,
   editRecipe,
   toggleDetails,
   populateModal
 }) => {
+  const {
+    id,
+    name,
+    tags,
+    stars,
+    servings,
+    ingredients,
+    directions,
+    showDetails
+  } = recipe
+
   const tagList = tags.map(
     (tag, i) =>
     (<li
        key={i}
-       onClick={e =>
+       onClick={ e =>
          setVisibilityFilter(
-           filter.concat(e.target.innerHTML)
+           visibilityFilter.concat(e.target.innerHTML)
          )
        }
      >
@@ -64,7 +68,7 @@ const Recipe = ({
         className='edit'
         onClick={populateModal}
       >
-        <i className='fa fa-pencil fa-lg'></i>
+        <i className='fa fa-pencil'></i>
       </span>
     </div>
   ) : ''
@@ -137,7 +141,6 @@ const Recipe = ({
       {details}
     </li>
   );
-  }
 }
 
 module.exports = Recipe;

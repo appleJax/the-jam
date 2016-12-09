@@ -4,23 +4,23 @@ class RecipeForm extends React.Component {
   constructor(props) {
     super(props);
     const {
-      content,
-      addRecipe,
-      editRecipe,
-      deleteRecipe,
-      closeModal
+      content
     } = props
+    this.content = props.content
+    this.addRecipe = props.addRecipe
+    this.editRecipe = props.editRecipe
+    this.closeModal = props.closeModal
 
-    const editRecipe = {};
+    const tempRecipe = {};
     if (typeof content == 'object') {
-      editRecipe.tags = content.tags.join(',');
-      editRecipe.ingredients = content.ingredients.join(';\n');
-      editRecipe.directions = content.directions.join(';\n\n');
+      tempRecipe.tags = content.tags.join(',')
+      tempRecipe.ingredients = content.ingredients.join(';\n')
+      tempRecipe.directions = content.directions.join(';\n\n')
       this.state = Object.assign(
         {},
         content,
-        editRecipe
-      );
+        tempRecipe
+      )
 
     } else {
       this.state = {
@@ -61,19 +61,18 @@ class RecipeForm extends React.Component {
           direction.trim())
         .filter(direction => direction !== '') : [];
 
-    if (typeof content == 'object') {
-      editRecipe(recipe)
+    if (typeof this.content == 'object') {
+      this.editRecipe(recipe)
     } else {
-      addRecipe(recipe)
+      this.addRecipe(recipe)
     }
 
-    closeModal()
+    this.closeModal()
   }
 
   render() {
     const {
-      modal,
-      updateStore
+      closeModal
     } = this.props;
 
     return (
@@ -84,7 +83,7 @@ class RecipeForm extends React.Component {
         }
       >
         <h2 className="recipe-form__title">
-          {typeof modal.content == 'object' ? 'Edit': 'New'} Recipe
+          {typeof content == 'object' ? 'Edit': 'New'} Recipe
         </h2>
         <label htmlFor='title'>Name:</label>
         <input
