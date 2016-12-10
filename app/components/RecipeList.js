@@ -4,10 +4,10 @@ import Recipe from './Recipe'
 const RecipeList = ({
   recipes,
   visibilityFilter,
-  populateModal,
   setVisibilityFilter,
   editRecipe,
-  toggleDetails
+  toggleDetails,
+  populateModal
 }) => {
   return (
     <ul className="recipe-list">
@@ -16,8 +16,8 @@ const RecipeList = ({
           key={recipe.id}
           recipe={recipe}
           visibilityFilter={visibilityFilter}
-          confirmDelete={() => populateModal('confirm', recipe.id)}
           setVisibilityFilter={setVisibilityFilter}
+          confirmDelete={() => populateModal('confirm', recipe.id)}
           editRecipe={editRecipe}
           toggleDetails={() => toggleDetails(recipe.id)}
           populateModal={() => populateModal('recipe', recipe)}
