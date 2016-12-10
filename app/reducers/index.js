@@ -3,10 +3,10 @@ import recipes from './recipes'
 import visibilityFilter from './visibilityFilter'
 import modal from './modal'
 
-const theJam = combineReducers({
+const rootReducer = combineReducers({
   recipes,
   visibilityFilter,
   modal
 })
 
-export default theJam
+export default rootReducer

@@ -98,7 +98,7 @@ const recipes = (state = initialRecipeList, action) => {
         );
     case 'DELETE_RECIPE':
       return state.filter(
-        r => r.id !== action.id
+        r => r.id !== action.recipe.id
       );
     case 'TOGGLE_DETAILS':
       return state.map(

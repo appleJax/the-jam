@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import {
   populateModal,
   setVisibilityFilter,
-  editRecipe,
+  editUserRecipe,
   toggleDetails
 } from '../actions'
 import RecipeList from '../components/RecipeList'
@@ -41,7 +41,7 @@ const mapDispatchTProps = (dispatch) => {
       dispatch(populateModal(dialogue, content))
     },
     setVisibilityFilter: (filter) => dispatch(setVisibilityFilter(filter)),
-    editRecipe: (recipe) => dispatch(editRecipe(recipe)),
+    editRecipe: (user, recipe) => dispatch(editUserRecipe(user, recipe)),
     toggleDetails: (id) => dispatch(toggleDetails(id))
   }
 }

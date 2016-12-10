@@ -90,7 +90,7 @@ const Recipe = ({
             } else {
               editedRecipe.stars = newStars
             }
-              editRecipe(editedRecipe)
+              editRecipe(null, editedRecipe)
           }}
         >
         </i>
@@ -103,7 +103,7 @@ const Recipe = ({
           onClick={ e => {
             const editedRecipe = recipe
             editedRecipe.stars = e.target.dataset.value
-            editRecipe(editedRecipe)
+            editRecipe(null, editedRecipe)
           }}
         >
         </i>

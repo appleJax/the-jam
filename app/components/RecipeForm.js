@@ -63,9 +63,9 @@ class RecipeForm extends React.Component {
         .filter(direction => direction !== '') : [];
 
     if (typeof this.content == 'object') {
-      this.editRecipe(recipe)
+      this.editRecipe(null, recipe)
     } else {
-      this.addRecipe(recipe)
+      this.addRecipe(null, recipe)
     }
 
     this.closeModal()
@@ -84,7 +84,7 @@ class RecipeForm extends React.Component {
         }
       >
         <h2 className="recipe-form__title">
-          {typeof content == 'object' ? 'Edit': 'New'} Recipe
+          {typeof this.content == 'object' ? 'Edit': 'New'} Recipe
         </h2>
         <label htmlFor='title'>Name:</label>
         <input
@@ -104,20 +104,23 @@ class RecipeForm extends React.Component {
           onChange={(e) => this.setState({tags: e.target.value})}
         />
 
-        <label htmlFor='servings'>
-          Servings:
-        </label>
-        <input
-          type='number'
-          name='servings'
-          className='recipe-form__servings'
-          value={this.state.servings}
-          onChange={(e) => {
-            let val = e.target.value;
-            this.setState({servings: (val > 0 || val === '') ? val : 1});
-          }}
-        />
-        <br />
+        <div className='recipe-form__servings-group'>
+          <label className='recipe-form__servings-label' htmlFor='servings'>
+            Servings:
+          </label>
+          <input
+            type='number'
+            name='servings'
+            max='999'
+            min='1'
+            className='recipe-form__servings-input'
+            value={this.state.servings}
+            onChange={(e) => {
+              let val = e.target.value;
+              this.setState({servings: (val > 0 || val === '') ? val : 1});
+            }}
+          />
+        </div>
 
         <label htmlFor='ingredients'>
           Ingredients (separated by semicolons):

@@ -12,7 +12,7 @@ const ModalOverlay = ({
 }) => {
   const  dialogueBox = dialogue == 'confirm' ?
       <ConfirmDialogue
-        deleteRecipe={() => deleteRecipe(content)}
+        deleteRecipe={() => deleteRecipe(null, {id: content})}
         closeModal={closeModal}
       /> :
       <RecipeForm

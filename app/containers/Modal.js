@@ -1,8 +1,8 @@
 import { connect } from 'react-redux'
 import {
-  addRecipe,
-  editRecipe,
-  deleteRecipe,
+  addUserRecipe,
+  editUserRecipe,
+  deleteUserRecipe,
   closeModal
 } from '../actions'
 import ModalOverlay from '../components/ModalOverlay'
@@ -16,9 +16,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addRecipe: (recipe) => dispatch(addRecipe(recipe)),
-    editRecipe: (recipe) => dispatch(editRecipe(recipe)),
-    deleteRecipe: (id) => dispatch(deleteRecipe(id)),
+    addRecipe: (user, recipe) => dispatch(addUserRecipe(user, recipe)),
+    editRecipe: (user, recipe) => dispatch(editUserRecipe(user, recipe)),
+    deleteRecipe: (user, id) => dispatch(deleteUserRecipe(user, id)),
     closeModal: () => {
       document.body.classList.remove('no-scroll')
       dispatch(closeModal())
