@@ -10,7 +10,7 @@ const Nav = ({
       <i className='fa fa-search fa-lg'></i>
       <input
         type='search'
-        id='search'
+        className='nav__searchbox'
         value={visibilityFilter.join(' ')}
         onChange={ e => {
           const filter = e.target.value
@@ -19,12 +19,12 @@ const Nav = ({
           setVisibilityFilter(filter)
         }}
       />
-      <span
-        id='add-button'
+      <div
+        className='nav__add-recipe'
         onClick={populateModal}
       >
-        <i className='fa fa-plus'></i>
-      </span>
+        <i className='fa fa-plus fa-lg'></i>
+      </div>
     </nav>
   )
 }

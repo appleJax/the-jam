@@ -142,18 +142,20 @@ class RecipeForm extends React.Component {
           onChange={(e) => this.setState({directions: e.target.value})}
         />
 
-        <span
-          className='recipe-form__save'
-          onClick={this.save}
-        >
-          <i className='fa fa-check'></i>
-        </span>
-        <span
-          className='recipe-form__cancel'
-          onClick={closeModal}
-        >
-          <i className='fa fa-times'></i>
-        </span>
+        <div className='recipe-form__buttons'>
+          <div
+            className='recipe-form__save'
+            onClick={this.save}
+          >
+            <i className='fa fa-check fa-lg'></i>
+          </div>
+          <div
+            className='recipe-form__cancel'
+            onClick={closeModal}
+          >
+            <i className='fa fa-times fa-lg'></i>
+          </div>
+        </div>
       </form>
     );
   }

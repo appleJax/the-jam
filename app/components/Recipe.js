@@ -64,12 +64,12 @@ const Recipe = ({
           {directionList}
         </ol>
       </div>
-      <span
-        className='edit'
+      <div
+        className='recipe__edit-button'
         onClick={populateModal}
       >
         <i className='fa fa-pencil'></i>
-      </span>
+      </div>
     </div>
   ) : ''
 
@@ -115,7 +115,7 @@ const Recipe = ({
     <li className='recipe'>
       <div className='recipe__header'>
         <span
-          className='delete'
+          className='recipe__delete-button'
           onClick={confirmDelete}
         >
           <i className='fa fa-times'></i>
@@ -129,11 +129,11 @@ const Recipe = ({
       </div>
       <i
         onClick={toggleDetails}
-        id='expand-toggle'
+        className='recipe__expand-toggle'
         className={
           showDetails ?
-          'fa fa-toggle-up' :
-          'fa fa-ellipsis-h'
+          'fa fa-toggle-up fa-lg' :
+          'fa fa-ellipsis-h fa-lg'
         }
       >
       </i>

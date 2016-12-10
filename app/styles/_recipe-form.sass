@@ -1,8 +1,10 @@
 .recipe-form
   background: lighten($nav-bg, 40%)
   border-radius: 10px
+  font-size: 20px
   margin: 0 auto
   max-width: 700px
+  overflow: auto
   padding: 5px 15px 20px 15px
   input, textarea
     border: none
@@ -41,14 +43,20 @@
   box-shadow: 1px 1px 2px #555
   color: #fff
   cursor: pointer
+  display: flex
+  align-items: center
+  justify-content: center
   font-weight: bold
-  width: 50px
+  float: left
 
 .recipe-form__save
-  background: lighten(green, 10%)
-  padding: 4px 6px 5px 6px
+  background: $nav-bg
+  margin-top: -10px
+  height: 45px
+  width: 45px
 
 .recipe-form__cancel
   background: lighten(red, 10%)
-  margin-left: 25px
-  padding: 2px 6px 4px 6px
+  margin: -8px 0 0 30px
+  height: 40px
+  width: 40px
