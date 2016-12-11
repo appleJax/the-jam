@@ -22,13 +22,15 @@ function setHeaders() {
 
 function handleRender(req, res) {
   // Get recipes from MONGODB_URI
+  console.log('Test');
   MongoClient.connect(url, (err, db) => {
     assert.equal(null, err);
 
     const collection = db.collection('recipes');
 
-    collection.find().toArray((err, docs) => {
+    collection.find({}).toArray((err, docs) => {
       const recipes = docs;
+      console.log('Docs: ', docs);
 
       let preloadedState = {
         modal: {
@@ -85,7 +87,10 @@ function renderFullPage(html, preloadedState) {
 }
 
 module.exports = (app) => {
-  app.get('*', (req, res) => handleRender(req, res));
+  app.get('*', (req, res) => {
+    console.log('Testing');
+    handleRender(req, res);
+  });
 
   app.all('/new', (req, res) => {
     if (req.method == 'OPTIONS') {
