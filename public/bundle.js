@@ -29927,9 +29927,9 @@
 
 	var _reactRedux = __webpack_require__(489);
 
-	var _configureReduxStore = __webpack_require__(519);
+	var _configureStore = __webpack_require__(519);
 
-	var _configureReduxStore2 = _interopRequireDefault(_configureReduxStore);
+	var _configureStore2 = _interopRequireDefault(_configureStore);
 
 	var _App = __webpack_require__(532);
 
@@ -29939,7 +29939,7 @@
 
 	const preloadedState = window.__PRELOADED_STATE__;
 
-	const store = (0, _configureReduxStore2.default)(preloadedState);
+	const store = (0, _configureStore2.default)(preloadedState);
 
 	const Root = () => {
 	  return _react2.default.createElement(
@@ -31708,7 +31708,6 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.default = configureStore;
 
 	var _redux = __webpack_require__(496);
 
@@ -31728,9 +31727,11 @@
 
 	const loggerMiddleware = (0, _reduxLogger2.default)();
 
-	function configureStore(preloadedState) {
+	const configureStore = preloadedState => {
 	  return (0, _redux.createStore)(_reducers2.default, preloadedState, (0, _redux.applyMiddleware)(_reduxThunk2.default, loggerMiddleware));
-	}
+	};
+
+	exports.default = configureStore;
 
 /***/ },
 /* 520 */
@@ -33925,7 +33926,9 @@
 
 	  return _react2.default.createElement(
 	    'li',
-	    { className: 'recipe' },
+	    {
+	      key: id,
+	      className: 'recipe' },
 	    _react2.default.createElement(
 	      'div',
 	      { className: 'recipe__header' },

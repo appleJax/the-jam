@@ -112,7 +112,9 @@ const Recipe = ({
   }
 
   return (
-    <li className='recipe'>
+    <li
+      key={id}
+      className='recipe'>
       <div className='recipe__header'>
         <span
           className='recipe__delete-button'

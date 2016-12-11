@@ -1,6 +1,6 @@
 import React from 'react'
 import { Provider } from 'react-redux'
-import configureStore from '../configureReduxStore'
+import configureStore from '../configureStore'
 import App from './App'
 
 const preloadedState = window.__PRELOADED_STATE__

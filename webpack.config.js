@@ -33,8 +33,8 @@ module.exports = {
     ]
   },
   output: {
-    filename: 'index.js',
-    path: __dirname + '/build'
+    filename: 'bundle.js',
+    path: __dirname + '/public'
   },
   plugins: [
     HTMLWebpackPluginConfig,
