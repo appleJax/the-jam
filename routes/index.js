@@ -1,6 +1,11 @@
 const MongoClient = require('mongodb').MongoClient,
-      assert = require('assert'),
-      url = process.env.MONGODB_URI;
+  assert = require('assert'),
+  React = require('react'),
+  renderToString = require('react-dom/server').renderToString,
+  configureStore = require('../app/configureReduxStore'),
+  Provider = require('react-redux').Provider,
+  App = require('../app/containers/App'),
+  url = process.env.MONGODB_URI;
 
 function setHeaders() {
       const headers = {};
@@ -15,8 +20,72 @@ function setHeaders() {
       return headers;
 }
 
+function handleRender(req, res) {
+  // Get recipes from MONGODB_URI
+  MongoClient.connect(url, (err, db) => {
+    assert.equal(null, err);
+
+    const collection = db.collection('recipes');
+
+    collection.find().toArray((err, docs) => {
+      const recipes = docs;
+
+      let preloadedState = {
+        modal: {
+          content: '',
+          dialogue: '',
+          show: false
+        },
+        recipes,
+        sort: {
+          asc: false,
+          desc: false,
+          stars: false
+        },
+        visibilityFilter: ['']
+      };
+
+      const store = configureStore(preloadedState);
+
+      const html = renderToString(
+        <Provider store={store}>
+          <App />
+        </Provider>
+      );
+
+      const finalState = store.getState();
+
+      res.send(renderFullPage(html, finalState));
+
+      db.close();
+    });
+  });
+}
+
+function renderFullPage(html, preloadedState) {
+  return `
+  <!DOCTYPE html>
+  <html lang="EN">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>the Jam</title>
+      <link rel='shortcut icon' href='favicon.ico' type='image/x-icon'/ >
+      <link href="https://fonts.googleapis.com/css?family=Lato|Molle:400i|Architects+Daughter" rel="stylesheet">
+    </head>
+    <body>
+      <div id="root">${html}</div>
+      <script>
+        window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState)}
+      </script>
+      <script src="/public/bundle.js"></script>
+    </body>
+  </html>
+  `;
+}
+
 module.exports = (app) => {
-  app.get('*', (req, res) => res.sendFile('.public/index.html'));
+  app.get('*', (req, res) => handleRender(req, res));
 
   app.all('/new', (req, res) => {
     if (req.method == 'OPTIONS') {
