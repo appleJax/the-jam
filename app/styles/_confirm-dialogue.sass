@@ -3,23 +3,20 @@
   border-radius: 10px
   font-size: 20px
   margin: 10% auto
-  max-width: 300px
+  max-width: 320px
   padding: 5px 15px 35px 15px
   text-align: center
 
 .confirm-dialogue__message
-  background: lighten($nav-bg, 10%)
-  border-radius: 10px 10px 0 0
-  color: white
-  font-size: 24px
-  margin: -5px -15px 35px -15px
-  padding: 15px
-  text-shadow: 1px 1px darken($nav-bg, 40%)
+  @include dialogue-header
+  font-size: 26px
+  margin-bottom: 35px
 
 .confirm-dialogue__delete,
 .confirm-dialogue__cancel
   border-radius: 10px
   cursor: pointer
+  display: inline
   margin: 20px
   padding: 15px
 .confirm-dialogue__delete

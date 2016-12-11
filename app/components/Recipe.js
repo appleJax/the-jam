@@ -129,11 +129,10 @@ const Recipe = ({
       </div>
       <i
         onClick={toggleDetails}
-        className='recipe__expand-toggle'
         className={
           showDetails ?
-          'fa fa-toggle-up fa-lg' :
-          'fa fa-ellipsis-h fa-lg'
+          'recipe__expand-toggle fa fa-toggle-up fa-lg' :
+          'recipe__expand-toggle fa fa-ellipsis-h fa-lg'
         }
       >
       </i>

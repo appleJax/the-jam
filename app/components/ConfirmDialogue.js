@@ -16,7 +16,7 @@ const ConfirmDialogue = ({
       >
         Delete recipe permanently?
       </h3>
-      <span
+      <div
         className='confirm-dialogue__delete'
         onClick={() => {
           deleteRecipe()
@@ -24,13 +24,13 @@ const ConfirmDialogue = ({
         }}
       >
         Delete
-      </span>
-      <span
+      </div>
+      <div
         className='confirm-dialogue__cancel'
         onClick={closeModal}
       >
         Cancel
-      </span>
+      </div>
     </div>
   );
 }

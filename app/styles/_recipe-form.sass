@@ -1,15 +1,21 @@
 .recipe-form
-  background: lighten($nav-bg, 40%)
+  background: lighten($nav-bg, 35%)
   border-radius: 10px
+  color: #333
   font-size: 20px
   margin: 0 auto
   max-width: 700px
   overflow: auto
   padding: 5px 15px 20px 15px
+  label
+    font-family: 'Architects Daughter', 'sans-serif'
+    font-weight: bold
   input, textarea
+    background: lighten($nav-bg, 45%)
     border: none
     border-radius: 5px
     box-shadow: 0 0 2px #555
+    color: #333
     display: block
     font-size: 20px
     margin: 5px 0 25px
@@ -20,12 +26,8 @@
     margin-bottom: 30px
 
 .recipe-form__title
-  background: lighten($nav-bg, 10%)
-  border-radius: 10px 10px 0 0
-  color: white
-  margin: -5px -15px 15px
-  padding: 15px
-  text-shadow: 1px 1px darken($nav-bg, 40%)
+  @include dialogue-header
+  font-family: 'Architects Daughter', 'sans-serif'
 
 .recipe-form__servings-group
   display: inline
@@ -36,12 +38,11 @@
   margin: 2px 15px 0 0
 
 .recipe-form__servings-input
-  max-width: 35px
+  max-width: 50px
 
 .recipe-form__save,
 .recipe-form__cancel
   border-radius: 50%
-  box-shadow: 1px 1px 2px #555
   color: #fff
   cursor: pointer
   display: flex
@@ -52,12 +53,21 @@
 
 .recipe-form__save
   background: $nav-bg
+  box-shadow: 0 0 10px darken($nav-bg, 20%) inset, 1px 1px 2px #555
+  color: lighten($nav-bg, 40%)
   margin-top: -10px
   height: 45px
   width: 45px
+  @include hover-change($nav-bg)
 
 .recipe-form__cancel
-  background: lighten(red, 10%)
+  background: white
+  box-shadow: 0 0 10px #777 inset, 1px 1px 2px #555
+  color: #f77
   margin: -8px 0 0 30px
   height: 40px
   width: 40px
+  text-align: center
+  @include hover-change(white)
+  i
+    margin-top: -3px

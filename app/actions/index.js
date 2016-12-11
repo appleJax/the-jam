@@ -42,6 +42,13 @@ export const setVisibilityFilter = (visibilityFilter) => {
   }
 }
 
+export const setSort = (sortBy) => {
+  return {
+    type: 'SET_SORT',
+    sortBy
+  }
+}
+
 export const closeModal = () => {
   return {
     type: 'CLOSE_MODAL'

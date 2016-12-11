@@ -7,7 +7,7 @@ import {
 } from '../actions'
 import RecipeList from '../components/RecipeList'
 
-const getVisibleRecipes = (recipes, filter) => {
+const getVisibleRecipes = (recipes, filter, sort) => {
   const regex = filter
                 .filter(val => val !== '')
                 .join('|')
@@ -24,12 +24,39 @@ const getVisibleRecipes = (recipes, filter) => {
 
       return text.match(new RegExp(regex, 'i'));
     }
-  )
+  ).sort((a, b) => {
+    if (sort.stars && sort.asc) {
+      if (a.stars == b.stars) {
+        return a.name < b.name ? -1 : a.name > b.name ? 1 : 0
+      }
+      return b.stars - a.stars
+
+    } else if (sort.stars && sort.desc) {
+      if (a.stars == b.stars) {
+        return a.name > b.name ? -1 : a.name < b.name ? 1 : 0
+      }
+      return b.stars - a.stars
+
+    } else if (sort.asc) {
+      if (a.name == b.name) return 0
+      return a.name < b.name ? -1 : 1
+
+    } else if (sort.desc) {
+      if (a.name == b.name) return 0
+      return a.name > b.name ? -1 : 1
+
+    } else if (sort.stars) {
+      return b.stars - a.stars
+
+    } else {
+      return 0
+    }
+  })
 }
 
 const mapStateToProps = (state) => {
   return {
-    recipes: getVisibleRecipes(state.recipes, state.visibilityFilter),
+    recipes: getVisibleRecipes(state.recipes, state.visibilityFilter, state.sort),
     visibilityFilter: state.visibilityFilter
   }
 }
