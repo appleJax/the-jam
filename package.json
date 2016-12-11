@@ -1,19 +1,23 @@
 {
-  "name": "RecipeCards",
+  "name": "theJam",
   "version": "1.0.0",
   "description": "An Editable Collection of Recipes",
   "main": "index.js",
   "scripts": {
     "build": "webpack",
-    "start": "node server.js",
+    "start": "node devServer.js",
     "deploy": "NODE_ENV=production webpack --config webpack.production.config.js"
   },
   "author": "macaroni",
   "license": "ISC",
   "dependencies": {
+    "assert": "^1.4.1",
     "babel-polyfill": "^6.20.0",
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
     "font-awesome": "^4.7.0",
     "isomorphic-fetch": "^2.2.1",
+    "mongodb": "^2.2.15",
     "normalize-scss": "^6.0.0",
     "normalize.css": "^5.0.0",
     "react": "^15.4.1",

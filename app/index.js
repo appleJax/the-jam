@@ -10,7 +10,7 @@ import Root from './containers/Root'
 
 render(
   <Root />,
-  document.getElementById('app')
+  document.getElementById('root')
 )
 
 /*
