@@ -69,11 +69,12 @@ module.exports = (app) => {
     <!DOCTYPE html>
     <html lang="EN">
       <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>the Jam</title>
-        <link rel='shortcut icon' href='favicon.ico' type='image/x-icon'/ >
-        <link href="https://fonts.googleapis.com/css?family=Lato|Molle:400i|Architects+Daughter" rel="stylesheet">
+        <link rel='shortcut icon' href='favicon.ico' type='image/x-icon'/>
+        <link href="https://fonts.googleapis.com/css?family=Lato|Molle:400i|Architects+Daughter" rel="stylesheet" />
+        <link rel="stylesheet" href="bundle.css" />
       </head>
       <body>
         <div id="root">${html}</div>

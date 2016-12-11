@@ -436,45 +436,12 @@
 
 /***/ },
 /* 5 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(6);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(4)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../node_modules/css-loader/index.js!./../node_modules/sass-loader/index.js!./index.sass", function() {
-				var newContent = require("!!./../node_modules/css-loader/index.js!./../node_modules/sass-loader/index.js!./index.sass");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
+	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 6 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(3)();
-	// imports
-
-
-	// module
-	exports.push([module.id, "* {\n  font-family: 'Lato', sans-serif; }\n\nhtml, body {\n  margin: 0;\n  padding: 0; }\n\n.container {\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n  min-height: 100vh; }\n\n.spacer {\n  flex: auto; }\n\n.no-scroll {\n  overflow: hidden; }\n\nnav {\n  background: #F14723;\n  box-shadow: 0 0 5px #aaa;\n  color: white;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  margin-bottom: 10px; }\n\n.logo {\n  text-shadow: 2px 2px 5px #500373; }\n\n.nav__header {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  max-width: 768px;\n  width: 95%; }\n  .nav__header .signup,\n  .nav__header .signin {\n    background: white;\n    border-radius: 10px;\n    box-shadow: 0 0 15px #f46f53 inset;\n    color: #F14723;\n    cursor: pointer;\n    display: inline;\n    margin: 0 5px;\n    padding: 10px; }\n    .nav__header .signup:hover,\n    .nav__header .signin:hover {\n      background: #f2f2f2; }\n\n.nav__search {\n  display: flex;\n  justify-content: center;\n  width: 100vw; }\n\n.nav__searchbox {\n  border-radius: 5px;\n  font-size: 24px;\n  margin-left: -15px;\n  padding-left: 30px;\n  position: static;\n  width: 95%;\n  max-width: 720px;\n  z-index: 0.5; }\n  .nav__searchbox:focus {\n    background: #fde7e3;\n    outline: none; }\n\n.fa-search {\n  color: rgba(50, 50, 50, 0.5);\n  margin: 10px -10px 0 0;\n  position: relative;\n  z-index: 1; }\n\n.nav__controls {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  margin: 10px 0;\n  max-width: 700px;\n  width: 93%; }\n  .nav__controls .sort {\n    border-radius: 5px;\n    color: white;\n    cursor: pointer;\n    margin-right: 30px;\n    padding: 12px; }\n    .nav__controls .sort:hover {\n      background: rgba(255, 255, 255, 0.5);\n      color: #F14723; }\n  .nav__controls .active {\n    background: white;\n    box-shadow: 0 0 10px #F14723 inset;\n    color: #500373; }\n    .nav__controls .active:hover {\n      background: #f2f2f2;\n      color: #500373; }\n\n.nav__add-recipe {\n  background: white;\n  border-radius: 50%;\n  box-shadow: 0 0 15px #f6836b inset, 1px 1px 2px #a4250a;\n  color: #F14723;\n  cursor: pointer;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  margin-left: 8px;\n  height: 40px;\n  width: 40px; }\n  .nav__add-recipe:hover {\n    background: #f2f2f2; }\n\n.recipe {\n  background: #fde7e3;\n  border-radius: 5px;\n  box-shadow: 2px 2px 2px 1px #aaa;\n  color: #333;\n  font-size: 20px;\n  margin: 0 auto 15px;\n  max-width: 700px;\n  padding: 15px; }\n\n.recipe__header {\n  background: #fcd3cb;\n  border-radius: 5px 5px 0 0;\n  margin: -15px -15px 15px -15px;\n  padding: 15px 15px 3px 15px; }\n\n.recipe__name {\n  text-shadow: 1px 1px white;\n  margin: 0 0 5px;\n  width: 90%; }\n\n.recipe__delete-button {\n  background: #f46f53;\n  border-radius: 50%;\n  box-shadow: 0 0 3px #d4300d;\n  color: #fcd3cb;\n  cursor: pointer;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  float: right;\n  padding: 3px 5px;\n  margin-right: -7px; }\n\n.tags {\n  cursor: pointer;\n  display: block;\n  list-style-type: none;\n  margin-bottom: 15px;\n  padding: 0; }\n  .tags li {\n    background: #f79783;\n    border-radius: 10px;\n    color: #555;\n    display: inline-block;\n    font-size: 12px;\n    margin: 10px 10px 0 0;\n    padding: 3px 8px; }\n\n.recipe__expand-toggle {\n  color: #444;\n  cursor: pointer;\n  margin-left: 10px; }\n\n.fa-star,\n.fa-star-o {\n  cursor: pointer;\n  float: right;\n  font-weight: bold; }\n\n.fa-star {\n  color: #F14723; }\n\n.fa-star-o {\n  color: rgba(241, 71, 35, 0.4); }\n\n.ingredients {\n  margin-top: 0; }\n  .ingredients ul {\n    list-style-type: disc;\n    margin-top: 10px;\n    padding-left: 18px; }\n\n.directions ol {\n  margin: 12px 0 0 5px; }\n\n.servings {\n  color: #555;\n  font-size: 17px; }\n\nh3 {\n  margin-bottom: 5px; }\n\n.directions ol {\n  padding: 0 15px; }\n  .directions ol li {\n    margin-bottom: 15px; }\n\n.recipe__edit-button {\n  background: #F14723;\n  border-radius: 50%;\n  box-shadow: 0 0 5px #aaa;\n  color: white;\n  cursor: pointer;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  margin: 25px 0 0 5px;\n  height: 40px;\n  width: 40px; }\n  .recipe__edit-button:hover {\n    background: #ec360f; }\n\nfooter {\n  background: #444;\n  color: #ddd;\n  font: 12px 'Lato';\n  margin-top: 50px;\n  padding: 10px 30px; }\n\n.recipe-list {\n  list-style-type: none;\n  margin: 0;\n  padding: 0; }\n\n.modal-overlay {\n  background: rgba(0, 0, 0, 0.7);\n  font-family: sans-serif;\n  overflow-y: scroll;\n  position: fixed;\n  left: 0;\n  top: 0;\n  height: 100vh;\n  width: 100vw;\n  z-index: 1; }\n\n.recipe-form {\n  background: #fcd3cb;\n  border-radius: 10px;\n  color: #333;\n  font-size: 20px;\n  margin: 0 auto;\n  max-width: 700px;\n  overflow: auto;\n  padding: 5px 15px 20px 15px; }\n  .recipe-form label {\n    font-family: 'Architects Daughter', 'sans-serif';\n    font-weight: bold; }\n  .recipe-form input, .recipe-form textarea {\n    background: #fffbfb;\n    border: none;\n    border-radius: 5px;\n    box-shadow: 0 0 2px #555;\n    color: #333;\n    display: block;\n    font-size: 20px;\n    margin: 5px 0 25px;\n    padding: 5px;\n    resize: vertical;\n    width: 95%; }\n  .recipe-form textarea[name='directions'] {\n    margin-bottom: 30px; }\n\n.recipe-form__title {\n  background: #F14723;\n  border-radius: 10px 10px 0 0;\n  box-shadow: 0 2px 10px #bc2b0c inset;\n  color: white;\n  margin: -5px -15px 15px;\n  padding: 15px;\n  text-shadow: 1px 1px #440f04;\n  font-family: 'Architects Daughter', 'sans-serif'; }\n\n.recipe-form__servings-group {\n  display: inline;\n  margin: 25px 0; }\n\n.recipe-form__servings-label {\n  float: left;\n  margin: 2px 15px 0 0; }\n\n.recipe-form__servings-input {\n  max-width: 50px; }\n\n.recipe-form__save,\n.recipe-form__cancel {\n  border-radius: 50%;\n  color: #fff;\n  cursor: pointer;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  font-weight: bold;\n  float: left; }\n\n.recipe-form__save {\n  background: #F14723;\n  box-shadow: 0 0 10px #a4250a inset, 1px 1px 2px #555;\n  color: #fde7e3;\n  margin-top: -10px;\n  height: 45px;\n  width: 45px; }\n  .recipe-form__save:hover {\n    background: #ec360f; }\n\n.recipe-form__cancel {\n  background: white;\n  box-shadow: 0 0 10px #777 inset, 1px 1px 2px #555;\n  color: #f77;\n  margin: -8px 0 0 30px;\n  height: 40px;\n  width: 40px;\n  text-align: center; }\n  .recipe-form__cancel:hover {\n    background: #f2f2f2; }\n  .recipe-form__cancel i {\n    margin-top: -3px; }\n\n.confirm-dialogue {\n  background: #fde7e3;\n  border-radius: 10px;\n  font-size: 20px;\n  margin: 10% auto;\n  max-width: 320px;\n  padding: 5px 15px 35px 15px;\n  text-align: center; }\n\n.confirm-dialogue__message {\n  background: #F14723;\n  border-radius: 10px 10px 0 0;\n  box-shadow: 0 2px 10px #bc2b0c inset;\n  color: white;\n  margin: -5px -15px 15px;\n  padding: 15px;\n  text-shadow: 1px 1px #440f04;\n  font-size: 26px;\n  margin-bottom: 35px; }\n\n.confirm-dialogue__delete,\n.confirm-dialogue__cancel {\n  border-radius: 10px;\n  cursor: pointer;\n  display: inline;\n  margin: 20px;\n  padding: 15px; }\n\n.confirm-dialogue__delete {\n  background: #ff9999;\n  box-shadow: 0 0 15px #ff3333 inset, 1px 1px 1px #aaa;\n  color: #990000;\n  text-shadow: 1px 1px #fbb; }\n\n.confirm-dialogue__cancel {\n  background: #9999ff;\n  box-shadow: 0 0 15px #3333ff inset, 1px 1px 1px #aaa;\n  text-shadow: 1px 1px #bbf; }\n  .confirm-dialogue__cancel:active {\n    box-shadow: 0 0 15px #3333ff inset; }\n", ""]);
-
-	// exports
-
-
-/***/ },
+/* 6 */,
 /* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -32669,55 +32636,55 @@
 	  value: true
 	});
 	// let initialRecipeList = [
-	//   {
-	//     id: 1,
-	//     name: 'Margherita Pizza',
-	//     tags: ['pizza', 'vegetarian', 'cheese', 'tomatoes'],
-	//     stars: 4,
-	//     servings: 2,
-	//     ingredients: ['1 cup flour', '1 cup beer', '1 Tbsp salt', '1 Tbsp yeast',
-	//       '1 1/2 cups tomato sauce', '1 1/2 cups mozzarella cheese',
-	//       '1/2 cup cherry tomatoes', '1/2 cup fresh basil leaves'],
-	//     directions: [
-	//       'Pour beer into microwave-safe measuring cup and heat to 110F.',
-	//       'Mix flour, beer, salt, and yeast together, and knead for 10 minutes.',
-	//       'Cover dough with warm wet towel and let rest for 30 minutes.',
-	//       'Preheat oven to 450F.',
-	//       'Roll dough out flat, cut cherry tomatoes in half, and layer tomato sauce, cheese, cherry tomatoes, and  basil onto the dough.',
-	//       'Bake for 10-15 minutes.'
-	//     ],
-	//     showDetails: false
-	//   },
-	//   {
-	//     id: 2,
-	//     name: 'Buffalo Chicken Dip',
-	//     tags: ['chicken', 'appetizer', 'spicy', 'snack'],
-	//     stars: 0,
-	//     servings: 4,
-	//     ingredients: ['2 chicken breasts (cooked and shredded)', '4oz Philadelphia cream cheese',
-	//       '1/2 cup colby jack shredded cheese', '1/2 cup Buffalo Wild Wing sauce',
-	//       '1/2 cup ranch dressing'],
-	//     directions: ['Preheat oven to 350F','Mix everything together', 'Bake for 15 min'],
-	//     showDetails: false
-	//   },
-	//   {
-	//     id: 3,
-	//     name: 'Cheesy Chicken Tortilla Soup',
-	//     tags: ['chicken', 'cheese', 'soup', 'sides', 'mexican'],
-	//     stars: 3,
-	//     servings: 4,
-	//     ingredients: ['1 package fajita mix', '1 pound chicken breast, shredded',
-	//       '1 medium onion (chopped)', '1 stick butter', '1/3 cup flour', '2 cans chicken broth',
-	//       '1 can diced tomatoes', '1/2 tsp chili powder', '1 cup Velveeta cheese',
-	//       '1 1/2 cups colby jack cheese, divided in half', '1 cup milk', '1/2 cup half-and-half', 'tortilla chips'],
-	//     directions: ['Precook chicken with fajita mix according to package',
-	//       'In a large saucepan, cook onion in butter until tender. Stir in flour until blended.',
-	//       'Stir in broth and bring to a boil.', 'Cook for 2 minutes, stirring occasionally.',
-	//       'Add tomatoes, chili powder, Velveeta cheese, and 1/2 of the colby jack cheese. Cook until cheese is melted.',
-	//       'Stir in milk, half-and-half, and chicken.', 'Continue to cook until heated through.',
-	//       'Serve in bowls and garnish with crushed tortilla chips and the remaining colby jack cheese.'],
-	//     showDetails: false
-	//   }
+	// {
+	//   id: 1481448287819,
+	//   name: 'Margherita Pizza',
+	//   tags: ['pizza', 'vegetarian', 'cheese', 'tomatoes'],
+	//   stars: 4,
+	//   servings: 2,
+	//   ingredients: ['1 cup flour', '1 cup beer', '1 Tbsp salt', '1 Tbsp yeast',
+	//     '1 1/2 cups tomato sauce', '1 1/2 cups mozzarella cheese',
+	//     '1/2 cup cherry tomatoes', '1/2 cup fresh basil leaves'],
+	//   directions: [
+	//     'Pour beer into microwave-safe measuring cup and heat to 110F.',
+	//     'Mix flour, beer, salt, and yeast together, and knead for 10 minutes.',
+	//     'Cover dough with warm wet towel and let rest for 30 minutes.',
+	//     'Preheat oven to 450F.',
+	//     'Roll dough out flat, cut cherry tomatoes in half, and layer tomato sauce, cheese, cherry tomatoes, and  basil onto the dough.',
+	//     'Bake for 10-15 minutes.'
+	//   ],
+	//   showDetails: false
+	// },
+	// {
+	//   id: 1481448307735,
+	//   name: 'Buffalo Chicken Dip',
+	//   tags: ['chicken', 'appetizer', 'spicy', 'snack'],
+	//   stars: 0,
+	//   servings: 4,
+	//   ingredients: ['2 chicken breasts (cooked and shredded)', '4oz Philadelphia cream cheese',
+	//     '1/2 cup colby jack shredded cheese', '1/2 cup Buffalo Wild Wing sauce',
+	//     '1/2 cup ranch dressing'],
+	//   directions: ['Preheat oven to 350F','Mix everything together', 'Bake for 15 min'],
+	//   showDetails: false
+	// },
+	// {
+	//   id: 1481448321571,
+	//   name: 'Cheesy Chicken Tortilla Soup',
+	//   tags: ['chicken', 'cheese', 'soup', 'sides', 'mexican'],
+	//   stars: 3,
+	//   servings: 4,
+	//   ingredients: ['1 package fajita mix', '1 pound chicken breast, shredded',
+	//     '1 medium onion (chopped)', '1 stick butter', '1/3 cup flour', '2 cans chicken broth',
+	//     '1 can diced tomatoes', '1/2 tsp chili powder', '1 cup Velveeta cheese',
+	//     '1 1/2 cups colby jack cheese, divided in half', '1 cup milk', '1/2 cup half-and-half', 'tortilla chips'],
+	//   directions: ['Precook chicken with fajita mix according to package',
+	//     'In a large saucepan, cook onion in butter until tender. Stir in flour until blended.',
+	//     'Stir in broth and bring to a boil.', 'Cook for 2 minutes, stirring occasionally.',
+	//     'Add tomatoes, chili powder, Velveeta cheese, and 1/2 of the colby jack cheese. Cook until cheese is melted.',
+	//     'Stir in milk, half-and-half, and chicken.', 'Continue to cook until heated through.',
+	//     'Serve in bowls and garnish with crushed tortilla chips and the remaining colby jack cheese.'],
+	//   showDetails: false
+	// }
 	// ];
 
 	const recipe = (state = {}, action) => {
