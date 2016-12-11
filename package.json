@@ -12,9 +12,11 @@
   "license": "ISC",
   "dependencies": {
     "assert": "^1.4.1",
+    "babel-core": "^6.20.0",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.18.0",
     "babel-plugin-transform-object-rest-spread": "^6.20.2",
     "babel-polyfill": "^6.20.0",
+    "babel-preset-react": "^6.16.0",
     "babel-register": "^6.18.0",
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
