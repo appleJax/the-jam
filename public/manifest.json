@@ -2,6 +2,7 @@
   "lang": "en",
   "name": "the Jam",
   "background_color": "#9043B3",
+  "theme_color": "#9043B3",
   "icons": [
     {
       "src": "images/hi_jam.gif",
