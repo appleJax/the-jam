@@ -4,7 +4,7 @@ module.exports = {
   entry: __dirname + '/app/index.js',
   module: {
     loaders: [
-      {test: /\.scss?$/, loader: 'style!css!sass'},
+      {test: /\.scss?$/, loader: ExtractTextPlugin.extract('style-loader', 'css!sass')},
       {test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'file-loader?mimetype=image/svg+xml'},
       {test: /\.woff(\?v=\d+\.\d+\.\d+)?$/, loader: "file-loader?mimetype=application/font-woff"},
       {test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/, loader: "file-loader?mimetype=application/font-woff"},
