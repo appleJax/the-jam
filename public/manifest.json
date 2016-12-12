@@ -10,7 +10,7 @@
       "src": "images/lo_jam.gif",
       "sizes": "72x72 96x96 128x128"
     }
-  ]
+  ],
   "description": "A Repository for Recipe Cards",
   "start_url": "index.html",
   "display": "standalone",
