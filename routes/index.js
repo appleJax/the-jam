@@ -72,8 +72,8 @@ module.exports = (app) => {
         <meta charset='UTF-8' />
         <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=no' />
         <title>the Jam</title>
-        <meta name="apple-mobile-web-app-capable" content="yes" />
         <link rel='manifest' href='manifest.json' />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
         <link rel='icon' sizes='192x192' href='images/hi_jam.gif' />
         <link rel='shortcut icon' href='favicon.ico' type='image/x-icon'/>
         <link href='https://fonts.googleapis.com/css?family=Lato|Molle:400i|Architects+Daughter' rel='stylesheet' />
