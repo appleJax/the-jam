@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "assert": "^1.4.1",
+    "auth0-lock": "^10.7.2",
     "babel-core": "^6.20.0",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.18.0",
     "babel-plugin-transform-object-rest-spread": "^6.20.2",
@@ -22,6 +23,7 @@
     "express": "^4.14.0",
     "font-awesome": "^4.7.0",
     "isomorphic-fetch": "^2.2.1",
+    "jwt-decode": "^2.1.0",
     "mongodb": "^2.2.15",
     "normalize-scss": "^6.0.0",
     "normalize.css": "^5.0.0",

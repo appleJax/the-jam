@@ -1,6 +1,7 @@
 {
   "lang": "en",
   "name": "the Jam",
+  "background_color": purple,
   "icons": [
     {
       "src": "images/hi_jam.gif",
