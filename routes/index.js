@@ -12,12 +12,12 @@ module.exports = (app) => {
   function setHeaders() {
         const headers = {};
         // IE8 does not allow domains to be specified, just the *
-        // headers["Access-Control-Allow-Origin"] = req.headers.origin;
-        headers["Access-Control-Allow-Origin"] = "*";
-        headers["Access-Control-Allow-Methods"] = "POST, GET, PUT, DELETE, OPTIONS";
-        headers["Access-Control-Allow-Credentials"] = false;
-        headers["Access-Control-Max-Age"] = '86400'; // 24 hours
-        headers["Access-Control-Allow-Headers"] = "X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept";
+        // headers['Access-Control-Allow-Origin'] = req.headers.origin;
+        headers['Access-Control-Allow-Origin'] = '*';
+        headers['Access-Control-Allow-Methods'] = 'POST, GET, PUT, DELETE, OPTIONS';
+        headers['Access-Control-Allow-Credentials'] = false;
+        headers['Access-Control-Max-Age'] = '86400'; // 24 hours
+        headers['Access-Control-Allow-Headers'] = 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept';
 
         return headers;
   }
@@ -67,21 +67,23 @@ module.exports = (app) => {
   function renderFullPage(html, preloadedState) {
     return `
     <!DOCTYPE html>
-    <html lang="EN">
+    <html lang='EN'>
       <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset='UTF-8' />
+        <meta name='viewport' content='width=device-width, initial-scale=1.0' />
         <title>the Jam</title>
+        <link rel='manifest' href='manifest.json' />
+        <link rel='icon' sizes='192x192' href='images/hi_jam.gif' />
         <link rel='shortcut icon' href='favicon.ico' type='image/x-icon'/>
-        <link href="https://fonts.googleapis.com/css?family=Lato|Molle:400i|Architects+Daughter" rel="stylesheet" />
-        <link rel="stylesheet" href="bundle.css" />
+        <link href='https://fonts.googleapis.com/css?family=Lato|Molle:400i|Architects+Daughter' rel='stylesheet' />
+        <link rel='stylesheet' href='bundle.css' />
       </head>
       <body>
-        <div id="root">${html}</div>
+        <div id='root'>${html}</div>
         <script>
           window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState)}
         </script>
-        <script type="text/javascript" src="bundle.js"></script>
+        <script type='text/javascript' src='bundle.js'></script>
       </body>
     </html>
     `;
