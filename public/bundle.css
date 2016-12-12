@@ -27,7 +27,7 @@ nav {
   margin-bottom: 10px; }
 
 .logo {
-  text-shadow: 2px 2px 5px #500373; }
+  text-shadow: 2px 2px 5px #9043b3; }
 
 .nav__header {
   display: flex;
@@ -92,10 +92,10 @@ nav {
   .nav__controls .active {
     background: white;
     box-shadow: 0 0 10px #F14723 inset;
-    color: #500373; }
+    color: #9043b3; }
     .nav__controls .active:hover {
       background: #f2f2f2;
-      color: #500373; }
+      color: #9043b3; }
 
 .nav__add-recipe {
   background: white;
