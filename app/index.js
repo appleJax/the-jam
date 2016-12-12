@@ -1,6 +1,6 @@
 import 'normalize-scss/sass/_normalize.scss'
-import './index.sass'
 import 'font-awesome/scss/font-awesome.scss'
+import './index.sass'
 
 import 'babel-polyfill'
 import React from 'react'
