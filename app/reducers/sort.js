@@ -1,3 +1,5 @@
+import { SET_SORT } from '../actions/sync'
+
 const sort = (
   state = {
     stars: false,
@@ -7,7 +9,7 @@ const sort = (
   action
 ) => {
   switch (action.type) {
-    case 'SET_SORT':
+    case SET_SORT:
       switch (action.sortBy) {
         case 'STARS':
           return {

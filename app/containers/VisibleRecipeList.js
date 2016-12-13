@@ -2,9 +2,11 @@ import { connect } from 'react-redux'
 import {
   populateModal,
   setVisibilityFilter,
-  editUserRecipe,
   toggleDetails
-} from '../actions'
+} from '../actions/sync'
+import {
+  editUserRecipe
+} from '../actions/async'
 import RecipeList from '../components/RecipeList'
 
 const getVisibleRecipes = (recipes, filter, sort) => {

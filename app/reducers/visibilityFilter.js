@@ -1,6 +1,8 @@
+import { SET_VISIBILITY_FILTER } from '../actions/sync'
+
 const visibilityFilter = (state = [''], action) => {
   switch (action.type) {
-    case 'SET_VISIBILITY_FILTER':
+    case SET_VISIBILITY_FILTER:
       return action.visibilityFilter
     default:
       return state

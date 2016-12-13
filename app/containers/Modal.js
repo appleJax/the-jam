@@ -2,9 +2,11 @@ import { connect } from 'react-redux'
 import {
   addUserRecipe,
   editUserRecipe,
-  deleteUserRecipe,
+  deleteUserRecipe
+} from '../actions/async'
+import {
   closeModal
-} from '../actions'
+} from '../actions/sync'
 import ModalOverlay from '../components/ModalOverlay'
 
 const mapStateToProps = (state) => {

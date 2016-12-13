@@ -1,3 +1,8 @@
+import {
+  CLOSE_MODAL,
+  POPULATE_MODAL
+} from '../actions/sync'
+
 const modal = (
   state = {
     show: false,
@@ -7,13 +12,13 @@ const modal = (
   action
 ) => {
   switch (action.type) {
-    case 'CLOSE_MODAL':
+    case CLOSE_MODAL:
       return {
         show: false,
         dialogue: '',
         content: ''
       };
-    case 'POPULATE_MODAL':
+    case POPULATE_MODAL:
       return {
         show: true,
         dialogue: action.dialogue,

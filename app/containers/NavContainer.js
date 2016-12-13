@@ -3,7 +3,7 @@ import {
   setVisibilityFilter,
   setSort,
   populateModal
-} from '../actions'
+} from '../actions/sync'
 import Nav from '../components/Nav'
 
 const mapStateToProps = (state) => {
