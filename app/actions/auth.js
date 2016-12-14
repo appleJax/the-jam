@@ -1,5 +1,5 @@
 import fetch from 'isomorphic-fetch'
-import localforage from '../utils/localforage'
+import { authStore } from '../utils/localforage'
 
 export const CREATE_USER_REQUEST = 'CREATE_USER_REQUEST'
 export const CREATE_USER_SUCCESS = 'CREATE_USER_SUCCESS'
@@ -121,7 +121,7 @@ export const createUser = (creds) => {
         } else {
           // If login was successful, set the token in storage
           // and update UI
-          localforage.setItem('id_token', user.id_token).then(
+          authStore.setItem('id_token', user.id_token).then(
             dispatch(receiveCreateUser(user))
           ).catch(e => console.error(e))
         }
@@ -153,7 +153,7 @@ export const loginUser = (creds) => {
         } else {
           // If login was successful, set the token in storage
           // and dispatch the success action
-          localforage.setItem('id_token', user.id_token).then(
+          authStore.setItem('id_token', user.id_token).then(
             dispatch(receiveLogin(user))
           ).catch(e => console.error(e))
         }
@@ -163,7 +163,7 @@ export const loginUser = (creds) => {
 
 export const logoutUser = () => {
   return dispatch => {
-    localforage.removeItem('id_token').then(
+    authStore.removeItem('id_token').then(
       dispatch(logout())
     ).catch(e => console.error(e))
   }

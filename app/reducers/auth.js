@@ -12,13 +12,13 @@ import {
 } from '../actions/auth'
 
 import { isTokenExpired } from '../utils/jwtHelper'
-import localforage from '../utils/localforage'
+import authStore from '../utils/localforage'
 
 const auth = (
   state = {
     isFetching: false,
-    isAuthenticated: localforage.getItem('id_token') &&
-      !isTokenExpired(localforage.getItem('id_token')) ?
+    isAuthenticated: authStore.getItem('id_token') &&
+      !isTokenExpired(authStore.getItem('id_token')) ?
       true : false
   },
   action

@@ -7,4 +7,8 @@ const options = {
   description : 'storage for JWT'
 }
 
-export default localforage.config(options)
+localforage.config(options)
+
+export const authStore = localforage.createInstance({
+  name: 'authStore'
+})
