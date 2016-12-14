@@ -32,15 +32,15 @@ class AuthService {
   }
 
   setToken(idToken) {
-    localStorage.setItem('id_token', idToken)
+    window.localStorage.setItem('id_token', idToken)
   }
 
   getToken() {
-    return localStorage.getItem('id_token')
+    return window.localStorage.getItem('id_token')
   }
 
   logout() {
-    localStorage.removeItem('id_token')
+    window.localStorage.removeItem('id_token')
   }
 }
 

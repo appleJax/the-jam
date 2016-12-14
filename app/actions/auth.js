@@ -119,7 +119,7 @@ export const createUser = (creds) => {
           return Promise.reject(user)
         } else {
           // If login was successful, set the token in local storage
-          localStorage.setItem('id_token', user.id_token)
+          window.localStorage.setItem('id_token', user.id_token)
           // Dispatch the success action
           dispatch(receiveCreateUser(user))
         }
@@ -150,7 +150,7 @@ export const loginUser = (creds) => {
           return Promise.reject(user)
         } else {
           // If login was successful, set the token in local storage
-          localStorage.setItem('id_token', user.id_token)
+          window.localStorage.setItem('id_token', user.id_token)
           // Dispatch the success action
           dispatch(receiveLogin(user))
         }
@@ -160,7 +160,7 @@ export const loginUser = (creds) => {
 
 export const logoutUser = () => {
   return dispatch => {
-    localStorage.removeItem('id_token')
+    window.localStorage.removeItem('id_token')
     dispatch(logout())
   }
 }

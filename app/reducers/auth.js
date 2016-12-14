@@ -16,8 +16,8 @@ import { isTokenExpired } from '../utils/jwtHelper'
 const auth = (
   state = {
     isFetching: false,
-    isAuthenticated: localStorage.getItem('id_token') &&
-      !isTokenExpired(localStorage.getItem('id_token')) ?
+    isAuthenticated: window.localStorage.getItem('id_token') &&
+      !isTokenExpired(window.localStorage.getItem('id_token')) ?
       true : false
   },
   action

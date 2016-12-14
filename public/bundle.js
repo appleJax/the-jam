@@ -32247,7 +32247,7 @@
 
 	const auth = (state = {
 	  isFetching: false,
-	  isAuthenticated: localStorage.getItem('id_token') && !(0, _jwtHelper.isTokenExpired)(localStorage.getItem('id_token')) ? true : false
+	  isAuthenticated: window.localStorage.getItem('id_token') && !(0, _jwtHelper.isTokenExpired)(window.localStorage.getItem('id_token')) ? true : false
 	}, action) => {
 	  switch (action.type) {
 	    case _auth.CREATE_USER_REQUEST:
@@ -32435,7 +32435,7 @@
 	        return Promise.reject(user);
 	      } else {
 	        // If login was successful, set the token in local storage
-	        localStorage.setItem('id_token', user.id_token);
+	        window.localStorage.setItem('id_token', user.id_token);
 	        // Dispatch the success action
 	        dispatch(receiveCreateUser(user));
 	      }
@@ -32463,7 +32463,7 @@
 	        return Promise.reject(user);
 	      } else {
 	        // If login was successful, set the token in local storage
-	        localStorage.setItem('id_token', user.id_token);
+	        window.localStorage.setItem('id_token', user.id_token);
 	        // Dispatch the success action
 	        dispatch(receiveLogin(user));
 	      }
@@ -32473,7 +32473,7 @@
 
 	const logoutUser = exports.logoutUser = () => {
 	  return dispatch => {
-	    localStorage.removeItem('id_token');
+	    window.localStorage.removeItem('id_token');
 	    dispatch(logout());
 	  };
 	};
@@ -33015,15 +33015,15 @@
 	  }
 
 	  setToken(idToken) {
-	    localStorage.setItem('id_token', idToken);
+	    window.localStorage.setItem('id_token', idToken);
 	  }
 
 	  getToken() {
-	    return localStorage.getItem('id_token');
+	    return window.localStorage.getItem('id_token');
 	  }
 
 	  logout() {
-	    localStorage.removeItem('id_token');
+	    window.localStorage.removeItem('id_token');
 	  }
 	}
 
