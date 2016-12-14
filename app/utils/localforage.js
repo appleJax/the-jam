@@ -9,6 +9,4 @@ const options = {
 
 localforage.config(options)
 
-export const authStore = localforage.createInstance({
-  name: 'authStore'
-})
+export default localforage

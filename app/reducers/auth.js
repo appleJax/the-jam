@@ -12,9 +12,10 @@ import {
 } from '../actions/auth'
 
 import { isTokenExpired } from '../utils/jwtHelper'
-import { authStore } from '../utils/localforage'
+import localforage from '../utils/localforage'
 
-let authToken = authStore.getItem('id_token')
+let authToken = localforage.getItem('id_token')
+  .then(val => val)
   .catch(e => {
     console.error('My Error: ', e)
     authToken = false
@@ -23,7 +24,7 @@ let authToken = authStore.getItem('id_token')
 const auth = (
   state = {
     isFetching: false,
-    isAuthenticated: (authToken && !isTokenExpired(authToken)) ?
+    isAuthenticated: (authToken.resolve() && !isTokenExpired(authToken)) ?
       true : false
   },
   action

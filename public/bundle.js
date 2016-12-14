@@ -32442,14 +32442,18 @@
 
 	var _localforage = __webpack_require__(536);
 
-	let authToken = _localforage.authStore.getItem('id_token').catch(e => {
+	var _localforage2 = _interopRequireDefault(_localforage);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	let authToken = _localforage2.default.getItem('id_token').then(val => val).catch(e => {
 	  console.error('My Error: ', e);
 	  authToken = false;
 	});
 
 	const auth = (state = {
 	  isFetching: false,
-	  isAuthenticated: authToken && !(0, _jwtHelper.isTokenExpired)(authToken) ? true : false
+	  isAuthenticated: authToken.resolve() && !(0, _jwtHelper.isTokenExpired)(authToken) ? true : false
 	}, action) => {
 	  switch (action.type) {
 	    case _auth.CREATE_USER_REQUEST:
@@ -32516,6 +32520,8 @@
 	var _isomorphicFetch2 = _interopRequireDefault(_isomorphicFetch);
 
 	var _localforage = __webpack_require__(536);
+
+	var _localforage2 = _interopRequireDefault(_localforage);
 
 	var _AuthService = __webpack_require__(538);
 
@@ -32640,7 +32646,7 @@
 	      } else {
 	        // If login was successful, set the token in storage
 	        // and update UI
-	        _localforage.authStore.setItem('id_token', user.id_token).then(dispatch(receiveCreateUser(user))).catch(e => console.error(e));
+	        _localforage2.default.setItem('id_token', user.id_token).then(dispatch(receiveCreateUser(user))).catch(e => console.error(e));
 	      }
 	    }).catch(e => console.error(e));
 	  };
@@ -32667,7 +32673,7 @@
 	      } else {
 	        // If login was successful, set the token in storage
 	        // and dispatch the success action
-	        _localforage.authStore.setItem('id_token', user.id_token).then(dispatch(receiveLogin(user))).catch(e => console.error(e));
+	        _localforage2.default.setItem('id_token', user.id_token).then(dispatch(receiveLogin(user))).catch(e => console.error(e));
 	      }
 	    }).catch(e => console.error(e));
 	  };
@@ -32675,7 +32681,7 @@
 
 	const logoutUser = exports.logoutUser = () => {
 	  return dispatch => {
-	    _localforage.authStore.removeItem('id_token').then(dispatch(logout())).catch(e => console.error(e));
+	    _localforage2.default.removeItem('id_token').then(dispatch(logout())).catch(e => console.error(e));
 	  };
 	};
 
@@ -33177,7 +33183,6 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.authStore = undefined;
 
 	var _localforage = __webpack_require__(537);
 
@@ -33194,9 +33199,7 @@
 
 	_localforage2.default.config(options);
 
-	const authStore = exports.authStore = _localforage2.default.createInstance({
-	  name: 'authStore'
-	});
+	exports.default = _localforage2.default;
 
 /***/ },
 /* 537 */
@@ -35521,6 +35524,8 @@
 
 	var _localforage = __webpack_require__(536);
 
+	var _localforage2 = _interopRequireDefault(_localforage);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	class AuthService {
@@ -35555,18 +35560,18 @@
 	  }
 
 	  setToken(idToken) {
-	    _localforage.authStore.setItem('id_token', idToken).catch(e => console.error(e));
+	    _localforage2.default.setItem('id_token', idToken).catch(e => console.error(e));
 	  }
 
 	  getToken() {
-	    return _localforage.authStore.getItem('id_token').catch(e => {
+	    return _localforage2.default.getItem('id_token').catch(e => {
 	      console.error(e);
 	      return null;
 	    });
 	  }
 
 	  logout() {
-	    _localforage.authStore.removeItem('id_token').catch(e => console.error(e));
+	    _localforage2.default.removeItem('id_token').catch(e => console.error(e));
 	  }
 	}
 
