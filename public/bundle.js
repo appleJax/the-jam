@@ -32446,14 +32446,12 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	let authToken = _localforage2.default.getItem('id_token').then(val => val).catch(e => {
-	  console.error('My Error: ', e);
-	  authToken = false;
-	});
-
 	const auth = (state = {
 	  isFetching: false,
-	  isAuthenticated: authToken && !(0, _jwtHelper.isTokenExpired)(authToken) ? true : false
+	  isAuthenticated: _localforage2.default.getItem('id_token').then(token => {
+	    console.log('My token: ', token);
+	    return !(0, _jwtHelper.isTokenExpired)(token);
+	  }) ? true : false
 	}, action) => {
 	  switch (action.type) {
 	    case _auth.CREATE_USER_REQUEST:

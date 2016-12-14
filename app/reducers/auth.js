@@ -14,17 +14,15 @@ import {
 import { isTokenExpired } from '../utils/jwtHelper'
 import localforage from '../utils/localforage'
 
-let authToken = localforage.getItem('id_token')
-  .then(val => val)
-  .catch(e => {
-    console.error('My Error: ', e)
-    authToken = false
-  })
-
 const auth = (
   state = {
     isFetching: false,
-    isAuthenticated: (authToken && !isTokenExpired(authToken)) ?
+    isAuthenticated:
+      localforage.getItem('id_token')
+        .then(token => {
+          console.log('My token: ', token)
+          return !isTokenExpired(token)
+        }) ?
       true : false
   },
   action
