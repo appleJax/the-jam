@@ -15,9 +15,6 @@ const Nav = ({
           the Jam
         </h2>
         <div className='nav__user'>
-          <div className='signup'>
-            Sign Up
-          </div>
           <div
             className='signin'
             onClick={login}

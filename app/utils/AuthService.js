@@ -1,4 +1,5 @@
 import Auth0Lock from 'auth0-lock'
+import localforage from './localforage'
 
 class AuthService {
   constructor(clientId, domain) {
@@ -32,15 +33,18 @@ class AuthService {
   }
 
   setToken(idToken) {
-    window.localStorage.setItem('id_token', idToken)
+    localforage.setItem('id_token', idToken)
+      .catch(e => console.error(e))
   }
 
   getToken() {
-    return window.localStorage.getItem('id_token')
+    return localforage.getItem('id_token')
+      .catch(e => console.error(e))
   }
 
   logout() {
-    window.localStorage.removeItem('id_token')
+    localforage.removeItem('id_token')
+      .catch(e => console.error(e))
   }
 }
 

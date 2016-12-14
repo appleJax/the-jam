@@ -1,4 +1,5 @@
 import fetch from 'isomorphic-fetch'
+import localforage from '../utils/localforage'
 
 export const CREATE_USER_REQUEST = 'CREATE_USER_REQUEST'
 export const CREATE_USER_SUCCESS = 'CREATE_USER_SUCCESS'
@@ -118,12 +119,13 @@ export const createUser = (creds) => {
           dispatch(rejectCreateUser(user.message))
           return Promise.reject(user)
         } else {
-          // If login was successful, set the token in local storage
-          window.localStorage.setItem('id_token', user.id_token)
-          // Dispatch the success action
-          dispatch(receiveCreateUser(user))
+          // If login was successful, set the token in storage
+          // and update UI
+          localforage.setItem('id_token', user.id_token).then(
+            dispatch(receiveCreateUser(user))
+          ).catch(e => console.error(e))
         }
-      }).catch(err => console.log("Error: ", err))
+      }).catch(e => console.error(e))
   }
 }
 
@@ -149,19 +151,21 @@ export const loginUser = (creds) => {
           dispatch(rejectLogin(user.message))
           return Promise.reject(user)
         } else {
-          // If login was successful, set the token in local storage
-          window.localStorage.setItem('id_token', user.id_token)
-          // Dispatch the success action
-          dispatch(receiveLogin(user))
+          // If login was successful, set the token in storage
+          // and dispatch the success action
+          localforage.setItem('id_token', user.id_token).then(
+            dispatch(receiveLogin(user))
+          ).catch(e => console.error(e))
         }
-      }).catch(err => console.log("Error: ", err))
+      }).catch(e => console.error(e))
   }
 }
 
 export const logoutUser = () => {
   return dispatch => {
-    window.localStorage.removeItem('id_token')
-    dispatch(logout())
+    localforage.removeItem('id_token').then(
+      dispatch(logout())
+    ).catch(e => console.error(e))
   }
 }
 

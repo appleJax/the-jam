@@ -24,6 +24,7 @@
     "font-awesome": "^4.7.0",
     "isomorphic-fetch": "^2.2.1",
     "jwt-decode": "^2.1.0",
+    "localforage": "^1.4.3",
     "mongodb": "^2.2.15",
     "normalize-scss": "^6.0.0",
     "normalize.css": "^5.0.0",

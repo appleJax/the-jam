@@ -12,12 +12,13 @@ import {
 } from '../actions/auth'
 
 import { isTokenExpired } from '../utils/jwtHelper'
+import localforage from '../utils/localforage'
 
 const auth = (
   state = {
     isFetching: false,
-    isAuthenticated: window.localStorage.getItem('id_token') &&
-      !isTokenExpired(window.localStorage.getItem('id_token')) ?
+    isAuthenticated: localforage.getItem('id_token') &&
+      !isTokenExpired(localforage.getItem('id_token')) ?
       true : false
   },
   action
