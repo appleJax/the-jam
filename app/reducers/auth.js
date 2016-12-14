@@ -14,7 +14,7 @@ import {
 import { isTokenExpired } from '../utils/jwtHelper'
 import { authStore } from '../utils/localforage'
 
-const authToken = authStore.getItem('id_token')
+let authToken = authStore.getItem('id_token')
   .catch(e => {
     console.error('My Error: ', e)
     authToken = false

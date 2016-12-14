@@ -32442,7 +32442,7 @@
 
 	var _localforage = __webpack_require__(536);
 
-	const authToken = _localforage.authStore.getItem('id_token').catch(e => {
+	let authToken = _localforage.authStore.getItem('id_token').catch(e => {
 	  console.error('My Error: ', e);
 	  authToken = false;
 	});
@@ -62983,7 +62983,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	function getTokenExpirationDate(token) {
+	function getTokenExpirationDate(token = false) {
 	  if (!token) return 'none';
 	  const decoded = (0, _jwtDecode2.default)(token);
 	  if (!decoded.exp) return null;
@@ -62993,7 +62993,7 @@
 	  return date;
 	}
 
-	function isTokenExpired(token) {
+	function isTokenExpired(token = false) {
 	  if (!token) return true;
 	  const date = getTokenExpirationDate(token);
 	  const offsetSeconds = 0;
