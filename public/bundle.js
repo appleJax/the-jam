@@ -32243,11 +32243,11 @@
 
 	var _auth = __webpack_require__(529);
 
-	var _jwthelper = __webpack_require__(691);
+	var _jwtHelper = __webpack_require__(691);
 
 	const auth = (state = {
 	  isFetching: false,
-	  isAuthenticated: localStorage.getItem('id_token') && !(0, _jwthelper.isTokenExpired)(localStorage.getItem('id_token')) ? true : false
+	  isAuthenticated: localStorage.getItem('id_token') && !(0, _jwtHelper.isTokenExpired)(localStorage.getItem('id_token')) ? true : false
 	}, action) => {
 	  switch (action.type) {
 	    case _auth.CREATE_USER_REQUEST:

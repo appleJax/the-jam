@@ -11,7 +11,7 @@ import {
   LOCK_ERROR
 } from '../actions/auth'
 
-import { isTokenExpired } from '../utils/jwthelper'
+import { isTokenExpired } from '../utils/jwtHelper'
 
 const auth = (
   state = {
