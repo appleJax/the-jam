@@ -62984,6 +62984,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function getTokenExpirationDate(token = false) {
+	  console.log('Token: ', token);
 	  if (!token) return 'none';
 	  const decoded = (0, _jwtDecode2.default)(token);
 	  if (!decoded.exp) return null;
@@ -62994,6 +62995,7 @@
 	}
 
 	function isTokenExpired(token = false) {
+	  console.log('Token: ', token);
 	  if (!token) return true;
 	  const date = getTokenExpirationDate(token);
 	  const offsetSeconds = 0;
