@@ -5,7 +5,10 @@ import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
   LOGIN_ERROR,
-  LOGOUT
+  LOGOUT,
+  SHOW_LOCK,
+  LOCK_SUCCESS,
+  LOCK_ERROR
 } from '../actions/auth'
 
 import { isTokenExpired } from '../utils/jwthelper'

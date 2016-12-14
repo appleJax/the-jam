@@ -5,7 +5,8 @@ const Nav = ({
   sort,
   setVisibilityFilter,
   setSort,
-  populateModal
+  populateModal,
+  login
 }) => {
   return (
     <nav>
@@ -17,7 +18,10 @@ const Nav = ({
           <div className='signup'>
             Sign Up
           </div>
-          <div className='signin'>
+          <div
+            className='signin'
+            onClick={login}
+          >
             Sign In
           </div>
         </div>

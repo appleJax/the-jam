@@ -7,6 +7,9 @@ export const LOGIN_REQUEST = 'LOGIN_REQUEST'
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 export const LOGIN_ERROR = 'LOGIN_ERROR'
 export const LOGOUT = 'LOGOUT'
+export const SHOW_LOCK = 'SHOW_LOCK'
+export const LOCK_SUCCESS = 'LOCK_SUCCESS'
+export const LOCK_ERROR = 'LOCK_ERROR'
 
 // -- Sync --
 export const requestCreateUser = (creds) => {
@@ -54,7 +57,7 @@ export const receiveLogin = (user) => {
   }
 }
 
-export const rejectLogin = (error) = > {
+export const rejectLogin = (error) => {
   return {
     type: LOGIN_ERROR,
     isFetching: false,
@@ -68,6 +71,27 @@ export const logout = () => {
     type: LOGOUT,
     isFetching: false,
     isAuthenticated: false
+  }
+}
+
+export const showLock = () => {
+  return {
+    type: SHOW_LOCK
+  }
+}
+
+export const lockSuccess = (profile, token) => {
+  return {
+    type: LOCK_SUCCESS,
+    profile,
+    token
+  }
+}
+
+export const lockError = (err) => {
+  return {
+    type: LOCK_ERROR,
+    err
   }
 }
 
@@ -138,5 +162,20 @@ export const logoutUser = () => {
   return dispatch => {
     localStorage.removeItem('id_token')
     dispatch(logout())
+  }
+}
+
+import AuthService from '../utils/AuthService'
+
+export const login = () => {
+  const options = {
+    theme: {
+      logo: 'http://thejam.herokuapp.com/images/auth0-lock-logo.gif'
+    }
+  }
+
+  return dispatch => {
+    const lock = new AuthService('cScY9jmRXWFMDBvonACLTNbNL8KG7Vod', 'thejam.auth0.com', options)
+    lock.login()
   }
 }

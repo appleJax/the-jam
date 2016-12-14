@@ -4,6 +4,7 @@ import {
   setSort,
   populateModal
 } from '../actions/sync'
+import { login } from '../actions/auth'
 import Nav from '../components/Nav'
 
 const mapStateToProps = (state) => {
@@ -20,7 +21,8 @@ const mapDispatchToProps = (dispatch) => {
     populateModal: () => {
       document.body.classList.add('no-scroll')
       dispatch(populateModal('recipe', 'new'))
-    }
+    },
+    login: () => dispatch(login())
   }
 }
 
