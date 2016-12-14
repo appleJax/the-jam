@@ -32448,7 +32448,7 @@
 
 	const auth = (state = {
 	  isFetching: false,
-	  isAuthenticated: _localforage2.default.getItem('id_token') && !(0, _jwtHelper.isTokenExpired)(_localforage2.default.getItem('id_token')) ? true : false
+	  isAuthenticated: _localforage2.default.getItem('id_token').catch(e => console.error(e)) && !(0, _jwtHelper.isTokenExpired)(_localforage2.default.getItem('id_token')).catch(e => console.error(e)) ? true : false
 	}, action) => {
 	  switch (action.type) {
 	    case _auth.CREATE_USER_REQUEST:
@@ -33195,7 +33195,7 @@
 
 	const authStore = exports.authStore = _localforage2.default.createInstance({
 	  name: 'authStore'
-	});
+	}).catch(e => console.error(e));
 
 /***/ },
 /* 537 */

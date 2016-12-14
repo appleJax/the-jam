@@ -17,8 +17,8 @@ import authStore from '../utils/localforage'
 const auth = (
   state = {
     isFetching: false,
-    isAuthenticated: authStore.getItem('id_token') &&
-      !isTokenExpired(authStore.getItem('id_token')) ?
+    isAuthenticated: authStore.getItem('id_token').catch(e => console.error(e)) &&
+      !isTokenExpired(authStore.getItem('id_token')).catch(e => console.error(e)) ?
       true : false
   },
   action

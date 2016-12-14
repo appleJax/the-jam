@@ -11,4 +11,4 @@ localforage.config(options)
 
 export const authStore = localforage.createInstance({
   name: 'authStore'
-})
+}).catch(e => console.error(e))
