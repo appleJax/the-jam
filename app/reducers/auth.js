@@ -12,7 +12,7 @@ import {
 } from '../actions/auth'
 
 import { isTokenExpired } from '../utils/jwtHelper'
-import authStore from '../utils/localforage'
+import { authStore } from '../utils/localforage'
 
 const auth = (
   state = {

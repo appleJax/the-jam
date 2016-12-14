@@ -32442,13 +32442,9 @@
 
 	var _localforage = __webpack_require__(536);
 
-	var _localforage2 = _interopRequireDefault(_localforage);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 	const auth = (state = {
 	  isFetching: false,
-	  isAuthenticated: _localforage2.default.getItem('id_token').catch(e => console.error(e)) && !(0, _jwtHelper.isTokenExpired)(_localforage2.default.getItem('id_token')).catch(e => console.error(e)) ? true : false
+	  isAuthenticated: _localforage.authStore.getItem('id_token').catch(e => console.error(e)) && !(0, _jwtHelper.isTokenExpired)(_localforage.authStore.getItem('id_token')).catch(e => console.error(e)) ? true : false
 	}, action) => {
 	  switch (action.type) {
 	    case _auth.CREATE_USER_REQUEST:
