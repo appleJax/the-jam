@@ -32442,7 +32442,7 @@
 
 	var _localforage = __webpack_require__(536);
 
-	const authToken = _localforage.authStore.getItem('id_token').catch(e => console.error(e));
+	const authToken = _localforage.authStore.getItem('id_token').catch(e => console.error('My Error: ', e));
 
 	const auth = (state = {
 	  isFetching: false,
@@ -62981,6 +62981,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function getTokenExpirationDate(token) {
+	  if (!token) return 'none';
 	  const decoded = (0, _jwtDecode2.default)(token);
 	  if (!decoded.exp) return null;
 
@@ -62995,6 +62996,8 @@
 	  const offsetSeconds = 0;
 	  if (date === null) {
 	    return false;
+	  } else if (date == 'none') {
+	    return true;
 	  }
 	  return !(date.valueOf() > new Date().valueOf() + offsetSeconds * 1000);
 	}
