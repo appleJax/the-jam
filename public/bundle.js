@@ -32442,7 +32442,10 @@
 
 	var _localforage = __webpack_require__(536);
 
-	const authToken = _localforage.authStore.getItem('id_token').catch(e => console.error('My Error: ', e));
+	const authToken = _localforage.authStore.getItem('id_token').catch(e => {
+	  console.error('My Error: ', e);
+	  authToken = false;
+	});
 
 	const auth = (state = {
 	  isFetching: false,
