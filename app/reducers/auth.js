@@ -19,7 +19,7 @@ const authToken = authStore.getItem('id_token').catch(e => null )
 const auth = (
   state = {
     isFetching: false,
-    isAuthenticated: authToken && !isTokenExpired(authToken) ?
+    isAuthenticated: (authToken && !isTokenExpired(authToken)) ?
       true : false
   },
   action
