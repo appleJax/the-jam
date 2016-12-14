@@ -32442,7 +32442,7 @@
 
 	var _localforage = __webpack_require__(536);
 
-	const authToken = _localforage.authStore.getItem('id_token').catch(e => null);
+	const authToken = _localforage.authStore.getItem('id_token').catch(e => console.error(e));
 
 	const auth = (state = {
 	  isFetching: false,
@@ -62990,6 +62990,7 @@
 	}
 
 	function isTokenExpired(token) {
+	  if (!token) return true;
 	  const date = getTokenExpirationDate(token);
 	  const offsetSeconds = 0;
 	  if (date === null) {
