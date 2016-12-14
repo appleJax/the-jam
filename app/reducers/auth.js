@@ -24,7 +24,7 @@ let authToken = localforage.getItem('id_token')
 const auth = (
   state = {
     isFetching: false,
-    isAuthenticated: (authToken.resolve() && !isTokenExpired(authToken)) ?
+    isAuthenticated: (authToken && !isTokenExpired(authToken)) ?
       true : false
   },
   action

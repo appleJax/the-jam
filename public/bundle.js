@@ -32453,7 +32453,7 @@
 
 	const auth = (state = {
 	  isFetching: false,
-	  isAuthenticated: authToken.resolve() && !(0, _jwtHelper.isTokenExpired)(authToken) ? true : false
+	  isAuthenticated: authToken && !(0, _jwtHelper.isTokenExpired)(authToken) ? true : false
 	}, action) => {
 	  switch (action.type) {
 	    case _auth.CREATE_USER_REQUEST:
