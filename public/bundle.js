@@ -33195,7 +33195,7 @@
 
 	const authStore = exports.authStore = _localforage2.default.createInstance({
 	  name: 'authStore'
-	}).catch(e => console.error(e));
+	});
 
 /***/ },
 /* 537 */
