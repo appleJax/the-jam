@@ -39,7 +39,10 @@ class AuthService {
 
   getToken() {
     return authStore.getItem('id_token')
-      .catch(e => console.error(e))
+      .catch(e => {
+        console.error(e)
+        return null
+      })
   }
 
   logout() {

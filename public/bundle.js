@@ -32442,9 +32442,11 @@
 
 	var _localforage = __webpack_require__(536);
 
+	const authToken = _localforage.authStore.getItem('id_token').catch(e => null);
+
 	const auth = (state = {
 	  isFetching: false,
-	  isAuthenticated: _localforage.authStore.getItem('id_token').catch(e => console.error(e)) && !(0, _jwtHelper.isTokenExpired)(_localforage.authStore.getItem('id_token')).catch(e => console.error(e)) ? true : false
+	  isAuthenticated: authToken && !(0, _jwtHelper.isTokenExpired)(authToken) ? true : false
 	}, action) => {
 	  switch (action.type) {
 	    case _auth.CREATE_USER_REQUEST:
@@ -35554,7 +35556,10 @@
 	  }
 
 	  getToken() {
-	    return _localforage.authStore.getItem('id_token').catch(e => console.error(e));
+	    return _localforage.authStore.getItem('id_token').catch(e => {
+	      console.error(e);
+	      return null;
+	    });
 	  }
 
 	  logout() {

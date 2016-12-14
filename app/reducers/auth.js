@@ -14,11 +14,12 @@ import {
 import { isTokenExpired } from '../utils/jwtHelper'
 import { authStore } from '../utils/localforage'
 
+const authToken = authStore.getItem('id_token').catch(e => null )
+
 const auth = (
   state = {
     isFetching: false,
-    isAuthenticated: authStore.getItem('id_token').catch(e => console.error(e)) &&
-      !isTokenExpired(authStore.getItem('id_token')).catch(e => console.error(e)) ?
+    isAuthenticated: authToken && !isTokenExpired(authToken) ?
       true : false
   },
   action
