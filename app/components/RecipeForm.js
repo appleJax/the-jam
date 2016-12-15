@@ -15,11 +15,13 @@ class RecipeForm extends React.Component {
 
     const tempRecipe = {};
     if (typeof content == 'object') {
+      const altContent = content
+      delete altContent._id
       tempRecipe.tags = content.tags.join(',')
       tempRecipe.ingredients = content.ingredients.join(';\n')
       tempRecipe.directions = content.directions.join(';\n\n')
       this.state = {
-        ...content,
+        ...altContent,
         ...tempRecipe
       }
 
