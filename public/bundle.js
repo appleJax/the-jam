@@ -60968,10 +60968,12 @@
 
 	    const tempRecipe = {};
 	    if (typeof content == 'object') {
+	      const altContent = content;
+	      delete altContent._id;
 	      tempRecipe.tags = content.tags.join(',');
 	      tempRecipe.ingredients = content.ingredients.join(';\n');
 	      tempRecipe.directions = content.directions.join(';\n\n');
-	      this.state = _extends({}, content, tempRecipe);
+	      this.state = _extends({}, altContent, tempRecipe);
 	    } else {
 	      this.state = {
 	        id: Date.now(),
