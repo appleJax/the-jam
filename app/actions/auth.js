@@ -168,7 +168,7 @@ export const auth0Login = () => {
 
       const user = {}
       user.id_token = token
-      user.name = profile.username
+      user.name = profile.name
 
       dispatch(receiveLogin(user))
     })

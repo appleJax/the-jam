@@ -72,7 +72,6 @@ nav
   border-radius: 0 0 5px 5px
   box-shadow: 0 2px 2px darken($nav-bg, 20%)
   display: flex
-  flex-basis:
   font-size: 24px
   justify-content: center
   max-width: 600px
@@ -80,9 +79,11 @@ nav
   width: 100%
 
 .nav__recipe-selector
+  align-items: center
   cursor: pointer
-  padding: 15px
-  text-align: center
+  display: flex
+  justify-content: center
+  padding: 15px 3px
   text-shadow: 1px 1px 3px darken($nav-bg, 30%)
   width: 50%
   &:hover
