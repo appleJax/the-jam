@@ -23,6 +23,7 @@ module.exports = (app) => {
   }
 
   function handleRender(req, res) {
+    console.log(req)
     // Get recipes from MONGODB_URI
     MongoClient.connect(url, (err, db) => {
       assert.equal(null, err);
@@ -33,18 +34,31 @@ module.exports = (app) => {
         const recipes = docs;
 
         let preloadedState = {
+          auth: {
+            isAuthenticated: false,
+            isFetching: false,
+            id_token: null,
+            name: null,
+            errorMessage: ''
+          },
           modal: {
             content: '',
             dialogue: '',
             show: false
           },
-          recipes,
+          recipes: {
+            public: recipes,
+            private: []
+          },
           sort: {
             asc: false,
             desc: false,
             stars: false
           },
-          visibilityFilter: ['']
+          visibilityFilter: {
+            active: 'public',
+            content: ['']
+          }
         };
 
         const store = configureStore(preloadedState);
@@ -71,9 +85,11 @@ module.exports = (app) => {
       <head>
         <meta charset='UTF-8' />
         <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=no' />
-        <title>the Jam</title>
-        <link rel='manifest' href='manifest.json' />
         <meta name="apple-mobile-web-app-capable" content="yes" />
+
+        <title>the Jam</title>
+
+        <link rel='manifest' href='manifest.json' />
         <link rel='icon' sizes='192x192' href='images/hi_jam.gif' />
         <link rel='shortcut icon' href='favicon.ico' type='image/x-icon'/>
         <link href='https://fonts.googleapis.com/css?family=Lato|Molle:400i|Architects+Daughter' rel='stylesheet' />
@@ -89,7 +105,10 @@ module.exports = (app) => {
     </html>
     `;
   }
-  app.get('*', (req, res) => handleRender(req, res));
+  app.get('*', (req, res) => handleRender(req, res))
+  //   console.log('Request: ', req.body);
+  //   res.sendFile(index.html);
+  // });
 
   app.all('/new', (req, res) => {
     if (req.method == 'OPTIONS') {
@@ -124,6 +143,7 @@ module.exports = (app) => {
         const collection = db.collection('recipes'),
               recipe = req.body;
         collection.update({id: recipe.id}, recipe, (err, result) => {
+          console.log('My error: ', err)
           assert.equal(null, err);
           res.json(result);
           db.close();

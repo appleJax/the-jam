@@ -12,15 +12,22 @@ import ModalOverlay from '../components/ModalOverlay'
 const mapStateToProps = (state) => {
   return {
     dialogue: state.modal.dialogue,
-    content: state.modal.content
+    content: state.modal.content,
+    active: state.visibilityFilter.active
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addRecipe: (user, recipe) => dispatch(addUserRecipe(user, recipe)),
-    editRecipe: (user, recipe) => dispatch(editUserRecipe(user, recipe)),
-    deleteRecipe: (user, id) => dispatch(deleteUserRecipe(user, id)),
+    addRecipe: (user, recipe, active) =>
+      dispatch(addUserRecipe(user, recipe, active)),
+
+    editRecipe: (user, recipe, active) =>
+      dispatch(editUserRecipe(user, recipe, active)),
+
+    deleteRecipe: (user, id, active) =>
+      dispatch(deleteUserRecipe(user, id, active)),
+
     closeModal: () => {
       document.body.classList.remove('no-scroll')
       dispatch(closeModal())

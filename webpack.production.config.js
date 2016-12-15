@@ -1,4 +1,5 @@
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin'),
+      webpack = require('webpack');
 
 module.exports = {
   entry: __dirname + '/app/index.js',
@@ -28,6 +29,7 @@ module.exports = {
     path: __dirname + '/public'
   },
   plugins: [
-    new ExtractTextPlugin('bundle.css')
+    new ExtractTextPlugin('bundle.css'),
+    new webpack.optimize.DedupePlugin()
   ]
 };

@@ -6,6 +6,7 @@ class RecipeForm extends React.Component {
     const {
       content
     } = props
+    this.active = props.active
     this.content = props.content
     this.addRecipe = props.addRecipe
     this.editRecipe = props.editRecipe
@@ -17,11 +18,10 @@ class RecipeForm extends React.Component {
       tempRecipe.tags = content.tags.join(',')
       tempRecipe.ingredients = content.ingredients.join(';\n')
       tempRecipe.directions = content.directions.join(';\n\n')
-      this.state = Object.assign(
-        {},
-        content,
-        tempRecipe
-      )
+      this.state = {
+        ...content,
+        ...tempRecipe
+      }
 
     } else {
       this.state = {
@@ -63,9 +63,9 @@ class RecipeForm extends React.Component {
         .filter(direction => direction !== '') : [];
 
     if (typeof this.content == 'object') {
-      this.editRecipe(null, recipe)
+      this.editRecipe(null, recipe, this.active)
     } else {
-      this.addRecipe(null, recipe)
+      this.addRecipe(null, recipe, this.active)
     }
 
     this.closeModal()

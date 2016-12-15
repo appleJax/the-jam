@@ -3,29 +3,33 @@ export const EDIT_RECIPE = 'EDIT_RECIPE'
 export const DELETE_RECIPE = 'DELETE_RECIPE'
 export const POPULATE_RECIPE = 'POPULATE_RECIPES'
 export const TOGGLE_DETAILS = 'TOGGLE_DETAILS'
-export const SET_VISIBILITY_FILTER = 'SET_VISIBILITY_FILTER'
+export const SET_FILTER_CONTENT = 'SET_FILTER_CONTENT'
+export const SET_FILTER_RECIPES = 'SET_FILTER_RECIPES'
 export const SET_SORT = 'SET_SORT'
 export const CLOSE_MODAL = 'CLOSE_MODAL'
 export const POPULATE_MODAL = 'POPULATE_MODAL'
 
-export const addRecipe = (recipe) => {
+export const addRecipe = (recipe, active) => {
   return {
     type: ADD_RECIPE,
-    recipe
+    recipe,
+    active
   }
 }
 
-export const editRecipe = (recipe) => {
+export const editRecipe = (recipe, active) => {
   return {
     type: EDIT_RECIPE,
-    recipe
+    recipe,
+    active
   }
 }
 
-export const deleteRecipe = (recipe) => {
+export const deleteRecipe = (recipe, active) => {
   return {
     type: DELETE_RECIPE,
-    recipe
+    recipe,
+    active
   }
 }
 
@@ -36,17 +40,25 @@ export const populateRecipes = (recipes) => {
   }
 }
 
-export const toggleDetails = (id) => {
+export const toggleDetails = (id, active) => {
   return {
     type: TOGGLE_DETAILS,
-    id
+    id,
+    active
   }
 }
 
-export const setVisibilityFilter = (visibilityFilter) => {
+export const setFilterContent = (content) => {
   return {
-    type: SET_VISIBILITY_FILTER,
-    visibilityFilter
+    type: SET_FILTER_CONTENT,
+    content
+  }
+}
+
+export const setFilterRecipes = (recipes) => {
+  return {
+    type: SET_FILTER_RECIPES,
+    recipes
   }
 }
 

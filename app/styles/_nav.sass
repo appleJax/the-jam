@@ -16,7 +16,7 @@ nav
   justify-content: space-between
   max-width: 768px
   width: 95%
-  .signup,
+  .logout,
   .signin
     background: white
     border-radius: 10px
@@ -25,9 +25,21 @@ nav
     cursor: pointer
     display: inline
     margin: 0 5px
-    padding: 10px
+    padding: 12px
+    font-size: 18px
     @include hover-change(white)
 
+.user-info:hover
+  color: darken(white, 10%)
+  cursor: pointer
+
+.fa-user,
+.username
+  font-size: 20px
+  margin: 0 5px
+
+.username
+  margin-right: 15px
 
 .nav__search
   display: flex
@@ -36,12 +48,12 @@ nav
 
 .nav__searchbox
   border-radius: 5px
-  font-size: 24px
-  margin-left: -15px
-  padding-left: 30px
-  position: static
-  width: 95%
+  font-size: 28px
+  margin: 0 -10px 0 -20px
   max-width: 720px
+  padding: 5px 10px 5px 40px
+  position: static
+  width: 100%
   z-index: 0.5
   &:focus
     background: lighten($nav-bg, 40%)
@@ -49,9 +61,36 @@ nav
 
 .fa-search
   color: rgba(50, 50, 50, 0.5)
-  margin: 10px -10px 0 0
+  margin: 8px -18px 0 0
   position: relative
   z-index: 1
+
+.nav__recipe-list-selector
+  border-radius: 0 0 10px 10px
+  cursor: pointer
+  display: flex
+  flex-basis:
+  font-size: 24px
+  justify-content: center
+  max-width: 600px
+  width: 100%
+
+.nav__recipe-selector
+  box-shadow: 2px 2px 2px darken($nav-bg, 20%)
+  padding: 15px
+  text-align: center
+  text-shadow: 1px 1px #555
+  width: 50%
+  &:hover
+    @include hover-change($nav-bg)
+
+.nav__recipe-selector--active
+  background: white
+  box-shadow: 0 0 10px $purple inset, 2px 0 2px darken($nav-bg, 20%)
+  color: $purple
+  cursor: default
+  &:hover
+    background: white !important
 
 .nav__controls
   display: flex
@@ -71,7 +110,7 @@ nav
       color: $nav-bg
   .active
     background: white
-    box-shadow: 0 0 10px $nav-bg inset
+    box-shadow: 0 0 10px $purple inset
     color: $purple
     &:hover
       background: darken(white, 5%)

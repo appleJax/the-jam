@@ -2364,7 +2364,7 @@ nav {
   justify-content: space-between;
   max-width: 768px;
   width: 95%; }
-  .nav__header .signup,
+  .nav__header .logout,
   .nav__header .signin {
     background: white;
     border-radius: 10px;
@@ -2373,10 +2373,23 @@ nav {
     cursor: pointer;
     display: inline;
     margin: 0 5px;
-    padding: 10px; }
-    .nav__header .signup:hover,
+    padding: 12px;
+    font-size: 18px; }
+    .nav__header .logout:hover,
     .nav__header .signin:hover {
       background: #f2f2f2; }
+
+.user-info:hover {
+  color: #e6e6e6;
+  cursor: pointer; }
+
+.fa-user,
+.username {
+  font-size: 20px;
+  margin: 0 5px; }
+
+.username {
+  margin-right: 15px; }
 
 .nav__search {
   display: flex;
@@ -2385,12 +2398,12 @@ nav {
 
 .nav__searchbox {
   border-radius: 5px;
-  font-size: 24px;
-  margin-left: -15px;
-  padding-left: 30px;
-  position: static;
-  width: 95%;
+  font-size: 28px;
+  margin: 0 -10px 0 -20px;
   max-width: 720px;
+  padding: 5px 10px 5px 40px;
+  position: static;
+  width: 100%;
   z-index: 0.5; }
   .nav__searchbox:focus {
     background: #fde7e3;
@@ -2398,9 +2411,35 @@ nav {
 
 .fa-search {
   color: rgba(50, 50, 50, 0.5);
-  margin: 10px -10px 0 0;
+  margin: 8px -18px 0 0;
   position: relative;
   z-index: 1; }
+
+.nav__recipe-list-selector {
+  border-radius: 0 0 10px 10px;
+  cursor: pointer;
+  display: flex;
+  font-size: 24px;
+  justify-content: center;
+  max-width: 600px;
+  width: 100%; }
+
+.nav__recipe-selector {
+  box-shadow: 2px 2px 2px #a4250a;
+  padding: 15px;
+  text-align: center;
+  text-shadow: 1px 1px #555;
+  width: 50%; }
+  .nav__recipe-selector:hover:hover {
+    background: #ec360f; }
+
+.nav__recipe-selector--active {
+  background: white;
+  box-shadow: 0 0 10px #9043b3 inset, 2px 0 2px #a4250a;
+  color: #9043b3;
+  cursor: default; }
+  .nav__recipe-selector--active:hover {
+    background: white !important; }
 
 .nav__controls {
   display: flex;
@@ -2420,7 +2459,7 @@ nav {
       color: #F14723; }
   .nav__controls .active {
     background: white;
-    box-shadow: 0 0 10px #F14723 inset;
+    box-shadow: 0 0 10px #9043b3 inset;
     color: #9043b3; }
     .nav__controls .active:hover {
       background: #f2f2f2;
@@ -2543,8 +2582,8 @@ h3 {
   align-items: center;
   justify-content: center;
   margin: 25px 0 0 5px;
-  height: 40px;
-  width: 40px; }
+  height: 44px;
+  width: 44px; }
   .recipe__edit-button:hover {
     background: #ec360f; }
 

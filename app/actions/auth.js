@@ -1,5 +1,5 @@
 import fetch from 'isomorphic-fetch'
-import localforage from '../utils/localforage'
+import AuthService from '../utils/AuthService'
 
 export const CREATE_USER_REQUEST = 'CREATE_USER_REQUEST'
 export const CREATE_USER_SUCCESS = 'CREATE_USER_SUCCESS'
@@ -52,9 +52,8 @@ export const requestLogin = (creds) => {
 export const receiveLogin = (user) => {
   return {
     type: LOGIN_SUCCESS,
-    isFetching: false,
-    isAuthenticated: true,
-    id_token: user.id_token
+    id_token: user.id_token,
+    name: user.name
   }
 }
 
@@ -69,9 +68,7 @@ export const rejectLogin = (error) => {
 
 export const logout = () => {
   return {
-    type: LOGOUT,
-    isFetching: false,
-    isAuthenticated: false
+    type: LOGOUT
   }
 }
 
@@ -121,9 +118,7 @@ export const createUser = (creds) => {
         } else {
           // If login was successful, set the token in storage
           // and update UI
-          localforage.setItem('id_token', user.id_token).then(
-            dispatch(receiveCreateUser(user))
-          ).catch(e => console.error(e))
+          localStorage.setItem('id_token', user.id_token)
         }
       }).catch(e => console.error(e))
   }
@@ -153,33 +148,42 @@ export const loginUser = (creds) => {
         } else {
           // If login was successful, set the token in storage
           // and dispatch the success action
-          localforage.setItem('id_token', user.id_token).then(
-            dispatch(receiveLogin(user))
-          ).catch(e => console.error(e))
+          localStorage.setItem('id_token', user.id_token)
         }
       }).catch(e => console.error(e))
   }
 }
 
-export const logoutUser = () => {
+export const auth0Login = () => {
   return dispatch => {
-    localforage.removeItem('id_token').then(
-      dispatch(logout())
-    ).catch(e => console.error(e))
+    const authObj = new AuthService('cScY9jmRXWFMDBvonACLTNbNL8KG7Vod', 'thejam.auth0.com')
+    authObj.lock.on('authenticated', (authResult) => {
+      authObj.lock.getProfile(authResult.idToken, (err, profile) => {
+        if (err) return console.error(err)
+        console.log('profile: ', JSON.stringify(profile))
+
+        const user = { id_token: authResult.idToken },
+              userProfile = JSON.stringify(profile)
+
+        user.name = profile.username
+        localStorage.setItem('id_token', authResult.idToken)
+        localStorage.setItem('profile', userProfile)
+
+        dispatch(receiveLogin(user))
+      })
+    })
+
+    authObj.login()
+    return
   }
 }
 
-import AuthService from '../utils/AuthService'
-
-export const login = () => {
-  const options = {
-    theme: {
-      logo: 'http://thejam.herokuapp.com/images/auth0-lock-logo.gif'
-    }
-  }
-
+export const logoutUser = () => {
   return dispatch => {
-    const lock = new AuthService('cScY9jmRXWFMDBvonACLTNbNL8KG7Vod', 'thejam.auth0.com', options)
-    lock.login()
+    localStorage.removeItem('id_token')
+    localStorage.removeItem('profile')
+
+    dispatch(logout())
+    return
   }
 }

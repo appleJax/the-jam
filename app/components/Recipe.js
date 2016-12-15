@@ -3,8 +3,8 @@ import React from 'react'
 const Recipe = ({
   recipe,
   visibilityFilter,
+  setFilterContent,
   confirmDelete,
-  setVisibilityFilter,
   editRecipe,
   toggleDetails,
   populateModal
@@ -25,8 +25,8 @@ const Recipe = ({
     (<li
        key={i}
        onClick={ e =>
-         setVisibilityFilter(
-           visibilityFilter.concat(e.target.innerHTML)
+         setFilterContent(
+           visibilityFilter.content.concat(e.target.innerHTML)
          )
        }
      >
@@ -90,7 +90,7 @@ const Recipe = ({
             } else {
               editedRecipe.stars = newStars
             }
-              editRecipe(null, editedRecipe)
+              editRecipe(null, editedRecipe, visibilityFilter.active)
           }}
         >
         </i>
@@ -103,7 +103,7 @@ const Recipe = ({
           onClick={ e => {
             const editedRecipe = recipe
             editedRecipe.stars = e.target.dataset.value
-            editRecipe(null, editedRecipe)
+            editRecipe(null, editedRecipe, visibilityFilter.active)
           }}
         >
         </i>

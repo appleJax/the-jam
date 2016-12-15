@@ -1,24 +1,41 @@
 import Auth0Lock from 'auth0-lock'
-import localforage from './localforage'
 
 class AuthService {
   constructor(clientId, domain) {
     this.lock = new Auth0Lock(clientId, domain, {
       auth: {
-        redirectUrl: 'https://thejam.herokuapp.com/',
+//        redirectUrl: 'http://localhost:5000/',
+        redirect: false,
         responseType: 'token'
+      },
+      theme: {
+        logo: 'http://thejam.herokuapp.com/images/hi_jam.gif'
+      },
+      languageDictionary: {
+        title: 'the Jam',
+        passwordInputPlaceholder: 'password',
+        userNameInputPlaceholder: 'username'
       }
     })
 
-    this.lock.on('authenticated', this._doAuthentication.bind(this))
+//    this.lock.on('authenticated', this._doAuthentication.bind(this))
 
     this.login = this.login.bind(this)
   }
 
   _doAuthentication(authResult) {
-    this.setToken(authResult.idToken)
+    this.lock.getProfile(authResult.idToken, (err, profile) => {
+      if (err) return console.error(err)
+      console.log('profile: ', JSON.stringify(profile))
 
-    // Redirect or reload
+      const user = { id_token: authResult.idToken },
+            userProfile = JSON.stringify(profile)
+
+      user.name = userProfile.name
+      localStorage.setItem('id_token', authResult.idToken)
+      localStorage.setItem('profile', userProfile)
+
+    })
   }
 
   login() {
@@ -33,21 +50,16 @@ class AuthService {
   }
 
   setToken(idToken) {
-    localforage.setItem('id_token', idToken)
-      .catch(e => console.error(e))
+    localStorage.setItem('id_token', idToken)
   }
 
   getToken() {
-    return localforage.getItem('id_token')
-      .catch(e => {
-        console.error(e)
-        return null
-      })
+    return localStorage.getItem('id_token')
   }
 
   logout() {
-    localforage.removeItem('id_token')
-      .catch(e => console.error(e))
+    localStorage.removeItem('id_token')
+    localStorage.removeItem('profile')
   }
 }
 

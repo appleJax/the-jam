@@ -1,28 +1,43 @@
 import { connect } from 'react-redux'
 import {
-  setVisibilityFilter,
+  setFilterContent,
+  setFilterRecipes,
   setSort,
   populateModal
 } from '../actions/sync'
-import { login } from '../actions/auth'
+import {
+  auth0Login,
+  logoutUser
+} from '../actions/auth'
 import Nav from '../components/Nav'
 
 const mapStateToProps = (state) => {
   return {
     visibilityFilter: state.visibilityFilter,
-    sort: state.sort
+    sort: state.sort,
+    loggedIn: state.auth.isAuthenticated,
+    name: state.auth.name
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setVisibilityFilter: (filter) => dispatch(setVisibilityFilter(filter)),
-    setSort: (sortBy) => dispatch(setSort(sortBy)),
+    setFilterContent: (filter) =>
+      dispatch(setFilterContent(filter)),
+
+    setFilterRecipes: (recipes) =>
+      dispatch(setFilterRecipes(recipes)),
+
+    setSort: (sortBy) =>
+      dispatch(setSort(sortBy)),
+
     populateModal: () => {
       document.body.classList.add('no-scroll')
       dispatch(populateModal('recipe', 'new'))
     },
-    login: () => dispatch(login())
+
+    login: () => dispatch(auth0Login()),
+    logout: () => dispatch(logoutUser())
   }
 }
 

@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "assert": "^1.4.1",
+    "auth0-js": "^7.6.0",
     "auth0-lock": "^10.7.2",
     "babel-core": "^6.20.0",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.18.0",

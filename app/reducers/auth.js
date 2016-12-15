@@ -11,19 +11,13 @@ import {
   LOCK_ERROR
 } from '../actions/auth'
 
-import { isTokenExpired } from '../utils/jwtHelper'
-import localforage from '../utils/localforage'
-
 const auth = (
   state = {
     isFetching: false,
-    isAuthenticated:
-      localforage.getItem('id_token')
-        .then(token => {
-          console.log('My token: ', token)
-          return !isTokenExpired(token)
-        }) ?
-      true : false
+    isAuthenticated: false,
+    id_token: null,
+    name: null,
+    errorMessage: ''
   },
   action
 ) => {
@@ -61,6 +55,8 @@ const auth = (
         ...state,
         isFetching: false,
         isAuthenticated: true,
+        id_token: action.id_token,
+        name: action.name,
         errorMessage: ''
       }
     case LOGIN_ERROR:
@@ -68,13 +64,18 @@ const auth = (
         ...state,
         isFetching: false,
         isAuthenticated: false,
+        id_token: null,
+        name: null,
         errorMessage: action.error
       }
     case LOGOUT:
       return {
         ...state,
         isFetching: false,
-        isAuthenticated: false
+        isAuthenticated: false,
+        id_token: null,
+        name: null,
+        errorMessage: ''
       }
     default:
       return state

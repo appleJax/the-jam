@@ -1,8 +1,8 @@
 import decode from 'jwt-decode'
 
-export function getTokenExpirationDate(token = false) {
+export function getTokenExpirationDate(token) {
   console.log('Token: ', token)
-  if (!token) return 'none'
+  if (!token) return false
   const decoded = decode(token)
   if (!decoded.exp) return null
 
@@ -18,7 +18,7 @@ export function isTokenExpired(token = false) {
   const offsetSeconds = 0
   if (date === null) {
     return false
-  } else if (date == 'none') {
+  } else if (!date) {
     return true
   }
   return !(date.valueOf() > (new Date().valueOf() + (offsetSeconds * 1000)))

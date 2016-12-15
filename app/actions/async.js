@@ -1,4 +1,9 @@
 import fetch from 'isomorphic-fetch'
+import {
+  addRecipe,
+  editRecipe,
+  deleteRecipe
+} from './sync'
 
 export const fetchRecipes = (user) => {
   return dispatch => {
@@ -11,9 +16,9 @@ export const fetchRecipes = (user) => {
   }
 }
 
-export const addUserRecipe = (user, recipe) => {
+export const addUserRecipe = (user, recipe, active) => {
   return dispatch => {
-    dispatch(addRecipe(recipe))
+    dispatch(addRecipe(recipe, active))
 
     return fetch(`https://thejam.herokuapp.com/new`,
       {
@@ -31,9 +36,9 @@ export const addUserRecipe = (user, recipe) => {
   }
 }
 
-export const editUserRecipe = (user, recipe) => {
+export const editUserRecipe = (user, recipe, active) => {
   return dispatch => {
-    dispatch(editRecipe(recipe))
+    dispatch(editRecipe(recipe, active))
 
     return fetch(`https://thejam.herokuapp.com/edit`,
       {
@@ -51,9 +56,9 @@ export const editUserRecipe = (user, recipe) => {
   }
 }
 
-export const deleteUserRecipe = (user, recipe) => {
+export const deleteUserRecipe = (user, recipe, active) => {
   return dispatch => {
-    dispatch(deleteRecipe(recipe))
+    dispatch(deleteRecipe(recipe,active))
 
     return fetch(`https://thejam.herokuapp.com/delete`,
       {

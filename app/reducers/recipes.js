@@ -16,53 +16,68 @@ const recipe = (state = {}, action) => {
         servings: action.recipe.servings,
         ingredients: action.recipe.ingredients,
         directions: action.recipe.directions
-      };
+      }
 
     case EDIT_RECIPE:
       if (state.id == action.recipe.id) {
-        return action.recipe;
+        return action.recipe
       }
-      return state;
+      return state
 
     case TOGGLE_DETAILS:
       if (state.id == action.id) {
-        return Object.assign(
-          {},
-          state,
-          {showDetails: !state.showDetails}
-        );
+        return {
+          ...state,
+          showDetails: !state.showDetails
+        }
       }
-      return state;
+      return state
 
     default:
-      return state;
+      return state
   }
-};
+}
 
-const recipes = (state = [], action) => {
+const recipes = (state = {
+  public: [],
+  private: []
+},
+action) => {
   switch (action.type) {
     case ADD_RECIPE:
-      return [
+      return {
         ...state,
-        recipe(undefined, action)
-      ];
+        [action.active]: [
+          ...state[action.active],
+          recipe(undefined, action)
+        ]
+      }
     case EDIT_RECIPE:
-      return state.map(
-        r =>
-          recipe(r, action)
-        );
+      return {
+        ...state,
+        [action.active]: state[action.active].map(
+          r =>
+            recipe(r, action)
+        )
+      }
     case DELETE_RECIPE:
-      return state.filter(
-        r => r.id !== action.recipe.id
-      );
+      return {
+        ...state,
+        [action.active]: state[action.active].filter(
+          r => r.id !== action.recipe.id
+        )
+      }
     case TOGGLE_DETAILS:
-      return state.map(
-        r =>
-        recipe(r, action)
-      );
+      return {
+        ...state,
+        [action.active]: state[action.active].map(
+          r =>
+            recipe(r, action)
+        )
+      }
     default:
-      return state;
+      return state
   }
-};
+}
 
 export default recipes

@@ -9,20 +9,23 @@ import {
 } from '../actions/async'
 import RecipeList from '../components/RecipeList'
 
-const getVisibleRecipes = (recipes, filter, sort) => {
-  const regex = filter
+const getVisibleRecipes = (recipes, visibilityFilter, sort) => {
+  const regex = visibilityFilter.content
                 .filter(val => val !== '')
                 .join('|')
 
-  return recipes.filter(
-    recipe => {
-      const text = [
-        recipe.name,
-        ...recipe.tags,
-        recipe.servings,
-        ...recipe.ingredients,
-        ...recipe.directions
-      ].join(' ')
+  const activeRecipes = recipes[visibilityFilter.active]
+
+  return activeRecipes
+    .filter(
+      recipe => {
+        const text = [
+          recipe.name,
+          ...recipe.tags,
+          recipe.servings,
+          ...recipe.ingredients,
+          ...recipe.directions
+        ].join(' ')
 
       return text.match(new RegExp(regex, 'i'));
     }
@@ -65,13 +68,19 @@ const mapStateToProps = (state) => {
 
 const mapDispatchTProps = (dispatch) => {
   return {
+    setFilterContent: (filter) =>
+      dispatch(setFilterContent(filter)),
+
+    editRecipe: (user, recipe, active) =>
+      dispatch(editUserRecipe(user, recipe, active)),
+
+    toggleDetails: (id, active) =>
+      dispatch(toggleDetails(id, active)),
+
     populateModal: (dialogue, content) => {
       document.body.classList.add('no-scroll')
       dispatch(populateModal(dialogue, content))
-    },
-    setVisibilityFilter: (filter) => dispatch(setVisibilityFilter(filter)),
-    editRecipe: (user, recipe) => dispatch(editUserRecipe(user, recipe)),
-    toggleDetails: (id) => dispatch(toggleDetails(id))
+    }
   }
 }
 
