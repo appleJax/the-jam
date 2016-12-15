@@ -60726,6 +60726,8 @@
 	          const editedRecipe = recipe,
 	                newStars = e.target.dataset.value;
 
+	          delete editedRecipe._id;
+
 	          if (newStars == 1) {
 	            editedRecipe.stars = 0;
 	          } else {
@@ -60741,6 +60743,8 @@
 	        onClick: e => {
 	          const editedRecipe = recipe;
 	          editedRecipe.stars = e.target.dataset.value;
+	          delete editedRecipe._id;
+
 	          editRecipe(null, editedRecipe, visibilityFilter.active);
 	        }
 	      }));
