@@ -66,17 +66,18 @@ nav
   z-index: 1
 
 .nav__recipe-list-selector
-  border-radius: 0 0 10px 10px
+  border-radius: 0 0 5px 5px
+  box-shadow: 0 2px 2px darken($nav-bg, 20%)
   cursor: pointer
   display: flex
   flex-basis:
   font-size: 24px
   justify-content: center
   max-width: 600px
+  overflow: hidden
   width: 100%
 
 .nav__recipe-selector
-  box-shadow: 2px 2px 2px darken($nav-bg, 20%)
   padding: 15px
   text-align: center
   text-shadow: 1px 1px #555
@@ -86,7 +87,7 @@ nav
 
 .nav__recipe-selector--active
   background: white
-  box-shadow: 0 0 10px $purple inset, 2px 0 2px darken($nav-bg, 20%)
+  box-shadow: 0 0 10px $purple inset
   color: $purple
   cursor: default
   &:hover

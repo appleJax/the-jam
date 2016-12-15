@@ -72,7 +72,7 @@ const Nav = ({
           }
           onClick={() => setFilterRecipes('private')}
         >
-          My recipes
+          My Recipes
         </div>
       </div>
       }

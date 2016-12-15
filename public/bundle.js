@@ -32478,7 +32478,7 @@
 	        responseType: 'token'
 	      },
 	      theme: {
-	        logo: 'http://thejam.herokuapp.com/images/hi_jam.gif'
+	        logo: 'https://thejam.herokuapp.com/images/hi_jam.gif'
 	      },
 	      languageDictionary: {
 	        title: 'the Jam',
@@ -60375,7 +60375,7 @@
 	          className: visibilityFilter.active == 'private' ? 'nav__recipe-selector--active nav__recipe-selector' : 'nav__recipe-selector',
 	          onClick: () => setFilterRecipes('private')
 	        },
-	        'My recipes'
+	        'My Recipes'
 	      )
 	    ),
 	    _react2.default.createElement(

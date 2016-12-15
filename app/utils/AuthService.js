@@ -9,7 +9,7 @@ class AuthService {
         responseType: 'token'
       },
       theme: {
-        logo: 'http://thejam.herokuapp.com/images/hi_jam.gif'
+        logo: 'https://thejam.herokuapp.com/images/hi_jam.gif'
       },
       languageDictionary: {
         title: 'the Jam',
