@@ -31871,10 +31871,6 @@
 
 	var _AuthService2 = _interopRequireDefault(_AuthService);
 
-	var _auth0Lock = __webpack_require__(538);
-
-	var _auth0Lock2 = _interopRequireDefault(_auth0Lock);
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	const CREATE_USER_REQUEST = exports.CREATE_USER_REQUEST = 'CREATE_USER_REQUEST';
@@ -32025,7 +32021,7 @@
 	};
 
 	const auth0Login = exports.auth0Login = () => {
-	  const lock = new _auth0Lock2.default('cScY9jmRXWFMDBvonACLTNbNL8KG7Vod', 'thejam.auth0.com');
+	  const lock = new Auth0Lock('cScY9jmRXWFMDBvonACLTNbNL8KG7Vod', 'thejam.auth0.com');
 
 	  return dispatch => {
 	    lock.show((err, profile, token) => {

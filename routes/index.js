@@ -94,6 +94,7 @@ module.exports = (app) => {
         <link rel='shortcut icon' href='favicon.ico' type='image/x-icon'/>
         <link href='https://fonts.googleapis.com/css?family=Lato|Molle:400i|Architects+Daughter' rel='stylesheet' />
         <link rel='stylesheet' href='bundle.css' />
+        <script src="//cdn.auth0.com/js/lock-9.0.min.js"></script>
       </head>
       <body>
         <div id='root'>${html}</div>
