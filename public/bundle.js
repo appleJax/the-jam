@@ -60326,7 +60326,7 @@
 	            className: 'user-info',
 	            onClick: logout
 	          },
-	          _react2.default.createElement('i', { className: 'fa fa-user' }),
+	          _react2.default.createElement('i', { className: 'fa fa-user fa-lg' }),
 	          _react2.default.createElement(
 	            'span',
 	            { className: 'username' },
@@ -60476,7 +60476,7 @@
 
 	const mapDispatchTProps = dispatch => {
 	  return {
-	    setFilterContent: filter => dispatch(setFilterContent(filter)),
+	    setFilterContent: filter => dispatch((0, _sync.setFilterContent)(filter)),
 
 	    editRecipe: (user, recipe, active) => dispatch((0, _async.editUserRecipe)(user, recipe, active)),
 

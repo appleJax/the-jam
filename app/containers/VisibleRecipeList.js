@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import {
   populateModal,
-  setVisibilityFilter,
+  setFilterContent,
   toggleDetails
 } from '../actions/sync'
 import {

@@ -24,7 +24,7 @@ const Nav = ({
             className='user-info'
             onClick={logout}
           >
-            <i className='fa fa-user'></i>
+            <i className='fa fa-user fa-lg'></i>
             <span className='username'>
               {name}
             </span>
