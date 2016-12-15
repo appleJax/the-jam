@@ -28971,14 +28971,19 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	const preloadedState = window.__PRELOADED_STATE__,
-	      isAuthenticated = !!window.localStorage.getItem('id_token'),
-	      username = JSON.parse(window.localStorage.profile).username,
-	      userRecipes = window.localStorage.getItem('user-recipes') || [];
+	const preloadedState = window.__PRELOADED_STATE__;
 
-	preloadedState.auth.isAuthenticated = isAuthenticated;
-	preloadedState.auth.name = username;
-	preloadedState.recipes.private = userRecipes;
+	try {
+	  const isAuthenticated = !!window.localStorage.getItem('id_token'),
+	        username = JSON.parse(window.localStorage.profile).username,
+	        userRecipes = window.localStorage.getItem('user-recipes') || [];
+
+	  preloadedState.auth.isAuthenticated = isAuthenticated;
+	  preloadedState.auth.name = username;
+	  preloadedState.recipes.private = userRecipes;
+	} catch (e) {
+	  console.error(e);
+	}
 
 	const store = (0, _configureStore2.default)(preloadedState);
 
