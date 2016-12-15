@@ -4,9 +4,9 @@ class AuthService {
   constructor(clientId, domain) {
     this.lock = new Auth0Lock(clientId, domain, {
       auth: {
-//        redirectUrl: 'http://localhost:5000/',
-        redirect: false,
-        responseType: 'token'
+        redirectUrl: 'http://localhost:5000/',
+//        redirect: false,
+        responseType: 'code'
       },
       theme: {
         logo: 'https://thejam.herokuapp.com/images/hi_jam.gif'
@@ -34,7 +34,6 @@ class AuthService {
       user.name = userProfile.name
       localStorage.setItem('id_token', authResult.idToken)
       localStorage.setItem('profile', userProfile)
-
     })
   }
 

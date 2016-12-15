@@ -1,5 +1,6 @@
 import fetch from 'isomorphic-fetch'
 import AuthService from '../utils/AuthService'
+import Auth0Lock from 'auth0-lock'
 
 export const CREATE_USER_REQUEST = 'CREATE_USER_REQUEST'
 export const CREATE_USER_SUCCESS = 'CREATE_USER_SUCCESS'
@@ -155,26 +156,23 @@ export const loginUser = (creds) => {
 }
 
 export const auth0Login = () => {
+  const lock = new Auth0Lock('cScY9jmRXWFMDBvonACLTNbNL8KG7Vod', 'thejam.auth0.com')
+
   return dispatch => {
-    const authObj = new AuthService('cScY9jmRXWFMDBvonACLTNbNL8KG7Vod', 'thejam.auth0.com')
-    authObj.lock.on('authenticated', (authResult) => {
-      authObj.lock.getProfile(authResult.idToken, (err, profile) => {
-        if (err) return console.error(err)
-        console.log('profile: ', JSON.stringify(profile))
+    lock.show((err, profile, token) => {
+      if(err) {
+        dispatch(lockError(err))
+        return
+      }
+      localStorage.setItem('profile', JSON.stringify(profile))
+      localStorage.setItem('id_token', token)
 
-        const user = { id_token: authResult.idToken },
-              userProfile = JSON.stringify(profile)
+      const user = {}
+      user.id_token = token
+      user.name = profile.username
 
-        user.name = profile.username
-        localStorage.setItem('id_token', authResult.idToken)
-        localStorage.setItem('profile', userProfile)
-
-        dispatch(receiveLogin(user))
-      })
+      dispatch(receiveLogin(user))
     })
-
-    authObj.login()
-    return
   }
 }
 
