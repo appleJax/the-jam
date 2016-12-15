@@ -2379,9 +2379,12 @@ nav {
     .nav__header .signin:hover {
       background: #f2f2f2; }
 
-.user-info:hover {
-  color: #e6e6e6;
-  cursor: pointer; }
+.user-info {
+  display: flex;
+  align-items: center; }
+  .user-info:hover {
+    color: #f2f2f2;
+    cursor: pointer; }
 
 .fa-user,
 .username {
@@ -2418,7 +2421,6 @@ nav {
 .nav__recipe-list-selector {
   border-radius: 0 0 5px 5px;
   box-shadow: 0 2px 2px #a4250a;
-  cursor: pointer;
   display: flex;
   font-size: 24px;
   justify-content: center;
@@ -2427,9 +2429,10 @@ nav {
   width: 100%; }
 
 .nav__recipe-selector {
+  cursor: pointer;
   padding: 15px;
   text-align: center;
-  text-shadow: 1px 1px #555;
+  text-shadow: 1px 1px 3px #741a07;
   width: 50%; }
   .nav__recipe-selector:hover:hover {
     background: #ec360f; }
@@ -2438,7 +2441,8 @@ nav {
   background: white;
   box-shadow: 0 0 10px #9043b3 inset;
   color: #9043b3;
-  cursor: default; }
+  cursor: default;
+  text-shadow: 1px 1px 2px #cccccc; }
   .nav__recipe-selector--active:hover {
     background: white !important; }
 

@@ -28971,7 +28971,14 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	const preloadedState = window.__PRELOADED_STATE__;
+	const preloadedState = window.__PRELOADED_STATE__,
+	      isAuthenticated = !!window.localStorage.getItem('id_token'),
+	      username = JSON.parse(window.localStorage.profile).username,
+	      userRecipes = window.localStorage.getItem('user-recipes') || [];
+
+	preloadedState.auth.isAuthenticated = isAuthenticated;
+	preloadedState.auth.name = username;
+	preloadedState.recipes.private = userRecipes;
 
 	const store = (0, _configureStore2.default)(preloadedState);
 
@@ -60326,7 +60333,7 @@
 	            className: 'user-info',
 	            onClick: logout
 	          },
-	          _react2.default.createElement('i', { className: 'fa fa-user fa-lg' }),
+	          _react2.default.createElement('i', { className: 'fa fa-user fa-2x' }),
 	          _react2.default.createElement(
 	            'span',
 	            { className: 'username' },

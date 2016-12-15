@@ -29,9 +29,12 @@ nav
     font-size: 18px
     @include hover-change(white)
 
-.user-info:hover
-  color: darken(white, 10%)
-  cursor: pointer
+.user-info
+  display: flex
+  align-items: center
+  &:hover
+    color: darken(white, 5%)
+    cursor: pointer
 
 .fa-user,
 .username
@@ -68,7 +71,6 @@ nav
 .nav__recipe-list-selector
   border-radius: 0 0 5px 5px
   box-shadow: 0 2px 2px darken($nav-bg, 20%)
-  cursor: pointer
   display: flex
   flex-basis:
   font-size: 24px
@@ -78,9 +80,10 @@ nav
   width: 100%
 
 .nav__recipe-selector
+  cursor: pointer
   padding: 15px
   text-align: center
-  text-shadow: 1px 1px #555
+  text-shadow: 1px 1px 3px darken($nav-bg, 30%)
   width: 50%
   &:hover
     @include hover-change($nav-bg)
@@ -90,6 +93,7 @@ nav
   box-shadow: 0 0 10px $purple inset
   color: $purple
   cursor: default
+  text-shadow: 1px 1px 2px darken(white, 20%)
   &:hover
     background: white !important
 
