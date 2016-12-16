@@ -60343,7 +60343,7 @@
 	  const profile = localStorage.getItem('profile'),
 	        user = profile ? JSON.parse(profile).email : 'public';
 	} catch (e) {
-	  user = 'public';
+	  const user = 'public';
 	}
 
 	const mapStateToProps = state => {

@@ -64,7 +64,7 @@ try {
         user = profile ? JSON.parse(profile).email : 'public'
 
 } catch(e) {
-  user = 'public'
+  const user = 'public'
 }
 
 const mapStateToProps = (state) => {
