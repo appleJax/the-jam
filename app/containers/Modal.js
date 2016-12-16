@@ -9,7 +9,7 @@ import {
 } from '../actions/sync'
 import ModalOverlay from '../components/ModalOverlay'
 
-const user = 'public'
+let user = 'public'
 try {
   const profile = localStorage.getItem('profile')
   user = profile ? JSON.parse(profile).email : 'public'

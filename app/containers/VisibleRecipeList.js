@@ -59,7 +59,7 @@ const getVisibleRecipes = (recipes, visibilityFilter, sort) => {
   })
 }
 
-const user = 'public'
+let user = 'public'
 
 try {
   const profile = localStorage.getItem('profile')
