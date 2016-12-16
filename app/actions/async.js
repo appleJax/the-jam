@@ -2,17 +2,28 @@ import fetch from 'isomorphic-fetch'
 import {
   addRecipe,
   editRecipe,
-  deleteRecipe
+  deleteRecipe,
+  populateUserRecipes
 } from './sync'
 
 export const fetchRecipes = (user) => {
   return dispatch => {
     // update UI... (todo)
 
-    return fetch(`https://thejam.herokuapp.com/${user}/recipes`)
-      .then(response => response.json())
-      .then(json => dispatch(populateRecipes(json)))
-      .catch(e => console.error(e))
+    return fetch(`https://thejam.herokuapp.com/recipes`,
+      {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-type': 'application/json'
+        },
+        mode: 'cors',
+        cache: 'default',
+        body: JSON.stringify(user)
+      }
+    )
+    .then(json => dispatch(populateUserRecipes(json)))
+    .catch(e => console.error(e))
   }
 }
 

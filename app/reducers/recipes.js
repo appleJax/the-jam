@@ -67,6 +67,11 @@ action) => {
           r => r.id !== action.recipe.id
         )
       }
+    case POPULATE_USER_RECIPES:
+      return {
+        ...state,
+        private: action.recipes
+      }
     case TOGGLE_DETAILS:
       return {
         ...state,

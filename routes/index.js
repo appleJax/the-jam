@@ -206,4 +206,26 @@ module.exports = (app) => {
       });
     }
   });
+
+  app.all('/recipes', (req, res) => {
+    if (req.method == 'OPTIONS') {
+      const headers = setHeaders();
+      res.writeHead(200, headers);
+      res.end();
+    } else if (req.method == 'POST') {
+      MongoClient.connect(url, (err, db) => {
+        assert.equal(null, err);
+
+        const collection = db.collection(req.body.user);
+
+        collection.find({}).toArray((err, docs) => {
+          assert.equal(null, err);
+          
+          res.json(docs);
+          db.close();
+          res.end();
+        })
+      }
+    }
+  });
 };

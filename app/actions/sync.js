@@ -1,7 +1,7 @@
 export const ADD_RECIPE = 'ADD_RECIPE'
 export const EDIT_RECIPE = 'EDIT_RECIPE'
 export const DELETE_RECIPE = 'DELETE_RECIPE'
-export const POPULATE_RECIPE = 'POPULATE_RECIPES'
+export const POPULATE_USER_RECIPES = 'POPULATE_USER_RECIPES'
 export const TOGGLE_DETAILS = 'TOGGLE_DETAILS'
 export const SET_FILTER_CONTENT = 'SET_FILTER_CONTENT'
 export const SET_FILTER_RECIPES = 'SET_FILTER_RECIPES'
@@ -33,9 +33,9 @@ export const deleteRecipe = (recipe, active) => {
   }
 }
 
-export const populateRecipes = (recipes) => {
+export const populateUserRecipes = (recipes) => {
   return {
-    type: POPULATE_RECIPES,
+    type: POPULATE_USER_RECIPES,
     recipes
   }
 }
