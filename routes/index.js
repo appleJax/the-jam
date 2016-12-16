@@ -219,7 +219,8 @@ module.exports = (app) => {
         collection.find({}).toArray((err, docs) => {
           assert.equal(null, err);
           console.log('User recipes:', docs);
-          res.json(docs);
+          const response = {recipes: docs};
+          res.json(response);
           db.close();
           res.end();
         })
