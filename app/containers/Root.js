@@ -32,7 +32,6 @@ if (preloadedState.auth.isAuthenticated) {
     return response.json()
   })
   .then(recipes => {
-    localStorage.setItem('user-recipes', JSON.stringify(recipes))
     store.dispatch(populateUserRecipes(recipes))
   })
   .catch(e => console.error(e))

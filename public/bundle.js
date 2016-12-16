@@ -29000,7 +29000,6 @@
 	    }
 	    return response.json();
 	  }).then(recipes => {
-	    localStorage.setItem('user-recipes', JSON.stringify(recipes));
 	    store.dispatch((0, _sync.populateUserRecipes)(recipes));
 	  }).catch(e => console.error(e));
 	}
