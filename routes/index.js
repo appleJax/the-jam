@@ -213,7 +213,7 @@ module.exports = (app) => {
       MongoClient.connect(url, (err, db) => {
         assert.equal(null, err);
 
-        const collection = db.collection(req.body.name);
+        const collection = db.collection('recipes');
         console.log('Email:', req.body.name);
 
         collection.find({}).toArray((err, docs) => {
