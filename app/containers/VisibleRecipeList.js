@@ -59,10 +59,14 @@ const getVisibleRecipes = (recipes, visibilityFilter, sort) => {
   })
 }
 
+const profile = localStorage.getItem('profile'),
+      user = profile ? JSON.parse(profile).email : 'public'
+
 const mapStateToProps = (state) => {
   return {
     recipes: getVisibleRecipes(state.recipes, state.visibilityFilter, state.sort),
-    visibilityFilter: state.visibilityFilter
+    visibilityFilter: state.visibilityFilter,
+    user
   }
 }
 

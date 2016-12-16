@@ -4,6 +4,7 @@ import Recipe from './Recipe'
 const RecipeList = ({
   recipes,
   visibilityFilter,
+  user,
   setFilterContent,
   editRecipe,
   toggleDetails,
@@ -16,6 +17,7 @@ const RecipeList = ({
           key={recipe.id}
           recipe={recipe}
           visibilityFilter={visibilityFilter}
+          user={user}
           setFilterContent={setFilterContent}
           confirmDelete={() => populateModal('confirm', recipe.id)}
           editRecipe={editRecipe}

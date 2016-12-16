@@ -150,7 +150,6 @@ module.exports = (app) => {
         const recipe = req.body.recipe,
               user = req.body.user || 'public',
               collection = db.collection(user);
-        console.log(req.body);
 
         collection.insert(recipe, (err, result) => {
           assert.equal(null, err);
@@ -171,8 +170,10 @@ module.exports = (app) => {
       MongoClient.connect(url, (err, db) => {
         assert.equal(null, err);
 
-        const collection = db.collection('recipes'),
-              recipe = req.body;
+        const recipe = req.body.recipe,
+              user = req.body.user || 'public',
+              collection = db.collection(user);
+
         collection.update({id: recipe.id}, recipe, (err, result) => {
           console.log('My error: ', err)
           assert.equal(null, err);
@@ -193,8 +194,10 @@ module.exports = (app) => {
       MongoClient.connect(url, (err, db) => {
         assert.equal(null, err);
 
-        const collection = db.collection('recipes'),
-              recipe = req.body;
+        const recipe = req.body.recipe,
+              user = req.body.user || 'public',
+              collection = db.collection(user);
+
         collection.remove(recipe, (err, result) => {
           assert.equal(null, err);
           res.json(result);

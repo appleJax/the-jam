@@ -60339,10 +60339,14 @@
 	  });
 	};
 
+	const profile = localStorage.getItem('profile'),
+	      user = profile ? JSON.parse(profile).email : 'public';
+
 	const mapStateToProps = state => {
 	  return {
 	    recipes: getVisibleRecipes(state.recipes, state.visibilityFilter, state.sort),
-	    visibilityFilter: state.visibilityFilter
+	    visibilityFilter: state.visibilityFilter,
+	    user
 	  };
 	};
 
@@ -60447,7 +60451,7 @@
 	      },
 	      mode: 'cors',
 	      cache: 'default',
-	      body: JSON.stringify(recipe)
+	      body: JSON.stringify({ user, recipe })
 	    }).catch(e => console.error(e));
 	  };
 	};
@@ -60471,6 +60475,7 @@
 	const RecipeList = ({
 	  recipes,
 	  visibilityFilter,
+	  user,
 	  setFilterContent,
 	  editRecipe,
 	  toggleDetails,
@@ -60483,6 +60488,7 @@
 	      key: recipe.id,
 	      recipe: recipe,
 	      visibilityFilter: visibilityFilter,
+	      user: user,
 	      setFilterContent: setFilterContent,
 	      confirmDelete: () => populateModal('confirm', recipe.id),
 	      editRecipe: editRecipe,
@@ -60509,6 +60515,7 @@
 	const Recipe = ({
 	  recipe,
 	  visibilityFilter,
+	  user,
 	  setFilterContent,
 	  confirmDelete,
 	  editRecipe,
@@ -60614,7 +60621,7 @@
 	          } else {
 	            editedRecipe.stars = newStars;
 	          }
-	          editRecipe(null, editedRecipe, visibilityFilter.active);
+	          editRecipe(user, editedRecipe, visibilityFilter.active);
 	        }
 	      }));
 	    } else {
@@ -60626,7 +60633,7 @@
 	          editedRecipe.stars = e.target.dataset.value;
 	          delete editedRecipe._id;
 
-	          editRecipe(null, editedRecipe, visibilityFilter.active);
+	          editRecipe(user, editedRecipe, visibilityFilter.active);
 	        }
 	      }));
 	    }
@@ -60692,11 +60699,15 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	const profile = localStorage.getItem('profile'),
+	      user = profile ? JSON.parse(profile).email : null;
+
 	const mapStateToProps = state => {
 	  return {
 	    dialogue: state.modal.dialogue,
 	    content: state.modal.content,
-	    active: state.visibilityFilter.active
+	    active: state.visibilityFilter.active,
+	    user
 	  };
 	};
 
@@ -60743,13 +60754,14 @@
 	  dialogue,
 	  content,
 	  active,
+	  user,
 	  addRecipe,
 	  editRecipe,
 	  deleteRecipe,
 	  closeModal
 	}) => {
 	  const dialogueBox = dialogue == 'confirm' ? _react2.default.createElement(_ConfirmDialogue2.default, {
-	    deleteRecipe: () => deleteRecipe(null, { id: content }, active),
+	    deleteRecipe: () => deleteRecipe(user, { id: content }, active),
 	    closeModal: closeModal
 	  }) : _react2.default.createElement(_RecipeForm2.default, {
 	    content: content,

@@ -3,6 +3,7 @@ import React from 'react'
 const Recipe = ({
   recipe,
   visibilityFilter,
+  user,
   setFilterContent,
   confirmDelete,
   editRecipe,
@@ -93,7 +94,7 @@ const Recipe = ({
             } else {
               editedRecipe.stars = newStars
             }
-              editRecipe(null, editedRecipe, visibilityFilter.active)
+              editRecipe(user, editedRecipe, visibilityFilter.active)
           }}
         >
         </i>
@@ -108,7 +109,7 @@ const Recipe = ({
             editedRecipe.stars = e.target.dataset.value
             delete editedRecipe._id
 
-            editRecipe(null, editedRecipe, visibilityFilter.active)
+            editRecipe(user, editedRecipe, visibilityFilter.active)
           }}
         >
         </i>

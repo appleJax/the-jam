@@ -80,7 +80,7 @@ export const deleteUserRecipe = (user, recipe, active) => {
         },
         mode: 'cors',
         cache: 'default',
-        body: JSON.stringify(recipe)
+        body: JSON.stringify({user, recipe})
       }
     )
     .catch(e => console.error(e))

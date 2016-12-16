@@ -9,11 +9,15 @@ import {
 } from '../actions/sync'
 import ModalOverlay from '../components/ModalOverlay'
 
+const profile = localStorage.getItem('profile'),
+      user = profile ? JSON.parse(profile).email : null
+
 const mapStateToProps = (state) => {
   return {
     dialogue: state.modal.dialogue,
     content: state.modal.content,
-    active: state.visibilityFilter.active
+    active: state.visibilityFilter.active,
+    user
   }
 }
 

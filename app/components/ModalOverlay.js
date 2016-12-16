@@ -6,6 +6,7 @@ const ModalOverlay = ({
   dialogue,
   content,
   active,
+  user,
   addRecipe,
   editRecipe,
   deleteRecipe,
@@ -13,7 +14,7 @@ const ModalOverlay = ({
 }) => {
   const  dialogueBox = dialogue == 'confirm' ?
       <ConfirmDialogue
-        deleteRecipe={() => deleteRecipe(null, {id: content}, active)}
+        deleteRecipe={() => deleteRecipe(user, {id: content}, active)}
         closeModal={closeModal}
       /> :
       <RecipeForm
