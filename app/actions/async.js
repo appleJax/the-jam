@@ -65,7 +65,7 @@ export const editUserRecipe = (user, recipe, active) => {
         },
         mode: 'cors',
         cache: 'default',
-        body: JSON.stringify({user, altRecipe})
+        body: JSON.stringify({user, recipe: altRecipe})
       }
     )
     .catch(e => console.error(e))
