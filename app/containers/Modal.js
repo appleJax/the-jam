@@ -9,9 +9,8 @@ import {
 } from '../actions/sync'
 import ModalOverlay from '../components/ModalOverlay'
 
-let user = 'public'
-
 const mapStateToProps = (state) => {
+  let user = 'public'
   if (state.visibilityFilter.active === 'private') {
     try {
       const profile = localStorage.getItem('profile')

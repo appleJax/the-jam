@@ -151,6 +151,7 @@ module.exports = (app) => {
               user = req.body.user || 'public',
               collection = db.collection(user);
 
+console.log(req.body)
         collection.insert(recipe, (err, result) => {
           assert.equal(null, err);
           res.json(result.ops[0]);
@@ -174,6 +175,7 @@ module.exports = (app) => {
               user = req.body.user || 'public',
               collection = db.collection(user);
 
+console.log(req.body)
         collection.update({id: recipe.id}, recipe, (err, result) => {
           console.log('My error: ', err)
           assert.equal(null, err);
@@ -197,7 +199,7 @@ module.exports = (app) => {
         const recipe = req.body.recipe,
               user = req.body.user || 'public',
               collection = db.collection(user);
-
+console.log(req.body)
         collection.remove(recipe, (err, result) => {
           assert.equal(null, err);
           res.json(result);

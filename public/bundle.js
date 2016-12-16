@@ -60339,9 +60339,8 @@
 	  });
 	};
 
-	let user = 'public';
-
 	const mapStateToProps = state => {
+	  let user = 'public';
 	  if (state.visibilityFilter.active === 'private') {
 	    try {
 	      const profile = localStorage.getItem('profile');
@@ -60714,9 +60713,8 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	let user = 'public';
-
 	const mapStateToProps = state => {
+	  let user = 'public';
 	  if (state.visibilityFilter.active === 'private') {
 	    try {
 	      const profile = localStorage.getItem('profile');
