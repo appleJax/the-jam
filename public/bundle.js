@@ -30808,11 +30808,11 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	const BASE_URL = 'http://localhost:3001/api/';
+	const BASE_URL = 'https://thejam.herokuapp.com/';
 
 	function callApi(endpoint, authenticated) {
 
-	  let token = localStorage.getItem('id_token') || null;
+	  let token = localStorage.getItem('idToken') || null;
 	  let config = {};
 
 	  if (authenticated) {
@@ -31785,30 +31785,6 @@
 	  errorMessage: ''
 	}, action) => {
 	  switch (action.type) {
-	    case _auth.CREATE_USER_REQUEST:
-	      return _extends({}, state, {
-	        isFetching: true,
-	        isAuthenticated: false,
-	        user: action.creds
-	      });
-	    case _auth.CREATE_USER_SUCCESS:
-	      return _extends({}, state, {
-	        isFetching: false,
-	        isAuthenticated: true,
-	        errorMessage: ''
-	      });
-	    case _auth.CREATE_USER_ERROR:
-	      return _extends({}, state, {
-	        isFetching: false,
-	        isAuthenticated: false,
-	        errorMessage: action.error
-	      });
-	    case _auth.LOGIN_REQUEST:
-	      return _extends({}, state, {
-	        isFetching: true,
-	        isAuthenticated: false,
-	        user: action.creds
-	      });
 	    case _auth.LOGIN_SUCCESS:
 	      return _extends({}, state, {
 	        isFetching: false,
@@ -31816,14 +31792,6 @@
 	        id_token: action.id_token,
 	        name: action.name,
 	        errorMessage: ''
-	      });
-	    case _auth.LOGIN_ERROR:
-	      return _extends({}, state, {
-	        isFetching: false,
-	        isAuthenticated: false,
-	        id_token: null,
-	        name: null,
-	        errorMessage: action.error
 	      });
 	    case _auth.LOGOUT:
 	      return _extends({}, state, {
@@ -31849,7 +31817,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.logoutUser = exports.auth0Login = exports.loginUser = exports.createUser = exports.lockError = exports.lockSuccess = exports.showLock = exports.logout = exports.rejectLogin = exports.receiveLogin = exports.requestLogin = exports.rejectCreateUser = exports.receiveCreateUser = exports.requestCreateUser = exports.LOCK_ERROR = exports.LOCK_SUCCESS = exports.SHOW_LOCK = exports.LOGOUT = exports.LOGIN_ERROR = exports.LOGIN_SUCCESS = exports.LOGIN_REQUEST = exports.CREATE_USER_ERROR = exports.CREATE_USER_SUCCESS = exports.CREATE_USER_REQUEST = undefined;
+	exports.logoutUser = exports.auth0Login = exports.logout = exports.receiveLogin = exports.LOGOUT = exports.LOGIN_SUCCESS = undefined;
 
 	var _isomorphicFetch = __webpack_require__(535);
 
@@ -31863,68 +31831,15 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	const CREATE_USER_REQUEST = exports.CREATE_USER_REQUEST = 'CREATE_USER_REQUEST';
-	const CREATE_USER_SUCCESS = exports.CREATE_USER_SUCCESS = 'CREATE_USER_SUCCESS';
-	const CREATE_USER_ERROR = exports.CREATE_USER_ERROR = 'CREATE_USER_ERROR';
-	const LOGIN_REQUEST = exports.LOGIN_REQUEST = 'LOGIN_REQUEST';
 	const LOGIN_SUCCESS = exports.LOGIN_SUCCESS = 'LOGIN_SUCCESS';
-	const LOGIN_ERROR = exports.LOGIN_ERROR = 'LOGIN_ERROR';
 	const LOGOUT = exports.LOGOUT = 'LOGOUT';
-	const SHOW_LOCK = exports.SHOW_LOCK = 'SHOW_LOCK';
-	const LOCK_SUCCESS = exports.LOCK_SUCCESS = 'LOCK_SUCCESS';
-	const LOCK_ERROR = exports.LOCK_ERROR = 'LOCK_ERROR';
 
 	// -- Sync --
-	const requestCreateUser = exports.requestCreateUser = creds => {
-	  return {
-	    type: CREATE_USER_REQUEST,
-	    isFetching: true,
-	    isAuthenticated: false,
-	    creds
-	  };
-	};
-
-	const receiveCreateUser = exports.receiveCreateUser = user => {
-	  return {
-	    type: CREATE_USER_SUCCESS,
-	    isFetching: false,
-	    isAuthenticated: true,
-	    id_token: user.id_token
-	  };
-	};
-
-	const rejectCreateUser = exports.rejectCreateUser = error => {
-	  return {
-	    type: CREATE_USER_ERROR,
-	    isFetching: false,
-	    isAuthenticated: false,
-	    error
-	  };
-	};
-
-	const requestLogin = exports.requestLogin = creds => {
-	  return {
-	    type: LOGIN_REQUEST,
-	    isFetching: true,
-	    isAuthenticated: false,
-	    creds
-	  };
-	};
-
 	const receiveLogin = exports.receiveLogin = user => {
 	  return {
 	    type: LOGIN_SUCCESS,
 	    id_token: user.id_token,
 	    name: user.name
-	  };
-	};
-
-	const rejectLogin = exports.rejectLogin = error => {
-	  return {
-	    type: LOGIN_ERROR,
-	    isFetching: false,
-	    isAuthenticated: false,
-	    error
 	  };
 	};
 
@@ -31934,82 +31849,7 @@
 	  };
 	};
 
-	const showLock = exports.showLock = () => {
-	  return {
-	    type: SHOW_LOCK
-	  };
-	};
-
-	const lockSuccess = exports.lockSuccess = (profile, token) => {
-	  return {
-	    type: LOCK_SUCCESS,
-	    profile,
-	    token
-	  };
-	};
-
-	const lockError = exports.lockError = err => {
-	  return {
-	    type: LOCK_ERROR,
-	    err
-	  };
-	};
-
 	// -- Async --
-	// Calls the API to get a token and
-	// dispatches actions along the way
-	const createUser = exports.createUser = creds => {
-	  let config = {
-	    method: 'POST',
-	    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-	    body: `username=${ creds.username }&password=${ creds.password }`
-	  };
-
-	  return dispatch => {
-	    dispatch(requestCreateUser(creds));
-
-	    return (0, _isomorphicFetch2.default)('http://thejam.herokuapp.com/users', config).then(response => response.json().then(user => ({ user, response }))).then(({ user, response }) => {
-	      if (!response.ok) {
-	        // If there was a problem, we want to
-	        // dispatch the error condition
-	        dispatch(rejectCreateUser(user.message));
-	        return Promise.reject(user);
-	      } else {
-	        // If login was successful, set the token in storage
-	        // and update UI
-	        localStorage.setItem('id_token', user.id_token);
-	      }
-	    }).catch(e => console.error(e));
-	  };
-	};
-
-	const loginUser = exports.loginUser = creds => {
-
-	  let config = {
-	    method: 'POST',
-	    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-	    body: `username=${ creds.username }&password=${ creds.password }`
-	  };
-
-	  return dispatch => {
-	    // We dispatch requestLogin to kickoff the call to the API
-	    dispatch(requestLogin(creds));
-
-	    return (0, _isomorphicFetch2.default)('http://thejam.herokuapp.com/sessions/create', config).then(response => response.json().then(user => ({ user, response }))).then(({ user, response }) => {
-	      if (!response.ok) {
-	        // If there was a problem, we want to
-	        // dispatch the error condition
-	        dispatch(rejectLogin(user.message));
-	        return Promise.reject(user);
-	      } else {
-	        // If login was successful, set the token in storage
-	        // and dispatch the success action
-	        localStorage.setItem('id_token', user.id_token);
-	      }
-	    }).catch(e => console.error(e));
-	  };
-	};
-
 	const auth0Login = exports.auth0Login = () => {
 	  const options = {
 	    auth: {
@@ -32028,40 +31868,37 @@
 	      userNameInputPlaceholder: 'username'
 	    }
 	  };
-	  console.log('Login called');
 	  const lock = new _auth0Lock2.default(_env.AUTH0_ID, _env.AUTH0_DOMAIN, options);
 
 	  return dispatch => {
-	    console.log('Dispatch called');
-	    lock.on('authenticated', authResult => {
-	      console.log('Lock is authenticated');
-	      lock.getProfile(authResult.idToken, function (error, profile) {
-	        if (error) {
-	          // Handle error
-	          console.error(error);
-	          return;
-	        }
-	        console.log('GetProfile returned');
+	    // lock.on('authenticated', (authResult) => {
+	    //   console.log('Lock is authenticated')
+	    //   lock.getProfile(authResult.idToken, function(error, profile) {
+	    //     if (error) {
+	    //       // Handle error
+	    //       console.error(error)
+	    //       return;
+	    //     }
+	    //
+	    //     // Save token and profile locally
+	    //     localStorage.setItem("idToken", authResult.idToken)
+	    //     localStorage.setItem("profile", JSON.stringify(profile))
+	    //     const user = {}
+	    //     user.name = profile.username || profile.name
+	    //     user.id_token = authResult.idToken
+	    //
+	    //     dispatch(receiveLogin(user))
+	    //   })
+	    // })
 
-	        // Save token and profile locally
-	        localStorage.setItem("idToken", authResult.idToken);
-	        localStorage.setItem("profile", JSON.stringify(profile));
-	        const user = {};
-	        user.name = profile.username || profile.name;
-	        user.id_token = authResult.idToken;
-
-	        dispatch(receiveLogin(user));
-	      });
-	    });
-
-	    lock.on('authorization_error', function (error) {
-	      lock.show({
-	        flashMessage: {
-	          type: 'error',
-	          text: error.error_description
-	        }
-	      });
-	    });
+	    // lock.on('authorization_error', function(error) {
+	    //   lock.show({
+	    //     flashMessage: {
+	    //       type: 'error',
+	    //       text: error.error_description
+	    //     }
+	    //   })
+	    // })
 
 	    lock.show();
 	  };

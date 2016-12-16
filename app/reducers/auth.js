@@ -1,14 +1,6 @@
 import {
-  CREATE_USER_REQUEST,
-  CREATE_USER_SUCCESS,
-  CREATE_USER_ERROR,
-  LOGIN_REQUEST,
   LOGIN_SUCCESS,
-  LOGIN_ERROR,
-  LOGOUT,
-  SHOW_LOCK,
-  LOCK_SUCCESS,
-  LOCK_ERROR
+  LOGOUT
 } from '../actions/auth'
 
 const auth = (
@@ -22,34 +14,6 @@ const auth = (
   action
 ) => {
   switch (action.type) {
-    case CREATE_USER_REQUEST:
-      return {
-        ...state,
-        isFetching: true,
-        isAuthenticated: false,
-        user: action.creds
-      }
-    case CREATE_USER_SUCCESS:
-      return {
-        ...state,
-        isFetching: false,
-        isAuthenticated: true,
-        errorMessage: ''
-      }
-    case CREATE_USER_ERROR:
-      return {
-        ...state,
-        isFetching: false,
-        isAuthenticated: false,
-        errorMessage: action.error
-      }
-    case LOGIN_REQUEST:
-      return {
-        ...state,
-        isFetching: true,
-        isAuthenticated: false,
-        user: action.creds
-      }
     case LOGIN_SUCCESS:
       return {
         ...state,
@@ -58,15 +22,6 @@ const auth = (
         id_token: action.id_token,
         name: action.name,
         errorMessage: ''
-      }
-    case LOGIN_ERROR:
-      return {
-        ...state,
-        isFetching: false,
-        isAuthenticated: false,
-        id_token: null,
-        name: null,
-        errorMessage: action.error
       }
     case LOGOUT:
       return {

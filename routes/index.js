@@ -128,7 +128,6 @@ module.exports = (app) => {
             preloadedState.auth.isAuthenticated = isAuthenticated;
             preloadedState.auth.name = profile.username || profile.name;
             preloadedState.recipes.private = userRecipes;
-            console.log(preloadedState);
           } catch (e) {
             console.error(e)
           }

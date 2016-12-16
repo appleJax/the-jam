@@ -1,8 +1,8 @@
-const BASE_URL = 'http://localhost:3001/api/'
+const BASE_URL = 'https://thejam.herokuapp.com/'
 
 function callApi(endpoint, authenticated) {
 
-  let token = localStorage.getItem('id_token') || null
+  let token = localStorage.getItem('idToken') || null
   let config = {}
 
   if(authenticated) {
