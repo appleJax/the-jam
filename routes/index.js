@@ -214,10 +214,11 @@ module.exports = (app) => {
         assert.equal(null, err);
 
         const collection = db.collection(req.body.name);
+        console.log('Email:', req.body.name);
 
         collection.find({}).toArray((err, docs) => {
           assert.equal(null, err);
-
+          console.log('User recipes:', docs);
           res.json(docs);
           db.close();
           res.end();
