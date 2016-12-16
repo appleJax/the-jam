@@ -12,9 +12,7 @@ class RecipeForm extends React.Component {
     this.editRecipe = props.editRecipe
     this.closeModal = props.closeModal
     this.save = this.save.bind(this)
-
-    const user = JSON.parse(localStorage.getItem('profile'))
-    this.user = user ? user.email : 'public'
+    this.user = props.user
 
     const tempRecipe = {};
     if (typeof content == 'object') {

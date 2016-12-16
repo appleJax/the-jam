@@ -60339,8 +60339,12 @@
 	  });
 	};
 
-	const profile = localStorage.getItem('profile'),
-	      user = profile ? JSON.parse(profile).email : 'public';
+	try {
+	  const profile = localStorage.getItem('profile'),
+	        user = profile ? JSON.parse(profile).email : 'public';
+	} catch (e) {
+	  user = 'public';
+	}
 
 	const mapStateToProps = state => {
 	  return {
@@ -60699,8 +60703,12 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	const profile = localStorage.getItem('profile'),
-	      user = profile ? JSON.parse(profile).email : null;
+	try {
+	  const profile = localStorage.getItem('profile'),
+	        user = profile ? JSON.parse(profile).email : 'public';
+	} catch (e) {
+	  const user = 'public';
+	}
 
 	const mapStateToProps = state => {
 	  return {
@@ -60766,6 +60774,7 @@
 	  }) : _react2.default.createElement(_RecipeForm2.default, {
 	    content: content,
 	    active: active,
+	    user: user,
 	    addRecipe: addRecipe,
 	    editRecipe: editRecipe,
 	    closeModal: closeModal
@@ -60862,9 +60871,7 @@
 	    this.editRecipe = props.editRecipe;
 	    this.closeModal = props.closeModal;
 	    this.save = this.save.bind(this);
-
-	    const user = JSON.parse(localStorage.getItem('profile'));
-	    this.user = user ? user.email : 'public';
+	    this.user = props.user;
 
 	    const tempRecipe = {};
 	    if (typeof content == 'object') {

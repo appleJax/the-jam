@@ -20,6 +20,7 @@ const ModalOverlay = ({
       <RecipeForm
         content={content}
         active={active}
+        user={user}
         addRecipe={addRecipe}
         editRecipe={editRecipe}
         closeModal={closeModal}

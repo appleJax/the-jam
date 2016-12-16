@@ -9,8 +9,13 @@ import {
 } from '../actions/sync'
 import ModalOverlay from '../components/ModalOverlay'
 
-const profile = localStorage.getItem('profile'),
-      user = profile ? JSON.parse(profile).email : null
+try {
+  const profile = localStorage.getItem('profile'),
+        user = profile ? JSON.parse(profile).email : 'public'
+
+} catch(e) {
+  const user = 'public'
+}
 
 const mapStateToProps = (state) => {
   return {
