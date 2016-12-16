@@ -26,7 +26,8 @@ export const logout = () => {
 export const auth0Login = () => {
   const options = {
     auth: {
-      redirectUrl: 'https://thejam.herokuapp.com/',
+//      redirectUrl: 'https://thejam.herokuapp.com/',
+      redirectUrl: 'http://localhost:5000/',
       responseType: 'token',
       params: {
         scope: 'openid email username name'
@@ -42,7 +43,7 @@ export const auth0Login = () => {
     }
   },
     lock = new Auth0Lock(AUTH0_ID, AUTH0_DOMAIN, options)
-    
+
   lock.show()
 }
 

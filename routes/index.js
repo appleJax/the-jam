@@ -25,7 +25,7 @@ module.exports = (app) => {
   }
 
   function handleRender(req, res) {
-    console.log(req)
+    //console.log(req)
     // Get recipes from MONGODB_URI
     MongoClient.connect(url, (err, db) => {
       assert.equal(null, err);
@@ -101,36 +101,35 @@ module.exports = (app) => {
         <div id='root'>${html}</div>
         <script src="https://cdn.auth0.com/w2/auth0-7.2.min.js"></script>
         <script>
-          window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState)}
-          try {
-            var auth0 = new Auth0({
-              domain: '${auth0Domain}',
-              clientID: '${auth0Id}'
-            }),
-              result = auth0.parseHash(window.location.hash);
+          window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState)};
 
-            if (result && result.idTokenPayload) {
-              var idTokenPayload = result.idTokenPayload,
-                profile = {
-                  name: idTokenPayload.name,
-                  email: idTokenPayload.email,
-                  username: idTokenPayload.username
-                };
-              window.localStorage.setItem('idToken', result.idToken);
-              window.localStorage.setItem('profile', JSON.stringify(profile));
-            }
+          var auth0 = new Auth0({
+            domain: '${auth0Domain}',
+            clientID: '${auth0Id}'
+          }),
+            result = auth0.parseHash(window.location.hash);
 
-            var isAuthenticated = !!window.localStorage.getItem('idToken'),
-                profile = window.localStorage.getItem('profile') ? JSON.parse(window.localStorage.getItem('profile')) : {},
-                userRecipes = window.localStorage.getItem('user-recipes') || [],
-                preloadedState = window.__PRELOADED_STATE__;
+          console.log('Hash:', result);
 
-            preloadedState.auth.isAuthenticated = isAuthenticated;
-            preloadedState.auth.name = profile.username || profile.name;
-            preloadedState.recipes.private = userRecipes;
-          } catch (e) {
-            console.error(e)
+          if (result && result.idTokenPayload) {
+            var idTokenPayload = result.idTokenPayload,
+              profile = {
+                name: idTokenPayload.name,
+                email: idTokenPayload.email,
+                username: idTokenPayload.username
+              };
+            window.localStorage.setItem('idToken', result.idToken);
+            window.localStorage.setItem('profile', JSON.stringify(profile));
           }
+
+          var isAuthenticated = !!window.localStorage.getItem('idToken'),
+              profile = window.localStorage.getItem('profile') ? JSON.parse(window.localStorage.getItem('profile')) : {},
+              userRecipes = window.localStorage.getItem('user-recipes') || [],
+              preloadedState = window.__PRELOADED_STATE__;
+          console.log(preloadedState);
+          preloadedState.auth.isAuthenticated = isAuthenticated;
+          preloadedState.auth.name = profile.username || profile.name;
+          preloadedState.recipes.private = userRecipes;
           window.__PRELOADED_STATE__ = JSON.stringify(preloadedState);
         </script>
         <script type='text/javascript' src='bundle.js'></script>
@@ -138,7 +137,7 @@ module.exports = (app) => {
     </html>
     `;
   }
-  app.get('*', (req, res) => handleRender(req, res))
+  app.get('*', (req, res) => handleRender(req, res));
   //   console.log('Request: ', req.body);
   //   res.sendFile(index.html);
   // });
@@ -220,12 +219,12 @@ module.exports = (app) => {
 
         collection.find({}).toArray((err, docs) => {
           assert.equal(null, err);
-          
+
           res.json(docs);
           db.close();
           res.end();
         })
-      }
+      });
     }
   });
 };
