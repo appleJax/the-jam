@@ -28996,7 +28996,7 @@
 	    cache: 'default',
 	    body: JSON.stringify(user)
 	  }).then(json => {
-	    console.log('json:', JSON.parse(json));
+	    console.log('json:', json);
 	    store.dispatch((0, _sync.populateUserRecipes)(json));
 	  }).catch(e => console.error(e));
 	}

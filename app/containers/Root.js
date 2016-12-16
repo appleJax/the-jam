@@ -27,7 +27,7 @@ if (preloadedState.auth.isAuthenticated) {
     }
   )
   .then(json => {
-    console.log('json:', JSON.parse(json))
+    console.log('json:', json)
     store.dispatch(populateUserRecipes(json))
   })
   .catch(e => console.error(e))
