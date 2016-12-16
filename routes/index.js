@@ -124,7 +124,7 @@ module.exports = (app) => {
               profile = window.localStorage.getItem('profile') ? JSON.parse(window.localStorage.getItem('profile')) : {},
               userRecipes = window.localStorage.getItem('user-recipes') || [],
               preloadedState = window.__PRELOADED_STATE__;
-              
+
           preloadedState.auth.isAuthenticated = isAuthenticated;
           preloadedState.auth.name = profile.username || profile.name;
           preloadedState.recipes.private = userRecipes;
@@ -213,7 +213,7 @@ module.exports = (app) => {
       MongoClient.connect(url, (err, db) => {
         assert.equal(null, err);
 
-        const collection = db.collection(req.body.user);
+        const collection = db.collection(req.body.name);
 
         collection.find({}).toArray((err, docs) => {
           assert.equal(null, err);

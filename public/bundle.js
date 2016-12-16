@@ -28983,6 +28983,9 @@
 
 	if (preloadedState.auth.isAuthenticated) {
 	  console.log('authenticated');
+	  const user = {};
+	  user.name = JSON.parse(localStorage.getItem('profile')).email;
+
 	  (0, _isomorphicFetch2.default)(`https://thejam.herokuapp.com/recipes`, {
 	    method: 'POST',
 	    headers: {
@@ -28991,13 +28994,11 @@
 	    },
 	    mode: 'cors',
 	    cache: 'default',
-	    body: JSON.stringify({ user: preloadedState.profile.email })
+	    body: JSON.stringify(user)
 	  }).then(json => {
 	    console.log('json:', json);
 	    store.dispatch((0, _sync.populateUserRecipes)(json));
 	  }).catch(e => console.error(e));
-	} else {
-	  console.log('Not authenticated');
 	}
 
 	const Root = () => {

@@ -11,6 +11,9 @@ const store = configureStore(preloadedState)
 
 if (preloadedState.auth.isAuthenticated) {
   console.log('authenticated')
+  const user = {}
+  user.name = JSON.parse(localStorage.getItem('profile')).email
+
   fetch(`https://thejam.herokuapp.com/recipes`,
     {
       method: 'POST',
@@ -20,7 +23,7 @@ if (preloadedState.auth.isAuthenticated) {
       },
       mode: 'cors',
       cache: 'default',
-      body: JSON.stringify({user: preloadedState.profile.email})
+      body: JSON.stringify(user)
     }
   )
   .then(json => {
@@ -28,8 +31,6 @@ if (preloadedState.auth.isAuthenticated) {
     store.dispatch(populateUserRecipes(json))
   })
   .catch(e => console.error(e))
-} else {
-  console.log('Not authenticated')
 }
 
 const Root = () => {
