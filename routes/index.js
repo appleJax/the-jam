@@ -109,8 +109,6 @@ module.exports = (app) => {
           }),
             result = auth0.parseHash(window.location.hash);
 
-          console.log('Hash:', result);
-
           if (result && result.idTokenPayload) {
             var idTokenPayload = result.idTokenPayload,
               profile = {
@@ -126,7 +124,7 @@ module.exports = (app) => {
               profile = window.localStorage.getItem('profile') ? JSON.parse(window.localStorage.getItem('profile')) : {},
               userRecipes = window.localStorage.getItem('user-recipes') || [],
               preloadedState = window.__PRELOADED_STATE__;
-          console.log(preloadedState);
+              
           preloadedState.auth.isAuthenticated = isAuthenticated;
           preloadedState.auth.name = profile.username || profile.name;
           preloadedState.recipes.private = userRecipes;

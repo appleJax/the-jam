@@ -32350,8 +32350,8 @@
 	const auth0Login = exports.auth0Login = () => {
 	  const options = {
 	    auth: {
-	      //      redirectUrl: 'https://thejam.herokuapp.com/',
-	      redirectUrl: 'http://localhost:5000/',
+	      redirectUrl: 'https://thejam.herokuapp.com/',
+	      //      redirectUrl: 'http://localhost:5000/',
 	      responseType: 'token',
 	      params: {
 	        scope: 'openid email username name'
@@ -32365,32 +32365,10 @@
 	      passwordInputPlaceholder: 'password',
 	      userNameInputPlaceholder: 'username'
 	    }
-	  };
-	  return dispatch => {
-	    const lock = new _auth0Lock2.default(_env.AUTH0_ID, _env.AUTH0_DOMAIN, options);
+	  },
+	        lock = new _auth0Lock2.default(_env.AUTH0_ID, _env.AUTH0_DOMAIN, options);
 
-	    lock.on('authenticated', authResult => {
-	      console.log('Lock is authenticated');
-	      lock.getProfile(authResult.idToken, function (error, profile) {
-	        if (error) {
-	          // Handle error
-	          console.error(error);
-	          return;
-	        }
-
-	        // Save token and profile locally
-	        localStorage.setItem("idToken", authResult.idToken);
-	        localStorage.setItem("profile", JSON.stringify(profile));
-	        const user = {};
-	        user.name = profile.username || profile.name;
-	        user.id_token = authResult.idToken;
-
-	        dispatch(receiveLogin(user));
-	      });
-	    });
-
-	    lock.show();
-	  };
+	  lock.show();
 	};
 
 	const logoutUser = exports.logoutUser = () => {
