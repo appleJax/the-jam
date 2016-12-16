@@ -40,7 +40,7 @@ export const addUserRecipe = (user, recipe, active) => {
         },
         mode: 'cors',
         cache: 'default',
-        body: JSON.stringify(recipe)
+        body: JSON.stringify({user, recipe})
       }
     )
     .catch(e => console.error(e))
@@ -60,7 +60,7 @@ export const editUserRecipe = (user, recipe, active) => {
         },
         mode: 'cors',
         cache: 'default',
-        body: JSON.stringify(recipe)
+        body: JSON.stringify({user, recipe})
       }
     )
     .catch(e => console.error(e))
@@ -69,7 +69,7 @@ export const editUserRecipe = (user, recipe, active) => {
 
 export const deleteUserRecipe = (user, recipe, active) => {
   return dispatch => {
-    dispatch(deleteRecipe(recipe,active))
+    dispatch(deleteRecipe(recipe, active))
 
     return fetch(`https://thejam.herokuapp.com/delete`,
       {

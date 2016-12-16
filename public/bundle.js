@@ -28982,7 +28982,6 @@
 	const store = (0, _configureStore2.default)(preloadedState);
 
 	if (preloadedState.auth.isAuthenticated) {
-	  console.log('authenticated');
 	  const user = {};
 	  user.name = JSON.parse(localStorage.getItem('profile')).email;
 
@@ -29001,9 +29000,9 @@
 	    }
 	    return response.json();
 	  }).then(recipes => {
-	    console.log(recipes);
+	    localStorage.setItem('user-recipes', JSON.stringify(recipes));
 	    store.dispatch((0, _sync.populateUserRecipes)(recipes));
-	  });
+	  }).catch(e => console.error(e));
 	}
 
 	const Root = () => {
@@ -60415,7 +60414,7 @@
 	      },
 	      mode: 'cors',
 	      cache: 'default',
-	      body: JSON.stringify(recipe)
+	      body: JSON.stringify({ user, recipe })
 	    }).catch(e => console.error(e));
 	  };
 	};
@@ -60432,7 +60431,7 @@
 	      },
 	      mode: 'cors',
 	      cache: 'default',
-	      body: JSON.stringify(recipe)
+	      body: JSON.stringify({ user, recipe })
 	    }).catch(e => console.error(e));
 	  };
 	};
@@ -60853,6 +60852,9 @@
 	    this.closeModal = props.closeModal;
 	    this.save = this.save.bind(this);
 
+	    const user = localStorage.getItem('profile');
+	    this.user = user ? user.email : 'public';
+
 	    const tempRecipe = {};
 	    if (typeof content == 'object') {
 	      const altContent = content;
@@ -60888,9 +60890,9 @@
 	    recipe.directions = recipe.directions ? recipe.directions.split(';').map(direction => direction.trim()).filter(direction => direction !== '') : [];
 
 	    if (typeof this.content == 'object') {
-	      this.editRecipe(null, recipe, this.active);
+	      this.editRecipe(this.user, recipe, this.active);
 	    } else {
-	      this.addRecipe(null, recipe, this.active);
+	      this.addRecipe(this.user, recipe, this.active);
 	    }
 
 	    this.closeModal();

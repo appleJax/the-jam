@@ -13,6 +13,9 @@ class RecipeForm extends React.Component {
     this.closeModal = props.closeModal
     this.save = this.save.bind(this)
 
+    const user = localStorage.getItem('profile')
+    this.user = user ? user.email : 'public'
+
     const tempRecipe = {};
     if (typeof content == 'object') {
       const altContent = content
@@ -65,9 +68,9 @@ class RecipeForm extends React.Component {
         .filter(direction => direction !== '') : [];
 
     if (typeof this.content == 'object') {
-      this.editRecipe(null, recipe, this.active)
+      this.editRecipe(this.user, recipe, this.active)
     } else {
-      this.addRecipe(null, recipe, this.active)
+      this.addRecipe(this.user, recipe, this.active)
     }
 
     this.closeModal()

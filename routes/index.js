@@ -122,12 +122,10 @@ module.exports = (app) => {
 
           var isAuthenticated = !!window.localStorage.getItem('idToken'),
               profile = window.localStorage.getItem('profile') ? JSON.parse(window.localStorage.getItem('profile')) : {},
-              userRecipes = window.localStorage.getItem('user-recipes') || [],
               preloadedState = window.__PRELOADED_STATE__;
 
           preloadedState.auth.isAuthenticated = isAuthenticated;
           preloadedState.auth.name = profile.username || profile.name;
-          preloadedState.recipes.private = userRecipes;
           window.__PRELOADED_STATE__ = JSON.stringify(preloadedState);
         </script>
         <script type='text/javascript' src='bundle.js'></script>
@@ -149,8 +147,10 @@ module.exports = (app) => {
       MongoClient.connect(url, (err, db) => {
         assert.equal(null, err);
 
-        const collection = db.collection('recipes'),
-              recipe = req.body;
+        const recipe = req.body.recipe,
+              user = req.body.user || 'public',
+              collection = db.collection(user);
+
         collection.insert(recipe, (err, result) => {
           assert.equal(null, err);
           res.json(result.ops[0]);
@@ -213,7 +213,7 @@ module.exports = (app) => {
       MongoClient.connect(url, (err, db) => {
         assert.equal(null, err);
 
-        const collection = db.collection('recipes');
+        const collection = db.collection(req.body.name);
 
         collection.find({}).toArray((err, docs) => {
           assert.equal(null, err);

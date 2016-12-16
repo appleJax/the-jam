@@ -10,7 +10,6 @@ const preloadedState = JSON.parse(window.__PRELOADED_STATE__)
 const store = configureStore(preloadedState)
 
 if (preloadedState.auth.isAuthenticated) {
-  console.log('authenticated')
   const user = {}
   user.name = JSON.parse(localStorage.getItem('profile')).email
 
@@ -33,9 +32,10 @@ if (preloadedState.auth.isAuthenticated) {
     return response.json()
   })
   .then(recipes => {
-    console.log(recipes);
+    localStorage.setItem('user-recipes', JSON.stringify(recipes))
     store.dispatch(populateUserRecipes(recipes))
   })
+  .catch(e => console.error(e))
 }
 
 const Root = () => {
