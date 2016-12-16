@@ -23,7 +23,7 @@ class RecipeForm extends React.Component {
       tempRecipe.directions = content.directions.join(';\n\n')
       this.state = {
         ...altContent,
-        ...tempRecipe
+        ...tempRecipe,
       }
 
     } else {

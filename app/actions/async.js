@@ -51,6 +51,11 @@ export const editUserRecipe = (user, recipe, active) => {
   return dispatch => {
     dispatch(editRecipe(recipe, active))
 
+    const altRecipe = {
+      ...recipe,
+      showDetails: false
+    }
+
     return fetch(`https://thejam.herokuapp.com/edit`,
       {
         method: 'POST',
@@ -60,7 +65,7 @@ export const editUserRecipe = (user, recipe, active) => {
         },
         mode: 'cors',
         cache: 'default',
-        body: JSON.stringify({user, recipe})
+        body: JSON.stringify({user, altRecipe})
       }
     )
     .catch(e => console.error(e))

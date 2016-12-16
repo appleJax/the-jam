@@ -60341,14 +60341,16 @@
 
 	let user = 'public';
 
-	try {
-	  const profile = localStorage.getItem('profile');
-	  user = profile ? JSON.parse(profile).email : 'public';
-	} catch (e) {
-	  console.error(e);
-	}
-
 	const mapStateToProps = state => {
+	  if (state.visibilityFilter.active === 'private') {
+	    try {
+	      const profile = localStorage.getItem('profile');
+	      user = profile ? JSON.parse(profile).email : 'public';
+	    } catch (e) {
+	      console.error(e);
+	    }
+	  }
+
 	  return {
 	    recipes: getVisibleRecipes(state.recipes, state.visibilityFilter, state.sort),
 	    visibilityFilter: state.visibilityFilter,
@@ -60385,6 +60387,8 @@
 	  value: true
 	});
 	exports.deleteUserRecipe = exports.editUserRecipe = exports.addUserRecipe = exports.fetchRecipes = undefined;
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 	var _isomorphicFetch = __webpack_require__(493);
 
@@ -60432,6 +60436,10 @@
 	  return dispatch => {
 	    dispatch((0, _sync.editRecipe)(recipe, active));
 
+	    const altRecipe = _extends({}, recipe, {
+	      showDetails: false
+	    });
+
 	    return (0, _isomorphicFetch2.default)(`https://thejam.herokuapp.com/edit`, {
 	      method: 'POST',
 	      headers: {
@@ -60440,7 +60448,7 @@
 	      },
 	      mode: 'cors',
 	      cache: 'default',
-	      body: JSON.stringify({ user, recipe })
+	      body: JSON.stringify({ user, altRecipe })
 	    }).catch(e => console.error(e));
 	  };
 	};
@@ -60707,14 +60715,17 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	let user = 'public';
-	try {
-	  const profile = localStorage.getItem('profile');
-	  user = profile ? JSON.parse(profile).email : 'public';
-	} catch (e) {
-	  console.error(e);
-	}
 
 	const mapStateToProps = state => {
+	  if (state.visibilityFilter.active === 'private') {
+	    try {
+	      const profile = localStorage.getItem('profile');
+	      user = profile ? JSON.parse(profile).email : 'public';
+	    } catch (e) {
+	      console.error(e);
+	    }
+	  }
+
 	  return {
 	    dialogue: state.modal.dialogue,
 	    content: state.modal.content,

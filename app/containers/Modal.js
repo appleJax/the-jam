@@ -10,15 +10,18 @@ import {
 import ModalOverlay from '../components/ModalOverlay'
 
 let user = 'public'
-try {
-  const profile = localStorage.getItem('profile')
-  user = profile ? JSON.parse(profile).email : 'public'
-
-} catch(e) {
-  console.error(e)
-}
 
 const mapStateToProps = (state) => {
+  if (state.visibilityFilter.active === 'private') {
+    try {
+      const profile = localStorage.getItem('profile')
+      user = profile ? JSON.parse(profile).email : 'public'
+
+    } catch(e) {
+      console.error(e)
+    }
+  }
+
   return {
     dialogue: state.modal.dialogue,
     content: state.modal.content,
