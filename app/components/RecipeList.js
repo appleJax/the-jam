@@ -10,6 +10,7 @@ const RecipeList = ({
   toggleDetails,
   populateModal
 }) => {
+  console.log('RecipeList user:', user)
   return (
     <ul className="recipe-list">
       {recipes.map(recipe =>

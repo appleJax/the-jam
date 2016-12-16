@@ -60487,6 +60487,7 @@
 	  toggleDetails,
 	  populateModal
 	}) => {
+	  console.log('RecipeList user:', user);
 	  return _react2.default.createElement(
 	    'ul',
 	    { className: 'recipe-list' },
@@ -60771,6 +60772,7 @@
 	  deleteRecipe,
 	  closeModal
 	}) => {
+	  console.log('ModalOverlay user:', user);
 	  const dialogueBox = dialogue == 'confirm' ? _react2.default.createElement(_ConfirmDialogue2.default, {
 	    deleteRecipe: () => deleteRecipe(user, { id: content }, active),
 	    closeModal: closeModal
