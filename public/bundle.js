@@ -60851,7 +60851,7 @@
 	    this.closeModal = props.closeModal;
 	    this.save = this.save.bind(this);
 
-	    const user = localStorage.getItem('profile');
+	    const user = JSON.parse(localStorage.getItem('profile'));
 	    this.user = user ? user.email : 'public';
 
 	    const tempRecipe = {};
