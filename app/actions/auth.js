@@ -1,5 +1,5 @@
 import fetch from 'isomorphic-fetch'
-import AuthService from '../utils/AuthService'
+import Auth0Lock from 'auth0-lock'
 
 export const CREATE_USER_REQUEST = 'CREATE_USER_REQUEST'
 export const CREATE_USER_SUCCESS = 'CREATE_USER_SUCCESS'
@@ -155,30 +155,67 @@ export const loginUser = (creds) => {
 }
 
 export const auth0Login = () => {
-  const lock = new Auth0Lock('cScY9jmRXWFMDBvonACLTNbNL8KG7Vod', 'thejam.auth0.com')
+  const options = {
+    auth: {
+      redirectUrl: 'http://localhost:5000/',
+      responseType: 'token',
+      params: {
+        scope: 'openid email username name'
+      }
+    },
+    theme: {
+      logo: 'https://thejam.herokuapp.com/images/hi_jam.gif'
+    },
+    languageDictionary: {
+      title: 'the Jam',
+      passwordInputPlaceholder: 'password',
+      userNameInputPlaceholder: 'username'
+    }
+  }
+  console.log('Login called')
+  const lock = new Auth0Lock('cScY9jmRXWFMDBvonACLTNbNL8KG7Vod', 'thejam.auth0.com', options)
 
   return dispatch => {
-    lock.show((err, profile, token) => {
-      if(err) {
-        dispatch(lockError(err))
-        return
-      }
-      localStorage.setItem('profile', JSON.stringify(profile))
-      localStorage.setItem('id_token', token)
+    console.log('Dispatch called')
+    lock.on('authenticated', (authResult) => {
+      console.log('Lock is authenticated')
+      lock.getProfile(authResult.idToken, function(error, profile) {
+        if (error) {
+          // Handle error
+          console.error(error)
+          return;
+        }
+        console.log('GetProfile returned')
 
-      const user = {}
-      user.id_token = token
-      user.name = profile.name
+        // Save token and profile locally
+        localStorage.setItem("idToken", authResult.idToken)
+        localStorage.setItem("profile", JSON.stringify(profile))
+        const user = {}
+        user.name = profile.username || profile.name
+        user.id_token = authResult.idToken
 
-      dispatch(receiveLogin(user))
+        dispatch(receiveLogin(user))
+      })
     })
+
+    lock.on('authorization_error', function(error) {
+      lock.show({
+        flashMessage: {
+          type: 'error',
+          text: error.error_description
+        }
+      })
+    })
+
+    lock.show()
   }
 }
 
 export const logoutUser = () => {
   return dispatch => {
-    localStorage.removeItem('id_token')
+    localStorage.removeItem('idToken')
     localStorage.removeItem('profile')
+    localStorage.removeItem('user-recipes')
 
     dispatch(logout())
     return

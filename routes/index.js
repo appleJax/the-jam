@@ -94,12 +94,43 @@ module.exports = (app) => {
         <link rel='shortcut icon' href='favicon.ico' type='image/x-icon'/>
         <link href='https://fonts.googleapis.com/css?family=Lato|Molle:400i|Architects+Daughter' rel='stylesheet' />
         <link rel='stylesheet' href='bundle.css' />
-        <script src="//cdn.auth0.com/js/lock/10.7.2/lock.min.js"></script>
       </head>
       <body>
         <div id='root'>${html}</div>
+        <script src="https://cdn.auth0.com/w2/auth0-7.2.min.js"></script>
         <script>
           window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState)}
+          try {
+            var auth0 = new Auth0({
+              domain: 'thejam.auth0.com',
+              clientID: 'cScY9jmRXWFMDBvonACLTNbNL8KG7Vod'
+            }),
+              result = auth0.parseHash(window.location.hash);
+
+            if (result && result.idTokenPayload) {
+              var idTokenPayload = result.idTokenPayload,
+                profile = {
+                  name: idTokenPayload.name,
+                  email: idTokenPayload.email,
+                  username: idTokenPayload.username
+                };
+              window.localStorage.setItem('idToken', result.idToken);
+              window.localStorage.setItem('profile', JSON.stringify(profile));
+            }
+
+            var isAuthenticated = !!window.localStorage.getItem('idToken'),
+                profile = window.localStorage.getItem('profile') ? JSON.parse(window.localStorage.getItem('profile')) : {},
+                userRecipes = window.localStorage.getItem('user-recipes') || [],
+                preloadedState = window.__PRELOADED_STATE__;
+
+            preloadedState.auth.isAuthenticated = isAuthenticated;
+            preloadedState.auth.name = profile.username || profile.name;
+            preloadedState.recipes.private = userRecipes;
+            console.log(preloadedState);
+          } catch (e) {
+            console.error(e)
+          }
+          window.__PRELOADED_STATE__ = JSON.stringify(preloadedState);
         </script>
         <script type='text/javascript' src='bundle.js'></script>
       </body>

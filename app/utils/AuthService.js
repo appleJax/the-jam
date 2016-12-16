@@ -18,7 +18,16 @@ class AuthService {
       }
     })
 
-//    this.lock.on('authenticated', this._doAuthentication.bind(this))
+    this.lock.on('authenticated', this._doAuthentication.bind(this))
+
+    this.lock.on('authorization_error', function(error) {
+      lock.show({
+        flashMessage: {
+          type: 'error',
+          text: error.error_description
+        }
+      })
+    })
 
     this.login = this.login.bind(this)
   }
@@ -26,12 +35,12 @@ class AuthService {
   _doAuthentication(authResult) {
     this.lock.getProfile(authResult.idToken, (err, profile) => {
       if (err) return console.error(err)
-      console.log('profile: ', JSON.stringify(profile))
 
       const user = { id_token: authResult.idToken },
             userProfile = JSON.stringify(profile)
 
-      user.name = userProfile.name
+      console.log('profile:', profile)
+      user.name = profile.name
       localStorage.setItem('id_token', authResult.idToken)
       localStorage.setItem('profile', userProfile)
     })
