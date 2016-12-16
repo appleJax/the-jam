@@ -28995,10 +28995,15 @@
 	    mode: 'cors',
 	    cache: 'default',
 	    body: JSON.stringify(user)
-	  }).then(json => {
-	    console.log('json:', json);
-	    store.dispatch((0, _sync.populateUserRecipes)(json));
-	  }).catch(e => console.error(e));
+	  }).then(response => {
+	    if (response.status >= 400) {
+	      throw new Error("Bad response from server");
+	    }
+	    return response.json();
+	  }).then(recipes => {
+	    console.log(recipes);
+	    store.dispatch((0, _sync.populateUserRecipes)(recipes));
+	  });
 	}
 
 	const Root = () => {

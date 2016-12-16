@@ -26,11 +26,16 @@ if (preloadedState.auth.isAuthenticated) {
       body: JSON.stringify(user)
     }
   )
-  .then(json => {
-    console.log('json:', json)
-    store.dispatch(populateUserRecipes(json))
+  .then(response => {
+    if (response.status >= 400) {
+      throw new Error("Bad response from server")
+    }
+    return response.json()
   })
-  .catch(e => console.error(e))
+  .then(recipes => {
+    console.log(recipes);
+    store.dispatch(populateUserRecipes(recipes))
+  })
 }
 
 const Root = () => {
