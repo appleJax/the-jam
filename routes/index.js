@@ -30,7 +30,7 @@ module.exports = (app) => {
     MongoClient.connect(url, (err, db) => {
       assert.equal(null, err);
 
-      const collection = db.collection('recipes');
+      const collection = db.collection('public');
 
       collection.find({}).toArray((err, docs) => {
         const recipes = docs;
