@@ -1,5 +1,9 @@
 import fetch from 'isomorphic-fetch'
 import Auth0Lock from 'auth0-lock'
+import {
+  AUTH0_ID,
+  AUTH0_DOMAIN
+} from '../../env'
 
 export const CREATE_USER_REQUEST = 'CREATE_USER_REQUEST'
 export const CREATE_USER_SUCCESS = 'CREATE_USER_SUCCESS'
@@ -157,7 +161,7 @@ export const loginUser = (creds) => {
 export const auth0Login = () => {
   const options = {
     auth: {
-      redirectUrl: 'http://localhost:5000/',
+      redirectUrl: 'https://thejam.herokuapp.com/',
       responseType: 'token',
       params: {
         scope: 'openid email username name'
@@ -173,7 +177,7 @@ export const auth0Login = () => {
     }
   }
   console.log('Login called')
-  const lock = new Auth0Lock('cScY9jmRXWFMDBvonACLTNbNL8KG7Vod', 'thejam.auth0.com', options)
+  const lock = new Auth0Lock(AUTH0_ID, AUTH0_DOMAIN, options)
 
   return dispatch => {
     console.log('Dispatch called')

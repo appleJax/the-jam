@@ -5,7 +5,9 @@ const MongoClient = require('mongodb').MongoClient,
   configureStore = require('../app/configureStore').default,
   Provider = require('react-redux').Provider,
   App = require('../app/containers/App').default,
-  url = process.env.MONGODB_URI;
+  url = process.env.MONGODB_URI,
+  auth0Id = process.env.AUTH0_ID,
+  auth0Domain = process.env.AUTH0_DOMAIN;
 
 
 module.exports = (app) => {
@@ -102,8 +104,8 @@ module.exports = (app) => {
           window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState)}
           try {
             var auth0 = new Auth0({
-              domain: 'thejam.auth0.com',
-              clientID: 'cScY9jmRXWFMDBvonACLTNbNL8KG7Vod'
+              domain: '${auth0Domain}',
+              clientID: '${auth0Id}'
             }),
               result = auth0.parseHash(window.location.hash);
 

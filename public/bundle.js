@@ -8659,7 +8659,7 @@
 
 /***/ },
 /* 316 */
-[713, 317, 318],
+[714, 317, 318],
 /* 317 */
 /***/ function(module, exports) {
 
@@ -9140,7 +9140,7 @@
 
 /***/ },
 /* 321 */
-[714, 322],
+[715, 322],
 /* 322 */
 /***/ function(module, exports) {
 
@@ -14046,7 +14046,7 @@
 
 /***/ },
 /* 357 */
-[714, 358],
+[715, 358],
 /* 358 */
 322,
 /* 359 */
@@ -14287,7 +14287,7 @@
 
 /***/ },
 /* 363 */
-[713, 345, 347],
+[714, 345, 347],
 /* 364 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -28965,7 +28965,7 @@
 
 	var _configureStore2 = _interopRequireDefault(_configureStore);
 
-	var _App = __webpack_require__(701);
+	var _App = __webpack_require__(702);
 
 	var _App2 = _interopRequireDefault(_App);
 
@@ -31735,19 +31735,19 @@
 
 	var _auth2 = _interopRequireDefault(_auth);
 
-	var _recipes = __webpack_require__(696);
+	var _recipes = __webpack_require__(697);
 
 	var _recipes2 = _interopRequireDefault(_recipes);
 
-	var _visibilityFilter = __webpack_require__(698);
+	var _visibilityFilter = __webpack_require__(699);
 
 	var _visibilityFilter2 = _interopRequireDefault(_visibilityFilter);
 
-	var _sort = __webpack_require__(699);
+	var _sort = __webpack_require__(700);
 
 	var _sort2 = _interopRequireDefault(_sort);
 
-	var _modal = __webpack_require__(700);
+	var _modal = __webpack_require__(701);
 
 	var _modal2 = _interopRequireDefault(_modal);
 
@@ -31858,6 +31858,8 @@
 	var _auth0Lock = __webpack_require__(537);
 
 	var _auth0Lock2 = _interopRequireDefault(_auth0Lock);
+
+	var _env = __webpack_require__(696);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -32011,7 +32013,7 @@
 	const auth0Login = exports.auth0Login = () => {
 	  const options = {
 	    auth: {
-	      redirectUrl: 'http://localhost:5000/',
+	      redirectUrl: 'https://thejam.herokuapp.com/',
 	      responseType: 'token',
 	      params: {
 	        scope: 'openid email username name'
@@ -32027,7 +32029,7 @@
 	    }
 	  };
 	  console.log('Login called');
-	  const lock = new _auth0Lock2.default('cScY9jmRXWFMDBvonACLTNbNL8KG7Vod', 'thejam.auth0.com', options);
+	  const lock = new _auth0Lock2.default(_env.AUTH0_ID, _env.AUTH0_DOMAIN, options);
 
 	  return dispatch => {
 	    console.log('Dispatch called');
@@ -59909,6 +59911,21 @@
 
 /***/ },
 /* 696 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	const MONGODB_URI = exports.MONGODB_URI = 'mongodb://heroku_zp06vvxg:igpq28i97rn65l594r5f7r596u@ds119718.mlab.com:19718/heroku_zp06vvxg';
+
+	const AUTH0_ID = exports.AUTH0_ID = 'cScY9jmRXWFMDBvonACLTNbNL8KG7Vod';
+
+	const AUTH0_DOMAIN = exports.AUTH0_DOMAIN = 'thejam.auth0.com';
+
+/***/ },
+/* 697 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59919,7 +59936,7 @@
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var _sync = __webpack_require__(697);
+	var _sync = __webpack_require__(698);
 
 	const recipe = (state = {}, action) => {
 	  switch (action.type) {
@@ -59982,7 +59999,7 @@
 	exports.default = recipes;
 
 /***/ },
-/* 697 */
+/* 698 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -60076,7 +60093,7 @@
 	};
 
 /***/ },
-/* 698 */
+/* 699 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60087,7 +60104,7 @@
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var _sync = __webpack_require__(697);
+	var _sync = __webpack_require__(698);
 
 	const visibilityFilter = (state = {
 	  active: 'public',
@@ -60110,7 +60127,7 @@
 	exports.default = visibilityFilter;
 
 /***/ },
-/* 699 */
+/* 700 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60121,7 +60138,7 @@
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var _sync = __webpack_require__(697);
+	var _sync = __webpack_require__(698);
 
 	const sort = (state = {
 	  stars: false,
@@ -60156,7 +60173,7 @@
 	exports.default = sort;
 
 /***/ },
-/* 700 */
+/* 701 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60165,7 +60182,7 @@
 	  value: true
 	});
 
-	var _sync = __webpack_require__(697);
+	var _sync = __webpack_require__(698);
 
 	const modal = (state = {
 	  show: false,
@@ -60193,7 +60210,7 @@
 	exports.default = modal;
 
 /***/ },
-/* 701 */
+/* 702 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60208,19 +60225,19 @@
 
 	var _reactRedux = __webpack_require__(493);
 
-	var _NavContainer = __webpack_require__(702);
+	var _NavContainer = __webpack_require__(703);
 
 	var _NavContainer2 = _interopRequireDefault(_NavContainer);
 
-	var _VisibleRecipeList = __webpack_require__(704);
+	var _VisibleRecipeList = __webpack_require__(705);
 
 	var _VisibleRecipeList2 = _interopRequireDefault(_VisibleRecipeList);
 
-	var _Modal = __webpack_require__(708);
+	var _Modal = __webpack_require__(709);
 
 	var _Modal2 = _interopRequireDefault(_Modal);
 
-	var _Footer = __webpack_require__(712);
+	var _Footer = __webpack_require__(713);
 
 	var _Footer2 = _interopRequireDefault(_Footer);
 
@@ -60249,7 +60266,7 @@
 	exports.default = App;
 
 /***/ },
-/* 702 */
+/* 703 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60260,11 +60277,11 @@
 
 	var _reactRedux = __webpack_require__(493);
 
-	var _sync = __webpack_require__(697);
+	var _sync = __webpack_require__(698);
 
 	var _auth = __webpack_require__(534);
 
-	var _Nav = __webpack_require__(703);
+	var _Nav = __webpack_require__(704);
 
 	var _Nav2 = _interopRequireDefault(_Nav);
 
@@ -60302,7 +60319,7 @@
 	exports.default = NavContainer;
 
 /***/ },
-/* 703 */
+/* 704 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60431,7 +60448,7 @@
 	module.exports = Nav;
 
 /***/ },
-/* 704 */
+/* 705 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60442,11 +60459,11 @@
 
 	var _reactRedux = __webpack_require__(493);
 
-	var _sync = __webpack_require__(697);
+	var _sync = __webpack_require__(698);
 
-	var _async = __webpack_require__(705);
+	var _async = __webpack_require__(706);
 
-	var _RecipeList = __webpack_require__(706);
+	var _RecipeList = __webpack_require__(707);
 
 	var _RecipeList2 = _interopRequireDefault(_RecipeList);
 
@@ -60513,7 +60530,7 @@
 	exports.default = VisibleRecipeList;
 
 /***/ },
-/* 705 */
+/* 706 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60527,7 +60544,7 @@
 
 	var _isomorphicFetch2 = _interopRequireDefault(_isomorphicFetch);
 
-	var _sync = __webpack_require__(697);
+	var _sync = __webpack_require__(698);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -60591,7 +60608,7 @@
 	};
 
 /***/ },
-/* 706 */
+/* 707 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60600,7 +60617,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Recipe = __webpack_require__(707);
+	var _Recipe = __webpack_require__(708);
 
 	var _Recipe2 = _interopRequireDefault(_Recipe);
 
@@ -60633,7 +60650,7 @@
 	module.exports = RecipeList;
 
 /***/ },
-/* 707 */
+/* 708 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60809,7 +60826,7 @@
 	module.exports = Recipe;
 
 /***/ },
-/* 708 */
+/* 709 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60820,11 +60837,11 @@
 
 	var _reactRedux = __webpack_require__(493);
 
-	var _async = __webpack_require__(705);
+	var _async = __webpack_require__(706);
 
-	var _sync = __webpack_require__(697);
+	var _sync = __webpack_require__(698);
 
-	var _ModalOverlay = __webpack_require__(709);
+	var _ModalOverlay = __webpack_require__(710);
 
 	var _ModalOverlay2 = _interopRequireDefault(_ModalOverlay);
 
@@ -60858,7 +60875,7 @@
 	exports.default = Modal;
 
 /***/ },
-/* 709 */
+/* 710 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60867,11 +60884,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _ConfirmDialogue = __webpack_require__(710);
+	var _ConfirmDialogue = __webpack_require__(711);
 
 	var _ConfirmDialogue2 = _interopRequireDefault(_ConfirmDialogue);
 
-	var _RecipeForm = __webpack_require__(711);
+	var _RecipeForm = __webpack_require__(712);
 
 	var _RecipeForm2 = _interopRequireDefault(_RecipeForm);
 
@@ -60910,7 +60927,7 @@
 	module.exports = ModalOverlay;
 
 /***/ },
-/* 710 */
+/* 711 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60963,7 +60980,7 @@
 	module.exports = ConfirmDialogue;
 
 /***/ },
-/* 711 */
+/* 712 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -61141,7 +61158,7 @@
 	module.exports = RecipeForm;
 
 /***/ },
-/* 712 */
+/* 713 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -61163,7 +61180,7 @@
 	module.exports = Footer;
 
 /***/ },
-/* 713 */
+/* 714 */
 /***/ function(module, exports, __webpack_require__, __webpack_module_template_argument_0__, __webpack_module_template_argument_1__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -61292,7 +61309,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(308)))
 
 /***/ },
-/* 714 */
+/* 715 */
 /***/ function(module, exports, __webpack_require__, __webpack_module_template_argument_0__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
