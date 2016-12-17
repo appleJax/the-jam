@@ -124,6 +124,7 @@ module.exports = (app) => {
               profile = window.localStorage.getItem('profile') ? JSON.parse(window.localStorage.getItem('profile')) : {},
               preloadedState = window.__PRELOADED_STATE__;
 
+          if (isAuthenticated) preloadedState.visibilityFilter.active = 'private';
           preloadedState.auth.isAuthenticated = isAuthenticated;
           preloadedState.auth.name = profile.username || profile.name;
           window.__PRELOADED_STATE__ = JSON.stringify(preloadedState);
