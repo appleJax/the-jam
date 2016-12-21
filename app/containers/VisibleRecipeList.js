@@ -13,9 +13,6 @@ import {
 import RecipeList from '../components/RecipeList'
 
 const getVisibleRecipes = (recipes, visibilityFilter, sort) => {
-  console.log('visibilityFilter:', visibilityFilter)
-  console.log('active', visibilityFilter.active)
-  console.log('recipes', recipes)
   const regex = visibilityFilter.content
                 .filter(val => val !== '')
                 .join('|')
@@ -74,7 +71,7 @@ const mapStateToProps = (state) => {
   } catch(e) {
     console.error(e)
   }
-  console.log('User:', user)
+  
   return {
     recipes: getVisibleRecipes(state.recipes, state.visibilityFilter, state.sort),
     visibilityFilter: state.visibilityFilter,

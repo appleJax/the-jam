@@ -59852,15 +59852,16 @@
 	const recipe = (state = {}, action) => {
 	  switch (action.type) {
 	    case _sync.ADD_RECIPE:
-	      return {
-	        id: action.recipe.id,
-	        name: action.recipe.name,
-	        tags: action.recipe.tags,
-	        stars: action.recipe.stars,
-	        servings: action.recipe.servings,
-	        ingredients: action.recipe.ingredients,
-	        directions: action.recipe.directions
-	      };
+	      return action.recipe;
+	    //{
+	    // id: action.recipe.id,
+	    // name: action.recipe.name,
+	    // tags: action.recipe.tags,
+	    // stars: action.recipe.stars,
+	    // servings: action.recipe.servings,
+	    // ingredients: action.recipe.ingredients,
+	    // directions: action.recipe.directions
+	    //}
 
 	    case _sync.EDIT_RECIPE:
 	      if (state.id == action.recipe.id) {
@@ -60293,9 +60294,6 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	const getVisibleRecipes = (recipes, visibilityFilter, sort) => {
-	  console.log('visibilityFilter:', visibilityFilter);
-	  console.log('active', visibilityFilter.active);
-	  console.log('recipes', recipes);
 	  const regex = visibilityFilter.content.filter(val => val !== '').join('|');
 
 	  const activeRecipes = recipes[visibilityFilter.active];
@@ -60337,7 +60335,7 @@
 	  } catch (e) {
 	    console.error(e);
 	  }
-	  console.log('User:', user);
+
 	  return {
 	    recipes: getVisibleRecipes(state.recipes, state.visibilityFilter, state.sort),
 	    visibilityFilter: state.visibilityFilter,
