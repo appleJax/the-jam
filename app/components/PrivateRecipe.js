@@ -1,6 +1,7 @@
 import React from 'react'
+import RecipeBody from './RecipeBody'
 
-const Recipe = ({
+const PrivateRecipe = ({
   recipe,
   visibilityFilter,
   user,
@@ -18,6 +19,7 @@ const Recipe = ({
     servings,
     ingredients,
     directions,
+    published,
     showDetails
   } = recipe
 
@@ -46,39 +48,11 @@ const Recipe = ({
       <li key={i}>{direction}</li>
   )
 
-  const details = showDetails ?
-  (
-    <div>
-      <div className='ingredients'>
-        <h3>Ingredients:</h3>
-        <span className='servings'>
-          {servings} {servings ? 'serving' : ''}
-          {servings > 1 ? 's' : ''}
-        </span>
-        <ul>
-          {ingredientList}
-        </ul>
-      </div>
-      <div className='directions'>
-        <h3>Directions:</h3>
-        <ol>
-          {directionList}
-        </ol>
-      </div>
-      <div
-        className='recipe__edit-button'
-        onClick={populateModal}
-      >
-        <i className='fa fa-pencil'></i>
-      </div>
-    </div>
-  ) : ''
-
-  const starIcons = [];
+  const starIcons = []
 
   for (let i = 1; i <= 5; i++) {
     if (i <= stars) {
-      starIcons.unshift(
+      starIcons.push(
         <i className='fa fa-star fa-lg'
           key={i}
           data-value={i}
@@ -100,7 +74,7 @@ const Recipe = ({
         </i>
       )
     } else {
-      starIcons.unshift(
+      starIcons.push(
         <i className='fa fa-star-o fa-lg'
           key={i}
           data-value={i}
@@ -120,34 +94,70 @@ const Recipe = ({
   return (
     <li
       key={id}
-      className='recipe'>
+      className='recipe'
+    >
       <div className='recipe__header'>
-        <span
+        <h2 className='recipe__name'>
+          {name}
+        </h2>
+        <div
           className='recipe__delete-button'
           onClick={confirmDelete}
         >
           <i className='fa fa-times'></i>
-        </span>
-        <h2 className='recipe__name'>
-          {name}
-        </h2>
+        </div>
         <ul className='tags'>
           {tagList}
         </ul>
       </div>
-      <i
-        onClick={toggleDetails}
-        className={
-          showDetails ?
-          'recipe__expand-toggle fa fa-toggle-up fa-lg' :
-          'recipe__expand-toggle fa fa-ellipsis-h fa-lg'
+      <div className='recipe__control-bar'>
+        <i
+          onClick={toggleDetails}
+          className={
+            showDetails ?
+            'recipe__expand-toggle fa fa-toggle-up fa-lg' :
+            'recipe__expand-toggle fa fa-ellipsis-h fa-lg'
+          }
+        >
+        </i>
+        <div className='recipe__spacer'></div>
+        {published ?
+        <div>
+        <div
+          className='recipe__button--publish'
+          onClick={() => console.log('Publish')}
+        >
+          <i className='fa fa-id-card-o'></i>
+          Publish
+        </div>
+        </div> :
+        <div
+          className='recipe__button--unpublish'
+          onClick={() => console.log('Unpublish')}
+        >
+          <i className='fa fa-check-circle'></i>
+          Published
+        </div>
         }
+        {starIcons}
+      </div>
+      {showDetails &&
+      <div>
+      <RecipeBody
+        servings={servings}
+        ingredientList={ingredientList}
+        directionList={directionList}
+      />
+      <div
+        className='recipe__button--edit'
+        onClick={populateModal}
       >
-      </i>
-      {starIcons}
-      {details}
+        <i className='fa fa-pencil'></i>
+      </div>
+      </div>
+      }
     </li>
-  );
+  )
 }
 
-module.exports = Recipe;
+export default PrivateRecipe

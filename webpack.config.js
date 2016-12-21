@@ -9,7 +9,7 @@ let HTMLWebpackPlugin = require('html-webpack-plugin'),
 module.exports = {
   entry: [
     'webpack-dev-server/client?http://localhost:8080', // WebpackDevServer host and port
-    __dirname + '/app/index.js',
+    __dirname + '/app/index.js'
   ],
   module: {
     loaders: [
@@ -34,7 +34,7 @@ module.exports = {
   },
   output: {
     filename: 'bundle.js',
-    path: __dirname + '/public'
+    path: __dirname + '/build',
   },
   plugins: [
     HTMLWebpackPluginConfig,

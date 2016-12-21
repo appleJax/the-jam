@@ -5,7 +5,7 @@ var webpack = require('webpack'),
     compiler = webpack(config);
 
 new WebpackDevServer(compiler, {
-//  hot: true,
+  hot: true,
   stats: {colors: true}
 }).listen(port, 'localhost', function(err, result) {
     if (err) {

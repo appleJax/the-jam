@@ -6,7 +6,7 @@ import 'babel-polyfill'
 import React from 'react'
 import { render } from 'react-dom'
 import Root from './containers/Root'
-// import 'react-hot-loader/patch'
+//import 'react-hot-loader/patch'
 
 render(
   <Root />,
@@ -15,16 +15,13 @@ render(
 
 /*
 if (module.hot) {
-  module.hot.accept('./components/App.js', () => {
-    const NextRootContainer = require('./components/App.js');
+  module.hot.accept('./containers/Root.js', () => {
+    const NextRoot = require('./containers/Root.js')
 
-    ReactDOM.render(
-      <NextRootContainer
-        {...store.getState()}
-        updateStore={store.dispatch}
-      />,
-      document.getElementById('app')
-    );
-  });
+    render(
+      <NextRoot />,
+      document.getElementById('root')
+    )
+  })
 }
 */

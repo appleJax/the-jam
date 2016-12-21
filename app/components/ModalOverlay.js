@@ -12,7 +12,6 @@ const ModalOverlay = ({
   deleteRecipe,
   closeModal
 }) => {
-  console.log('ModalOverlay user:', user)
   const  dialogueBox = dialogue == 'confirm' ?
       <ConfirmDialogue
         deleteRecipe={() => deleteRecipe(user, {id: content}, active)}
@@ -37,4 +36,4 @@ const ModalOverlay = ({
   )
 }
 
-module.exports = ModalOverlay;
+export default ModalOverlay

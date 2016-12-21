@@ -89,23 +89,20 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	// import 'react-hot-loader/patch'
+	//import 'react-hot-loader/patch'
 
 	(0, _reactDom.render)(_react2.default.createElement(_Root2.default, null), document.getElementById('root'));
 
 	/*
 	if (module.hot) {
-	  module.hot.accept('./components/App.js', () => {
-	    const NextRootContainer = require('./components/App.js');
+	  module.hot.accept('./containers/Root.js', () => {
+	    const NextRoot = require('./containers/Root.js')
 
-	    ReactDOM.render(
-	      <NextRootContainer
-	        {...store.getState()}
-	        updateStore={store.dispatch}
-	      />,
-	      document.getElementById('app')
-	    );
-	  });
+	    render(
+	      <NextRoot />,
+	      document.getElementById('root')
+	    )
+	  })
 	}
 	*/
 
@@ -8659,7 +8656,7 @@
 
 /***/ },
 /* 316 */
-[714, 317, 318],
+[716, 317, 318],
 /* 317 */
 /***/ function(module, exports) {
 
@@ -9140,7 +9137,7 @@
 
 /***/ },
 /* 321 */
-[715, 322],
+[717, 322],
 /* 322 */
 /***/ function(module, exports) {
 
@@ -14046,7 +14043,7 @@
 
 /***/ },
 /* 357 */
-[715, 358],
+[717, 358],
 /* 358 */
 322,
 /* 359 */
@@ -14287,7 +14284,7 @@
 
 /***/ },
 /* 363 */
-[714, 345, 347],
+[716, 345, 347],
 /* 364 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -28973,35 +28970,41 @@
 
 	var _App2 = _interopRequireDefault(_App);
 
-	var _sync = __webpack_require__(698);
+	var _sync = __webpack_require__(697);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	const preloadedState = JSON.parse(window.__PRELOADED_STATE__);
+	let store = '';
 
-	const store = (0, _configureStore2.default)(preloadedState);
+	try {
+	  const preloadedState = JSON.parse(window.__PRELOADED_STATE__);
 
-	if (preloadedState.auth.isAuthenticated) {
-	  const user = {};
-	  user.name = JSON.parse(localStorage.getItem('profile')).email;
+	  store = (0, _configureStore2.default)(preloadedState);
 
-	  (0, _isomorphicFetch2.default)(`https://thejam.herokuapp.com/recipes`, {
-	    method: 'POST',
-	    headers: {
-	      'Accept': 'application/json',
-	      'Content-type': 'application/json'
-	    },
-	    mode: 'cors',
-	    cache: 'default',
-	    body: JSON.stringify(user)
-	  }).then(response => {
-	    if (response.status >= 400) {
-	      throw new Error("Bad response from server");
-	    }
-	    return response.json();
-	  }).then(recipes => {
-	    store.dispatch((0, _sync.populateUserRecipes)(recipes));
-	  }).catch(e => console.error(e));
+	  if (preloadedState.auth.isAuthenticated) {
+	    const user = {};
+	    user.name = JSON.parse(localStorage.getItem('profile')).email;
+
+	    (0, _isomorphicFetch2.default)(`https://thejam.herokuapp.com/recipes`, {
+	      method: 'POST',
+	      headers: {
+	        'Accept': 'application/json',
+	        'Content-type': 'application/json'
+	      },
+	      mode: 'cors',
+	      cache: 'default',
+	      body: JSON.stringify(user)
+	    }).then(response => {
+	      if (response.status >= 400) {
+	        throw new Error("Bad response from server");
+	      }
+	      return response.json();
+	    }).then(recipes => {
+	      store.dispatch((0, _sync.populateUserRecipes)(recipes));
+	    }).catch(console.error);
+	  }
+	} catch (e) {
+	  store = (0, _configureStore2.default)();
 	}
 
 	const Root = () => {
@@ -32240,7 +32243,7 @@
 
 	var _auth2 = _interopRequireDefault(_auth);
 
-	var _recipes = __webpack_require__(697);
+	var _recipes = __webpack_require__(698);
 
 	var _recipes2 = _interopRequireDefault(_recipes);
 
@@ -32330,6 +32333,8 @@
 
 	var _env = __webpack_require__(696);
 
+	var _sync = __webpack_require__(697);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	const LOGIN_SUCCESS = exports.LOGIN_SUCCESS = 'LOGIN_SUCCESS';
@@ -32379,8 +32384,8 @@
 	  return dispatch => {
 	    localStorage.removeItem('idToken');
 	    localStorage.removeItem('profile');
-	    localStorage.removeItem('user-recipes');
 
+	    dispatch((0, _sync.setFilterRecipes)('public'));
 	    dispatch(logout());
 	    return;
 	  };
@@ -59758,84 +59763,6 @@
 
 /***/ },
 /* 697 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	var _sync = __webpack_require__(698);
-
-	const recipe = (state = {}, action) => {
-	  switch (action.type) {
-	    case _sync.ADD_RECIPE:
-	      return {
-	        id: action.recipe.id,
-	        name: action.recipe.name,
-	        tags: action.recipe.tags,
-	        stars: action.recipe.stars,
-	        servings: action.recipe.servings,
-	        ingredients: action.recipe.ingredients,
-	        directions: action.recipe.directions
-	      };
-
-	    case _sync.EDIT_RECIPE:
-	      if (state.id == action.recipe.id) {
-	        return action.recipe;
-	      }
-	      return state;
-
-	    case _sync.TOGGLE_DETAILS:
-	      if (state.id == action.id) {
-	        return _extends({}, state, {
-	          showDetails: !state.showDetails
-	        });
-	      }
-	      return state;
-
-	    default:
-	      return state;
-	  }
-	};
-
-	const recipes = (state = {
-	  public: [],
-	  private: []
-	}, action) => {
-	  switch (action.type) {
-	    case _sync.ADD_RECIPE:
-	      return _extends({}, state, {
-	        [action.active]: [...state[action.active], recipe(undefined, action)]
-	      });
-	    case _sync.EDIT_RECIPE:
-	      return _extends({}, state, {
-	        [action.active]: state[action.active].map(r => recipe(r, action))
-	      });
-	    case _sync.DELETE_RECIPE:
-	      return _extends({}, state, {
-	        [action.active]: state[action.active].filter(r => r.id !== action.recipe.id)
-	      });
-	    case _sync.POPULATE_USER_RECIPES:
-	      return _extends({}, state, {
-	        private: action.recipes
-	      });
-	    case _sync.TOGGLE_DETAILS:
-	      return _extends({}, state, {
-	        [action.active]: state[action.active].map(r => recipe(r, action))
-	      });
-	    default:
-	      return state;
-	  }
-	};
-
-	exports.default = recipes;
-
-/***/ },
-/* 698 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -59929,6 +59856,84 @@
 	};
 
 /***/ },
+/* 698 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _sync = __webpack_require__(697);
+
+	const recipe = (state = {}, action) => {
+	  switch (action.type) {
+	    case _sync.ADD_RECIPE:
+	      return {
+	        id: action.recipe.id,
+	        name: action.recipe.name,
+	        tags: action.recipe.tags,
+	        stars: action.recipe.stars,
+	        servings: action.recipe.servings,
+	        ingredients: action.recipe.ingredients,
+	        directions: action.recipe.directions
+	      };
+
+	    case _sync.EDIT_RECIPE:
+	      if (state.id == action.recipe.id) {
+	        return action.recipe;
+	      }
+	      return state;
+
+	    case _sync.TOGGLE_DETAILS:
+	      if (state.id == action.id) {
+	        return _extends({}, state, {
+	          showDetails: !state.showDetails
+	        });
+	      }
+	      return state;
+
+	    default:
+	      return state;
+	  }
+	};
+
+	const recipes = (state = {
+	  public: [],
+	  private: []
+	}, action) => {
+	  switch (action.type) {
+	    case _sync.ADD_RECIPE:
+	      return _extends({}, state, {
+	        [action.active]: [...state[action.active], recipe(undefined, action)]
+	      });
+	    case _sync.EDIT_RECIPE:
+	      return _extends({}, state, {
+	        [action.active]: state[action.active].map(r => recipe(r, action))
+	      });
+	    case _sync.DELETE_RECIPE:
+	      return _extends({}, state, {
+	        [action.active]: state[action.active].filter(r => r.id !== action.recipe.id)
+	      });
+	    case _sync.POPULATE_USER_RECIPES:
+	      return _extends({}, state, {
+	        private: action.recipes
+	      });
+	    case _sync.TOGGLE_DETAILS:
+	      return _extends({}, state, {
+	        [action.active]: state[action.active].map(r => recipe(r, action))
+	      });
+	    default:
+	      return state;
+	  }
+	};
+
+	exports.default = recipes;
+
+/***/ },
 /* 699 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -59940,7 +59945,7 @@
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var _sync = __webpack_require__(698);
+	var _sync = __webpack_require__(697);
 
 	const visibilityFilter = (state = {
 	  active: 'public',
@@ -59974,7 +59979,7 @@
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var _sync = __webpack_require__(698);
+	var _sync = __webpack_require__(697);
 
 	const sort = (state = {
 	  stars: false,
@@ -60018,7 +60023,7 @@
 	  value: true
 	});
 
-	var _sync = __webpack_require__(698);
+	var _sync = __webpack_require__(697);
 
 	const modal = (state = {
 	  show: false,
@@ -60069,11 +60074,11 @@
 
 	var _VisibleRecipeList2 = _interopRequireDefault(_VisibleRecipeList);
 
-	var _Modal = __webpack_require__(709);
+	var _Modal = __webpack_require__(711);
 
 	var _Modal2 = _interopRequireDefault(_Modal);
 
-	var _Footer = __webpack_require__(713);
+	var _Footer = __webpack_require__(715);
 
 	var _Footer2 = _interopRequireDefault(_Footer);
 
@@ -60113,7 +60118,7 @@
 
 	var _reactRedux = __webpack_require__(495);
 
-	var _sync = __webpack_require__(698);
+	var _sync = __webpack_require__(697);
 
 	var _auth = __webpack_require__(536);
 
@@ -60160,6 +60165,10 @@
 
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
 	var _react = __webpack_require__(312);
 
 	var _react2 = _interopRequireDefault(_react);
@@ -60177,111 +60186,109 @@
 	  populateModal,
 	  login,
 	  logout
-	}) => {
-	  return _react2.default.createElement(
-	    'nav',
-	    null,
+	}) => _react2.default.createElement(
+	  'nav',
+	  null,
+	  _react2.default.createElement(
+	    'div',
+	    { className: 'nav__header' },
+	    _react2.default.createElement(
+	      'h2',
+	      { className: 'logo' },
+	      'the Jam'
+	    ),
 	    _react2.default.createElement(
 	      'div',
-	      { className: 'nav__header' },
-	      _react2.default.createElement(
-	        'h2',
-	        { className: 'logo' },
-	        'the Jam'
-	      ),
-	      _react2.default.createElement(
+	      { className: 'nav__user' },
+	      loggedIn && _react2.default.createElement(
 	        'div',
-	        { className: 'nav__user' },
-	        loggedIn && _react2.default.createElement(
-	          'div',
-	          {
-	            className: 'user-info',
-	            onClick: logout
-	          },
-	          _react2.default.createElement('i', { className: 'fa fa-user fa-2x' }),
-	          _react2.default.createElement(
-	            'span',
-	            { className: 'username' },
-	            name
-	          )
-	        ),
-	        !loggedIn && _react2.default.createElement(
-	          'div',
-	          {
-	            className: 'signin',
-	            onClick: login
-	          },
-	          'Sign In'
+	        {
+	          className: 'user-info',
+	          onClick: logout
+	        },
+	        _react2.default.createElement('i', { className: 'fa fa-user fa-2x' }),
+	        _react2.default.createElement(
+	          'span',
+	          { className: 'username' },
+	          name
 	        )
-	      )
-	    ),
-	    _react2.default.createElement(
-	      'div',
-	      { className: 'nav__search' },
-	      _react2.default.createElement('i', { className: 'fa fa-search fa-2x' }),
-	      _react2.default.createElement('input', {
-	        type: 'search',
-	        className: 'nav__searchbox',
-	        value: visibilityFilter.content.join(' '),
-	        onChange: e => {
-	          const filter = e.target.value.split(' ');
-
-	          setFilterContent(filter);
-	        }
-	      })
-	    ),
-	    loggedIn && _react2.default.createElement(
-	      'div',
-	      { className: 'nav__recipe-list-selector' },
-	      _react2.default.createElement(
-	        'div',
-	        {
-	          className: visibilityFilter.active == 'public' ? 'nav__recipe-selector--active nav__recipe-selector' : 'nav__recipe-selector',
-	          onClick: () => setFilterRecipes('public')
-	        },
-	        'Public Recipes'
 	      ),
-	      _react2.default.createElement(
+	      !loggedIn && _react2.default.createElement(
 	        'div',
 	        {
-	          className: visibilityFilter.active == 'private' ? 'nav__recipe-selector--active nav__recipe-selector' : 'nav__recipe-selector',
-	          onClick: () => setFilterRecipes('private')
+	          className: 'signin',
+	          onClick: login
 	        },
-	        'My Recipes'
-	      )
-	    ),
-	    _react2.default.createElement(
-	      'div',
-	      { className: 'nav__controls' },
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'nav__sort-buttons' },
-	        _react2.default.createElement('i', {
-	          onClick: () => setSort('ASC'),
-	          className: sort.asc ? 'active sort fa fa-sort-alpha-asc fa-lg' : 'sort fa fa-sort-alpha-asc fa-lg'
-	        }),
-	        _react2.default.createElement('i', {
-	          onClick: () => setSort('DESC'),
-	          className: sort.desc ? 'active sort fa fa-sort-alpha-desc fa-lg' : 'sort fa fa-sort-alpha-desc fa-lg'
-	        }),
-	        _react2.default.createElement('i', {
-	          onClick: () => setSort('STARS'),
-	          className: sort.stars ? 'active sort fa fa-star fa-lg' : 'sort fa fa-star fa-lg'
-	        })
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        {
-	          className: 'nav__add-recipe',
-	          onClick: populateModal
-	        },
-	        _react2.default.createElement('i', { className: 'fa fa-plus fa-lg' })
+	        'Sign In'
 	      )
 	    )
-	  );
-	};
+	  ),
+	  _react2.default.createElement(
+	    'div',
+	    { className: 'nav__search' },
+	    _react2.default.createElement('i', { className: 'fa fa-search fa-2x' }),
+	    _react2.default.createElement('input', {
+	      type: 'search',
+	      className: 'nav__searchbox',
+	      value: visibilityFilter.content.join(' '),
+	      onChange: e => {
+	        const filter = e.target.value.split(' ');
 
-	module.exports = Nav;
+	        setFilterContent(filter);
+	      }
+	    })
+	  ),
+	  loggedIn && _react2.default.createElement(
+	    'div',
+	    { className: 'nav__recipe-list-selector' },
+	    _react2.default.createElement(
+	      'div',
+	      {
+	        className: visibilityFilter.active == 'public' ? 'nav__recipe-selector--active nav__recipe-selector' : 'nav__recipe-selector',
+	        onClick: () => setFilterRecipes('public')
+	      },
+	      'Public Recipes'
+	    ),
+	    _react2.default.createElement(
+	      'div',
+	      {
+	        className: visibilityFilter.active == 'private' ? 'nav__recipe-selector--active nav__recipe-selector' : 'nav__recipe-selector',
+	        onClick: () => setFilterRecipes('private')
+	      },
+	      'My Recipes'
+	    )
+	  ),
+	  _react2.default.createElement(
+	    'div',
+	    { className: 'nav__controls' },
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'nav__sort-buttons' },
+	      _react2.default.createElement('i', {
+	        onClick: () => setSort('ASC'),
+	        className: sort.asc ? 'active sort fa fa-sort-alpha-asc fa-lg' : 'sort fa fa-sort-alpha-asc fa-lg'
+	      }),
+	      _react2.default.createElement('i', {
+	        onClick: () => setSort('DESC'),
+	        className: sort.desc ? 'active sort fa fa-sort-alpha-desc fa-lg' : 'sort fa fa-sort-alpha-desc fa-lg'
+	      }),
+	      _react2.default.createElement('i', {
+	        onClick: () => setSort('STARS'),
+	        className: sort.stars ? 'active sort fa fa-star fa-lg' : 'sort fa fa-star fa-lg'
+	      })
+	    ),
+	    _react2.default.createElement(
+	      'div',
+	      {
+	        className: 'nav__add-recipe',
+	        onClick: populateModal
+	      },
+	      _react2.default.createElement('i', { className: 'fa fa-plus fa-lg' })
+	    )
+	  )
+	);
+
+	exports.default = Nav;
 
 /***/ },
 /* 705 */
@@ -60295,7 +60302,7 @@
 
 	var _reactRedux = __webpack_require__(495);
 
-	var _sync = __webpack_require__(698);
+	var _sync = __webpack_require__(697);
 
 	var _async = __webpack_require__(706);
 
@@ -60353,7 +60360,8 @@
 	  return {
 	    recipes: getVisibleRecipes(state.recipes, state.visibilityFilter, state.sort),
 	    visibilityFilter: state.visibilityFilter,
-	    user
+	    user,
+	    privateView: state.visibilityFilter.active == 'private'
 	  };
 	};
 
@@ -60393,7 +60401,7 @@
 
 	var _isomorphicFetch2 = _interopRequireDefault(_isomorphicFetch);
 
-	var _sync = __webpack_require__(698);
+	var _sync = __webpack_require__(697);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -60418,6 +60426,10 @@
 	  return dispatch => {
 	    dispatch((0, _sync.addRecipe)(recipe, active));
 
+	    const altRecipe = _extends({}, recipe, {
+	      showDetails: false
+	    });
+
 	    return (0, _isomorphicFetch2.default)(`https://thejam.herokuapp.com/new`, {
 	      method: 'POST',
 	      headers: {
@@ -60426,7 +60438,7 @@
 	      },
 	      mode: 'cors',
 	      cache: 'default',
-	      body: JSON.stringify({ user, recipe })
+	      body: JSON.stringify({ user, altRecipe })
 	    }).catch(e => console.error(e));
 	  };
 	};
@@ -60475,13 +60487,21 @@
 
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
 	var _react = __webpack_require__(312);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Recipe = __webpack_require__(708);
+	var _PrivateRecipe = __webpack_require__(708);
 
-	var _Recipe2 = _interopRequireDefault(_Recipe);
+	var _PrivateRecipe2 = _interopRequireDefault(_PrivateRecipe);
+
+	var _PublicRecipe = __webpack_require__(710);
+
+	var _PublicRecipe2 = _interopRequireDefault(_PublicRecipe);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -60489,16 +60509,19 @@
 	  recipes,
 	  visibilityFilter,
 	  user,
+	  privateView,
 	  setFilterContent,
 	  editRecipe,
 	  toggleDetails,
-	  populateModal
+	  populateModal,
+	  publishRecipe,
+	  unpublishRecipe,
+	  addToUserRecipes
 	}) => {
-	  console.log('RecipeList user:', user);
 	  return _react2.default.createElement(
 	    'ul',
 	    { className: 'recipe-list' },
-	    recipes.map(recipe => _react2.default.createElement(_Recipe2.default, {
+	    recipes.map(recipe => privateView ? _react2.default.createElement(_PrivateRecipe2.default, {
 	      key: recipe.id,
 	      recipe: recipe,
 	      visibilityFilter: visibilityFilter,
@@ -60507,12 +60530,23 @@
 	      confirmDelete: () => populateModal('confirm', recipe.id),
 	      editRecipe: editRecipe,
 	      toggleDetails: () => toggleDetails(recipe.id, visibilityFilter.active),
-	      populateModal: () => populateModal('recipe', recipe)
+	      populateModal: () => populateModal('recipe', recipe),
+	      publishRecipe: () => publishRecipe(user, recipe),
+	      unpublishRecipe: () => unpublishRecipe(user, recipe)
+	    }) : _react2.default.createElement(_PublicRecipe2.default, {
+	      key: recipe.id,
+	      recipe: recipe,
+	      visibilityFilter: visibilityFilter,
+	      user: user,
+	      setFilterContent: setFilterContent,
+	      toggleDetails: () => toggleDetails(recipe.id, visibilityFilter.active),
+	      unpublishRecipe: () => unpublishRecipe(user, recipe),
+	      addToUserRecipes: () => addToUserRecipes(user, recipe)
 	    }))
 	  );
 	};
 
-	module.exports = RecipeList;
+	exports.default = RecipeList;
 
 /***/ },
 /* 708 */
@@ -60520,13 +60554,21 @@
 
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
 	var _react = __webpack_require__(312);
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _RecipeBody = __webpack_require__(709);
+
+	var _RecipeBody2 = _interopRequireDefault(_RecipeBody);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	const Recipe = ({
+	const PrivateRecipe = ({
 	  recipe,
 	  visibilityFilter,
 	  user,
@@ -60541,6 +60583,249 @@
 	    name,
 	    tags,
 	    stars,
+	    servings,
+	    ingredients,
+	    directions,
+	    published,
+	    showDetails
+	  } = recipe;
+
+	  const tagList = tags.map((tag, i) => _react2.default.createElement(
+	    'li',
+	    {
+	      key: i,
+	      onClick: e => setFilterContent(visibilityFilter.content.concat(e.target.innerHTML))
+	    },
+	    tag
+	  ));
+
+	  const ingredientList = ingredients.map((ingredient, i) => _react2.default.createElement(
+	    'li',
+	    { key: i },
+	    ingredient
+	  ));
+
+	  const directionList = directions.map((direction, i) => _react2.default.createElement(
+	    'li',
+	    { key: i },
+	    direction
+	  ));
+
+	  const starIcons = [];
+
+	  for (let i = 1; i <= 5; i++) {
+	    if (i <= stars) {
+	      starIcons.push(_react2.default.createElement('i', { className: 'fa fa-star fa-lg',
+	        key: i,
+	        'data-value': i,
+	        onClick: e => {
+	          const editedRecipe = recipe,
+	                newStars = e.target.dataset.value;
+
+	          delete editedRecipe._id;
+
+	          if (newStars == 1) {
+	            editedRecipe.stars = 0;
+	          } else {
+	            editedRecipe.stars = newStars;
+	          }
+	          editRecipe(user, editedRecipe, visibilityFilter.active);
+	        }
+	      }));
+	    } else {
+	      starIcons.push(_react2.default.createElement('i', { className: 'fa fa-star-o fa-lg',
+	        key: i,
+	        'data-value': i,
+	        onClick: e => {
+	          const editedRecipe = recipe;
+	          editedRecipe.stars = e.target.dataset.value;
+	          delete editedRecipe._id;
+
+	          editRecipe(user, editedRecipe, visibilityFilter.active);
+	        }
+	      }));
+	    }
+	  }
+
+	  return _react2.default.createElement(
+	    'li',
+	    {
+	      key: id,
+	      className: 'recipe'
+	    },
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'recipe__header' },
+	      _react2.default.createElement(
+	        'h2',
+	        { className: 'recipe__name' },
+	        name
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        {
+	          className: 'recipe__delete-button',
+	          onClick: confirmDelete
+	        },
+	        _react2.default.createElement('i', { className: 'fa fa-times' })
+	      ),
+	      _react2.default.createElement(
+	        'ul',
+	        { className: 'tags' },
+	        tagList
+	      )
+	    ),
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'recipe__control-bar' },
+	      _react2.default.createElement('i', {
+	        onClick: toggleDetails,
+	        className: showDetails ? 'recipe__expand-toggle fa fa-toggle-up fa-lg' : 'recipe__expand-toggle fa fa-ellipsis-h fa-lg'
+	      }),
+	      _react2.default.createElement('div', { className: 'recipe__spacer' }),
+	      published ? _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'div',
+	          {
+	            className: 'recipe__button--publish',
+	            onClick: () => console.log('Publish')
+	          },
+	          _react2.default.createElement('i', { className: 'fa fa-id-card-o' }),
+	          'Publish'
+	        )
+	      ) : _react2.default.createElement(
+	        'div',
+	        {
+	          className: 'recipe__button--unpublish',
+	          onClick: () => console.log('Unpublish')
+	        },
+	        _react2.default.createElement('i', { className: 'fa fa-check-circle' }),
+	        'Published'
+	      ),
+	      starIcons
+	    ),
+	    showDetails && _react2.default.createElement(
+	      'div',
+	      null,
+	      _react2.default.createElement(_RecipeBody2.default, {
+	        servings: servings,
+	        ingredientList: ingredientList,
+	        directionList: directionList
+	      }),
+	      _react2.default.createElement(
+	        'div',
+	        {
+	          className: 'recipe__button--edit',
+	          onClick: populateModal
+	        },
+	        _react2.default.createElement('i', { className: 'fa fa-pencil' })
+	      )
+	    )
+	  );
+	};
+
+	exports.default = PrivateRecipe;
+
+/***/ },
+/* 709 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(312);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	const RecipeBody = ({
+	  servings,
+	  ingredientList,
+	  directionList
+	}) => _react2.default.createElement(
+	  'div',
+	  null,
+	  _react2.default.createElement(
+	    'div',
+	    { className: 'ingredients' },
+	    _react2.default.createElement(
+	      'h3',
+	      null,
+	      'Ingredients:'
+	    ),
+	    _react2.default.createElement(
+	      'span',
+	      { className: 'servings' },
+	      servings,
+	      ' ',
+	      servings ? 'serving' : '',
+	      servings > 1 ? 's' : ''
+	    ),
+	    _react2.default.createElement(
+	      'ul',
+	      null,
+	      ingredientList
+	    )
+	  ),
+	  _react2.default.createElement(
+	    'div',
+	    { className: 'directions' },
+	    _react2.default.createElement(
+	      'h3',
+	      null,
+	      'Directions:'
+	    ),
+	    _react2.default.createElement(
+	      'ol',
+	      null,
+	      directionList
+	    )
+	  )
+	);
+
+	exports.default = RecipeBody;
+
+/***/ },
+/* 710 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(312);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _RecipeBody = __webpack_require__(709);
+
+	var _RecipeBody2 = _interopRequireDefault(_RecipeBody);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	const PublicRecipe = ({
+	  recipe,
+	  visibilityFilter,
+	  user,
+	  setFilterContent,
+	  toggleDetails,
+	  unpublishRecipe,
+	  addToUserRecipes
+	}) => {
+	  const {
+	    id,
+	    name,
+	    tags,
+	    votes,
+	    author,
 	    servings,
 	    ingredients,
 	    directions,
@@ -60568,60 +60853,13 @@
 	    direction
 	  ));
 
-	  const details = showDetails ? _react2.default.createElement(
-	    'div',
-	    null,
-	    _react2.default.createElement(
-	      'div',
-	      { className: 'ingredients' },
-	      _react2.default.createElement(
-	        'h3',
-	        null,
-	        'Ingredients:'
-	      ),
-	      _react2.default.createElement(
-	        'span',
-	        { className: 'servings' },
-	        servings,
-	        ' ',
-	        servings ? 'serving' : '',
-	        servings > 1 ? 's' : ''
-	      ),
-	      _react2.default.createElement(
-	        'ul',
-	        null,
-	        ingredientList
-	      )
-	    ),
-	    _react2.default.createElement(
-	      'div',
-	      { className: 'directions' },
-	      _react2.default.createElement(
-	        'h3',
-	        null,
-	        'Directions:'
-	      ),
-	      _react2.default.createElement(
-	        'ol',
-	        null,
-	        directionList
-	      )
-	    ),
-	    _react2.default.createElement(
-	      'div',
-	      {
-	        className: 'recipe__edit-button',
-	        onClick: populateModal
-	      },
-	      _react2.default.createElement('i', { className: 'fa fa-pencil' })
-	    )
-	  ) : '';
-
+	  const totalStars = 0;
+	  const rating = 0;
 	  const starIcons = [];
 
 	  for (let i = 1; i <= 5; i++) {
-	    if (i <= stars) {
-	      starIcons.unshift(_react2.default.createElement('i', { className: 'fa fa-star fa-lg',
+	    if (i <= rating) {
+	      starIcons.push(_react2.default.createElement('i', { className: 'fa fa-star fa-lg',
 	        key: i,
 	        'data-value': i,
 	        onClick: e => {
@@ -60639,7 +60877,7 @@
 	        }
 	      }));
 	    } else {
-	      starIcons.unshift(_react2.default.createElement('i', { className: 'fa fa-star-o fa-lg',
+	      starIcons.push(_react2.default.createElement('i', { className: 'fa fa-star-o fa-lg',
 	        key: i,
 	        'data-value': i,
 	        onClick: e => {
@@ -60662,12 +60900,12 @@
 	      'div',
 	      { className: 'recipe__header' },
 	      _react2.default.createElement(
-	        'span',
+	        'div',
 	        {
-	          className: 'recipe__delete-button',
-	          onClick: confirmDelete
+	          className: 'recipe__button--add-to-my-recipes',
+	          onClick: addToUserRecipes
 	        },
-	        _react2.default.createElement('i', { className: 'fa fa-times' })
+	        _react2.default.createElement('i', { className: 'fa fa-cloud-download' })
 	      ),
 	      _react2.default.createElement(
 	        'h2',
@@ -60680,19 +60918,45 @@
 	        tagList
 	      )
 	    ),
-	    _react2.default.createElement('i', {
-	      onClick: toggleDetails,
-	      className: showDetails ? 'recipe__expand-toggle fa fa-toggle-up fa-lg' : 'recipe__expand-toggle fa fa-ellipsis-h fa-lg'
-	    }),
-	    starIcons,
-	    details
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'recipe__control-bar' },
+	      _react2.default.createElement('i', {
+	        onClick: toggleDetails,
+	        className: showDetails ? 'recipe__expand-toggle fa fa-toggle-up fa-lg' : 'recipe__expand-toggle fa fa-ellipsis-h fa-lg'
+	      }),
+	      _react2.default.createElement('div', { className: 'recipe__spacer' }),
+	      _react2.default.createElement(
+	        'div',
+	        {
+	          className: 'recipe__votes'
+	        },
+	        '10 Votes'
+	      ),
+	      starIcons
+	    ),
+	    showDetails && _react2.default.createElement(
+	      'div',
+	      null,
+	      _react2.default.createElement(_RecipeBody2.default, {
+	        servings: servings,
+	        ingredientList: ingredientList,
+	        directionList: directionList
+	      }),
+	      _react2.default.createElement(
+	        'span',
+	        { className: 'recipe__author' },
+	        'Recipe By: ',
+	        author
+	      )
+	    )
 	  );
 	};
 
-	module.exports = Recipe;
+	exports.default = PublicRecipe;
 
 /***/ },
-/* 709 */
+/* 711 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60705,9 +60969,9 @@
 
 	var _async = __webpack_require__(706);
 
-	var _sync = __webpack_require__(698);
+	var _sync = __webpack_require__(697);
 
-	var _ModalOverlay = __webpack_require__(710);
+	var _ModalOverlay = __webpack_require__(712);
 
 	var _ModalOverlay2 = _interopRequireDefault(_ModalOverlay);
 
@@ -60752,20 +61016,24 @@
 	exports.default = Modal;
 
 /***/ },
-/* 710 */
+/* 712 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 
 	var _react = __webpack_require__(312);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _ConfirmDialogue = __webpack_require__(711);
+	var _ConfirmDialogue = __webpack_require__(713);
 
 	var _ConfirmDialogue2 = _interopRequireDefault(_ConfirmDialogue);
 
-	var _RecipeForm = __webpack_require__(712);
+	var _RecipeForm = __webpack_require__(714);
 
 	var _RecipeForm2 = _interopRequireDefault(_RecipeForm);
 
@@ -60781,7 +61049,6 @@
 	  deleteRecipe,
 	  closeModal
 	}) => {
-	  console.log('ModalOverlay user:', user);
 	  const dialogueBox = dialogue == 'confirm' ? _react2.default.createElement(_ConfirmDialogue2.default, {
 	    deleteRecipe: () => deleteRecipe(user, { id: content }, active),
 	    closeModal: closeModal
@@ -60804,13 +61071,17 @@
 	  );
 	};
 
-	module.exports = ModalOverlay;
+	exports.default = ModalOverlay;
 
 /***/ },
-/* 711 */
+/* 713 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 
 	var _react = __webpack_require__(312);
 
@@ -60821,49 +61092,51 @@
 	const ConfirmDialogue = ({
 	  deleteRecipe,
 	  closeModal
-	}) => {
-	  return _react2.default.createElement(
+	}) => _react2.default.createElement(
+	  'div',
+	  {
+	    className: 'confirm-dialogue',
+	    onClick: e => e.stopPropagation()
+	  },
+	  _react2.default.createElement(
+	    'h3',
+	    {
+	      className: 'confirm-dialogue__message'
+	    },
+	    'Delete recipe permanently?'
+	  ),
+	  _react2.default.createElement(
 	    'div',
 	    {
-	      className: 'confirm-dialogue',
-	      onClick: e => e.stopPropagation()
+	      className: 'confirm-dialogue__delete',
+	      onClick: () => {
+	        deleteRecipe();
+	        closeModal();
+	      }
 	    },
-	    _react2.default.createElement(
-	      'h3',
-	      {
-	        className: 'confirm-dialogue__message'
-	      },
-	      'Delete recipe permanently?'
-	    ),
-	    _react2.default.createElement(
-	      'div',
-	      {
-	        className: 'confirm-dialogue__delete',
-	        onClick: () => {
-	          deleteRecipe();
-	          closeModal();
-	        }
-	      },
-	      'Delete'
-	    ),
-	    _react2.default.createElement(
-	      'div',
-	      {
-	        className: 'confirm-dialogue__cancel',
-	        onClick: closeModal
-	      },
-	      'Cancel'
-	    )
-	  );
-	};
+	    'Delete'
+	  ),
+	  _react2.default.createElement(
+	    'div',
+	    {
+	      className: 'confirm-dialogue__cancel',
+	      onClick: closeModal
+	    },
+	    'Cancel'
+	  )
+	);
 
-	module.exports = ConfirmDialogue;
+	exports.default = ConfirmDialogue;
 
 /***/ },
-/* 712 */
+/* 714 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -60888,12 +61161,13 @@
 	    this.user = props.user;
 
 	    const tempRecipe = {};
+
 	    if (typeof content == 'object') {
 	      const altContent = content;
 	      delete altContent._id;
 	      tempRecipe.tags = content.tags.join(',');
-	      tempRecipe.ingredients = content.ingredients.join(';\n');
-	      tempRecipe.directions = content.directions.join(';\n\n');
+	      tempRecipe.ingredients = content.ingredients.join('\n');
+	      tempRecipe.directions = content.directions.join('\n\n');
 	      this.state = _extends({}, altContent, tempRecipe);
 	    } else {
 	      this.state = {
@@ -60904,7 +61178,7 @@
 	        servings: 1,
 	        ingredients: '',
 	        directions: '',
-	        showDetails: false
+	        showDetails: true
 	      };
 	    }
 	  }
@@ -60917,9 +61191,9 @@
 
 	    recipe.servings = recipe.servings || 1;
 
-	    recipe.ingredients = recipe.ingredients ? recipe.ingredients.split(';').map(ingredient => ingredient.trim()).filter(ingredient => ingredient !== '') : [];
+	    recipe.ingredients = recipe.ingredients ? recipe.ingredients.split('\n').map(ingredient => ingredient.trim()).filter(ingredient => ingredient !== '') : [];
 
-	    recipe.directions = recipe.directions ? recipe.directions.split(';').map(direction => direction.trim()).filter(direction => direction !== '') : [];
+	    recipe.directions = recipe.directions ? recipe.directions.split('\n').map(direction => direction.trim()).filter(direction => direction !== '') : [];
 
 	    if (typeof this.content == 'object') {
 	      this.editRecipe(this.user, recipe, this.active);
@@ -60993,7 +61267,7 @@
 	      _react2.default.createElement(
 	        'label',
 	        { htmlFor: 'ingredients' },
-	        'Ingredients (separated by semicolons):'
+	        'Ingredients (one per line):'
 	      ),
 	      _react2.default.createElement('textarea', {
 	        rows: '10',
@@ -61004,7 +61278,7 @@
 	      _react2.default.createElement(
 	        'label',
 	        { htmlFor: 'directions' },
-	        'Directions (separated by semicolons):'
+	        'Directions (Separated by blank lines):'
 	      ),
 	      _react2.default.createElement('textarea', {
 	        rows: '14',
@@ -61036,13 +61310,17 @@
 	  }
 	}
 
-	module.exports = RecipeForm;
+	exports.default = RecipeForm;
 
 /***/ },
-/* 713 */
+/* 715 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 
 	var _react = __webpack_require__(312);
 
@@ -61050,18 +61328,16 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	const Footer = () => {
-	  return _react2.default.createElement(
-	    'footer',
-	    null,
-	    '\xA9 2016 theJam'
-	  );
-	};
+	const Footer = () => _react2.default.createElement(
+	  'footer',
+	  null,
+	  '\xA9 2016 theJam'
+	);
 
-	module.exports = Footer;
+	exports.default = Footer;
 
 /***/ },
-/* 714 */
+/* 716 */
 /***/ function(module, exports, __webpack_require__, __webpack_module_template_argument_0__, __webpack_module_template_argument_1__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -61190,7 +61466,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(308)))
 
 /***/ },
-/* 715 */
+/* 717 */
 /***/ function(module, exports, __webpack_require__, __webpack_module_template_argument_0__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**

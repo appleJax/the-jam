@@ -2,7 +2,7 @@ import React from 'react'
 
 class RecipeForm extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     const {
       content
     } = props
@@ -14,13 +14,14 @@ class RecipeForm extends React.Component {
     this.save = this.save.bind(this)
     this.user = props.user
 
-    const tempRecipe = {};
+    const tempRecipe = {}
+
     if (typeof content == 'object') {
       const altContent = content
       delete altContent._id
       tempRecipe.tags = content.tags.join(',')
-      tempRecipe.ingredients = content.ingredients.join(';\n')
-      tempRecipe.directions = content.directions.join(';\n\n')
+      tempRecipe.ingredients = content.ingredients.join('\n')
+      tempRecipe.directions = content.directions.join('\n\n')
       this.state = {
         ...altContent,
         ...tempRecipe,
@@ -35,8 +36,8 @@ class RecipeForm extends React.Component {
         servings: 1,
         ingredients: '',
         directions: '',
-        showDetails: false
-      };
+        showDetails: true
+      }
     }
   }
 
@@ -54,13 +55,13 @@ class RecipeForm extends React.Component {
     recipe.servings = recipe.servings || 1;
 
     recipe.ingredients = recipe.ingredients ?
-      recipe.ingredients.split(';')
+      recipe.ingredients.split('\n')
         .map(ingredient =>
           ingredient.trim())
         .filter(ingredient => ingredient !== '') : [];
 
     recipe.directions = recipe.directions ?
-      recipe.directions.split(';')
+      recipe.directions.split('\n')
         .map(direction =>
           direction.trim())
         .filter(direction => direction !== '') : [];
@@ -126,7 +127,7 @@ class RecipeForm extends React.Component {
         </div>
 
         <label htmlFor='ingredients'>
-          Ingredients (separated by semicolons):
+          Ingredients (one per line):
         </label>
         <textarea
           rows='10'
@@ -136,7 +137,7 @@ class RecipeForm extends React.Component {
         />
 
         <label htmlFor='directions'>
-          Directions (separated by semicolons):
+          Directions (Separated by blank lines):
         </label>
         <textarea
           rows='14'
@@ -160,8 +161,8 @@ class RecipeForm extends React.Component {
           </div>
         </div>
       </form>
-    );
+    )
   }
 }
 
-module.exports = RecipeForm;
+export default RecipeForm

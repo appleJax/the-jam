@@ -5,36 +5,42 @@ import configureStore from '../configureStore'
 import App from './App'
 import { populateUserRecipes } from '../actions/sync'
 
-const preloadedState = JSON.parse(window.__PRELOADED_STATE__)
+let store = ''
 
-const store = configureStore(preloadedState)
+try {
+  const preloadedState = JSON.parse(window.__PRELOADED_STATE__)
 
-if (preloadedState.auth.isAuthenticated) {
-  const user = {}
-  user.name = JSON.parse(localStorage.getItem('profile')).email
+  store = configureStore(preloadedState)
 
-  fetch(`https://thejam.herokuapp.com/recipes`,
-    {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-type': 'application/json'
-      },
-      mode: 'cors',
-      cache: 'default',
-      body: JSON.stringify(user)
-    }
-  )
-  .then(response => {
-    if (response.status >= 400) {
-      throw new Error("Bad response from server")
-    }
-    return response.json()
-  })
-  .then(recipes => {
-    store.dispatch(populateUserRecipes(recipes))
-  })
-  .catch(e => console.error(e))
+  if (preloadedState.auth.isAuthenticated) {
+    const user = {}
+    user.name = JSON.parse(localStorage.getItem('profile')).email
+
+    fetch(`https://thejam.herokuapp.com/recipes`,
+      {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-type': 'application/json'
+        },
+        mode: 'cors',
+        cache: 'default',
+        body: JSON.stringify(user)
+      }
+    )
+    .then(response => {
+      if (response.status >= 400) {
+        throw new Error("Bad response from server")
+      }
+      return response.json()
+    })
+    .then(recipes => {
+      store.dispatch(populateUserRecipes(recipes))
+    })
+    .catch(console.error)
+  }
+} catch(e) {
+  store = configureStore()
 }
 
 const Root = () => {

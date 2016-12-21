@@ -2527,12 +2527,24 @@ nav {
   padding: 3px 5px;
   margin-right: -7px; }
 
+.recipe__button--add-to-my-recipes {
+  align-items: center;
+  background: #f46f53;
+  border-radius: 50%;
+  color: #fcd3cb;
+  cursor: pointer;
+  display: flex;
+  float: right;
+  margin: 0;
+  padding: 8px; }
+
 .tags {
   cursor: pointer;
   display: block;
   list-style-type: none;
   margin-bottom: 15px;
-  padding: 0; }
+  padding: 0;
+  width: fit-content; }
   .tags li {
     background: #f79783;
     border-radius: 10px;
@@ -2542,15 +2554,39 @@ nav {
     margin: 10px 10px 0 0;
     padding: 3px 8px; }
 
+.recipe__control-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; }
+
+.recipe__spacer {
+  flex: auto; }
+
 .recipe__expand-toggle {
   color: #444;
   cursor: pointer;
   margin-left: 10px; }
 
+.recipe__votes {
+  color: #f46f53;
+  font-size: 16px;
+  margin-right: 15px; }
+
+.recipe__button--publish {
+  border: 1px solid #f79783;
+  border-radius: 5px;
+  box-shadow: 0 0 8px #f46f53 inset;
+  color: #f46f53;
+  cursor: pointer;
+  display: inline;
+  margin: 0 15px;
+  padding: 5px; }
+  .recipe__button--publish i {
+    margin-right: 10px; }
+
 .fa-star,
 .fa-star-o {
   cursor: pointer;
-  float: right;
   font-weight: bold; }
 
 .fa-star {
@@ -2581,7 +2617,10 @@ h3 {
   .directions ol li {
     margin-bottom: 15px; }
 
-.recipe__edit-button {
+.recipe__author {
+  color: #f46f53; }
+
+.recipe__button--edit {
   background: #F14723;
   border-radius: 50%;
   box-shadow: 0 0 5px #aaa;
@@ -2593,7 +2632,7 @@ h3 {
   margin: 25px 0 0 5px;
   height: 44px;
   width: 44px; }
-  .recipe__edit-button:hover {
+  .recipe__button--edit:hover {
     background: #ec360f; }
 
 footer {
@@ -2630,6 +2669,7 @@ footer {
   padding: 5px 15px 20px 15px; }
   .recipe-form label {
     font-family: 'Architects Daughter', 'sans-serif';
+    font-size: 25px;
     font-weight: bold; }
   .recipe-form input, .recipe-form textarea {
     background: #fffbfb;
@@ -2680,7 +2720,7 @@ footer {
 
 .recipe-form__save {
   background: #F14723;
-  box-shadow: 0 0 5px #a4250a inset, 1px 1px 2px #555;
+  box-shadow: 0 0 5px #8c2009 inset, 1px 1px 5px #aaa;
   color: #fde7e3;
   margin-top: -10px;
   height: 45px;
@@ -2690,7 +2730,7 @@ footer {
 
 .recipe-form__cancel {
   background: white;
-  box-shadow: 0 0 5px #cccccc inset, 1px 1px 2px #555;
+  box-shadow: 0 0 6px gray inset;
   color: #f77;
   margin: -8px 0 0 30px;
   height: 40px;

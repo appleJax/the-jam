@@ -3,6 +3,7 @@ import {
   AUTH0_ID,
   AUTH0_DOMAIN
 } from '../../env'
+import { setFilterRecipes } from './sync'
 
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 export const LOGOUT = 'LOGOUT'
@@ -51,8 +52,8 @@ export const logoutUser = () => {
   return dispatch => {
     localStorage.removeItem('idToken')
     localStorage.removeItem('profile')
-    localStorage.removeItem('user-recipes')
 
+    dispatch(setFilterRecipes('public'))
     dispatch(logout())
     return
   }
