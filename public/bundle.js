@@ -61326,7 +61326,12 @@
 	      _react2.default.createElement(
 	        'label',
 	        { htmlFor: 'tags' },
-	        'Tags (separated by commas):'
+	        'Tags:',
+	        _react2.default.createElement(
+	          'span',
+	          { className: 'parens' },
+	          '(separated by commas)'
+	        )
 	      ),
 	      _react2.default.createElement('input', {
 	        type: 'text',
@@ -61358,7 +61363,12 @@
 	      _react2.default.createElement(
 	        'label',
 	        { htmlFor: 'ingredients' },
-	        'Ingredients (one per line):'
+	        'Ingredients:',
+	        _react2.default.createElement(
+	          'span',
+	          { className: 'parens' },
+	          '(one per line)'
+	        )
 	      ),
 	      _react2.default.createElement('textarea', {
 	        rows: '10',
@@ -61369,7 +61379,12 @@
 	      _react2.default.createElement(
 	        'label',
 	        { htmlFor: 'directions' },
-	        'Directions (Separated by blank lines):'
+	        'Directions:',
+	        _react2.default.createElement(
+	          'span',
+	          { className: 'parens' },
+	          '(Separated by blank lines)'
+	        )
 	      ),
 	      _react2.default.createElement('textarea', {
 	        rows: '14',

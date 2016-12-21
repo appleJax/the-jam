@@ -99,7 +99,7 @@ class RecipeForm extends React.Component {
         />
 
         <label htmlFor='tags'>
-          Tags (separated by commas):
+          Tags:<span className='parens'>(separated by commas)</span>
         </label>
         <input
           type='text'
@@ -127,7 +127,7 @@ class RecipeForm extends React.Component {
         </div>
 
         <label htmlFor='ingredients'>
-          Ingredients (one per line):
+          Ingredients:<span className='parens'>(one per line)</span>
         </label>
         <textarea
           rows='10'
@@ -137,7 +137,7 @@ class RecipeForm extends React.Component {
         />
 
         <label htmlFor='directions'>
-          Directions (Separated by blank lines):
+          Directions:<span className='parens'>(Separated by blank lines)</span>
         </label>
         <textarea
           rows='14'

@@ -2631,7 +2631,7 @@ h3 {
   .recipe__author i {
     margin-right: 8px; }
   .recipe__author .author-name {
-    margin-left: 20px; }
+    margin-left: 15px; }
 
 .recipe__button--edit {
   background: #F14723;
@@ -2716,6 +2716,10 @@ footer {
 .recipe-form__servings-label {
   float: left;
   margin: 2px 15px 0 0; }
+
+.parens {
+  display: block;
+  font-size: 20px; }
 
 .recipe-form__servings-input {
   max-width: 50px; }
