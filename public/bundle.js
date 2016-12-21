@@ -60611,6 +60611,24 @@
 	    direction
 	  ));
 
+	  const status = published ? _react2.default.createElement(
+	    'div',
+	    {
+	      className: 'recipe__button--publish',
+	      onClick: () => console.log('Publish')
+	    },
+	    _react2.default.createElement('i', { className: 'fa fa-id-card-o' }),
+	    'Publish'
+	  ) : _react2.default.createElement(
+	    'div',
+	    {
+	      className: 'recipe__button--unpublish',
+	      onClick: () => console.log('Unpublish')
+	    },
+	    _react2.default.createElement('i', { className: 'fa fa-check-circle' }),
+	    'Published'
+	  );
+
 	  const starIcons = [];
 
 	  for (let i = 1; i <= 5; i++) {
@@ -60657,17 +60675,17 @@
 	      'div',
 	      { className: 'recipe__header' },
 	      _react2.default.createElement(
-	        'h2',
-	        { className: 'recipe__name' },
-	        name
-	      ),
-	      _react2.default.createElement(
 	        'div',
 	        {
 	          className: 'recipe__delete-button',
 	          onClick: confirmDelete
 	        },
 	        _react2.default.createElement('i', { className: 'fa fa-times' })
+	      ),
+	      _react2.default.createElement(
+	        'h2',
+	        { className: 'recipe__name' },
+	        name
 	      ),
 	      _react2.default.createElement(
 	        'ul',
@@ -60683,27 +60701,7 @@
 	        className: showDetails ? 'recipe__expand-toggle fa fa-toggle-up fa-lg' : 'recipe__expand-toggle fa fa-ellipsis-h fa-lg'
 	      }),
 	      _react2.default.createElement('div', { className: 'recipe__spacer' }),
-	      published ? _react2.default.createElement(
-	        'div',
-	        null,
-	        _react2.default.createElement(
-	          'div',
-	          {
-	            className: 'recipe__button--publish',
-	            onClick: () => console.log('Publish')
-	          },
-	          _react2.default.createElement('i', { className: 'fa fa-id-card-o' }),
-	          'Publish'
-	        )
-	      ) : _react2.default.createElement(
-	        'div',
-	        {
-	          className: 'recipe__button--unpublish',
-	          onClick: () => console.log('Unpublish')
-	        },
-	        _react2.default.createElement('i', { className: 'fa fa-check-circle' }),
-	        'Published'
-	      ),
+	      status,
 	      starIcons
 	    ),
 	    showDetails && _react2.default.createElement(
@@ -60944,8 +60942,9 @@
 	        directionList: directionList
 	      }),
 	      _react2.default.createElement(
-	        'span',
+	        'div',
 	        { className: 'recipe__author' },
+	        _react2.default.createElement('i', { className: 'fa fa-id-card-o' }),
 	        'Recipe By: ',
 	        author
 	      )

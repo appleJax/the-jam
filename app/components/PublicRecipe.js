@@ -135,9 +135,10 @@ const PublicRecipe = ({
           ingredientList={ingredientList}
           directionList={directionList}
         />
-        <span className='recipe__author'>
+        <div className='recipe__author'>
+          <i className='fa fa-id-card-o'></i>
           Recipe By: {author}
-        </span>
+        </div>
       </div>
       }
     </li>

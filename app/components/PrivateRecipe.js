@@ -48,6 +48,22 @@ const PrivateRecipe = ({
       <li key={i}>{direction}</li>
   )
 
+  const status = published ?
+    <div
+      className='recipe__button--publish'
+      onClick={() => console.log('Publish')}
+    >
+      <i className='fa fa-id-card-o'></i>
+      Publish
+    </div> :
+    <div
+      className='recipe__button--unpublish'
+      onClick={() => console.log('Unpublish')}
+    >
+      <i className='fa fa-check-circle'></i>
+      Published
+    </div>
+
   const starIcons = []
 
   for (let i = 1; i <= 5; i++) {
@@ -97,15 +113,15 @@ const PrivateRecipe = ({
       className='recipe'
     >
       <div className='recipe__header'>
-        <h2 className='recipe__name'>
-          {name}
-        </h2>
         <div
           className='recipe__delete-button'
           onClick={confirmDelete}
         >
           <i className='fa fa-times'></i>
         </div>
+        <h2 className='recipe__name'>
+          {name}
+        </h2>
         <ul className='tags'>
           {tagList}
         </ul>
@@ -121,24 +137,7 @@ const PrivateRecipe = ({
         >
         </i>
         <div className='recipe__spacer'></div>
-        {published ?
-        <div>
-        <div
-          className='recipe__button--publish'
-          onClick={() => console.log('Publish')}
-        >
-          <i className='fa fa-id-card-o'></i>
-          Publish
-        </div>
-        </div> :
-        <div
-          className='recipe__button--unpublish'
-          onClick={() => console.log('Unpublish')}
-        >
-          <i className='fa fa-check-circle'></i>
-          Published
-        </div>
-        }
+        {status}
         {starIcons}
       </div>
       {showDetails &&

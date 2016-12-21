@@ -2568,20 +2568,23 @@ nav {
   margin-left: 10px; }
 
 .recipe__votes {
-  color: #f46f53;
+  color: #d4300d;
   font-size: 16px;
   margin-right: 15px; }
 
-.recipe__button--publish {
+.recipe__button--publish,
+.recipe__button--unpublish {
   border: 1px solid #f79783;
   border-radius: 5px;
   box-shadow: 0 0 8px #f46f53 inset;
   color: #f46f53;
   cursor: pointer;
   display: inline;
+  font-size: 18px;
   margin: 0 15px;
   padding: 5px; }
-  .recipe__button--publish i {
+  .recipe__button--publish i,
+  .recipe__button--unpublish i {
     margin-right: 10px; }
 
 .fa-star,
@@ -2618,7 +2621,12 @@ h3 {
     margin-bottom: 15px; }
 
 .recipe__author {
-  color: #f46f53; }
+  background: #f46f53;
+  border-radius: 10px;
+  color: #fde7e3;
+  font-size: 16px;
+  margin: 15px 0;
+  padding: 8px; }
 
 .recipe__button--edit {
   background: #F14723;
