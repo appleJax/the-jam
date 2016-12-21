@@ -60659,7 +60659,6 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	const PrivateRecipe = ({
-	  key,
 	  recipe,
 	  visibilityFilter,
 	  user,
@@ -60761,7 +60760,6 @@
 	  return _react2.default.createElement(
 	    'li',
 	    {
-	      key: key,
 	      className: 'recipe'
 	    },
 	    _react2.default.createElement(
@@ -60903,7 +60901,6 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	const PublicRecipe = ({
-	  key,
 	  recipe,
 	  visibilityFilter,
 	  user,
@@ -60986,7 +60983,6 @@
 	  return _react2.default.createElement(
 	    'li',
 	    {
-	      key: key,
 	      className: 'recipe' },
 	    _react2.default.createElement(
 	      'div',

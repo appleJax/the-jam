@@ -2,7 +2,6 @@ import React from 'react'
 import RecipeBody from './RecipeBody'
 
 const PrivateRecipe = ({
-  key,
   recipe,
   visibilityFilter,
   user,
@@ -112,7 +111,6 @@ const PrivateRecipe = ({
 
   return (
     <li
-      key={key}
       className='recipe'
     >
       <div className='recipe__header'>
