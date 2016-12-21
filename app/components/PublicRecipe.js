@@ -2,6 +2,7 @@ import React from 'react'
 import RecipeBody from './RecipeBody'
 
 const PublicRecipe = ({
+  key,
   recipe,
   visibilityFilter,
   user,
@@ -94,7 +95,7 @@ const PublicRecipe = ({
 
   return (
     <li
-      key={id}
+      key={key}
       className='recipe'>
       <div className='recipe__header'>
         <div

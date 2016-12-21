@@ -60334,7 +60334,7 @@
 	  } catch (e) {
 	    console.error(e);
 	  }
-
+	  console.log('User:', user);
 	  return {
 	    recipes: getVisibleRecipes(state.recipes, state.visibilityFilter, state.sort),
 	    visibilityFilter: state.visibilityFilter,
@@ -60462,9 +60462,15 @@
 	};
 
 	const publishRecipe = exports.publishRecipe = (user, recipe) => dispatch => {
+	  let author = 'anonymous';
+	  try {
+	    author = JSON.parse(localStorage.getItem('profile')).name;
+	  } catch (e) {
+	    console.error(e);
+	  }
 	  const publicRecipe = _extends({}, recipe, {
 	    votes: {},
-	    author: user
+	    author
 	  });
 	  delete publicRecipe.stars;
 	  delete publicRecipe._id;
@@ -60601,8 +60607,8 @@
 	  return _react2.default.createElement(
 	    'ul',
 	    { className: 'recipe-list' },
-	    recipes.map(recipe => privateView ? _react2.default.createElement(_PrivateRecipe2.default, {
-	      key: recipe.id,
+	    recipes.map((recipe, i) => privateView ? _react2.default.createElement(_PrivateRecipe2.default, {
+	      key: i,
 	      recipe: recipe,
 	      visibilityFilter: visibilityFilter,
 	      user: user,
@@ -60614,7 +60620,7 @@
 	      publishRecipe: () => publishRecipe(user, recipe),
 	      unpublishRecipe: () => unpublishRecipe(user, recipe)
 	    }) : _react2.default.createElement(_PublicRecipe2.default, {
-	      key: recipe.id,
+	      key: i,
 	      recipe: recipe,
 	      visibilityFilter: visibilityFilter,
 	      user: user,
@@ -60649,6 +60655,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	const PrivateRecipe = ({
+	  key,
 	  recipe,
 	  visibilityFilter,
 	  user,
@@ -60750,7 +60757,7 @@
 	  return _react2.default.createElement(
 	    'li',
 	    {
-	      key: id,
+	      key: key,
 	      className: 'recipe'
 	    },
 	    _react2.default.createElement(
@@ -60892,6 +60899,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	const PublicRecipe = ({
+	  key,
 	  recipe,
 	  visibilityFilter,
 	  user,
@@ -60974,7 +60982,7 @@
 	  return _react2.default.createElement(
 	    'li',
 	    {
-	      key: id,
+	      key: key,
 	      className: 'recipe' },
 	    _react2.default.createElement(
 	      'div',

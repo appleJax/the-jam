@@ -17,10 +17,10 @@ const RecipeList = ({
 }) => {
   return (
     <ul className="recipe-list">
-      {recipes.map(recipe =>
+      {recipes.map((recipe, i) =>
         privateView ?
         <PrivateRecipe
-          key={recipe.id}
+          key={i}
           recipe={recipe}
           visibilityFilter={visibilityFilter}
           user={user}
@@ -33,7 +33,7 @@ const RecipeList = ({
           unpublishRecipe={() => unpublishRecipe(user, recipe)}
         /> :
         <PublicRecipe
-          key={recipe.id}
+          key={i}
           recipe={recipe}
           visibilityFilter={visibilityFilter}
           user={user}

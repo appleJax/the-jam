@@ -71,7 +71,7 @@ const mapStateToProps = (state) => {
   } catch(e) {
     console.error(e)
   }
-
+  console.log('User:', user)
   return {
     recipes: getVisibleRecipes(state.recipes, state.visibilityFilter, state.sort),
     visibilityFilter: state.visibilityFilter,

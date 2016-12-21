@@ -98,10 +98,16 @@ export const deleteUserRecipe = (user, recipe, active) =>
 
 export const publishRecipe = (user, recipe) =>
   dispatch => {
+    let author = 'anonymous'
+    try {
+      author = JSON.parse(localStorage.getItem('profile')).name
+    } catch(e) {
+      console.error(e)
+    }
     const publicRecipe = {
       ...recipe,
       votes: {},
-      author: user
+      author
     }
     delete publicRecipe.stars
     delete publicRecipe._id
