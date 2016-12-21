@@ -137,7 +137,7 @@ const PublicRecipe = ({
         />
         <div className='recipe__author'>
           <i className='fa fa-id-card-o'></i>
-          Recipe By: {author}
+          Recipe By: <span className='author-name'>{author}</span>
         </div>
       </div>
       }

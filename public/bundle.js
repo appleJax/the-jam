@@ -60277,7 +60277,7 @@
 	        className: sort.stars ? 'active sort fa fa-star fa-lg' : 'sort fa fa-star fa-lg'
 	      })
 	    ),
-	    _react2.default.createElement(
+	    visibilityFilter.active == 'private' && _react2.default.createElement(
 	      'div',
 	      {
 	        className: 'nav__add-recipe',
@@ -60614,19 +60614,19 @@
 	  const status = published ? _react2.default.createElement(
 	    'div',
 	    {
-	      className: 'recipe__button--publish',
-	      onClick: () => console.log('Publish')
-	    },
-	    _react2.default.createElement('i', { className: 'fa fa-id-card-o' }),
-	    'Publish'
-	  ) : _react2.default.createElement(
-	    'div',
-	    {
 	      className: 'recipe__button--unpublish',
 	      onClick: () => console.log('Unpublish')
 	    },
 	    _react2.default.createElement('i', { className: 'fa fa-check-circle' }),
 	    'Published'
+	  ) : _react2.default.createElement(
+	    'div',
+	    {
+	      className: 'recipe__button--publish',
+	      onClick: () => console.log('Publish')
+	    },
+	    _react2.default.createElement('i', { className: 'fa fa-id-card-o' }),
+	    'Publish'
 	  );
 
 	  const starIcons = [];
@@ -60946,7 +60946,11 @@
 	        { className: 'recipe__author' },
 	        _react2.default.createElement('i', { className: 'fa fa-id-card-o' }),
 	        'Recipe By: ',
-	        author
+	        _react2.default.createElement(
+	          'span',
+	          { className: 'author-name' },
+	          author
+	        )
 	      )
 	    )
 	  );

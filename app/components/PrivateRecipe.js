@@ -50,18 +50,18 @@ const PrivateRecipe = ({
 
   const status = published ?
     <div
-      className='recipe__button--publish'
-      onClick={() => console.log('Publish')}
-    >
-      <i className='fa fa-id-card-o'></i>
-      Publish
-    </div> :
-    <div
       className='recipe__button--unpublish'
       onClick={() => console.log('Unpublish')}
     >
       <i className='fa fa-check-circle'></i>
       Published
+    </div> :
+    <div
+      className='recipe__button--publish'
+      onClick={() => console.log('Publish')}
+    >
+      <i className='fa fa-id-card-o'></i>
+      Publish
     </div>
 
   const starIcons = []

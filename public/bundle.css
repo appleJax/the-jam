@@ -2582,7 +2582,8 @@ nav {
   display: inline;
   font-size: 18px;
   margin: 0 15px;
-  padding: 5px; }
+  padding: 5px;
+  text-align: center; }
   .recipe__button--publish i,
   .recipe__button--unpublish i {
     margin-right: 10px; }
@@ -2623,12 +2624,14 @@ h3 {
 .recipe__author {
   background: #f46f53;
   border-radius: 0 0 5px 5px;
-  color: #fde7e3;
+  color: white;
   font-size: 16px;
-  margin: 20px -15px -15px -15px;
+  margin: 25px -15px -15px -15px;
   padding: 15px; }
   .recipe__author i {
     margin-right: 8px; }
+  .recipe__author .author-name {
+    margin-left: 20px; }
 
 .recipe__button--edit {
   background: #F14723;
