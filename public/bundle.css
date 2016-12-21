@@ -2568,7 +2568,7 @@ nav {
   margin-left: 10px; }
 
 .recipe__votes {
-  color: #d4300d;
+  color: #f46f53;
   font-size: 16px;
   margin-right: 15px; }
 
@@ -2622,11 +2622,13 @@ h3 {
 
 .recipe__author {
   background: #f46f53;
-  border-radius: 10px;
+  border-radius: 0 0 5px 5px;
   color: #fde7e3;
   font-size: 16px;
-  margin: 15px 0;
-  padding: 8px; }
+  margin: 20px -15px -15px -15px;
+  padding: 15px; }
+  .recipe__author i {
+    margin-right: 8px; }
 
 .recipe__button--edit {
   background: #F14723;
