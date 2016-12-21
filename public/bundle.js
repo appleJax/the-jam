@@ -60328,13 +60328,11 @@
 
 	const mapStateToProps = state => {
 	  let user = 'public';
-	  if (state.visibilityFilter.active === 'private') {
-	    try {
-	      const profile = localStorage.getItem('profile');
-	      user = profile ? JSON.parse(profile).email : 'public';
-	    } catch (e) {
-	      console.error(e);
-	    }
+	  try {
+	    const profile = localStorage.getItem('profile');
+	    user = profile ? JSON.parse(profile).email : 'public';
+	  } catch (e) {
+	    console.error(e);
 	  }
 
 	  return {
@@ -60377,7 +60375,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.addToUserRecipes = exports.unpublishRecipe = exports.publishUserRecipe = exports.deleteUserRecipe = exports.editUserRecipe = exports.addUserRecipe = exports.fetchRecipes = undefined;
+	exports.addToUserRecipes = exports.unpublishRecipe = exports.publishRecipe = exports.deleteUserRecipe = exports.editUserRecipe = exports.addUserRecipe = exports.fetchRecipes = undefined;
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -60463,7 +60461,7 @@
 	  }).catch(console.error);
 	};
 
-	const publishUserRecipe = exports.publishUserRecipe = (user, recipe) => dispatch => {
+	const publishRecipe = exports.publishRecipe = (user, recipe) => dispatch => {
 	  const publicRecipe = _extends({}, recipe, {
 	    votes: {},
 	    author: user
@@ -60551,7 +60549,7 @@
 
 	  dispatch((0, _sync.addRecipe)(altRecipe, 'private'));
 
-	  (0, _isomorphicFetch2.default)(`https://thejam.herokuapp.com/new`, {
+	  return (0, _isomorphicFetch2.default)(`https://thejam.herokuapp.com/new`, {
 	    method: 'POST',
 	    headers: {
 	      'Accept': 'application/json',

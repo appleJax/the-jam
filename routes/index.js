@@ -176,7 +176,6 @@ module.exports = (app) => {
               collection = db.collection(user);
 
         collection.update({id: recipe.id}, recipe, (err, result) => {
-          console.log('My error: ', err)
           assert.equal(null, err);
           res.json(result);
           db.close();

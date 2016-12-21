@@ -96,7 +96,7 @@ export const deleteUserRecipe = (user, recipe, active) =>
     .catch(console.error)
   }
 
-export const publishUserRecipe = (user, recipe) =>
+export const publishRecipe = (user, recipe) =>
   dispatch => {
     const publicRecipe = {
       ...recipe,
@@ -204,7 +204,7 @@ export const addToUserRecipes = (user, recipe) =>
 
     dispatch(addRecipe(altRecipe, 'private'))
 
-    fetch(`https://thejam.herokuapp.com/new`,
+    return fetch(`https://thejam.herokuapp.com/new`,
       {
         method: 'POST',
         headers: {
