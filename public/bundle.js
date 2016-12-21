@@ -59781,79 +59781,59 @@
 	const CLOSE_MODAL = exports.CLOSE_MODAL = 'CLOSE_MODAL';
 	const POPULATE_MODAL = exports.POPULATE_MODAL = 'POPULATE_MODAL';
 
-	const addRecipe = exports.addRecipe = (recipe, active) => {
-	  return {
-	    type: ADD_RECIPE,
-	    recipe,
-	    active
-	  };
-	};
+	const addRecipe = exports.addRecipe = (recipe, active) => ({
+	  type: ADD_RECIPE,
+	  recipe,
+	  active
+	});
 
-	const editRecipe = exports.editRecipe = (recipe, active) => {
-	  return {
-	    type: EDIT_RECIPE,
-	    recipe,
-	    active
-	  };
-	};
+	const editRecipe = exports.editRecipe = (recipe, active) => ({
+	  type: EDIT_RECIPE,
+	  recipe,
+	  active
+	});
 
-	const deleteRecipe = exports.deleteRecipe = (recipe, active) => {
-	  return {
-	    type: DELETE_RECIPE,
-	    recipe,
-	    active
-	  };
-	};
+	const deleteRecipe = exports.deleteRecipe = (recipe, active) => ({
+	  type: DELETE_RECIPE,
+	  recipe,
+	  active
+	});
 
-	const populateUserRecipes = exports.populateUserRecipes = recipes => {
-	  return {
-	    type: POPULATE_USER_RECIPES,
-	    recipes
-	  };
-	};
+	const populateUserRecipes = exports.populateUserRecipes = recipes => ({
+	  type: POPULATE_USER_RECIPES,
+	  recipes
+	});
 
-	const toggleDetails = exports.toggleDetails = (id, active) => {
-	  return {
-	    type: TOGGLE_DETAILS,
-	    id,
-	    active
-	  };
-	};
+	const toggleDetails = exports.toggleDetails = (id, active) => ({
+	  type: TOGGLE_DETAILS,
+	  id,
+	  active
+	});
 
-	const setFilterContent = exports.setFilterContent = content => {
-	  return {
-	    type: SET_FILTER_CONTENT,
-	    content
-	  };
-	};
+	const setFilterContent = exports.setFilterContent = content => ({
+	  type: SET_FILTER_CONTENT,
+	  content
+	});
 
-	const setFilterRecipes = exports.setFilterRecipes = recipes => {
-	  return {
-	    type: SET_FILTER_RECIPES,
-	    recipes
-	  };
-	};
+	const setFilterRecipes = exports.setFilterRecipes = recipes => ({
+	  type: SET_FILTER_RECIPES,
+	  recipes
+	});
 
-	const setSort = exports.setSort = sortBy => {
-	  return {
-	    type: SET_SORT,
-	    sortBy
-	  };
-	};
+	const setSort = exports.setSort = sortBy => ({
+	  type: SET_SORT,
+	  sortBy
+	});
 
-	const closeModal = exports.closeModal = () => {
-	  return {
-	    type: CLOSE_MODAL
-	  };
-	};
+	const closeModal = exports.closeModal = () => ({
+	  type: CLOSE_MODAL
+	});
 
-	const populateModal = exports.populateModal = (dialogue, content) => {
-	  return {
-	    type: POPULATE_MODAL,
-	    dialogue,
-	    content
-	  };
-	};
+	const populateModal = exports.populateModal = (dialogue, content) => ({
+	  type: POPULATE_MODAL,
+	  dialogue,
+	  content
+	});
 
 /***/ },
 /* 698 */
@@ -60365,20 +60345,24 @@
 	  };
 	};
 
-	const mapDispatchTProps = dispatch => {
-	  return {
-	    setFilterContent: filter => dispatch((0, _sync.setFilterContent)(filter)),
+	const mapDispatchTProps = dispatch => ({
+	  setFilterContent: filter => dispatch((0, _sync.setFilterContent)(filter)),
 
-	    editRecipe: (user, recipe, active) => dispatch((0, _async.editUserRecipe)(user, recipe, active)),
+	  editRecipe: (user, recipe, active) => dispatch((0, _async.editUserRecipe)(user, recipe, active)),
 
-	    toggleDetails: (id, active) => dispatch((0, _sync.toggleDetails)(id, active)),
+	  toggleDetails: (id, active) => dispatch((0, _sync.toggleDetails)(id, active)),
 
-	    populateModal: (dialogue, content) => {
-	      document.body.classList.add('no-scroll');
-	      dispatch((0, _sync.populateModal)(dialogue, content));
-	    }
-	  };
-	};
+	  populateModal: (dialogue, content) => {
+	    document.body.classList.add('no-scroll');
+	    dispatch((0, _sync.populateModal)(dialogue, content));
+	  },
+
+	  publishRecipe: (user, recipe) => dispatch((0, _async.publishRecipe)(user, recipe)),
+
+	  unpublishRecipe: (user, recipe) => dispatch((0, _async.unpublishRecipe)(user, recipe)),
+
+	  addToUserRecipes: (user, recipe) => dispatch((0, _async.addToUserRecipes)(user, recipe))
+	});
 
 	const VisibleRecipeList = (0, _reactRedux.connect)(mapStateToProps, mapDispatchTProps)(_RecipeList2.default);
 
@@ -60393,7 +60377,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.deleteUserRecipe = exports.editUserRecipe = exports.addUserRecipe = exports.fetchRecipes = undefined;
+	exports.addToUserRecipes = exports.unpublishRecipe = exports.publishUserRecipe = exports.deleteUserRecipe = exports.editUserRecipe = exports.addUserRecipe = exports.fetchRecipes = undefined;
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -60438,8 +60422,8 @@
 	      },
 	      mode: 'cors',
 	      cache: 'default',
-	      body: JSON.stringify({ user, altRecipe })
-	    }).catch(e => console.error(e));
+	      body: JSON.stringify({ user, recipe: altRecipe })
+	    }).catch(console.error);
 	  };
 	};
 
@@ -60460,25 +60444,123 @@
 	      mode: 'cors',
 	      cache: 'default',
 	      body: JSON.stringify({ user, recipe: altRecipe })
-	    }).catch(e => console.error(e));
+	    }).catch(console.error);
 	  };
 	};
 
-	const deleteUserRecipe = exports.deleteUserRecipe = (user, recipe, active) => {
-	  return dispatch => {
-	    dispatch((0, _sync.deleteRecipe)(recipe, active));
+	const deleteUserRecipe = exports.deleteUserRecipe = (user, recipe, active) => dispatch => {
+	  dispatch((0, _sync.deleteRecipe)(recipe, active));
 
-	    return (0, _isomorphicFetch2.default)(`https://thejam.herokuapp.com/delete`, {
-	      method: 'POST',
-	      headers: {
-	        'Accept': 'application/json',
-	        'Content-type': 'application/json'
-	      },
-	      mode: 'cors',
-	      cache: 'default',
-	      body: JSON.stringify({ user, recipe })
-	    }).catch(e => console.error(e));
-	  };
+	  return (0, _isomorphicFetch2.default)(`https://thejam.herokuapp.com/delete`, {
+	    method: 'POST',
+	    headers: {
+	      'Accept': 'application/json',
+	      'Content-type': 'application/json'
+	    },
+	    mode: 'cors',
+	    cache: 'default',
+	    body: JSON.stringify({ user, recipe })
+	  }).catch(console.error);
+	};
+
+	const publishUserRecipe = exports.publishUserRecipe = (user, recipe) => dispatch => {
+	  const publicRecipe = _extends({}, recipe, {
+	    votes: {},
+	    author: user
+	  });
+	  delete publicRecipe.stars;
+	  delete publicRecipe._id;
+
+	  const privateRecipe = _extends({}, recipe, {
+	    published: true
+	  });
+	  delete privateRecipe._id;
+
+	  dispatch((0, _sync.addRecipe)(publicRecipe, 'public'));
+	  dispatch((0, _sync.editRecipe)(privateRecipe, 'private'));
+
+	  publicRecipe.showDetails = false;
+	  privateRecipe.showDetails = false;
+
+	  (0, _isomorphicFetch2.default)(`https://thejam.herokuapp.com/new`, {
+	    method: 'POST',
+	    headers: {
+	      'Accept': 'application/json',
+	      'Content-type': 'application/json'
+	    },
+	    mode: 'cors',
+	    cache: 'default',
+	    body: JSON.stringify({ user: 'public', recipe: publicRecipe })
+	  }).catch(console.error);
+
+	  (0, _isomorphicFetch2.default)(`https://thejam.herokuapp.com/edit`, {
+	    method: 'POST',
+	    headers: {
+	      'Accept': 'application/json',
+	      'Content-type': 'application/json'
+	    },
+	    mode: 'cors',
+	    cache: 'default',
+	    body: JSON.stringify({ user, recipe: privateRecipe })
+	  }).catch(console.error);
+	};
+
+	const unpublishRecipe = exports.unpublishRecipe = (user, recipe) => dispatch => {
+	  const altRecipe = _extends({}, recipe, {
+	    published: false
+	  });
+	  delete altRecipe._id;
+
+	  dispatch((0, _sync.deleteRecipe)(recipe, 'public'));
+	  dispatch((0, _sync.editRecipe)(altRecipe, 'private'));
+
+	  altRecipe.showDetails = false;
+
+	  (0, _isomorphicFetch2.default)(`https://thejam.herokuapp.com/delete`, {
+	    method: 'POST',
+	    headers: {
+	      'Accept': 'application/json',
+	      'Content-type': 'application/json'
+	    },
+	    mode: 'cors',
+	    cache: 'default',
+	    body: JSON.stringify({ user: 'public', recipe })
+	  }).catch(console.error);
+
+	  (0, _isomorphicFetch2.default)(`https://thejam.herokuapp.com/edit`, {
+	    method: 'POST',
+	    headers: {
+	      'Accept': 'application/json',
+	      'Content-type': 'application/json'
+	    },
+	    mode: 'cors',
+	    cache: 'default',
+	    body: JSON.stringify({ user, recipe: altRecipe })
+	  }).catch(console.error);
+	};
+
+	const addToUserRecipes = exports.addToUserRecipes = (user, recipe) => dispatch => {
+	  const altRecipe = _extends({}, recipe, {
+	    stars: 0,
+	    published: false,
+	    showDetails: false
+	  });
+	  delete altRecipe.votes;
+	  delete altRecipe.author;
+	  delete altRecipe._id;
+
+	  dispatch((0, _sync.addRecipe)(altRecipe, 'private'));
+
+	  (0, _isomorphicFetch2.default)(`https://thejam.herokuapp.com/new`, {
+	    method: 'POST',
+	    headers: {
+	      'Accept': 'application/json',
+	      'Content-type': 'application/json'
+	    },
+	    mode: 'cors',
+	    cache: 'default',
+	    body: JSON.stringify({ user, recipe: altRecipe })
+	  }).catch(console.error);
 	};
 
 /***/ },
@@ -60576,7 +60658,9 @@
 	  confirmDelete,
 	  editRecipe,
 	  toggleDetails,
-	  populateModal
+	  populateModal,
+	  publishRecipe,
+	  unpublishRecipe
 	}) => {
 	  const {
 	    id,
@@ -60615,7 +60699,7 @@
 	    'div',
 	    {
 	      className: 'recipe__button--unpublish',
-	      onClick: () => console.log('Unpublish')
+	      onClick: unpublishRecipe
 	    },
 	    _react2.default.createElement('i', { className: 'fa fa-check-circle' }),
 	    'Published'
@@ -60623,7 +60707,7 @@
 	    'div',
 	    {
 	      className: 'recipe__button--publish',
-	      onClick: () => console.log('Publish')
+	      onClick: publishRecipe
 	    },
 	    _react2.default.createElement('i', { className: 'fa fa-id-card-o' }),
 	    'Publish'

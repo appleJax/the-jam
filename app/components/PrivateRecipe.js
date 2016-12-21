@@ -9,7 +9,9 @@ const PrivateRecipe = ({
   confirmDelete,
   editRecipe,
   toggleDetails,
-  populateModal
+  populateModal,
+  publishRecipe,
+  unpublishRecipe
 }) => {
   const {
     id,
@@ -51,14 +53,14 @@ const PrivateRecipe = ({
   const status = published ?
     <div
       className='recipe__button--unpublish'
-      onClick={() => console.log('Unpublish')}
+      onClick={unpublishRecipe}
     >
       <i className='fa fa-check-circle'></i>
       Published
     </div> :
     <div
       className='recipe__button--publish'
-      onClick={() => console.log('Publish')}
+      onClick={publishRecipe}
     >
       <i className='fa fa-id-card-o'></i>
       Publish

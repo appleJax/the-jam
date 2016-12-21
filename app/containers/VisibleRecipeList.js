@@ -5,7 +5,10 @@ import {
   toggleDetails
 } from '../actions/sync'
 import {
-  editUserRecipe
+  editUserRecipe,
+  publishRecipe,
+  unpublishRecipe,
+  addToUserRecipes
 } from '../actions/async'
 import RecipeList from '../components/RecipeList'
 
@@ -79,8 +82,8 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchTProps = (dispatch) => {
-  return {
+const mapDispatchTProps = (dispatch) =>
+  ({
     setFilterContent: (filter) =>
       dispatch(setFilterContent(filter)),
 
@@ -93,9 +96,17 @@ const mapDispatchTProps = (dispatch) => {
     populateModal: (dialogue, content) => {
       document.body.classList.add('no-scroll')
       dispatch(populateModal(dialogue, content))
-    }
-  }
-}
+    },
+
+    publishRecipe: (user, recipe) =>
+      dispatch(publishRecipe(user, recipe)),
+
+    unpublishRecipe: (user, recipe) =>
+      dispatch(unpublishRecipe(user, recipe)),
+
+    addToUserRecipes: (user, recipe) =>
+      dispatch(addToUserRecipes(user, recipe))
+  })
 
 const VisibleRecipeList = connect(
   mapStateToProps,

@@ -3,7 +3,8 @@ import {
   EDIT_RECIPE,
   DELETE_RECIPE,
   POPULATE_USER_RECIPES,
-  TOGGLE_DETAILS
+  TOGGLE_DETAILS,
+  TRANSFER_RECIPE
 } from '../actions/sync'
 
 const recipe = (state = {}, action) => {

@@ -9,76 +9,66 @@ export const SET_SORT = 'SET_SORT'
 export const CLOSE_MODAL = 'CLOSE_MODAL'
 export const POPULATE_MODAL = 'POPULATE_MODAL'
 
-export const addRecipe = (recipe, active) => {
-  return {
+export const addRecipe = (recipe, active) =>
+  ({
     type: ADD_RECIPE,
     recipe,
     active
-  }
-}
+  })
 
-export const editRecipe = (recipe, active) => {
-  return {
+export const editRecipe = (recipe, active) =>
+  ({
     type: EDIT_RECIPE,
     recipe,
     active
-  }
-}
+  })
 
-export const deleteRecipe = (recipe, active) => {
-  return {
+export const deleteRecipe = (recipe, active) =>
+  ({
     type: DELETE_RECIPE,
     recipe,
     active
-  }
-}
+  })
 
-export const populateUserRecipes = (recipes) => {
-  return {
+export const populateUserRecipes = (recipes) =>
+  ({
     type: POPULATE_USER_RECIPES,
     recipes
-  }
-}
+  })
 
-export const toggleDetails = (id, active) => {
-  return {
+export const toggleDetails = (id, active) =>
+  ({
     type: TOGGLE_DETAILS,
     id,
     active
-  }
-}
+  })
 
-export const setFilterContent = (content) => {
-  return {
+export const setFilterContent = (content) =>
+  ({
     type: SET_FILTER_CONTENT,
     content
-  }
-}
+  })
 
-export const setFilterRecipes = (recipes) => {
-  return {
+export const setFilterRecipes = (recipes) =>
+  ({
     type: SET_FILTER_RECIPES,
     recipes
-  }
-}
+  })
 
-export const setSort = (sortBy) => {
-  return {
+export const setSort = (sortBy) =>
+  ({
     type: SET_SORT,
     sortBy
-  }
-}
+  })
 
-export const closeModal = () => {
-  return {
+export const closeModal = () =>
+  ({
     type: CLOSE_MODAL
-  }
-}
+  })
 
-export const populateModal = (dialogue, content) => {
-  return {
+export const populateModal = (dialogue, content) =>
+  ({
     type: POPULATE_MODAL,
     dialogue,
     content
-  }
-}
+  })

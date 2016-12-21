@@ -45,10 +45,10 @@ export const addUserRecipe = (user, recipe, active) => {
         },
         mode: 'cors',
         cache: 'default',
-        body: JSON.stringify({user, altRecipe})
+        body: JSON.stringify({user, recipe: altRecipe})
       }
     )
-    .catch(e => console.error(e))
+    .catch(console.error)
   }
 }
 
@@ -73,12 +73,12 @@ export const editUserRecipe = (user, recipe, active) => {
         body: JSON.stringify({user, recipe: altRecipe})
       }
     )
-    .catch(e => console.error(e))
+    .catch(console.error)
   }
 }
 
-export const deleteUserRecipe = (user, recipe, active) => {
-  return dispatch => {
+export const deleteUserRecipe = (user, recipe, active) =>
+  dispatch => {
     dispatch(deleteRecipe(recipe, active))
 
     return fetch(`https://thejam.herokuapp.com/delete`,
@@ -93,6 +93,128 @@ export const deleteUserRecipe = (user, recipe, active) => {
         body: JSON.stringify({user, recipe})
       }
     )
-    .catch(e => console.error(e))
+    .catch(console.error)
   }
-}
+
+export const publishUserRecipe = (user, recipe) =>
+  dispatch => {
+    const publicRecipe = {
+      ...recipe,
+      votes: {},
+      author: user
+    }
+    delete publicRecipe.stars
+    delete publicRecipe._id
+
+    const privateRecipe = {
+      ...recipe,
+      published: true
+    }
+    delete privateRecipe._id
+
+    dispatch(addRecipe(publicRecipe, 'public'))
+    dispatch(editRecipe(privateRecipe, 'private'))
+
+    publicRecipe.showDetails = false
+    privateRecipe.showDetails = false
+
+    fetch(`https://thejam.herokuapp.com/new`,
+      {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-type': 'application/json'
+        },
+        mode: 'cors',
+        cache: 'default',
+        body: JSON.stringify({user: 'public', recipe: publicRecipe})
+      }
+    )
+    .catch(console.error)
+
+    fetch(`https://thejam.herokuapp.com/edit`,
+      {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-type': 'application/json'
+        },
+        mode: 'cors',
+        cache: 'default',
+        body: JSON.stringify({user, recipe: privateRecipe})
+      }
+    )
+    .catch(console.error)
+  }
+
+export const unpublishRecipe = (user, recipe) =>
+  dispatch => {
+    const altRecipe = {
+      ...recipe,
+      published: false
+    }
+    delete altRecipe._id
+
+    dispatch(deleteRecipe(recipe, 'public'))
+    dispatch(editRecipe(altRecipe, 'private'))
+
+    altRecipe.showDetails = false
+
+    fetch(`https://thejam.herokuapp.com/delete`,
+      {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-type': 'application/json'
+        },
+        mode: 'cors',
+        cache: 'default',
+        body: JSON.stringify({user: 'public', recipe})
+      }
+    )
+    .catch(console.error)
+
+
+    fetch(`https://thejam.herokuapp.com/edit`,
+      {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-type': 'application/json'
+        },
+        mode: 'cors',
+        cache: 'default',
+        body: JSON.stringify({user, recipe: altRecipe})
+      }
+    )
+    .catch(console.error)
+  }
+
+export const addToUserRecipes = (user, recipe) =>
+  dispatch => {
+    const altRecipe = {
+      ...recipe,
+      stars: 0,
+      published: false,
+      showDetails: false
+    }
+    delete altRecipe.votes
+    delete altRecipe.author
+    delete altRecipe._id
+
+    dispatch(addRecipe(altRecipe, 'private'))
+
+    fetch(`https://thejam.herokuapp.com/new`,
+      {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-type': 'application/json'
+        },
+        mode: 'cors',
+        cache: 'default',
+        body: JSON.stringify({user, recipe: altRecipe})
+      }
+    )
+    .catch(console.error)
+  }
