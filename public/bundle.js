@@ -60464,7 +60464,8 @@
 	const publishRecipe = exports.publishRecipe = (user, recipe) => dispatch => {
 	  let author = 'anonymous';
 	  try {
-	    author = JSON.parse(localStorage.getItem('profile')).name;
+	    profile = localStorage.getItem('profile');
+	    author = profile ? JSON.parse(profile).name : 'anonymous';
 	  } catch (e) {
 	    console.error(e);
 	  }
