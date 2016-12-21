@@ -2719,7 +2719,8 @@ footer {
 
 .parens {
   display: block;
-  font-size: 20px; }
+  font-family: 'Architects Daughter', 'sans-serif';
+  font-size: 18px; }
 
 .recipe-form__servings-input {
   max-width: 50px; }
