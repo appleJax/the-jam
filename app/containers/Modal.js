@@ -3,7 +3,8 @@ import {
   addUserRecipe,
   editUserRecipe,
   deleteUserRecipe,
-  voteForRecipe
+  voteForRecipe,
+  unpublishRecipe
 } from '../actions/async'
 import { closeModal } from '../actions/sync'
 import { auth0Login } from '../actions/auth'
@@ -36,6 +37,8 @@ const mapDispatchToProps = (dispatch) =>
 
     voteForRecipe: (user, vote, recipe) =>
       dispatch(voteForRecipe(user, vote, recipe)),
+
+    unpublishRecipe: (user, recipe) => dispatch(unpublishRecipe(user, recipe)),
 
     login: () => dispatch(auth0Login())
   })

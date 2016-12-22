@@ -3,6 +3,7 @@ import ConfirmDialogue from '../components/ConfirmDialogue'
 import RecipeForm from '../components/RecipeForm'
 import VoteDialogue from '../components/VoteDialogue'
 import LoginDialogue from '../components/LoginDialogue'
+import UnpublishDialogue from '../components/UnpublishDialogue'
 
 const ModalOverlay = ({
   dialogue,
@@ -15,6 +16,7 @@ const ModalOverlay = ({
   deleteRecipe,
   closeModal,
   voteForRecipe,
+  unpublishRecipe,
   login
 }) => {
   let dialogueBox = ''
@@ -47,6 +49,12 @@ const ModalOverlay = ({
     case 'login':
       dialogueBox = <LoginDialogue
         login={login}
+        closeModal={closeModal}
+      />
+      break
+    case 'unpublish':
+      dialogueBox = <UnpublishDialogue
+        unpublishRecipe={() => unpublishRecipe(user, content)}
         closeModal={closeModal}
       />
   }

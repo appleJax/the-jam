@@ -8656,7 +8656,7 @@
 
 /***/ },
 /* 316 */
-[718, 317, 318],
+[719, 317, 318],
 /* 317 */
 /***/ function(module, exports) {
 
@@ -9137,7 +9137,7 @@
 
 /***/ },
 /* 321 */
-[719, 322],
+[720, 322],
 /* 322 */
 /***/ function(module, exports) {
 
@@ -14043,7 +14043,7 @@
 
 /***/ },
 /* 357 */
-[719, 358],
+[720, 358],
 /* 358 */
 322,
 /* 359 */
@@ -14284,7 +14284,7 @@
 
 /***/ },
 /* 363 */
-[718, 345, 347],
+[719, 345, 347],
 /* 364 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -60054,7 +60054,7 @@
 
 	var _Modal2 = _interopRequireDefault(_Modal);
 
-	var _Footer = __webpack_require__(717);
+	var _Footer = __webpack_require__(718);
 
 	var _Footer2 = _interopRequireDefault(_Footer);
 
@@ -60631,7 +60631,7 @@
 	      toggleDetails: () => toggleDetails(recipe.id, visibilityFilter.active),
 	      populateModal: () => populateModal('recipe', recipe),
 	      publishRecipe: () => publishRecipe(user, recipe, name),
-	      unpublishConfirm: () => populateModal('confirm', recipe)
+	      unpublishConfirm: () => populateModal('unpublish', recipe)
 	    }) : _react2.default.createElement(_PublicRecipe2.default, {
 	      key: i,
 	      recipe: recipe,
@@ -60642,7 +60642,7 @@
 	      setFilterContent: setFilterContent,
 	      toggleDetails: () => toggleDetails(recipe.id, visibilityFilter.active),
 	      addToUserRecipes: () => addToUserRecipes(user, recipe),
-	      unpublishConfirm: () => populateModal('confirm', recipe),
+	      unpublishConfirm: () => populateModal('unpublish', recipe),
 	      voteDialogue: () => populateModal('vote', recipe),
 	      loginDialogue: () => populateModal('login')
 	    }))
@@ -61112,6 +61112,8 @@
 
 	  voteForRecipe: (user, vote, recipe) => dispatch((0, _async.voteForRecipe)(user, vote, recipe)),
 
+	  unpublishRecipe: (user, recipe) => dispatch((0, _async.unpublishRecipe)(user, recipe)),
+
 	  login: () => dispatch((0, _auth.auth0Login)())
 	});
 
@@ -61149,6 +61151,10 @@
 
 	var _LoginDialogue2 = _interopRequireDefault(_LoginDialogue);
 
+	var _UnpublishDialogue = __webpack_require__(717);
+
+	var _UnpublishDialogue2 = _interopRequireDefault(_UnpublishDialogue);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	const ModalOverlay = ({
@@ -61162,6 +61168,7 @@
 	  deleteRecipe,
 	  closeModal,
 	  voteForRecipe,
+	  unpublishRecipe,
 	  login
 	}) => {
 	  let dialogueBox = '';
@@ -61194,6 +61201,12 @@
 	    case 'login':
 	      dialogueBox = _react2.default.createElement(_LoginDialogue2.default, {
 	        login: login,
+	        closeModal: closeModal
+	      });
+	      break;
+	    case 'unpublish':
+	      dialogueBox = _react2.default.createElement(_UnpublishDialogue2.default, {
+	        unpublishRecipe: () => unpublishRecipe(user, content),
 	        closeModal: closeModal
 	      });
 	  }
@@ -61245,7 +61258,7 @@
 	  _react2.default.createElement(
 	    'div',
 	    {
-	      className: 'confirm dialogue__button confirm-dialogue__button--delete',
+	      className: 'confirm-dialogue__button confirm-dialogue__button--delete',
 	      onClick: () => {
 	        deleteRecipe();
 	        closeModal();
@@ -61256,7 +61269,7 @@
 	  _react2.default.createElement(
 	    'div',
 	    {
-	      className: 'confirm dialogue__button confirm-dialogue__button--cancel',
+	      className: 'confirm-dialogue__button confirm-dialogue__button--cancel',
 	      onClick: closeModal
 	    },
 	    'Cancel'
@@ -61651,6 +61664,66 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	const UnpublishDialogue = ({
+	  unpublishRecipe,
+	  closeModal
+	}) => _react2.default.createElement(
+	  'div',
+	  {
+	    className: 'confirm-dialogue',
+	    onClick: e => e.stopPropagation()
+	  },
+	  _react2.default.createElement(
+	    'h3',
+	    {
+	      className: 'confirm-dialogue__message'
+	    },
+	    'Unpublish Recipe?'
+	  ),
+	  _react2.default.createElement(
+	    'p',
+	    null,
+	    'The recipe will be removed from the public space, and it will lose all votes permanently.'
+	  ),
+	  _react2.default.createElement(
+	    'div',
+	    {
+	      className: 'confirm-dialogue__button confirm-dialogue__button--delete',
+	      onClick: () => {
+	        unpublishRecipe();
+	        closeModal();
+	      }
+	    },
+	    'Unpublish'
+	  ),
+	  _react2.default.createElement(
+	    'div',
+	    {
+	      className: 'confirm-dialogue__button confirm-dialogue__button--cancel',
+	      onClick: closeModal
+	    },
+	    'Cancel'
+	  )
+	);
+
+	exports.default = UnpublishDialogue;
+
+/***/ },
+/* 718 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(312);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 	const Footer = () => _react2.default.createElement(
 	  'footer',
 	  null,
@@ -61660,7 +61733,7 @@
 	exports.default = Footer;
 
 /***/ },
-/* 718 */
+/* 719 */
 /***/ function(module, exports, __webpack_require__, __webpack_module_template_argument_0__, __webpack_module_template_argument_1__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -61789,7 +61862,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(308)))
 
 /***/ },
-/* 719 */
+/* 720 */
 /***/ function(module, exports, __webpack_require__, __webpack_module_template_argument_0__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**

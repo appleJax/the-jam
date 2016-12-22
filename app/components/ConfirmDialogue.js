@@ -16,7 +16,7 @@ const ConfirmDialogue = ({
       Delete recipe permanently?
     </h3>
     <div
-      className='confirm dialogue__button confirm-dialogue__button--delete'
+      className='confirm-dialogue__button confirm-dialogue__button--delete'
       onClick={() => {
         deleteRecipe()
         closeModal()
@@ -25,7 +25,7 @@ const ConfirmDialogue = ({
       Delete
     </div>
     <div
-      className='confirm dialogue__button confirm-dialogue__button--cancel'
+      className='confirm-dialogue__button confirm-dialogue__button--cancel'
       onClick={closeModal}
     >
       Cancel
