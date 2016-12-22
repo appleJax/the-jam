@@ -45,7 +45,12 @@ class PublishDialogue extends React.Component {
           >
             Not an original recipe?<br />Give the chef some credit...
           </p>
-          <form onSubmit={this.save}>
+          <form
+            onSubmit={e => {
+              e.preventDefault()
+              this.save
+            }}
+          >
             <label
               className='publish-dialogue__author-name'
               htmlFor='author'

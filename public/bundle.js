@@ -61753,7 +61753,12 @@
 	      ),
 	      _react2.default.createElement(
 	        'form',
-	        { onSubmit: this.save },
+	        {
+	          onSubmit: e => {
+	            e.preventDefault();
+	            this.save;
+	          }
+	        },
 	        _react2.default.createElement(
 	          'label',
 	          {
