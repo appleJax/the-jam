@@ -61752,21 +61752,24 @@
 	        'Give the chef some credit...'
 	      ),
 	      _react2.default.createElement(
-	        'label',
-	        {
-	          className: 'publish-dialogue__author-name',
-	          htmlFor: 'author'
-	        },
-	        'Original Author:'
+	        'form',
+	        { onSubmit: this.save },
+	        _react2.default.createElement(
+	          'label',
+	          {
+	            className: 'publish-dialogue__author-name',
+	            htmlFor: 'author'
+	          },
+	          'Original Author:'
+	        ),
+	        _react2.default.createElement('input', {
+	          type: 'text',
+	          name: 'author',
+	          className: 'publish-dialogue__author-input',
+	          value: this.state.author,
+	          onChange: e => this.setState({ author: e.target.value })
+	        })
 	      ),
-	      _react2.default.createElement('input', {
-	        type: 'text',
-	        name: 'author',
-	        className: 'publish-dialogue__author-input',
-	        value: this.state.author,
-	        onChange: e => this.setState({ author: e.target.value }),
-	        onSubmit: this.save
-	      }),
 	      _react2.default.createElement(
 	        'div',
 	        { className: 'confirm-dialogue__button-bar' },

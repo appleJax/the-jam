@@ -45,22 +45,23 @@ class PublishDialogue extends React.Component {
           >
             Not an original recipe?<br />Give the chef some credit...
           </p>
-          <label
-            className='publish-dialogue__author-name'
-            htmlFor='author'
-          >
-            Original Author:
-          </label>
-          <input
-            type='text'
-            name='author'
-            className='publish-dialogue__author-input'
-            value={this.state.author}
-            onChange={ e =>
-              this.setState({author: e.target.value})
-            }
-            onSubmit={this.save}
-          />
+          <form onSubmit={this.save}>
+            <label
+              className='publish-dialogue__author-name'
+              htmlFor='author'
+            >
+              Original Author:
+            </label>
+            <input
+              type='text'
+              name='author'
+              className='publish-dialogue__author-input'
+              value={this.state.author}
+              onChange={ e =>
+                this.setState({author: e.target.value})
+              }
+            />
+          </form>
           <div className='confirm-dialogue__button-bar'>
             <div
               className='confirm-dialogue__button confirm-dialogue__button--accept'
