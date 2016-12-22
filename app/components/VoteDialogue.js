@@ -13,7 +13,6 @@ class VoteDialogue extends React.Component {
     this.state = {
       stars
     }
-    console.log('Stars:', this.state.stars)
   }
 
   render() {
@@ -33,7 +32,7 @@ class VoteDialogue extends React.Component {
             key={i}
             data-value={i}
             onClick={ e => {
-              let stars = e.target.dataset.value
+              let stars = Number(e.target.dataset.value)
 
               if (stars == 1) {
                 stars = 0
@@ -50,7 +49,7 @@ class VoteDialogue extends React.Component {
             key={i}
             data-value={i}
             onClick={ e => {
-              let stars = e.target.dataset.value
+              let stars = Number(e.target.dataset.value)
               this.setState({stars})
             }}
           >

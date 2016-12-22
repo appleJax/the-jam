@@ -231,9 +231,6 @@ export const voteForRecipe = (user, vote, recipe) =>
     for (let voter in votes) totalStars += votes[voter]
 
     const stars = Math.ceil(totalStars / totalVotes)
-    console.log('Total Stars:', totalStars)
-    console.log('Total Votes:', totalVotes)
-    console.log('Stars:', stars)
 
     const newRecipe = {
       ...recipe,

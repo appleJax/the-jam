@@ -60564,9 +60564,6 @@
 	  for (let voter in votes) totalStars += votes[voter];
 
 	  const stars = Math.ceil(totalStars / totalVotes);
-	  console.log('Total Stars:', totalStars);
-	  console.log('Total Votes:', totalVotes);
-	  console.log('Stars:', stars);
 
 	  const newRecipe = _extends({}, recipe, {
 	    stars,
@@ -61516,7 +61513,6 @@
 	    this.state = {
 	      stars
 	    };
-	    console.log('Stars:', this.state.stars);
 	  }
 
 	  render() {
@@ -61535,7 +61531,7 @@
 	          key: i,
 	          'data-value': i,
 	          onClick: e => {
-	            let stars = e.target.dataset.value;
+	            let stars = Number(e.target.dataset.value);
 
 	            if (stars == 1) {
 	              stars = 0;
@@ -61549,7 +61545,7 @@
 	          key: i,
 	          'data-value': i,
 	          onClick: e => {
-	            let stars = e.target.dataset.value;
+	            let stars = Number(e.target.dataset.value);
 	            this.setState({ stars });
 	          }
 	        }));
