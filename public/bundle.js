@@ -61764,7 +61764,8 @@
 	        name: 'author',
 	        className: 'publish-dialogue__author-input',
 	        value: this.state.author,
-	        onChange: e => this.setState({ author: e.target.value })
+	        onChange: e => this.setState({ author: e.target.value }),
+	        onSubmit: this.save
 	      }),
 	      _react2.default.createElement(
 	        'div',

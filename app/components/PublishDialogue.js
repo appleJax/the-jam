@@ -59,6 +59,7 @@ class PublishDialogue extends React.Component {
             onChange={ e =>
               this.setState({author: e.target.value})
             }
+            onSubmit={this.save}
           />
           <div className='confirm-dialogue__button-bar'>
             <div
