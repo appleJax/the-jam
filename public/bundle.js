@@ -61776,7 +61776,7 @@
 	        'div',
 	        {
 	          className: 'confirm-dialogue__button confirm-dialogue__button--cancel',
-	          onClick: closeModal
+	          onClick: this.closeModal
 	        },
 	        'Cancel'
 	      )
