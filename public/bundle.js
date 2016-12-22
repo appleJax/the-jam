@@ -60557,6 +60557,7 @@
 	const voteForRecipe = exports.voteForRecipe = (user, vote, recipe) => dispatch => {
 	  const votes = recipe.votes;
 	  votes[user] = vote;
+	  if (vote == 0) delete votes[user];
 
 	  const totalVotes = Object.keys(votes).length;
 	  let totalStars = 0;
