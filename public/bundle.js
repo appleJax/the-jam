@@ -61060,7 +61060,7 @@
 	        { className: 'recipe__credits' },
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'recipe__credits--author' },
+	          { className: 'recipe__credits__author' },
 	          _react2.default.createElement('i', { className: 'fa fa-id-card-o' }),
 	          'Recipe By: ',
 	          _react2.default.createElement(
@@ -61071,7 +61071,7 @@
 	        ),
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'recipe__credits--publisher' },
+	          { className: 'recipe__credits__publisher' },
 	          _react2.default.createElement('i', { className: 'fa fa-newspaper-o' }),
 	          'Published By: ',
 	          _react2.default.createElement(
@@ -61729,7 +61729,7 @@
 	  }
 
 	  render() {
-	    _react2.default.createElement(
+	    return _react2.default.createElement(
 	      'div',
 	      {
 	        className: 'confirm-dialogue',

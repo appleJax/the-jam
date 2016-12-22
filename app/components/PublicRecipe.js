@@ -135,11 +135,11 @@ const PublicRecipe = ({
           directionList={directionList}
         />
         <div className='recipe__credits'>
-          <div className='recipe__credits--author'>
+          <div className='recipe__credits__author'>
             <i className='fa fa-id-card-o'></i>
             Recipe By: <span className='credit-name'>{author}</span>
           </div>
-          <div className='recipe__credits--publisher'>
+          <div className='recipe__credits__publisher'>
             <i className='fa fa-newspaper-o'></i>
             Published By: <span className='credit-name'>{publisher}</span>
           </div>

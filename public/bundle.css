@@ -2639,17 +2639,19 @@ h3 {
   border-radius: 0 0 5px 5px;
   color: white;
   display: flex;
+  flex-wrap: wrap;
   font-size: 16px;
   justify-content: space-between;
   margin: 25px -15px -15px -15px;
-  padding: 15px; }
+  padding: 8px 15px; }
   .recipe__credits i {
     margin-right: 8px; }
   .recipe__credits .credit-name {
     margin-left: 15px; }
 
-.recipe__credits--publisher {
-  float: right; }
+.recipe__credits__author {
+  margin: 8px 0;
+  white-space: nowrap; }
 
 .recipe__button--edit {
   background: #F14723;
