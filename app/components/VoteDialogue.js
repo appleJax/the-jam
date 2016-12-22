@@ -13,6 +13,7 @@ class VoteDialogue extends React.Component {
     this.state = {
       stars
     }
+    console.log('Stars:', this.state.stars)
   }
 
   render() {

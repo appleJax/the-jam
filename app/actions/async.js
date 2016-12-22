@@ -226,11 +226,14 @@ export const voteForRecipe = (user, vote, recipe) =>
     votes[user] = vote
 
     const totalVotes = Object.keys(votes).length
-    let stars = 0
+    let totalStars = 0
 
-    for (let voter in votes) stars += votes[voter]
+    for (let voter in votes) totalStars += votes[voter]
 
-    stars = Math.ceil(stars / totalVotes)
+    const stars = Math.ceil(totalStars / totalVotes)
+    console.log('Total Stars:', totalStars)
+    console.log('Total Votes:', totalVotes)
+    console.log('Stars:', stars)
 
     const newRecipe = {
       ...recipe,
