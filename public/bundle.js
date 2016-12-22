@@ -61756,7 +61756,7 @@
 	        {
 	          onSubmit: e => {
 	            e.preventDefault();
-	            this.save;
+	            this.save();
 	          }
 	        },
 	        _react2.default.createElement(

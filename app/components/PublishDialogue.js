@@ -48,7 +48,7 @@ class PublishDialogue extends React.Component {
           <form
             onSubmit={e => {
               e.preventDefault()
-              this.save
+              this.save()
             }}
           >
             <label
