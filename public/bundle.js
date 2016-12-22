@@ -8656,7 +8656,7 @@
 
 /***/ },
 /* 316 */
-[716, 317, 318],
+[718, 317, 318],
 /* 317 */
 /***/ function(module, exports) {
 
@@ -9137,7 +9137,7 @@
 
 /***/ },
 /* 321 */
-[717, 322],
+[719, 322],
 /* 322 */
 /***/ function(module, exports) {
 
@@ -14043,7 +14043,7 @@
 
 /***/ },
 /* 357 */
-[717, 358],
+[719, 358],
 /* 358 */
 322,
 /* 359 */
@@ -14284,7 +14284,7 @@
 
 /***/ },
 /* 363 */
-[716, 345, 347],
+[718, 345, 347],
 /* 364 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -60054,7 +60054,7 @@
 
 	var _Modal2 = _interopRequireDefault(_Modal);
 
-	var _Footer = __webpack_require__(715);
+	var _Footer = __webpack_require__(717);
 
 	var _Footer2 = _interopRequireDefault(_Footer);
 
@@ -60349,7 +60349,9 @@
 
 	  unpublishRecipe: (user, recipe) => dispatch((0, _async.unpublishRecipe)(user, recipe)),
 
-	  addToUserRecipes: (user, recipe) => dispatch((0, _async.addToUserRecipes)(user, recipe))
+	  addToUserRecipes: (user, recipe) => dispatch((0, _async.addToUserRecipes)(user, recipe)),
+
+	  voteForRecipe: (user, vote, recipe) => dispatch((0, _async.voteForRecipe)(user, vote, recipe))
 	});
 
 	const VisibleRecipeList = (0, _reactRedux.connect)(mapStateToProps, mapDispatchTProps)(_RecipeList2.default);
@@ -60365,7 +60367,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.addToUserRecipes = exports.unpublishRecipe = exports.publishRecipe = exports.deleteUserRecipe = exports.editUserRecipe = exports.addUserRecipe = exports.fetchRecipes = undefined;
+	exports.voteForRecipe = exports.addToUserRecipes = exports.unpublishRecipe = exports.publishRecipe = exports.deleteUserRecipe = exports.editUserRecipe = exports.addUserRecipe = exports.fetchRecipes = undefined;
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -60398,7 +60400,7 @@
 	  return dispatch => {
 	    dispatch((0, _sync.addRecipe)(recipe, active));
 
-	    const altRecipe = _extends({}, recipe, {
+	    const newRecipe = _extends({}, recipe, {
 	      showDetails: false
 	    });
 
@@ -60410,7 +60412,7 @@
 	      },
 	      mode: 'cors',
 	      cache: 'default',
-	      body: JSON.stringify({ user, recipe: altRecipe })
+	      body: JSON.stringify({ user, recipe: newRecipe })
 	    }).catch(console.error);
 	  };
 	};
@@ -60419,7 +60421,7 @@
 	  return dispatch => {
 	    dispatch((0, _sync.editRecipe)(recipe, active));
 
-	    const altRecipe = _extends({}, recipe, {
+	    const newRecipe = _extends({}, recipe, {
 	      showDetails: false
 	    });
 
@@ -60431,7 +60433,7 @@
 	      },
 	      mode: 'cors',
 	      cache: 'default',
-	      body: JSON.stringify({ user, recipe: altRecipe })
+	      body: JSON.stringify({ user, recipe: newRecipe })
 	    }).catch(console.error);
 	  };
 	};
@@ -60494,7 +60496,7 @@
 	};
 
 	const unpublishRecipe = exports.unpublishRecipe = (user, recipe) => dispatch => {
-	  const altRecipe = _extends({}, recipe, {
+	  const newRecipe = _extends({}, recipe, {
 	    published: false
 	  });
 	  delete altRecipe._id;
@@ -60523,12 +60525,12 @@
 	    },
 	    mode: 'cors',
 	    cache: 'default',
-	    body: JSON.stringify({ user, recipe: altRecipe })
+	    body: JSON.stringify({ user, recipe: newRecipe })
 	  }).catch(console.error);
 	};
 
 	const addToUserRecipes = exports.addToUserRecipes = (user, recipe) => dispatch => {
-	  const altRecipe = _extends({}, recipe, {
+	  const newRecipe = _extends({}, recipe, {
 	    stars: 0,
 	    published: false,
 	    showDetails: false,
@@ -60538,7 +60540,7 @@
 	  delete altRecipe.author;
 	  delete altRecipe._id;
 
-	  dispatch((0, _sync.addRecipe)(altRecipe, 'private'));
+	  dispatch((0, _sync.addRecipe)(newRecipe, 'private'));
 
 	  return (0, _isomorphicFetch2.default)(`https://thejam.herokuapp.com/new`, {
 	    method: 'POST',
@@ -60549,6 +60551,31 @@
 	    mode: 'cors',
 	    cache: 'default',
 	    body: JSON.stringify({ user, recipe: altRecipe })
+	  }).catch(console.error);
+	};
+
+	const voteForRecipe = exports.voteForRecipe = (user, vote, recipe) => dispatch => {
+	  const votes = recipe.votes;
+
+	  votes[user] = vote;
+
+	  const newRecipe = _extends({}, recipe, {
+	    votes
+	  });
+	  delete newRecipe._id;
+
+	  dispatch((0, _sync.editRecipe)(newRecipe, 'public'));
+	  newRecipe.showDetails = false;
+
+	  (0, _isomorphicFetch2.default)(`https://thejam.herokuapp.com/edit`, {
+	    method: 'POST',
+	    headers: {
+	      'Accept': 'application/json',
+	      'Content-type': 'application/json'
+	    },
+	    mode: 'cors',
+	    cache: 'default',
+	    body: JSON.stringify({ user: 'public', recipe: newRecipe })
 	  }).catch(console.error);
 	};
 
@@ -60588,7 +60615,6 @@
 	  toggleDetails,
 	  populateModal,
 	  publishRecipe,
-	  unpublishRecipe,
 	  addToUserRecipes
 	}) => {
 	  return _react2.default.createElement(
@@ -60605,7 +60631,7 @@
 	      toggleDetails: () => toggleDetails(recipe.id, visibilityFilter.active),
 	      populateModal: () => populateModal('recipe', recipe),
 	      publishRecipe: () => publishRecipe(user, recipe, name),
-	      unpublishRecipe: () => unpublishRecipe(user, recipe)
+	      unpublishConfirm: () => populateModal('confirm', recipe)
 	    }) : _react2.default.createElement(_PublicRecipe2.default, {
 	      key: i,
 	      recipe: recipe,
@@ -60615,8 +60641,10 @@
 	      loggedIn: loggedIn,
 	      setFilterContent: setFilterContent,
 	      toggleDetails: () => toggleDetails(recipe.id, visibilityFilter.active),
-	      unpublishRecipe: () => unpublishRecipe(user, recipe),
-	      addToUserRecipes: () => addToUserRecipes(user, recipe)
+	      addToUserRecipes: () => addToUserRecipes(user, recipe),
+	      unpublishConfirm: () => populateModal('confirm', recipe),
+	      voteDialogue: () => populateModal('vote', recipe),
+	      loginDialogue: () => populateModal('login')
 	    }))
 	  );
 	};
@@ -60653,7 +60681,7 @@
 	  toggleDetails,
 	  populateModal,
 	  publishRecipe,
-	  unpublishRecipe
+	  unpublishConfirm
 	}) => {
 	  const {
 	    id,
@@ -60692,7 +60720,7 @@
 	    'div',
 	    {
 	      className: 'recipe__button--unpublish',
-	      onClick: unpublishRecipe
+	      onClick: unpublishConfirm
 	    },
 	    _react2.default.createElement('i', { className: 'fa fa-check-circle' }),
 	    'Published'
@@ -60893,8 +60921,10 @@
 	  loggedIn,
 	  setFilterContent,
 	  toggleDetails,
-	  unpublishRecipe,
-	  addToUserRecipes
+	  addToUserRecipes,
+	  unpublishConfirm,
+	  voteDialogue,
+	  loginDialogue
 	}) => {
 	  const {
 	    id,
@@ -60929,40 +60959,24 @@
 	    direction
 	  ));
 
-	  const totalStars = 0;
-	  const rating = 0;
-	  const starIcons = [];
+	  let totalStars = 0;
+
+	  for (let voter in votes) totalStars += votes[voter];
+
+	  const totalVotes = Object.keys(votes).length,
+	        rating = Math.ceil(totalStars / totalVotes),
+	        starIcons = [];
 
 	  for (let i = 1; i <= 5; i++) {
 	    if (i <= rating) {
 	      starIcons.push(_react2.default.createElement('i', { className: 'fa fa-star fa-lg',
 	        key: i,
-	        'data-value': i,
-	        onClick: e => {
-	          const editedRecipe = recipe,
-	                newStars = e.target.dataset.value;
-
-	          delete editedRecipe._id;
-
-	          if (newStars == 1) {
-	            editedRecipe.stars = 0;
-	          } else {
-	            editedRecipe.stars = newStars;
-	          }
-	          editRecipe(user, editedRecipe, visibilityFilter.active);
-	        }
+	        'data-value': i
 	      }));
 	    } else {
 	      starIcons.push(_react2.default.createElement('i', { className: 'fa fa-star-o fa-lg',
 	        key: i,
-	        'data-value': i,
-	        onClick: e => {
-	          const editedRecipe = recipe;
-	          editedRecipe.stars = e.target.dataset.value;
-	          delete editedRecipe._id;
-
-	          editRecipe(user, editedRecipe, visibilityFilter.active);
-	        }
+	        'data-value': i
 	      }));
 	    }
 	  }
@@ -60971,7 +60985,7 @@
 	    'div',
 	    {
 	      className: 'recipe__button--mine-unpub',
-	      onClick: () => console.log('Confirm to unpublish')
+	      onClick: unpublishConfirm
 	    },
 	    _react2.default.createElement('i', { className: 'fa fa-id-card' })
 	  ) : _react2.default.createElement(
@@ -61015,9 +61029,17 @@
 	        {
 	          className: 'recipe__votes'
 	        },
-	        '10 Votes'
+	        totalVotes,
+	        ' Vote',
+	        totalVotes != 1 && 's'
 	      ),
-	      starIcons
+	      _react2.default.createElement(
+	        'div',
+	        {
+	          onClick: loggedIn ? voteDialogue : loginDialogue
+	        },
+	        starIcons
+	      )
 	    ),
 	    showDetails && _react2.default.createElement(
 	      'div',
@@ -61060,45 +61082,37 @@
 
 	var _sync = __webpack_require__(697);
 
+	var _auth = __webpack_require__(536);
+
 	var _ModalOverlay = __webpack_require__(712);
 
 	var _ModalOverlay2 = _interopRequireDefault(_ModalOverlay);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	const mapStateToProps = state => {
-	  let user = 'public';
-	  if (state.visibilityFilter.active === 'private') {
-	    try {
-	      const profile = localStorage.getItem('profile');
-	      user = profile ? JSON.parse(profile).email : 'public';
-	    } catch (e) {
-	      console.error(e);
-	    }
-	  }
+	const mapStateToProps = state => ({
+	  dialogue: state.modal.dialogue,
+	  content: state.modal.content,
+	  active: state.visibilityFilter.active,
+	  user: state.auth.email
+	});
 
-	  return {
-	    dialogue: state.modal.dialogue,
-	    content: state.modal.content,
-	    active: state.visibilityFilter.active,
-	    user
-	  };
-	};
+	const mapDispatchToProps = dispatch => ({
+	  addRecipe: (user, recipe, active) => dispatch((0, _async.addUserRecipe)(user, recipe, active)),
 
-	const mapDispatchToProps = dispatch => {
-	  return {
-	    addRecipe: (user, recipe, active) => dispatch((0, _async.addUserRecipe)(user, recipe, active)),
+	  editRecipe: (user, recipe, active) => dispatch((0, _async.editUserRecipe)(user, recipe, active)),
 
-	    editRecipe: (user, recipe, active) => dispatch((0, _async.editUserRecipe)(user, recipe, active)),
+	  deleteRecipe: (user, id, active) => dispatch((0, _async.deleteUserRecipe)(user, id, active)),
 
-	    deleteRecipe: (user, id, active) => dispatch((0, _async.deleteUserRecipe)(user, id, active)),
+	  closeModal: () => {
+	    document.body.classList.remove('no-scroll');
+	    dispatch((0, _sync.closeModal)());
+	  },
 
-	    closeModal: () => {
-	      document.body.classList.remove('no-scroll');
-	      dispatch((0, _sync.closeModal)());
-	    }
-	  };
-	};
+	  voteForRecipe: (user, vote, recipe) => dispatch((0, _async.voteForRecipe)(user, vote, recipe)),
+
+	  login: () => dispatch((0, _auth.auth0Login)())
+	});
 
 	const Modal = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_ModalOverlay2.default);
 
@@ -61126,6 +61140,14 @@
 
 	var _RecipeForm2 = _interopRequireDefault(_RecipeForm);
 
+	var _VoteDialogue = __webpack_require__(715);
+
+	var _VoteDialogue2 = _interopRequireDefault(_VoteDialogue);
+
+	var _LoginDialogue = __webpack_require__(716);
+
+	var _LoginDialogue2 = _interopRequireDefault(_LoginDialogue);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	const ModalOverlay = ({
@@ -61136,19 +61158,42 @@
 	  addRecipe,
 	  editRecipe,
 	  deleteRecipe,
-	  closeModal
+	  closeModal,
+	  voteForRecipe,
+	  login
 	}) => {
-	  const dialogueBox = dialogue == 'confirm' ? _react2.default.createElement(_ConfirmDialogue2.default, {
-	    deleteRecipe: () => deleteRecipe(user, { id: content }, active),
-	    closeModal: closeModal
-	  }) : _react2.default.createElement(_RecipeForm2.default, {
-	    content: content,
-	    active: active,
-	    user: user,
-	    addRecipe: addRecipe,
-	    editRecipe: editRecipe,
-	    closeModal: closeModal
-	  });
+	  let dialogueBox = '';
+
+	  switch (dialogue) {
+	    case 'confirm':
+	      dialogueBox = _react2.default.createElement(_ConfirmDialogue2.default, {
+	        deleteRecipe: () => deleteRecipe(user, { id: content }, active),
+	        closeModal: closeModal
+	      });
+	      break;
+	    case 'recipe':
+	      dialogueBox = _react2.default.createElement(_RecipeForm2.default, {
+	        content: content,
+	        active: active,
+	        user: user,
+	        addRecipe: addRecipe,
+	        editRecipe: editRecipe,
+	        closeModal: closeModal
+	      });
+	      break;
+	    case 'vote':
+	      dialogueBox = _react2.default.createElement(_VoteDialogue2.default, {
+	        user: user,
+	        recipe: content,
+	        voteForRecipe: voteForRecipe,
+	        closeModal: closeModal
+	      });
+	    case 'login':
+	      dialogueBox = _react2.default.createElement(_LoginDialogue2.default, {
+	        login: login,
+	        closeModal: closeModal
+	      });
+	  }
 
 	  return _react2.default.createElement(
 	    'div',
@@ -61197,7 +61242,7 @@
 	  _react2.default.createElement(
 	    'div',
 	    {
-	      className: 'confirm-dialogue__delete',
+	      className: 'confirm dialogue__button confirm-dialogue__button--delete',
 	      onClick: () => {
 	        deleteRecipe();
 	        closeModal();
@@ -61208,7 +61253,7 @@
 	  _react2.default.createElement(
 	    'div',
 	    {
-	      className: 'confirm-dialogue__cancel',
+	      className: 'confirm dialogue__button confirm-dialogue__button--cancel',
 	      onClick: closeModal
 	    },
 	    'Cancel'
@@ -61252,12 +61297,12 @@
 	    const tempRecipe = {};
 
 	    if (typeof content == 'object') {
-	      const altContent = content;
-	      delete altContent._id;
+	      const newContent = content;
+	      delete newContent._id;
 	      tempRecipe.tags = content.tags.join(',');
 	      tempRecipe.ingredients = content.ingredients.join('\n');
 	      tempRecipe.directions = content.directions.join('\n\n');
-	      this.state = _extends({}, altContent, tempRecipe);
+	      this.state = _extends({}, newContent, tempRecipe);
 	    } else {
 	      this.state = {
 	        id: Date.now(),
@@ -61299,7 +61344,7 @@
 	    } = this.props;
 
 	    return _react2.default.createElement(
-	      'form',
+	      'div',
 	      {
 	        className: 'recipe-form',
 	        onClick: e => e.stopPropagation()
@@ -61311,103 +61356,107 @@
 	        ' Recipe'
 	      ),
 	      _react2.default.createElement(
-	        'label',
-	        { htmlFor: 'title' },
-	        'Name:'
-	      ),
-	      _react2.default.createElement('input', {
-	        type: 'text',
-	        name: 'title',
-	        value: this.state.name,
-	        onChange: e => this.setState({ name: e.target.value })
-	      }),
-	      _react2.default.createElement(
-	        'label',
-	        { htmlFor: 'tags' },
-	        'Tags:',
-	        _react2.default.createElement(
-	          'span',
-	          { className: 'parens' },
-	          '(separated by commas)'
-	        )
-	      ),
-	      _react2.default.createElement('input', {
-	        type: 'text',
-	        name: 'tags',
-	        value: this.state.tags,
-	        onChange: e => this.setState({ tags: e.target.value })
-	      }),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'recipe-form__servings-group' },
+	        'form',
+	        null,
 	        _react2.default.createElement(
 	          'label',
-	          { className: 'recipe-form__servings-label', htmlFor: 'servings' },
-	          'Servings:'
+	          { htmlFor: 'title' },
+	          'Name:'
 	        ),
 	        _react2.default.createElement('input', {
-	          type: 'number',
-	          name: 'servings',
-	          max: '999',
-	          min: '1',
-	          className: 'recipe-form__servings-input',
-	          value: this.state.servings,
-	          onChange: e => {
-	            let val = e.target.value;
-	            this.setState({ servings: val > 0 || val === '' ? val : 1 });
-	          }
-	        })
-	      ),
-	      _react2.default.createElement(
-	        'label',
-	        { htmlFor: 'ingredients' },
-	        'Ingredients:',
+	          type: 'text',
+	          name: 'title',
+	          value: this.state.name,
+	          onChange: e => this.setState({ name: e.target.value })
+	        }),
 	        _react2.default.createElement(
-	          'span',
-	          { className: 'parens' },
-	          '(one per line)'
-	        )
-	      ),
-	      _react2.default.createElement('textarea', {
-	        rows: '10',
-	        name: 'ingredients',
-	        value: this.state.ingredients,
-	        onChange: e => this.setState({ ingredients: e.target.value })
-	      }),
-	      _react2.default.createElement(
-	        'label',
-	        { htmlFor: 'directions' },
-	        'Directions:',
-	        _react2.default.createElement(
-	          'span',
-	          { className: 'parens' },
-	          '(Separated by blank lines)'
-	        )
-	      ),
-	      _react2.default.createElement('textarea', {
-	        rows: '14',
-	        name: 'directions',
-	        value: this.state.directions,
-	        onChange: e => this.setState({ directions: e.target.value })
-	      }),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'recipe-form__buttons' },
+	          'label',
+	          { htmlFor: 'tags' },
+	          'Tags:',
+	          _react2.default.createElement(
+	            'span',
+	            { className: 'parens' },
+	            '(separated by commas)'
+	          )
+	        ),
+	        _react2.default.createElement('input', {
+	          type: 'text',
+	          name: 'tags',
+	          value: this.state.tags,
+	          onChange: e => this.setState({ tags: e.target.value })
+	        }),
 	        _react2.default.createElement(
 	          'div',
-	          {
-	            className: 'recipe-form__save',
-	            onClick: this.save
-	          },
-	          _react2.default.createElement('i', { className: 'fa fa-check fa-lg' })
+	          { className: 'recipe-form__servings-group' },
+	          _react2.default.createElement(
+	            'label',
+	            { className: 'recipe-form__servings-label', htmlFor: 'servings' },
+	            'Servings:'
+	          ),
+	          _react2.default.createElement('input', {
+	            type: 'number',
+	            name: 'servings',
+	            max: '999',
+	            min: '1',
+	            className: 'recipe-form__servings-input',
+	            value: this.state.servings,
+	            onChange: e => {
+	              let val = e.target.value;
+	              this.setState({ servings: val > 0 || val === '' ? val : 1 });
+	            }
+	          })
 	        ),
 	        _react2.default.createElement(
+	          'label',
+	          { htmlFor: 'ingredients' },
+	          'Ingredients:',
+	          _react2.default.createElement(
+	            'span',
+	            { className: 'parens' },
+	            '(one per line)'
+	          )
+	        ),
+	        _react2.default.createElement('textarea', {
+	          rows: '10',
+	          name: 'ingredients',
+	          value: this.state.ingredients,
+	          onChange: e => this.setState({ ingredients: e.target.value })
+	        }),
+	        _react2.default.createElement(
+	          'label',
+	          { htmlFor: 'directions' },
+	          'Directions:',
+	          _react2.default.createElement(
+	            'span',
+	            { className: 'parens' },
+	            '(Separated by blank lines)'
+	          )
+	        ),
+	        _react2.default.createElement('textarea', {
+	          rows: '14',
+	          name: 'directions',
+	          value: this.state.directions,
+	          onChange: e => this.setState({ directions: e.target.value })
+	        }),
+	        _react2.default.createElement(
 	          'div',
-	          {
-	            className: 'recipe-form__cancel',
-	            onClick: closeModal
-	          },
-	          _react2.default.createElement('i', { className: 'fa fa-times fa-lg' })
+	          { className: 'recipe-form__buttons' },
+	          _react2.default.createElement(
+	            'div',
+	            {
+	              className: 'recipe-form__save',
+	              onClick: this.save
+	            },
+	            _react2.default.createElement('i', { className: 'fa fa-check fa-lg' })
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            {
+	              className: 'recipe-form__cancel',
+	              onClick: closeModal
+	            },
+	            _react2.default.createElement('i', { className: 'fa fa-times fa-lg' })
+	          )
 	        )
 	      )
 	    );
@@ -61432,6 +61481,173 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	class VoteDialogue extends _react2.default.Component {
+	  constructor(props) {
+	    super(props);
+	    const {
+	      user,
+	      recipe
+	    } = this.props;
+
+	    const stars = recipe.votes[user] || 0;
+
+	    this.state = {
+	      stars
+	    };
+	  }
+
+	  render() {
+	    const {
+	      user,
+	      recipe,
+	      voteForRecipe,
+	      closeModal
+	    } = this.props;
+
+	    const starIcons = [];
+
+	    for (let i = 1; i <= 5; i++) {
+	      if (i <= this.state.stars) {
+	        starIcons.push(_react2.default.createElement('i', { className: 'fa fa-star fa-2x',
+	          key: i,
+	          'data-value': i,
+	          onClick: e => {
+	            let stars = e.target.dataset.value;
+
+	            if (this.state.stars == 1) {
+	              stars = 0;
+	            }
+
+	            this.setState({ stars });
+	          }
+	        }));
+	      } else {
+	        starIcons.push(_react2.default.createElement('i', { className: 'fa fa-star-o fa-2x',
+	          key: i,
+	          'data-value': i,
+	          onClick: e => {
+	            let stars = e.target.dataset.value;
+	            this.setState({ stars });
+	          }
+	        }));
+	      }
+	    }
+
+	    return _react2.default.createElement(
+	      'div',
+	      {
+	        className: 'confirm-dialogue',
+	        onClick: e => e.stopPropagation()
+	      },
+	      _react2.default.createElement(
+	        'h3',
+	        {
+	          className: 'confirm-dialogue__message'
+	        },
+	        'Your Vote'
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'confirm-dialogue__stars' },
+	        starIcons
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'confirm-dialogue__button-bar' },
+	        _react2.default.createElement(
+	          'div',
+	          {
+	            className: 'confirm-dialogue__button confirm-dialogue__button--accept',
+	            onClick: () => {
+	              voteForRecipe(user, this.state.stars, recipe);
+	              closeModal();
+	            }
+	          },
+	          'Vote'
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          {
+	            className: 'confirm-dialogue__button confirm-dialogue__button--cancel',
+	            onClick: closeModal
+	          },
+	          'Cancel'
+	        )
+	      )
+	    );
+	  }
+	}
+
+	exports.default = VoteDialogue;
+
+/***/ },
+/* 716 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(312);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	const LoginDialogue = ({
+	  login,
+	  closeModal
+	}) => _react2.default.createElement(
+	  'div',
+	  {
+	    className: 'confirm-dialogue',
+	    onClick: e => e.stopPropagation()
+	  },
+	  _react2.default.createElement(
+	    'h3',
+	    {
+	      className: 'confirm-dialogue__message'
+	    },
+	    'Sign In to Vote'
+	  ),
+	  _react2.default.createElement(
+	    'div',
+	    {
+	      className: 'confirm-dialogue__button confirm-dialogue__button--accept',
+	      onClick: login
+	    },
+	    'Sign In'
+	  ),
+	  _react2.default.createElement(
+	    'div',
+	    {
+	      className: 'confirm-dialogue__button confirm-dialogue__button--cancel',
+	      onClick: closeModal
+	    },
+	    'Cancel'
+	  )
+	);
+
+	exports.default = LoginDialogue;
+
+/***/ },
+/* 717 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(312);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 	const Footer = () => _react2.default.createElement(
 	  'footer',
 	  null,
@@ -61441,7 +61657,7 @@
 	exports.default = Footer;
 
 /***/ },
-/* 716 */
+/* 718 */
 /***/ function(module, exports, __webpack_require__, __webpack_module_template_argument_0__, __webpack_module_template_argument_1__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -61570,7 +61786,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(308)))
 
 /***/ },
-/* 717 */
+/* 719 */
 /***/ function(module, exports, __webpack_require__, __webpack_module_template_argument_0__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**

@@ -2,35 +2,23 @@ import { connect } from 'react-redux'
 import {
   addUserRecipe,
   editUserRecipe,
-  deleteUserRecipe
+  deleteUserRecipe,
+  voteForRecipe
 } from '../actions/async'
-import {
-  closeModal
-} from '../actions/sync'
+import { closeModal } from '../actions/sync'
+import { auth0Login } from '../actions/auth'
 import ModalOverlay from '../components/ModalOverlay'
 
-const mapStateToProps = (state) => {
-  let user = 'public'
-  if (state.visibilityFilter.active === 'private') {
-    try {
-      const profile = localStorage.getItem('profile')
-      user = profile ? JSON.parse(profile).email : 'public'
-
-    } catch(e) {
-      console.error(e)
-    }
-  }
-
-  return {
+const mapStateToProps = (state) =>
+  ({
     dialogue: state.modal.dialogue,
     content: state.modal.content,
     active: state.visibilityFilter.active,
-    user
-  }
-}
+    user: state.auth.email
+  })
 
-const mapDispatchToProps = (dispatch) => {
-  return {
+const mapDispatchToProps = (dispatch) =>
+  ({
     addRecipe: (user, recipe, active) =>
       dispatch(addUserRecipe(user, recipe, active)),
 
@@ -43,9 +31,13 @@ const mapDispatchToProps = (dispatch) => {
     closeModal: () => {
       document.body.classList.remove('no-scroll')
       dispatch(closeModal())
-    }
-  }
-}
+    },
+
+    voteForRecipe: (user, vote, recipe) =>
+      dispatch(voteForRecipe(user, vote, recipe)),
+
+    login: () => dispatch(auth0Login())
+  })
 
 const Modal = connect(
   mapStateToProps,

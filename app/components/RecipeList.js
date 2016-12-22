@@ -14,7 +14,6 @@ const RecipeList = ({
   toggleDetails,
   populateModal,
   publishRecipe,
-  unpublishRecipe,
   addToUserRecipes
 }) => {
   return (
@@ -32,7 +31,7 @@ const RecipeList = ({
           toggleDetails={() => toggleDetails(recipe.id, visibilityFilter.active)}
           populateModal={() => populateModal('recipe', recipe)}
           publishRecipe={() => publishRecipe(user, recipe, name)}
-          unpublishRecipe={() => unpublishRecipe(user, recipe)}
+          unpublishConfirm={() => populateModal('confirm', recipe)}
         /> :
         <PublicRecipe
           key={i}
@@ -43,8 +42,10 @@ const RecipeList = ({
           loggedIn={loggedIn}
           setFilterContent={setFilterContent}
           toggleDetails={() => toggleDetails(recipe.id, visibilityFilter.active)}
-          unpublishRecipe={() => unpublishRecipe(user, recipe)}
           addToUserRecipes={() => addToUserRecipes(user, recipe)}
+          unpublishConfirm={() => populateModal('confirm', recipe)}
+          voteDialogue={() => populateModal('vote', recipe)}
+          loginDialogue={() => populateModal('login')}
         />
       )}
     </ul>

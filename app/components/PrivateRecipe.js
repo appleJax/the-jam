@@ -11,7 +11,7 @@ const PrivateRecipe = ({
   toggleDetails,
   populateModal,
   publishRecipe,
-  unpublishRecipe
+  unpublishConfirm
 }) => {
   const {
     id,
@@ -53,7 +53,7 @@ const PrivateRecipe = ({
   const status = published ?
     <div
       className='recipe__button--unpublish'
-      onClick={unpublishRecipe}
+      onClick={unpublishConfirm}
     >
       <i className='fa fa-check-circle'></i>
       Published

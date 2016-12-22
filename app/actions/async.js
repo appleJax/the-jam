@@ -31,7 +31,7 @@ export const addUserRecipe = (user, recipe, active) => {
   return dispatch => {
     dispatch(addRecipe(recipe, active))
 
-    const altRecipe = {
+    const newRecipe = {
       ...recipe,
       showDetails: false
     }
@@ -45,7 +45,7 @@ export const addUserRecipe = (user, recipe, active) => {
         },
         mode: 'cors',
         cache: 'default',
-        body: JSON.stringify({user, recipe: altRecipe})
+        body: JSON.stringify({user, recipe: newRecipe})
       }
     )
     .catch(console.error)
@@ -56,7 +56,7 @@ export const editUserRecipe = (user, recipe, active) => {
   return dispatch => {
     dispatch(editRecipe(recipe, active))
 
-    const altRecipe = {
+    const newRecipe = {
       ...recipe,
       showDetails: false
     }
@@ -70,7 +70,7 @@ export const editUserRecipe = (user, recipe, active) => {
         },
         mode: 'cors',
         cache: 'default',
-        body: JSON.stringify({user, recipe: altRecipe})
+        body: JSON.stringify({user, recipe: newRecipe})
       }
     )
     .catch(console.error)
@@ -149,7 +149,7 @@ export const publishRecipe = (user, recipe, author) =>
 
 export const unpublishRecipe = (user, recipe) =>
   dispatch => {
-    const altRecipe = {
+    const newRecipe = {
       ...recipe,
       published: false
     }
@@ -184,7 +184,7 @@ export const unpublishRecipe = (user, recipe) =>
         },
         mode: 'cors',
         cache: 'default',
-        body: JSON.stringify({user, recipe: altRecipe})
+        body: JSON.stringify({user, recipe: newRecipe})
       }
     )
     .catch(console.error)
@@ -192,7 +192,7 @@ export const unpublishRecipe = (user, recipe) =>
 
 export const addToUserRecipes = (user, recipe) =>
   dispatch => {
-    const altRecipe = {
+    const newRecipe = {
       ...recipe,
       stars: 0,
       published: false,
@@ -203,7 +203,7 @@ export const addToUserRecipes = (user, recipe) =>
     delete altRecipe.author
     delete altRecipe._id
 
-    dispatch(addRecipe(altRecipe, 'private'))
+    dispatch(addRecipe(newRecipe, 'private'))
 
     return fetch(`https://thejam.herokuapp.com/new`,
       {
@@ -215,6 +215,36 @@ export const addToUserRecipes = (user, recipe) =>
         mode: 'cors',
         cache: 'default',
         body: JSON.stringify({user, recipe: altRecipe})
+      }
+    )
+    .catch(console.error)
+  }
+
+export const voteForRecipe = (user, vote, recipe) =>
+  dispatch => {
+    const votes = recipe.votes
+
+    votes[user] = vote
+
+    const newRecipe = {
+      ...recipe,
+      votes
+    }
+    delete newRecipe._id
+
+    dispatch(editRecipe(newRecipe, 'public'))
+    newRecipe.showDetails = false
+
+    fetch(`https://thejam.herokuapp.com/edit`,
+      {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-type': 'application/json'
+        },
+        mode: 'cors',
+        cache: 'default',
+        body: JSON.stringify({user: 'public', recipe: newRecipe})
       }
     )
     .catch(console.error)

@@ -9,8 +9,10 @@ const PublicRecipe = ({
   loggedIn,
   setFilterContent,
   toggleDetails,
-  unpublishRecipe,
-  addToUserRecipes
+  addToUserRecipes,
+  unpublishConfirm,
+  voteDialogue,
+  loginDialogue
 }) => {
   const {
     id,
@@ -49,9 +51,13 @@ const PublicRecipe = ({
       <li key={i}>{direction}</li>
   )
 
-  const totalStars = 0
-  const rating = 0
-  const starIcons = []
+  let totalStars = 0
+
+  for (let voter in votes) totalStars += votes[voter]
+
+  const totalVotes = Object.keys(votes).length,
+        rating = Math.ceil(totalStars / totalVotes),
+        starIcons = []
 
   for (let i = 1; i <= 5; i++) {
     if (i <= rating) {
@@ -59,20 +65,6 @@ const PublicRecipe = ({
         <i className='fa fa-star fa-lg'
           key={i}
           data-value={i}
-          onClick={ e => {
-            const editedRecipe = recipe,
-              newStars = e.target.dataset.value
-
-            delete editedRecipe._id
-
-            if (newStars == 1) {
-              editedRecipe.stars = 0
-
-            } else {
-              editedRecipe.stars = newStars
-            }
-              editRecipe(user, editedRecipe, visibilityFilter.active)
-          }}
         >
         </i>
       )
@@ -81,13 +73,6 @@ const PublicRecipe = ({
         <i className='fa fa-star-o fa-lg'
           key={i}
           data-value={i}
-          onClick={ e => {
-            const editedRecipe = recipe
-            editedRecipe.stars = e.target.dataset.value
-            delete editedRecipe._id
-
-            editRecipe(user, editedRecipe, visibilityFilter.active)
-          }}
         >
         </i>
       )
@@ -97,7 +82,7 @@ const PublicRecipe = ({
   const upperIcon = username == author ?
     <div
       className='recipe__button--mine-unpub'
-      onClick={() => console.log('Confirm to unpublish')}
+      onClick={unpublishConfirm}
     >
       <i className='fa fa-id-card'></i>
     </div> :
@@ -134,9 +119,16 @@ const PublicRecipe = ({
         <div
           className='recipe__votes'
         >
-          10 Votes
+          {totalVotes} Vote{totalVotes != 1 && 's'}
         </div>
-        {starIcons}
+        <div
+          onClick={loggedIn ?
+            voteDialogue :
+            loginDialogue
+          }
+        >
+          {starIcons}
+        </div>
       </div>
       {showDetails &&
       <div>

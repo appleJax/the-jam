@@ -17,13 +17,13 @@ class RecipeForm extends React.Component {
     const tempRecipe = {}
 
     if (typeof content == 'object') {
-      const altContent = content
-      delete altContent._id
+      const newContent = content
+      delete newContent._id
       tempRecipe.tags = content.tags.join(',')
       tempRecipe.ingredients = content.ingredients.join('\n')
       tempRecipe.directions = content.directions.join('\n\n')
       this.state = {
-        ...altContent,
+        ...newContent,
         ...tempRecipe,
       }
 
@@ -78,10 +78,10 @@ class RecipeForm extends React.Component {
   render() {
     const {
       closeModal
-    } = this.props;
+    } = this.props
 
     return (
-      <form
+      <div
         className='recipe-form'
         onClick={e =>
           e.stopPropagation()
@@ -90,77 +90,79 @@ class RecipeForm extends React.Component {
         <h2 className="recipe-form__title">
           {typeof this.content == 'object' ? 'Edit': 'New'} Recipe
         </h2>
-        <label htmlFor='title'>Name:</label>
-        <input
-          type='text'
-          name='title'
-          value={this.state.name}
-          onChange={(e) => this.setState({name: e.target.value})}
-        />
+        <form>
+          <label htmlFor='title'>Name:</label>
+          <input
+            type='text'
+            name='title'
+            value={this.state.name}
+            onChange={(e) => this.setState({name: e.target.value})}
+          />
 
-        <label htmlFor='tags'>
-          Tags:<span className='parens'>(separated by commas)</span>
-        </label>
-        <input
-          type='text'
-          name='tags'
-          value={this.state.tags}
-          onChange={(e) => this.setState({tags: e.target.value})}
-        />
-
-        <div className='recipe-form__servings-group'>
-          <label className='recipe-form__servings-label' htmlFor='servings'>
-            Servings:
+          <label htmlFor='tags'>
+            Tags:<span className='parens'>(separated by commas)</span>
           </label>
           <input
-            type='number'
-            name='servings'
-            max='999'
-            min='1'
-            className='recipe-form__servings-input'
-            value={this.state.servings}
-            onChange={(e) => {
-              let val = e.target.value;
-              this.setState({servings: (val > 0 || val === '') ? val : 1});
-            }}
+            type='text'
+            name='tags'
+            value={this.state.tags}
+            onChange={(e) => this.setState({tags: e.target.value})}
           />
-        </div>
 
-        <label htmlFor='ingredients'>
-          Ingredients:<span className='parens'>(one per line)</span>
-        </label>
-        <textarea
-          rows='10'
-          name='ingredients'
-          value={this.state.ingredients}
-          onChange={(e) => this.setState({ingredients: e.target.value})}
-        />
-
-        <label htmlFor='directions'>
-          Directions:<span className='parens'>(Separated by blank lines)</span>
-        </label>
-        <textarea
-          rows='14'
-          name='directions'
-          value={this.state.directions}
-          onChange={(e) => this.setState({directions: e.target.value})}
-        />
-
-        <div className='recipe-form__buttons'>
-          <div
-            className='recipe-form__save'
-            onClick={this.save}
-          >
-            <i className='fa fa-check fa-lg'></i>
+          <div className='recipe-form__servings-group'>
+            <label className='recipe-form__servings-label' htmlFor='servings'>
+              Servings:
+            </label>
+            <input
+              type='number'
+              name='servings'
+              max='999'
+              min='1'
+              className='recipe-form__servings-input'
+              value={this.state.servings}
+              onChange={(e) => {
+                let val = e.target.value;
+                this.setState({servings: (val > 0 || val === '') ? val : 1});
+              }}
+            />
           </div>
-          <div
-            className='recipe-form__cancel'
-            onClick={closeModal}
-          >
-            <i className='fa fa-times fa-lg'></i>
+
+          <label htmlFor='ingredients'>
+            Ingredients:<span className='parens'>(one per line)</span>
+          </label>
+          <textarea
+            rows='10'
+            name='ingredients'
+            value={this.state.ingredients}
+            onChange={(e) => this.setState({ingredients: e.target.value})}
+          />
+
+          <label htmlFor='directions'>
+            Directions:<span className='parens'>(Separated by blank lines)</span>
+          </label>
+          <textarea
+            rows='14'
+            name='directions'
+            value={this.state.directions}
+            onChange={(e) => this.setState({directions: e.target.value})}
+          />
+
+          <div className='recipe-form__buttons'>
+            <div
+              className='recipe-form__save'
+              onClick={this.save}
+            >
+              <i className='fa fa-check fa-lg'></i>
+            </div>
+            <div
+              className='recipe-form__cancel'
+              onClick={closeModal}
+            >
+              <i className='fa fa-times fa-lg'></i>
+            </div>
           </div>
-        </div>
-      </form>
+        </form>
+      </div>
     )
   }
 }

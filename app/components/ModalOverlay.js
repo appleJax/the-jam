@@ -1,6 +1,8 @@
 import React from 'react'
 import ConfirmDialogue from '../components/ConfirmDialogue'
 import RecipeForm from '../components/RecipeForm'
+import VoteDialogue from '../components/VoteDialogue'
+import LoginDialogue from '../components/LoginDialogue'
 
 const ModalOverlay = ({
   dialogue,
@@ -10,14 +12,21 @@ const ModalOverlay = ({
   addRecipe,
   editRecipe,
   deleteRecipe,
-  closeModal
+  closeModal,
+  voteForRecipe,
+  login
 }) => {
-  const  dialogueBox = dialogue == 'confirm' ?
-      <ConfirmDialogue
+  let dialogueBox = ''
+
+  switch (dialogue) {
+    case 'confirm':
+      dialogueBox = <ConfirmDialogue
         deleteRecipe={() => deleteRecipe(user, {id: content}, active)}
         closeModal={closeModal}
-      /> :
-      <RecipeForm
+      />
+      break
+    case 'recipe':
+      dialogueBox = <RecipeForm
         content={content}
         active={active}
         user={user}
@@ -25,6 +34,20 @@ const ModalOverlay = ({
         editRecipe={editRecipe}
         closeModal={closeModal}
       />
+      break
+    case 'vote':
+      dialogueBox = <VoteDialogue
+        user={user}
+        recipe={content}
+        voteForRecipe={voteForRecipe}
+        closeModal={closeModal}
+      />
+    case 'login':
+      dialogueBox = <LoginDialogue
+        login={login}
+        closeModal={closeModal}
+      />
+  }
 
   return (
     <div

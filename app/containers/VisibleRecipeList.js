@@ -8,7 +8,8 @@ import {
   editUserRecipe,
   publishRecipe,
   unpublishRecipe,
-  addToUserRecipes
+  addToUserRecipes,
+  voteForRecipe
 } from '../actions/async'
 import RecipeList from '../components/RecipeList'
 
@@ -97,7 +98,10 @@ const mapDispatchTProps = (dispatch) =>
       dispatch(unpublishRecipe(user, recipe)),
 
     addToUserRecipes: (user, recipe) =>
-      dispatch(addToUserRecipes(user, recipe))
+      dispatch(addToUserRecipes(user, recipe)),
+
+    voteForRecipe: (user, vote, recipe) =>
+      dispatch(voteForRecipe(user, vote, recipe))
   })
 
 const VisibleRecipeList = connect(
