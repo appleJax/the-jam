@@ -60938,6 +60938,8 @@
 	    showDetails
 	  } = recipe;
 
+	  const voteAction = loggedIn ? voteDialogue : loginDialogue;
+
 	  const tagList = tags.map((tag, i) => _react2.default.createElement(
 	    'li',
 	    {
@@ -61036,7 +61038,7 @@
 	      _react2.default.createElement(
 	        'div',
 	        {
-	          onClick: loggedIn && voteDialogue || loginDialogue
+	          onClick: voteAction
 	        },
 	        starIcons
 	      )
