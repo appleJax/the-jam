@@ -38,6 +38,7 @@ const RecipeList = ({
           recipe={recipe}
           visibilityFilter={visibilityFilter}
           user={user}
+          name={name}
           setFilterContent={setFilterContent}
           toggleDetails={() => toggleDetails(recipe.id, visibilityFilter.active)}
           unpublishRecipe={() => unpublishRecipe(user, recipe)}

@@ -37840,6 +37840,7 @@
 	      recipe: recipe,
 	      visibilityFilter: visibilityFilter,
 	      user: user,
+	      name: name,
 	      setFilterContent: setFilterContent,
 	      toggleDetails: () => toggleDetails(recipe.id, visibilityFilter.active),
 	      unpublishRecipe: () => unpublishRecipe(user, recipe),
@@ -38190,14 +38191,6 @@
 	};
 	
 	const mapStateToProps = state => {
-	  // let user = 'public'
-	  // try {
-	  //   const profile = localStorage.getItem('profile')
-	  //   user = profile ? JSON.parse(profile).email : 'public'
-	  //
-	  // } catch(e) {
-	  //   console.error(e)
-	  // }
 	  return {
 	    recipes: getVisibleRecipes(state.recipes, state.visibilityFilter, state.sort),
 	    visibilityFilter: state.visibilityFilter,
@@ -38219,7 +38212,7 @@
 	    dispatch((0, _sync.populateModal)(dialogue, content));
 	  },
 	
-	  publishRecipe: (user, recipe) => dispatch((0, _async.publishRecipe)(user, recipe)),
+	  publishRecipe: (user, recipe, author) => dispatch((0, _async.publishRecipe)(user, recipe, author)),
 	
 	  unpublishRecipe: (user, recipe) => dispatch((0, _async.unpublishRecipe)(user, recipe)),
 	
@@ -38438,15 +38431,6 @@
 	  switch (action.type) {
 	    case _sync.ADD_RECIPE:
 	      return action.recipe;
-	    //{
-	    // id: action.recipe.id,
-	    // name: action.recipe.name,
-	    // tags: action.recipe.tags,
-	    // stars: action.recipe.stars,
-	    // servings: action.recipe.servings,
-	    // ingredients: action.recipe.ingredients,
-	    // directions: action.recipe.directions
-	    //}
 	
 	    case _sync.EDIT_RECIPE:
 	      if (state.id == action.recipe.id) {

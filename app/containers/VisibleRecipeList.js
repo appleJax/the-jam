@@ -63,14 +63,6 @@ const getVisibleRecipes = (recipes, visibilityFilter, sort) => {
 }
 
 const mapStateToProps = (state) => {
-  // let user = 'public'
-  // try {
-  //   const profile = localStorage.getItem('profile')
-  //   user = profile ? JSON.parse(profile).email : 'public'
-  //
-  // } catch(e) {
-  //   console.error(e)
-  // }
   return {
     recipes: getVisibleRecipes(state.recipes, state.visibilityFilter, state.sort),
     visibilityFilter: state.visibilityFilter,
@@ -96,8 +88,8 @@ const mapDispatchTProps = (dispatch) =>
       dispatch(populateModal(dialogue, content))
     },
 
-    publishRecipe: (user, recipe) =>
-      dispatch(publishRecipe(user, recipe)),
+    publishRecipe: (user, recipe, author) =>
+      dispatch(publishRecipe(user, recipe, author)),
 
     unpublishRecipe: (user, recipe) =>
       dispatch(unpublishRecipe(user, recipe)),

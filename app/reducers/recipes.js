@@ -11,15 +11,6 @@ const recipe = (state = {}, action) => {
   switch (action.type) {
     case ADD_RECIPE:
       return action.recipe
-      //{
-        // id: action.recipe.id,
-        // name: action.recipe.name,
-        // tags: action.recipe.tags,
-        // stars: action.recipe.stars,
-        // servings: action.recipe.servings,
-        // ingredients: action.recipe.ingredients,
-        // directions: action.recipe.directions
-      //}
 
     case EDIT_RECIPE:
       if (state.id == action.recipe.id) {
