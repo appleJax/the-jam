@@ -201,7 +201,7 @@ module.exports = (app) => {
               user = req.body.user || 'public',
               collection = db.collection(user);
 
-        collection.remove(recipe, (err, result) => {
+        collection.remove({id: recipe.id}, (err, result) => {
           assert.equal(null, err);
           res.json(result);
           db.close();

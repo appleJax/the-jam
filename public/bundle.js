@@ -60451,13 +60451,6 @@
 	};
 
 	const publishRecipe = exports.publishRecipe = (user, recipe, author) => dispatch => {
-	  // let author = 'anonymous'
-	  // try {
-	  //   profile = localStorage.getItem('profile')
-	  //   author = profile ? JSON.parse(profile).name : 'anonymous'
-	  // } catch(e) {
-	  //   console.error(e)
-	  // }
 	  const publicRecipe = _extends({}, recipe, {
 	    votes: {},
 	    author
