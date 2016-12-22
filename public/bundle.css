@@ -2532,12 +2532,18 @@ nav {
   align-items: center;
   background: #f46f53;
   border-radius: 50%;
-  color: #fcd3cb;
   cursor: pointer;
   display: flex;
   float: right;
   margin: 0;
   padding: 8px; }
+
+.recipe__button--mine-unpub {
+  color: #fcd3cb;
+  font-size: 16px; }
+
+.recipe__button--add-to-my-recipes {
+  color: #F14723; }
 
 .tags {
   cursor: pointer;
