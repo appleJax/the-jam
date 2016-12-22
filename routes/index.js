@@ -129,7 +129,7 @@ module.exports = (app) => {
           preloadedState.auth.isAuthenticated = isAuthenticated;
           preloadedState.auth.name = profile.username || profile.name;
           preloadedState.auth.email = profile.email || null;
-          preloadedState.auth.id_token = window.localStorage.getItem('idToken') ? JSON.parse(window.localStorage.getItem('idToken')) : null;
+          preloadedState.auth.id_token = window.localStorage.getItem('idToken');
           window.__PRELOADED_STATE__ = JSON.stringify(preloadedState);
         </script>
         <script type='text/javascript' src='bundle.js'></script>
