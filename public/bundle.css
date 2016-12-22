@@ -2673,8 +2673,7 @@ footer {
       column-gap: 20px;
       padding: 0 10%; } }
   .recipe-list li {
-    display: inline-block;
-    width: 100%; }
+    break-inside: avoid-column; }
 
 .modal-overlay {
   background: rgba(0, 0, 0, 0.7);
