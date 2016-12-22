@@ -2670,9 +2670,11 @@ footer {
   @media screen and (min-width: 1200px) {
     .recipe-list {
       columns: 3;
+      column-gap: 20px;
       padding: 0 10%; } }
   .recipe-list li {
-    display: inline-block; }
+    display: inline-block;
+    width: 100%; }
 
 .modal-overlay {
   background: rgba(0, 0, 0, 0.7);
