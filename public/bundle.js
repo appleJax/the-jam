@@ -60937,9 +60937,7 @@
 	    directions,
 	    showDetails
 	  } = recipe;
-	  console.log('loggedIn:', loggedIn);
-	  const voteAction = loggedIn == true ? voteDialogue : loginDialogue;
-	  console.log('action:', voteAction);
+
 	  const tagList = tags.map((tag, i) => _react2.default.createElement(
 	    'li',
 	    {
@@ -61038,7 +61036,7 @@
 	      _react2.default.createElement(
 	        'div',
 	        {
-	          onClick: voteAction
+	          onClick: loggedIn ? voteDialogue : loginDialogue
 	        },
 	        starIcons
 	      )
@@ -61190,6 +61188,7 @@
 	        voteForRecipe: voteForRecipe,
 	        closeModal: closeModal
 	      });
+	      break;
 	    case 'login':
 	      dialogueBox = _react2.default.createElement(_LoginDialogue2.default, {
 	        login: login,

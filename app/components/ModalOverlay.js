@@ -42,6 +42,7 @@ const ModalOverlay = ({
         voteForRecipe={voteForRecipe}
         closeModal={closeModal}
       />
+      break
     case 'login':
       dialogueBox = <LoginDialogue
         login={login}

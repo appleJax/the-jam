@@ -25,9 +25,7 @@ const PublicRecipe = ({
     directions,
     showDetails
   } = recipe
-  console.log('loggedIn:',loggedIn)
-  const voteAction = loggedIn == true ? voteDialogue : loginDialogue
-  console.log('action:', voteAction)
+
   const tagList = tags.map(
     (tag, i) =>
     (<li
@@ -124,7 +122,10 @@ const PublicRecipe = ({
           {totalVotes} Vote{totalVotes != 1 && 's'}
         </div>
         <div
-          onClick={voteAction}
+          onClick={loggedIn ?
+            voteDialogue :
+            loginDialogue
+          }
         >
           {starIcons}
         </div>
