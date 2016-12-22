@@ -9,6 +9,7 @@ const ModalOverlay = ({
   content,
   active,
   user,
+  username,
   addRecipe,
   editRecipe,
   deleteRecipe,
@@ -37,7 +38,7 @@ const ModalOverlay = ({
       break
     case 'vote':
       dialogueBox = <VoteDialogue
-        user={user}
+        username={username}
         recipe={content}
         voteForRecipe={voteForRecipe}
         closeModal={closeModal}

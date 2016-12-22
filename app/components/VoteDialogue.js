@@ -4,11 +4,11 @@ class VoteDialogue extends React.Component {
   constructor(props) {
     super(props)
     const {
-      user,
+      username,
       recipe
     } = this.props
 
-    const stars = recipe.votes[user] || 0
+    const stars = recipe.votes[username] || 0
 
     this.state = {
       stars
@@ -17,7 +17,7 @@ class VoteDialogue extends React.Component {
 
   render() {
     const {
-      user,
+      username,
       recipe,
       voteForRecipe,
       closeModal
@@ -77,7 +77,7 @@ class VoteDialogue extends React.Component {
         <div
           className='confirm-dialogue__button confirm-dialogue__button--accept'
           onClick={() => {
-            voteForRecipe(user, this.state.stars, recipe)
+            voteForRecipe(username, this.state.stars, recipe)
             closeModal()
           }}
         >

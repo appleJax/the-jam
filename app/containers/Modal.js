@@ -14,7 +14,8 @@ const mapStateToProps = (state) =>
     dialogue: state.modal.dialogue,
     content: state.modal.content,
     active: state.visibilityFilter.active,
-    user: state.auth.email
+    user: state.auth.email,
+    username: state.auth.name
   })
 
 const mapDispatchToProps = (dispatch) =>

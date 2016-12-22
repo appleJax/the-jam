@@ -61094,7 +61094,8 @@
 	  dialogue: state.modal.dialogue,
 	  content: state.modal.content,
 	  active: state.visibilityFilter.active,
-	  user: state.auth.email
+	  user: state.auth.email,
+	  username: state.auth.name
 	});
 
 	const mapDispatchToProps = dispatch => ({
@@ -61155,6 +61156,7 @@
 	  content,
 	  active,
 	  user,
+	  username,
 	  addRecipe,
 	  editRecipe,
 	  deleteRecipe,
@@ -61183,7 +61185,7 @@
 	      break;
 	    case 'vote':
 	      dialogueBox = _react2.default.createElement(_VoteDialogue2.default, {
-	        user: user,
+	        username: username,
 	        recipe: content,
 	        voteForRecipe: voteForRecipe,
 	        closeModal: closeModal
@@ -61486,11 +61488,11 @@
 	  constructor(props) {
 	    super(props);
 	    const {
-	      user,
+	      username,
 	      recipe
 	    } = this.props;
 
-	    const stars = recipe.votes[user] || 0;
+	    const stars = recipe.votes[username] || 0;
 
 	    this.state = {
 	      stars
@@ -61499,7 +61501,7 @@
 
 	  render() {
 	    const {
-	      user,
+	      username,
 	      recipe,
 	      voteForRecipe,
 	      closeModal
@@ -61560,7 +61562,7 @@
 	          {
 	            className: 'confirm-dialogue__button confirm-dialogue__button--accept',
 	            onClick: () => {
-	              voteForRecipe(user, this.state.stars, recipe);
+	              voteForRecipe(username, this.state.stars, recipe);
 	              closeModal();
 	            }
 	          },
