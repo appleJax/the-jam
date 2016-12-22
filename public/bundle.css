@@ -2689,6 +2689,7 @@ footer {
   overflow: auto; }
 
 .recipe-form {
+  margin: 20px 0 35px 0;
   padding: 5px 15px 20px 15px; }
   .recipe-form label {
     font-family: 'Architects Daughter', 'sans-serif';
@@ -2716,7 +2717,8 @@ footer {
   color: white;
   padding: 15px;
   text-shadow: 1px 1px #440f04;
-  font-family: 'Architects Daughter', 'sans-serif'; }
+  font-family: 'Architects Daughter', 'sans-serif';
+  font-size: 30px; }
 
 .recipe-form__servings-group {
   display: inline;

@@ -87,9 +87,9 @@ class RecipeForm extends React.Component {
           e.stopPropagation()
         }
       >
-        <h2 className="recipe-form__title">
+        <div className="recipe-form__title">
           {typeof this.content == 'object' ? 'Edit': 'New'} Recipe
-        </h2>
+        </div>
         <form className='recipe-form'>
           <label htmlFor='title'>Name:</label>
           <input

@@ -61353,7 +61353,7 @@
 	        onClick: e => e.stopPropagation()
 	      },
 	      _react2.default.createElement(
-	        'h2',
+	        'div',
 	        { className: 'recipe-form__title' },
 	        typeof this.content == 'object' ? 'Edit' : 'New',
 	        ' Recipe'
