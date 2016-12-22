@@ -69,7 +69,8 @@ const mapStateToProps = (state) => {
     visibilityFilter: state.visibilityFilter,
     user: state.auth.email,
     name: state.auth.name,
-    privateView: state.visibilityFilter.active == 'private'
+    privateView: state.visibilityFilter.active == 'private',
+    loggedIn: state.auth.isAuthenticated
   }
 }
 

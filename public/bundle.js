@@ -60328,7 +60328,8 @@
 	    visibilityFilter: state.visibilityFilter,
 	    user: state.auth.email,
 	    name: state.auth.name,
-	    privateView: state.visibilityFilter.active == 'private'
+	    privateView: state.visibilityFilter.active == 'private',
+	    loggedIn: state.auth.isAuthenticated
 	  };
 	};
 
@@ -60581,6 +60582,7 @@
 	  user,
 	  name,
 	  privateView,
+	  loggedIn,
 	  setFilterContent,
 	  editRecipe,
 	  toggleDetails,
@@ -60610,6 +60612,7 @@
 	      visibilityFilter: visibilityFilter,
 	      user: user,
 	      username: name,
+	      loggedIn: loggedIn,
 	      setFilterContent: setFilterContent,
 	      toggleDetails: () => toggleDetails(recipe.id, visibilityFilter.active),
 	      unpublishRecipe: () => unpublishRecipe(user, recipe),
@@ -60887,6 +60890,7 @@
 	  visibilityFilter,
 	  user,
 	  username,
+	  loggedIn,
 	  setFilterContent,
 	  toggleDetails,
 	  unpublishRecipe,
@@ -60963,6 +60967,22 @@
 	    }
 	  }
 
+	  const upperIcon = username == author ? _react2.default.createElement(
+	    'div',
+	    {
+	      className: 'recipe__button--mine-unpub',
+	      onClick: () => console.log('Confirm to unpublish')
+	    },
+	    _react2.default.createElement('i', { className: '' })
+	  ) : _react2.default.createElement(
+	    'div',
+	    {
+	      className: 'recipe__button--add-to-my-recipes',
+	      onClick: addToUserRecipes
+	    },
+	    _react2.default.createElement('i', { className: 'fa fa-cloud-download' })
+	  );
+
 	  return _react2.default.createElement(
 	    'li',
 	    {
@@ -60970,21 +60990,7 @@
 	    _react2.default.createElement(
 	      'div',
 	      { className: 'recipe__header' },
-	      username == author ? _react2.default.createElement(
-	        'div',
-	        {
-	          className: 'recipe__button--mine-unpub',
-	          onClick: () => console.log('Confirm to unpublish')
-	        },
-	        _react2.default.createElement('i', { className: 'fa fa-id-card' })
-	      ) : _react2.default.createElement(
-	        'div',
-	        {
-	          className: 'recipe__button--add-to-my-recipes',
-	          onClick: addToUserRecipes
-	        },
-	        _react2.default.createElement('i', { className: 'fa fa-cloud-download' })
-	      ),
+	      loggedIn && upperIcon,
 	      _react2.default.createElement(
 	        'h2',
 	        { className: 'recipe__name' },

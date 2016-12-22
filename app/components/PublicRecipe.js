@@ -6,6 +6,7 @@ const PublicRecipe = ({
   visibilityFilter,
   user,
   username,
+  loggedIn,
   setFilterContent,
   toggleDetails,
   unpublishRecipe,
@@ -93,24 +94,25 @@ const PublicRecipe = ({
     }
   }
 
+  const upperIcon = username == author ?
+    <div
+      className='recipe__button--mine-unpub'
+      onClick={() => console.log('Confirm to unpublish')}
+    >
+      <i className=''></i>
+    </div> :
+    <div
+      className='recipe__button--add-to-my-recipes'
+      onClick={addToUserRecipes}
+    >
+      <i className='fa fa-cloud-download'></i>
+    </div>
+
   return (
     <li
       className='recipe'>
       <div className='recipe__header'>
-        {username == author ?
-        <div
-          className='recipe__button--mine-unpub'
-          onClick={() => console.log('Confirm to unpublish')}
-        >
-          <i className='fa fa-id-card'></i>
-        </div> :
-        <div
-          className='recipe__button--add-to-my-recipes'
-          onClick={addToUserRecipes}
-        >
-          <i className='fa fa-cloud-download'></i>
-        </div>
-        }
+        {loggedIn && upperIcon}
         <h2 className='recipe__name'>
           {name}
         </h2>
