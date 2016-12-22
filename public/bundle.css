@@ -2559,7 +2559,9 @@ nav {
   width: fit-content; }
   .tags li {
     background: #f79783;
+    border-bottom: 2px solid rgba(50, 50, 50, 0.2);
     border-radius: 10px;
+    border-right: 1px solid rgba(50, 50, 50, 0.4);
     color: #555;
     display: inline-block;
     font-size: 12px;
