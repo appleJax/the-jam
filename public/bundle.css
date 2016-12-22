@@ -2667,6 +2667,12 @@ footer {
   list-style-type: none;
   margin: 0;
   padding: 0; }
+  @media screen and (min-width: 1200px) {
+    .recipe-list {
+      columns: 3;
+      padding: 0 10%; } }
+  .recipe-list li {
+    display: inline-block; }
 
 .modal-overlay {
   background: rgba(0, 0, 0, 0.7);
@@ -2790,7 +2796,7 @@ footer {
   margin-bottom: 35px; }
 
 .confirm-dialogue__description {
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.5);
   color: #bc2b0c;
   margin: -15px 0 50px;
   padding: 10px 0; }
