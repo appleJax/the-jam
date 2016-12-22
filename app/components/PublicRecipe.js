@@ -18,6 +18,7 @@ const PublicRecipe = ({
     id,
     name,
     tags,
+    stars,
     votes,
     author,
     servings,
@@ -51,16 +52,11 @@ const PublicRecipe = ({
       <li key={i}>{direction}</li>
   )
 
-  let totalStars = 0
-
-  for (let voter in votes) totalStars += votes[voter]
-
   const totalVotes = Object.keys(votes).length,
-        rating = Math.ceil(totalStars / totalVotes),
         starIcons = []
 
   for (let i = 1; i <= 5; i++) {
-    if (i <= rating) {
+    if (i <= stars) {
       starIcons.push(
         <i className='fa fa-star fa-lg'
           key={i}

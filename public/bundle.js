@@ -60455,10 +60455,10 @@
 
 	const publishRecipe = exports.publishRecipe = (user, recipe, author) => dispatch => {
 	  const publicRecipe = _extends({}, recipe, {
+	    stars: 0,
 	    votes: {},
 	    author
 	  });
-	  delete publicRecipe.stars;
 	  delete publicRecipe._id;
 
 	  const privateRecipe = _extends({}, recipe, {
@@ -60556,10 +60556,17 @@
 
 	const voteForRecipe = exports.voteForRecipe = (user, vote, recipe) => dispatch => {
 	  const votes = recipe.votes;
-
 	  votes[user] = vote;
 
+	  const totalVotes = Object.keys(votes).length;
+	  let stars = 0;
+
+	  for (let voter in votes) stars += votes[voter];
+
+	  stars = Math.ceil(stars / totalVotes);
+
 	  const newRecipe = _extends({}, recipe, {
+	    stars,
 	    votes
 	  });
 	  delete newRecipe._id;
@@ -60930,6 +60937,7 @@
 	    id,
 	    name,
 	    tags,
+	    stars,
 	    votes,
 	    author,
 	    servings,
@@ -60959,16 +60967,11 @@
 	    direction
 	  ));
 
-	  let totalStars = 0;
-
-	  for (let voter in votes) totalStars += votes[voter];
-
 	  const totalVotes = Object.keys(votes).length,
-	        rating = Math.ceil(totalStars / totalVotes),
 	        starIcons = [];
 
 	  for (let i = 1; i <= 5; i++) {
-	    if (i <= rating) {
+	    if (i <= stars) {
 	      starIcons.push(_react2.default.createElement('i', { className: 'fa fa-star fa-lg',
 	        key: i,
 	        'data-value': i

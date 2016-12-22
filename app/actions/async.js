@@ -100,10 +100,10 @@ export const publishRecipe = (user, recipe, author) =>
   dispatch => {
     const publicRecipe = {
       ...recipe,
+      stars: 0,
       votes: {},
       author
     }
-    delete publicRecipe.stars
     delete publicRecipe._id
 
     const privateRecipe = {
@@ -223,11 +223,18 @@ export const addToUserRecipes = (user, recipe) =>
 export const voteForRecipe = (user, vote, recipe) =>
   dispatch => {
     const votes = recipe.votes
-
     votes[user] = vote
+
+    const totalVotes = Object.keys(votes).length
+    let stars = 0
+
+    for (let voter in votes) stars += votes[voter]
+
+    stars = Math.ceil(stars / totalVotes)
 
     const newRecipe = {
       ...recipe,
+      stars,
       votes
     }
     delete newRecipe._id
