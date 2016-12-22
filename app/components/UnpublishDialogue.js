@@ -15,7 +15,11 @@ const UnpublishDialogue = ({
     >
       Unpublish Recipe?
     </h3>
-      <p>The recipe will be removed from the public space, and it will lose all votes permanently.</p>
+      <p
+       className='confirm-dialogue__description'
+      >
+        The recipe will be removed from the public space, and it will lose all votes permanently.
+      </p>
       <div
         className='confirm-dialogue__button confirm-dialogue__button--delete'
         onClick={() => {

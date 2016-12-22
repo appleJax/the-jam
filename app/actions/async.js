@@ -153,12 +153,12 @@ export const unpublishRecipe = (user, recipe) =>
       ...recipe,
       published: false
     }
-    delete altRecipe._id
+    delete newRecipe._id
 
     dispatch(deleteRecipe(recipe, 'public'))
-    dispatch(editRecipe(altRecipe, 'private'))
+    dispatch(editRecipe(newRecipe, 'private'))
 
-    altRecipe.showDetails = false
+    newRecipe.showDetails = false
 
     fetch(`https://thejam.herokuapp.com/delete`,
       {
@@ -199,9 +199,9 @@ export const addToUserRecipes = (user, recipe) =>
       showDetails: false,
       id: Date.now()
     }
-    delete altRecipe.votes
-    delete altRecipe.author
-    delete altRecipe._id
+    delete newRecipe.votes
+    delete newRecipe.author
+    delete newRecipe._id
 
     dispatch(addRecipe(newRecipe, 'private'))
 
@@ -214,7 +214,7 @@ export const addToUserRecipes = (user, recipe) =>
         },
         mode: 'cors',
         cache: 'default',
-        body: JSON.stringify({user, recipe: altRecipe})
+        body: JSON.stringify({user, recipe: newRecipe})
       }
     )
     .catch(console.error)

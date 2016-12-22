@@ -60499,12 +60499,12 @@
 	  const newRecipe = _extends({}, recipe, {
 	    published: false
 	  });
-	  delete altRecipe._id;
+	  delete newRecipe._id;
 
 	  dispatch((0, _sync.deleteRecipe)(recipe, 'public'));
-	  dispatch((0, _sync.editRecipe)(altRecipe, 'private'));
+	  dispatch((0, _sync.editRecipe)(newRecipe, 'private'));
 
-	  altRecipe.showDetails = false;
+	  newRecipe.showDetails = false;
 
 	  (0, _isomorphicFetch2.default)(`https://thejam.herokuapp.com/delete`, {
 	    method: 'POST',
@@ -60536,9 +60536,9 @@
 	    showDetails: false,
 	    id: Date.now()
 	  });
-	  delete altRecipe.votes;
-	  delete altRecipe.author;
-	  delete altRecipe._id;
+	  delete newRecipe.votes;
+	  delete newRecipe.author;
+	  delete newRecipe._id;
 
 	  dispatch((0, _sync.addRecipe)(newRecipe, 'private'));
 
@@ -60550,7 +60550,7 @@
 	    },
 	    mode: 'cors',
 	    cache: 'default',
-	    body: JSON.stringify({ user, recipe: altRecipe })
+	    body: JSON.stringify({ user, recipe: newRecipe })
 	  }).catch(console.error);
 	};
 
@@ -61682,7 +61682,9 @@
 	  ),
 	  _react2.default.createElement(
 	    'p',
-	    null,
+	    {
+	      className: 'confirm-dialogue__description'
+	    },
 	    'The recipe will be removed from the public space, and it will lose all votes permanently.'
 	  ),
 	  _react2.default.createElement(
