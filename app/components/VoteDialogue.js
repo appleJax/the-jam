@@ -34,7 +34,7 @@ class VoteDialogue extends React.Component {
             onClick={ e => {
               let stars = e.target.dataset.value
 
-              if (this.state.stars == 1) {
+              if (stars == 1) {
                 stars = 0
               }
 

@@ -2785,6 +2785,7 @@ footer {
   font-size: 20px;
   margin: 10% auto;
   max-width: 420px;
+  overflow: hidden;
   padding-bottom: 40px;
   text-align: center; }
 
@@ -2800,6 +2801,7 @@ footer {
 
 .confirm-dialogue__description {
   background: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 5px #ddd inset;
   color: #bc2b0c;
   margin: -15px 0 50px;
   padding: 10px 0; }
@@ -2824,7 +2826,7 @@ footer {
   box-shadow: 0 0 15px #a4250a inset, 1px 1px 1px #aaa;
   color: #5c1506;
   padding: 15px 20px;
-  text-shadow: 1px 1px #f46f53; }
+  text-shadow: 1px 1px #f6836b; }
 
 .confirm-dialogue__button--delete {
   background: #ff9999;
