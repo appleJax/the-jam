@@ -5,6 +5,7 @@ const PublicRecipe = ({
   recipe,
   visibilityFilter,
   user,
+  username,
   setFilterContent,
   toggleDetails,
   unpublishRecipe,
@@ -96,12 +97,20 @@ const PublicRecipe = ({
     <li
       className='recipe'>
       <div className='recipe__header'>
+        {username == author ?
+        <div
+          className='recipe__button--mine-unpub'
+          onClick={() => console.log('Confirm to unpublish')}
+        >
+          <i className='fa fa-id-card'></i>
+        </div> :
         <div
           className='recipe__button--add-to-my-recipes'
           onClick={addToUserRecipes}
         >
           <i className='fa fa-cloud-download'></i>
         </div>
+        }
         <h2 className='recipe__name'>
           {name}
         </h2>

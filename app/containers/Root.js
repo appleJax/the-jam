@@ -15,7 +15,6 @@ try {
   if (preloadedState.auth.isAuthenticated) {
     const user = {}
     user.name = preloadedState.auth.email
-    //user.name = JSON.parse(localStorage.getItem('profile')).email
 
     fetch(`https://thejam.herokuapp.com/recipes`,
       {
