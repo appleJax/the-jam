@@ -2502,8 +2502,9 @@ nav {
   color: #333;
   font-size: 20px;
   margin: 0 auto 15px;
-  max-width: 700px;
-  padding: 15px; }
+  max-width: 630px;
+  padding: 15px;
+  width: 100%; }
 
 .recipe__header {
   background: #fcd3cb;
@@ -2668,13 +2669,16 @@ footer {
   padding: 10px 30px; }
 
 .recipe-list {
+  align-items: stretch;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
   list-style-type: none;
   margin: 0;
   padding: 0; }
   @media screen and (min-width: 1200px) {
     .recipe-list {
-      columns: 3;
-      column-gap: 20px;
       padding: 0 10%; } }
 
 .modal-overlay {
@@ -2821,11 +2825,11 @@ footer {
   padding: 15px; }
 
 .confirm-dialogue__button--accept {
-  background: #f35b3b;
+  background: #f36345;
   box-shadow: 0 0 15px #a4250a inset, 1px 1px 1px #aaa;
   color: #5c1506;
   padding: 15px 20px;
-  text-shadow: 1px 1px #f6836b; }
+  text-shadow: 1px 1px #f5775d; }
 
 .confirm-dialogue__button--delete {
   background: #ff9999;
