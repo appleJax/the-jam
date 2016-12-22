@@ -60973,7 +60973,7 @@
 	      className: 'recipe__button--mine-unpub',
 	      onClick: () => console.log('Confirm to unpublish')
 	    },
-	    _react2.default.createElement('i', { className: '' })
+	    _react2.default.createElement('i', { className: 'fa fa-id-card' })
 	  ) : _react2.default.createElement(
 	    'div',
 	    {

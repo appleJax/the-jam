@@ -99,7 +99,7 @@ const PublicRecipe = ({
       className='recipe__button--mine-unpub'
       onClick={() => console.log('Confirm to unpublish')}
     >
-      <i className=''></i>
+      <i className='fa fa-id-card'></i>
     </div> :
     <div
       className='recipe__button--add-to-my-recipes'
