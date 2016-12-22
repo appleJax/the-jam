@@ -60937,9 +60937,9 @@
 	    directions,
 	    showDetails
 	  } = recipe;
-
-	  const voteAction = loggedIn ? voteDialogue : loginDialogue;
-
+	  console.log('loggedIn:', loggedIn);
+	  const voteAction = loggedIn == true ? voteDialogue : loginDialogue;
+	  console.log('action:', voteAction);
 	  const tagList = tags.map((tag, i) => _react2.default.createElement(
 	    'li',
 	    {
