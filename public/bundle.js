@@ -61349,7 +61349,7 @@
 	    return _react2.default.createElement(
 	      'div',
 	      {
-	        className: 'recipe-form',
+	        className: 'recipe-form--container',
 	        onClick: e => e.stopPropagation()
 	      },
 	      _react2.default.createElement(
@@ -61360,7 +61360,7 @@
 	      ),
 	      _react2.default.createElement(
 	        'form',
-	        null,
+	        { className: 'recipe-form' },
 	        _react2.default.createElement(
 	          'label',
 	          { htmlFor: 'title' },

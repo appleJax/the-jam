@@ -82,7 +82,7 @@ class RecipeForm extends React.Component {
 
     return (
       <div
-        className='recipe-form'
+        className='recipe-form--container'
         onClick={e =>
           e.stopPropagation()
         }
@@ -90,7 +90,7 @@ class RecipeForm extends React.Component {
         <h2 className="recipe-form__title">
           {typeof this.content == 'object' ? 'Edit': 'New'} Recipe
         </h2>
-        <form>
+        <form className='recipe-form'>
           <label htmlFor='title'>Name:</label>
           <input
             type='text'

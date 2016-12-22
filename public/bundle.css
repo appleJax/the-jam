@@ -2679,14 +2679,16 @@ footer {
   width: 100vw;
   z-index: 1; }
 
-.recipe-form {
+.recipe-form--container {
   background: #fcd3cb;
   border-radius: 10px;
   color: #333;
   font-size: 20px;
   margin: 0 auto;
   max-width: 700px;
-  overflow: auto;
+  overflow: auto; }
+
+.recipe-form {
   padding: 5px 15px 20px 15px; }
   .recipe-form label {
     font-family: 'Architects Daughter', 'sans-serif';
@@ -2791,7 +2793,7 @@ footer {
     text-shadow: 1px 3px 10px #d1aee1; }
 
 .confirm-dialogue__button-bar {
-  margin: 30px auto; }
+  margin: 30px auto 10px; }
 
 .confirm-dialogue__button {
   border-radius: 10px;
