@@ -60987,7 +60987,7 @@
 	    }
 	  }
 
-	  const upperIcon = username == author ? _react2.default.createElement(
+	  const upperIcon = username == publisher ? _react2.default.createElement(
 	    'div',
 	    {
 	      className: 'recipe__button--mine-unpub',
@@ -61747,7 +61747,9 @@
 	        {
 	          className: 'confirm-dialogue__description'
 	        },
-	        'Not an original recipe? Give the chef some credit...'
+	        'Not an original recipe?',
+	        _react2.default.createElement('br', null),
+	        'Give the chef some credit...'
 	      ),
 	      _react2.default.createElement(
 	        'label',
@@ -61766,19 +61768,23 @@
 	      }),
 	      _react2.default.createElement(
 	        'div',
-	        {
-	          className: 'confirm-dialogue__button confirm-dialogue__button--accept',
-	          onClick: this.save
-	        },
-	        'Publish'
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        {
-	          className: 'confirm-dialogue__button confirm-dialogue__button--cancel',
-	          onClick: this.closeModal
-	        },
-	        'Cancel'
+	        { className: 'confirm-dialogue__button-bar' },
+	        _react2.default.createElement(
+	          'div',
+	          {
+	            className: 'confirm-dialogue__button confirm-dialogue__button--accept',
+	            onClick: this.save
+	          },
+	          'Publish'
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          {
+	            className: 'confirm-dialogue__button confirm-dialogue__button--cancel',
+	            onClick: this.closeModal
+	          },
+	          'Cancel'
+	        )
 	      )
 	    );
 	  }

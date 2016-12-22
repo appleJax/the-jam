@@ -43,7 +43,7 @@ class PublishDialogue extends React.Component {
           <p
            className='confirm-dialogue__description'
           >
-            Not an original recipe? Give the chef some credit...
+            Not an original recipe?<br />Give the chef some credit...
           </p>
           <label
             className='publish-dialogue__author-name'
@@ -60,18 +60,19 @@ class PublishDialogue extends React.Component {
               this.setState({author: e.target.value})
             }
           />
-
-          <div
-            className='confirm-dialogue__button confirm-dialogue__button--accept'
-            onClick={this.save}
-          >
-            Publish
-          </div>
-          <div
-            className='confirm-dialogue__button confirm-dialogue__button--cancel'
-            onClick={this.closeModal}
-          >
-            Cancel
+          <div className='confirm-dialogue__button-bar'>
+            <div
+              className='confirm-dialogue__button confirm-dialogue__button--accept'
+              onClick={this.save}
+            >
+              Publish
+            </div>
+            <div
+              className='confirm-dialogue__button confirm-dialogue__button--cancel'
+              onClick={this.closeModal}
+            >
+              Cancel
+            </div>
           </div>
       </div>
     )

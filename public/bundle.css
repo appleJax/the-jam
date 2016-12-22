@@ -2649,7 +2649,8 @@ h3 {
   .recipe__credits .credit-name {
     margin-left: 15px; }
 
-.recipe__credits__author {
+.recipe__credits__author,
+.recipe__credits__publisher {
   margin: 8px 0;
   white-space: nowrap; }
 
@@ -2813,8 +2814,8 @@ footer {
   background: rgba(255, 255, 255, 0.5);
   box-shadow: 0 0 5px #ddd inset;
   color: #bc2b0c;
-  margin: -15px 0 50px;
-  padding: 10px 0; }
+  margin: -15px 0 30px;
+  padding: 10px; }
 
 .confirm-dialogue__stars {
   margin-bottom: 45px; }
@@ -2822,7 +2823,7 @@ footer {
     text-shadow: 1px 3px 10px #d1aee1; }
 
 .confirm-dialogue__button-bar {
-  margin: 30px auto 10px; }
+  margin: 50px auto 10px; }
 
 .confirm-dialogue__button {
   border-radius: 10px;
@@ -2850,3 +2851,16 @@ footer {
   text-shadow: 1px 1px #bbf; }
   .confirm-dialogue__button--cancel:active {
     box-shadow: 0 0 15px #3333ff inset; }
+
+.publish-dialogue__author-name {
+  color: #741a07;
+  display: block;
+  text-shadow: 1px 1px #f5775d; }
+
+.publish-dialogue__author-input {
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 5px;
+  color: #bc2b0c;
+  margin-top: 10px;
+  padding: 10px;
+  width: 100%; }

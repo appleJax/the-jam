@@ -76,7 +76,7 @@ const PublicRecipe = ({
     }
   }
 
-  const upperIcon = username == author ?
+  const upperIcon = username == publisher ?
     <div
       className='recipe__button--mine-unpub'
       onClick={unpublishConfirm}
