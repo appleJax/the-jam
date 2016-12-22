@@ -2530,20 +2530,21 @@ nav {
 .recipe__button--mine-unpub,
 .recipe__button--add-to-my-recipes {
   align-items: center;
-  background: #f46f53;
   border-radius: 50%;
+  color: #fcd3cb;
   cursor: pointer;
   display: flex;
   float: right;
-  margin: 0;
-  padding: 8px; }
+  margin: 0; }
 
 .recipe__button--mine-unpub {
-  color: #fcd3cb;
-  font-size: 16px; }
+  background: #f46f53;
+  font-size: 16px;
+  padding: 10px 8px; }
 
 .recipe__button--add-to-my-recipes {
-  color: #F14723; }
+  background: #F14723;
+  padding: 8px; }
 
 .tags {
   cursor: pointer;
