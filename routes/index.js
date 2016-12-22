@@ -41,6 +41,7 @@ module.exports = (app) => {
             isFetching: false,
             id_token: null,
             name: null,
+            email: null,
             errorMessage: ''
           },
           modal: {
@@ -127,6 +128,8 @@ module.exports = (app) => {
           if (isAuthenticated) preloadedState.visibilityFilter.active = 'private';
           preloadedState.auth.isAuthenticated = isAuthenticated;
           preloadedState.auth.name = profile.username || profile.name;
+          preloadedState.auth.email = profile.email || null;
+          preloadedState.auth.id_token = window.localStorage.getItem('idToken') ? JSON.parse(window.localStorage.getItem('idToken')) : null;
           window.__PRELOADED_STATE__ = JSON.stringify(preloadedState);
         </script>
         <script type='text/javascript' src='bundle.js'></script>

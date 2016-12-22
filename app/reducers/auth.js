@@ -9,6 +9,7 @@ const auth = (
     isAuthenticated: false,
     id_token: null,
     name: null,
+    email: null,
     errorMessage: ''
   },
   action
@@ -21,6 +22,7 @@ const auth = (
         isAuthenticated: true,
         id_token: action.id_token,
         name: action.name,
+        email: action.email,
         errorMessage: ''
       }
     case LOGOUT:
@@ -30,6 +32,7 @@ const auth = (
         isAuthenticated: false,
         id_token: null,
         name: null,
+        email: null,
         errorMessage: ''
       }
     default:

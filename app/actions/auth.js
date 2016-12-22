@@ -13,7 +13,8 @@ export const receiveLogin = (user) => {
   return {
     type: LOGIN_SUCCESS,
     id_token: user.id_token,
-    name: user.name
+    name: user.name,
+    email: user.email
   }
 }
 

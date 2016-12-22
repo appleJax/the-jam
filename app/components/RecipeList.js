@@ -6,6 +6,7 @@ const RecipeList = ({
   recipes,
   visibilityFilter,
   user,
+  name,
   privateView,
   setFilterContent,
   editRecipe,
@@ -29,7 +30,7 @@ const RecipeList = ({
           editRecipe={editRecipe}
           toggleDetails={() => toggleDetails(recipe.id, visibilityFilter.active)}
           populateModal={() => populateModal('recipe', recipe)}
-          publishRecipe={() => publishRecipe(user, recipe)}
+          publishRecipe={() => publishRecipe(user, recipe, name)}
           unpublishRecipe={() => unpublishRecipe(user, recipe)}
         /> :
         <PublicRecipe

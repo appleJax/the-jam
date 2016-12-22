@@ -23,7 +23,7 @@ export const fetchRecipes = (user) => {
       }
     )
     .then(json => dispatch(populateUserRecipes(json)))
-    .catch(e => console.error(e))
+    .catch(console.error)
   }
 }
 
@@ -96,15 +96,15 @@ export const deleteUserRecipe = (user, recipe, active) =>
     .catch(console.error)
   }
 
-export const publishRecipe = (user, recipe) =>
+export const publishRecipe = (user, recipe, author) =>
   dispatch => {
-    let author = 'anonymous'
-    try {
-      profile = localStorage.getItem('profile')
-      author = profile ? JSON.parse(profile).name : 'anonymous'
-    } catch(e) {
-      console.error(e)
-    }
+    // let author = 'anonymous'
+    // try {
+    //   profile = localStorage.getItem('profile')
+    //   author = profile ? JSON.parse(profile).name : 'anonymous'
+    // } catch(e) {
+    //   console.error(e)
+    // }
     const publicRecipe = {
       ...recipe,
       votes: {},
@@ -203,7 +203,8 @@ export const addToUserRecipes = (user, recipe) =>
       ...recipe,
       stars: 0,
       published: false,
-      showDetails: false
+      showDetails: false,
+      id: Date.now()
     }
     delete altRecipe.votes
     delete altRecipe.author

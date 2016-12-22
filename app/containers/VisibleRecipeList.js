@@ -63,19 +63,19 @@ const getVisibleRecipes = (recipes, visibilityFilter, sort) => {
 }
 
 const mapStateToProps = (state) => {
-  let user = 'public'
-  try {
-    const profile = localStorage.getItem('profile')
-    user = profile ? JSON.parse(profile).email : 'public'
-
-  } catch(e) {
-    console.error(e)
-  }
-  
+  // let user = 'public'
+  // try {
+  //   const profile = localStorage.getItem('profile')
+  //   user = profile ? JSON.parse(profile).email : 'public'
+  //
+  // } catch(e) {
+  //   console.error(e)
+  // }
   return {
     recipes: getVisibleRecipes(state.recipes, state.visibilityFilter, state.sort),
     visibilityFilter: state.visibilityFilter,
-    user,
+    user: state.auth.email,
+    name: state.auth.name,
     privateView: state.visibilityFilter.active == 'private'
   }
 }

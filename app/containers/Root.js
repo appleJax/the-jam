@@ -13,8 +13,8 @@ try {
   store = configureStore(preloadedState)
 
   if (preloadedState.auth.isAuthenticated) {
-    const user = {}
-    user.name = JSON.parse(localStorage.getItem('profile')).email
+    const user = preloadedState.auth.email
+    //user.name = JSON.parse(localStorage.getItem('profile')).email
 
     fetch(`https://thejam.herokuapp.com/recipes`,
       {

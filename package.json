@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack",
     "start": "node devServer.js",
-    "deploy": "NODE_ENV=production webpack --config webpack.production.config.js"
+    "deploy": "env NODE_ENV=production webpack -p --config webpack.production.config.js"
   },
   "author": "macaroni",
   "license": "ISC",
