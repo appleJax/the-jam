@@ -60453,11 +60453,10 @@
 	  }).catch(console.error);
 	};
 
-	const publishRecipe = exports.publishRecipe = (user, recipe, author) => dispatch => {
+	const publishRecipe = exports.publishRecipe = (user, recipe) => dispatch => {
 	  const publicRecipe = _extends({}, recipe, {
 	    stars: 0,
-	    votes: {},
-	    author
+	    votes: {}
 	  });
 	  delete publicRecipe._id;
 
@@ -60465,6 +60464,8 @@
 	    published: true
 	  });
 	  delete privateRecipe._id;
+	  delete privateRecipe.author;
+	  delete privateRecipe.publisher;
 
 	  dispatch((0, _sync.addRecipe)(publicRecipe, 'public'));
 	  dispatch((0, _sync.editRecipe)(privateRecipe, 'private'));
@@ -60622,7 +60623,6 @@
 	  editRecipe,
 	  toggleDetails,
 	  populateModal,
-	  publishRecipe,
 	  addToUserRecipes
 	}) => {
 	  return _react2.default.createElement(
@@ -60638,7 +60638,7 @@
 	      editRecipe: editRecipe,
 	      toggleDetails: () => toggleDetails(recipe.id, visibilityFilter.active),
 	      populateModal: () => populateModal('recipe', recipe),
-	      publishRecipe: () => publishRecipe(user, recipe, name),
+	      publishConfirm: () => populateModal('publish', recipe),
 	      unpublishConfirm: () => populateModal('unpublish', recipe)
 	    }) : _react2.default.createElement(_PublicRecipe2.default, {
 	      key: i,
@@ -60688,7 +60688,7 @@
 	  editRecipe,
 	  toggleDetails,
 	  populateModal,
-	  publishRecipe,
+	  publishConfirm,
 	  unpublishConfirm
 	}) => {
 	  const {
@@ -60700,6 +60700,7 @@
 	    ingredients,
 	    directions,
 	    published,
+	    author,
 	    showDetails
 	  } = recipe;
 
@@ -60736,9 +60737,9 @@
 	    'div',
 	    {
 	      className: 'recipe__button--publish',
-	      onClick: publishRecipe
+	      onClick: publishConfirm
 	    },
-	    _react2.default.createElement('i', { className: 'fa fa-id-card-o' }),
+	    _react2.default.createElement('i', { className: 'fa fa-newspaper-o' }),
 	    'Publish'
 	  );
 
@@ -60941,6 +60942,7 @@
 	    stars,
 	    votes,
 	    author,
+	    publisher,
 	    servings,
 	    ingredients,
 	    directions,
@@ -60991,7 +60993,7 @@
 	      className: 'recipe__button--mine-unpub',
 	      onClick: unpublishConfirm
 	    },
-	    _react2.default.createElement('i', { className: 'fa fa-id-card' })
+	    _react2.default.createElement('i', { className: 'fa fa-newspaper-o' })
 	  ) : _react2.default.createElement(
 	    'div',
 	    {
@@ -61055,13 +61057,28 @@
 	      }),
 	      _react2.default.createElement(
 	        'div',
-	        { className: 'recipe__author' },
-	        _react2.default.createElement('i', { className: 'fa fa-id-card-o' }),
-	        'Recipe By: ',
+	        { className: 'recipe__credits' },
 	        _react2.default.createElement(
-	          'span',
-	          { className: 'author-name' },
-	          author
+	          'div',
+	          { className: 'recipe__credits--author' },
+	          _react2.default.createElement('i', { className: 'fa fa-id-card-o' }),
+	          'Recipe By: ',
+	          _react2.default.createElement(
+	            'span',
+	            { className: 'credit-name' },
+	            author
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'recipe__credits--publisher' },
+	          _react2.default.createElement('i', { className: 'fa fa-newspaper-o' }),
+	          'Recipe By: ',
+	          _react2.default.createElement(
+	            'span',
+	            { className: 'credit-name' },
+	            publisher
+	          )
 	        )
 	      )
 	    )
@@ -61115,6 +61132,8 @@
 	  },
 
 	  voteForRecipe: (user, vote, recipe) => dispatch((0, _async.voteForRecipe)(user, vote, recipe)),
+
+	  publishRecipe: (user, recipe) => dispatch((0, _async.publishRecipe)(user, recipe)),
 
 	  unpublishRecipe: (user, recipe) => dispatch((0, _async.unpublishRecipe)(user, recipe)),
 
@@ -61172,6 +61191,7 @@
 	  deleteRecipe,
 	  closeModal,
 	  voteForRecipe,
+	  publishRecipe,
 	  unpublishRecipe,
 	  login
 	}) => {
@@ -61205,6 +61225,15 @@
 	    case 'login':
 	      dialogueBox = _react2.default.createElement(_LoginDialogue2.default, {
 	        login: login,
+	        closeModal: closeModal
+	      });
+	      break;
+	    case 'publish':
+	      dialogueBox = _react2.default.createElement(PublishDialogue, {
+	        recipe: content,
+	        user: user,
+	        username: username,
+	        publishRecipe: publishRecipe,
 	        closeModal: closeModal
 	      });
 	      break;

@@ -21,6 +21,7 @@ const PublicRecipe = ({
     stars,
     votes,
     author,
+    publisher,
     servings,
     ingredients,
     directions,
@@ -80,7 +81,7 @@ const PublicRecipe = ({
       className='recipe__button--mine-unpub'
       onClick={unpublishConfirm}
     >
-      <i className='fa fa-id-card'></i>
+      <i className='fa fa-newspaper-o'></i>
     </div> :
     <div
       className='recipe__button--add-to-my-recipes'
@@ -133,9 +134,15 @@ const PublicRecipe = ({
           ingredientList={ingredientList}
           directionList={directionList}
         />
-        <div className='recipe__author'>
-          <i className='fa fa-id-card-o'></i>
-          Recipe By: <span className='author-name'>{author}</span>
+        <div className='recipe__credits'>
+          <div className='recipe__credits--author'>
+            <i className='fa fa-id-card-o'></i>
+            Recipe By: <span className='credit-name'>{author}</span>
+          </div>
+          <div className='recipe__credits--publisher'>
+            <i className='fa fa-newspaper-o'></i>
+            Recipe By: <span className='credit-name'>{publisher}</span>
+          </div>
         </div>
       </div>
       }

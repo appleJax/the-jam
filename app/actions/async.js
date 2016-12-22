@@ -96,13 +96,12 @@ export const deleteUserRecipe = (user, recipe, active) =>
     .catch(console.error)
   }
 
-export const publishRecipe = (user, recipe, author) =>
+export const publishRecipe = (user, recipe) =>
   dispatch => {
     const publicRecipe = {
       ...recipe,
       stars: 0,
       votes: {},
-      author
     }
     delete publicRecipe._id
 
@@ -111,6 +110,8 @@ export const publishRecipe = (user, recipe, author) =>
       published: true
     }
     delete privateRecipe._id
+    delete privateRecipe.author
+    delete privateRecipe.publisher
 
     dispatch(addRecipe(publicRecipe, 'public'))
     dispatch(editRecipe(privateRecipe, 'private'))

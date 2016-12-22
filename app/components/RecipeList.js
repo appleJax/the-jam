@@ -13,7 +13,6 @@ const RecipeList = ({
   editRecipe,
   toggleDetails,
   populateModal,
-  publishRecipe,
   addToUserRecipes
 }) => {
   return (
@@ -30,7 +29,7 @@ const RecipeList = ({
           editRecipe={editRecipe}
           toggleDetails={() => toggleDetails(recipe.id, visibilityFilter.active)}
           populateModal={() => populateModal('recipe', recipe)}
-          publishRecipe={() => publishRecipe(user, recipe, name)}
+          publishConfirm={() => populateModal('publish', recipe)}
           unpublishConfirm={() => populateModal('unpublish', recipe)}
         /> :
         <PublicRecipe

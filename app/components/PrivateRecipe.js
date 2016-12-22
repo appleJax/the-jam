@@ -10,7 +10,7 @@ const PrivateRecipe = ({
   editRecipe,
   toggleDetails,
   populateModal,
-  publishRecipe,
+  publishConfirm,
   unpublishConfirm
 }) => {
   const {
@@ -22,6 +22,7 @@ const PrivateRecipe = ({
     ingredients,
     directions,
     published,
+    author,
     showDetails
   } = recipe
 
@@ -60,9 +61,9 @@ const PrivateRecipe = ({
     </div> :
     <div
       className='recipe__button--publish'
-      onClick={publishRecipe}
+      onClick={publishConfirm}
     >
-      <i className='fa fa-id-card-o'></i>
+      <i className='fa fa-newspaper-o'></i>
       Publish
     </div>
 

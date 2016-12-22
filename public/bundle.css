@@ -2634,17 +2634,20 @@ h3 {
   .directions ol li {
     margin-bottom: 15px; }
 
-.recipe__author {
+.recipe__credits {
   background: #f46f53;
   border-radius: 0 0 5px 5px;
   color: white;
   font-size: 16px;
   margin: 25px -15px -15px -15px;
   padding: 15px; }
-  .recipe__author i {
+  .recipe__credits i {
     margin-right: 8px; }
-  .recipe__author .author-name {
+  .recipe__credits .credit-name {
     margin-left: 15px; }
+
+.recipe__credits--publisher {
+  float: right; }
 
 .recipe__button--edit {
   background: #F14723;

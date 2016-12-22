@@ -16,6 +16,7 @@ const ModalOverlay = ({
   deleteRecipe,
   closeModal,
   voteForRecipe,
+  publishRecipe,
   unpublishRecipe,
   login
 }) => {
@@ -49,6 +50,15 @@ const ModalOverlay = ({
     case 'login':
       dialogueBox = <LoginDialogue
         login={login}
+        closeModal={closeModal}
+      />
+      break
+    case 'publish':
+      dialogueBox = <PublishDialogue
+        recipe={content}
+        user={user}
+        username={username}
+        publishRecipe={publishRecipe}
         closeModal={closeModal}
       />
       break
