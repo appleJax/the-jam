@@ -3,6 +3,7 @@ import ConfirmDialogue from '../components/ConfirmDialogue'
 import RecipeForm from '../components/RecipeForm'
 import VoteDialogue from '../components/VoteDialogue'
 import LoginDialogue from '../components/LoginDialogue'
+import PublishDialogue from '../components/PublishDialogue'
 import UnpublishDialogue from '../components/UnpublishDialogue'
 
 const ModalOverlay = ({

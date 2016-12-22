@@ -2543,7 +2543,7 @@ nav {
 .recipe__button--mine-unpub {
   background: #f46f53;
   font-size: 16px;
-  padding: 9px 8px; }
+  padding: 9px 7px; }
 
 .recipe__button--add-to-my-recipes {
   background: #F14723;
@@ -2638,7 +2638,9 @@ h3 {
   background: #f46f53;
   border-radius: 0 0 5px 5px;
   color: white;
+  display: flex;
   font-size: 16px;
+  justify-content: space-between;
   margin: 25px -15px -15px -15px;
   padding: 15px; }
   .recipe__credits i {

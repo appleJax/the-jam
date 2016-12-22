@@ -8656,7 +8656,7 @@
 
 /***/ },
 /* 316 */
-[719, 317, 318],
+[720, 317, 318],
 /* 317 */
 /***/ function(module, exports) {
 
@@ -9137,7 +9137,7 @@
 
 /***/ },
 /* 321 */
-[720, 322],
+[721, 322],
 /* 322 */
 /***/ function(module, exports) {
 
@@ -14043,7 +14043,7 @@
 
 /***/ },
 /* 357 */
-[720, 358],
+[721, 358],
 /* 358 */
 322,
 /* 359 */
@@ -14284,7 +14284,7 @@
 
 /***/ },
 /* 363 */
-[719, 345, 347],
+[720, 345, 347],
 /* 364 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -60054,7 +60054,7 @@
 
 	var _Modal2 = _interopRequireDefault(_Modal);
 
-	var _Footer = __webpack_require__(718);
+	var _Footer = __webpack_require__(719);
 
 	var _Footer2 = _interopRequireDefault(_Footer);
 
@@ -60993,7 +60993,7 @@
 	      className: 'recipe__button--mine-unpub',
 	      onClick: unpublishConfirm
 	    },
-	    _react2.default.createElement('i', { className: 'fa fa-newspaper-o' })
+	    _react2.default.createElement('i', { className: 'fa fa-user' })
 	  ) : _react2.default.createElement(
 	    'div',
 	    {
@@ -61073,7 +61073,7 @@
 	          'div',
 	          { className: 'recipe__credits--publisher' },
 	          _react2.default.createElement('i', { className: 'fa fa-newspaper-o' }),
-	          'Recipe By: ',
+	          'Published By: ',
 	          _react2.default.createElement(
 	            'span',
 	            { className: 'credit-name' },
@@ -61174,7 +61174,11 @@
 
 	var _LoginDialogue2 = _interopRequireDefault(_LoginDialogue);
 
-	var _UnpublishDialogue = __webpack_require__(717);
+	var _PublishDialogue = __webpack_require__(717);
+
+	var _PublishDialogue2 = _interopRequireDefault(_PublishDialogue);
+
+	var _UnpublishDialogue = __webpack_require__(718);
 
 	var _UnpublishDialogue2 = _interopRequireDefault(_UnpublishDialogue);
 
@@ -61229,7 +61233,7 @@
 	      });
 	      break;
 	    case 'publish':
-	      dialogueBox = _react2.default.createElement(PublishDialogue, {
+	      dialogueBox = _react2.default.createElement(_PublishDialogue2.default, {
 	        recipe: content,
 	        user: user,
 	        username: username,
@@ -61697,6 +61701,107 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	class PublishDialogue extends _react2.default.Component {
+	  constructor(props) {
+	    super(props);
+	    this.recipe = props.recipe;
+	    this.user = props.user;
+	    this.username = props.username;
+	    this.publishRecipe = props.publishRecipe;
+	    this.closeModal = props.closeModal;
+
+	    this.save = this.save.bind(this);
+
+	    this.state = {
+	      author: ''
+	    };
+	  }
+
+	  save() {
+	    const newRecipe = this.recipe,
+	          author = this.state.author.trim();
+
+	    newRecipe.author = author || this.username;
+	    newRecipe.publisher = this.username;
+
+	    this.publishRecipe(this.user, newRecipe);
+	    this.closeModal();
+	  }
+
+	  render() {
+	    _react2.default.createElement(
+	      'div',
+	      {
+	        className: 'confirm-dialogue',
+	        onClick: e => e.stopPropagation()
+	      },
+	      _react2.default.createElement(
+	        'h3',
+	        {
+	          className: 'confirm-dialogue__message'
+	        },
+	        'Publish Recipe'
+	      ),
+	      _react2.default.createElement(
+	        'p',
+	        {
+	          className: 'confirm-dialogue__description'
+	        },
+	        'Not an original recipe? Give the chef some credit...'
+	      ),
+	      _react2.default.createElement(
+	        'label',
+	        {
+	          className: 'publish-dialogue__author-name',
+	          htmlFor: 'author'
+	        },
+	        'Original Author:'
+	      ),
+	      _react2.default.createElement('input', {
+	        type: 'text',
+	        name: 'author',
+	        className: 'publish-dialogue__author-input',
+	        value: this.state.author,
+	        onChange: e => this.setState({ author: e.target.value })
+	      }),
+	      _react2.default.createElement(
+	        'div',
+	        {
+	          className: 'confirm-dialogue__button confirm-dialogue__button--accept',
+	          onClick: this.save
+	        },
+	        'Publish'
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        {
+	          className: 'confirm-dialogue__button confirm-dialogue__button--cancel',
+	          onClick: closeModal
+	        },
+	        'Cancel'
+	      )
+	    );
+	  }
+	}
+
+	exports.default = PublishDialogue;
+
+/***/ },
+/* 718 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(312);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 	const UnpublishDialogue = ({
 	  unpublishRecipe,
 	  closeModal
@@ -61744,7 +61849,7 @@
 	exports.default = UnpublishDialogue;
 
 /***/ },
-/* 718 */
+/* 719 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -61768,7 +61873,7 @@
 	exports.default = Footer;
 
 /***/ },
-/* 719 */
+/* 720 */
 /***/ function(module, exports, __webpack_require__, __webpack_module_template_argument_0__, __webpack_module_template_argument_1__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -61897,7 +62002,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(308)))
 
 /***/ },
-/* 720 */
+/* 721 */
 /***/ function(module, exports, __webpack_require__, __webpack_module_template_argument_0__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**

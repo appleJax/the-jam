@@ -81,7 +81,7 @@ const PublicRecipe = ({
       className='recipe__button--mine-unpub'
       onClick={unpublishConfirm}
     >
-      <i className='fa fa-newspaper-o'></i>
+      <i className='fa fa-user'></i>
     </div> :
     <div
       className='recipe__button--add-to-my-recipes'
@@ -141,7 +141,7 @@ const PublicRecipe = ({
           </div>
           <div className='recipe__credits--publisher'>
             <i className='fa fa-newspaper-o'></i>
-            Recipe By: <span className='credit-name'>{publisher}</span>
+            Published By: <span className='credit-name'>{publisher}</span>
           </div>
         </div>
       </div>

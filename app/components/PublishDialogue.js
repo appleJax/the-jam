@@ -17,8 +17,10 @@ class PublishDialogue extends React.Component {
   }
 
   save() {
-    const newRecipe = this.recipe
-    newRecipe.author = this.state.author.trim()
+    const newRecipe = this.recipe,
+          author = this.state.author.trim()
+
+    newRecipe.author = author || this.username
     newRecipe.publisher = this.username
 
     this.publishRecipe(this.user, newRecipe)
