@@ -61036,7 +61036,7 @@
 	      _react2.default.createElement(
 	        'div',
 	        {
-	          onClick: loggedIn ? voteDialogue : loginDialogue
+	          onClick: loggedIn && voteDialogue || loginDialogue
 	        },
 	        starIcons
 	      )

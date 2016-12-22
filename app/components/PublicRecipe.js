@@ -122,8 +122,7 @@ const PublicRecipe = ({
           {totalVotes} Vote{totalVotes != 1 && 's'}
         </div>
         <div
-          onClick={loggedIn ?
-            voteDialogue :
+          onClick={(loggedIn && voteDialogue) ||
             loginDialogue
           }
         >
