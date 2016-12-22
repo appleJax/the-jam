@@ -38097,7 +38097,8 @@
 	  store = (0, _configureStore2.default)(preloadedState);
 	
 	  if (preloadedState.auth.isAuthenticated) {
-	    const user = preloadedState.auth.email;
+	    const user = {};
+	    user.name = preloadedState.auth.email;
 	    //user.name = JSON.parse(localStorage.getItem('profile')).email
 	
 	    (0, _isomorphicFetch2.default)(`https://thejam.herokuapp.com/recipes`, {
