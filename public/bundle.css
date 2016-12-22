@@ -2496,7 +2496,6 @@ nav {
 .recipe {
   background: #fde7e3;
   border-radius: 5px;
-  box-shadow: 2px 2px 2px 1px #aaa;
   color: #333;
   font-size: 20px;
   margin: 0 auto 15px;
@@ -2673,7 +2672,9 @@ footer {
       column-gap: 20px;
       padding: 0 10%; } }
   .recipe-list li {
-    break-inside: avoid-column; }
+    border-bottom: 3px solid rgba(50, 50, 50, 0.2);
+    border-right: 1px solid rgba(50, 50, 50, 0.2);
+    break-inside: avoid; }
 
 .modal-overlay {
   background: rgba(0, 0, 0, 0.7);
