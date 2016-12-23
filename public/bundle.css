@@ -2500,7 +2500,10 @@ nav {
   border-right: 1px solid rgba(50, 50, 50, 0.2);
   break-inside: avoid;
   color: #333;
+  display: flex;
+  flex-direction: column;
   font-size: 20px;
+  justify-content: space-between;
   margin: 0 auto 15px;
   max-width: 630px;
   padding: 15px;
@@ -2611,7 +2614,8 @@ nav {
 
 .recipe__body {
   display: flex;
-  justify-content: space-between; }
+  justify-content: space-between;
+  flex-direction: column; }
 
 .ingredients {
   margin-top: 0; }

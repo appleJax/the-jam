@@ -60294,7 +60294,7 @@
 	  const activeRecipes = recipes[visibilityFilter.active];
 
 	  return activeRecipes.filter(recipe => {
-	    const text = [recipe.name, ...recipe.tags, recipe.servings, ...recipe.ingredients, ...recipe.directions, recipe.author].join(' ');
+	    const text = [recipe.name, ...recipe.tags, recipe.servings, ...recipe.ingredients, ...recipe.directions, recipe.author, recipe.publisher].join(' ');
 
 	    return text.match(new RegExp(regex, 'i'));
 	  }).sort((a, b) => {
@@ -60813,7 +60813,7 @@
 	        onClick: toggleDetails,
 	        className: showDetails ? 'recipe__expand-toggle fa fa-toggle-up fa-lg' : 'recipe__expand-toggle fa fa-ellipsis-h fa-lg'
 	      }),
-	      _react2.default.createElement('div', { className: 'recipe__spacer' }),
+	      _react2.default.createElement('div', { className: 'spacer' }),
 	      status,
 	      starIcons
 	    ),
@@ -61054,32 +61054,30 @@
 	        servings: servings,
 	        ingredientList: ingredientList,
 	        directionList: directionList
-	      }),
-	      _react2.default.createElement('div', { className: 'spacer' }),
+	      })
+	    ) && _react2.default.createElement('div', { className: 'spacer' }) && _react2.default.createElement(
+	      'div',
+	      { className: 'recipe__credits' },
 	      _react2.default.createElement(
 	        'div',
-	        { className: 'recipe__credits' },
+	        { className: 'recipe__credits__author' },
+	        _react2.default.createElement('i', { className: 'fa fa-id-card-o' }),
+	        'Recipe By: ',
 	        _react2.default.createElement(
-	          'div',
-	          { className: 'recipe__credits__author' },
-	          _react2.default.createElement('i', { className: 'fa fa-id-card-o' }),
-	          'Recipe By: ',
-	          _react2.default.createElement(
-	            'span',
-	            { className: 'credit-name' },
-	            author
-	          )
-	        ),
+	          'span',
+	          { className: 'credit-name' },
+	          author
+	        )
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'recipe__credits__publisher' },
+	        _react2.default.createElement('i', { className: 'fa fa-newspaper-o' }),
+	        'Published By: ',
 	        _react2.default.createElement(
-	          'div',
-	          { className: 'recipe__credits__publisher' },
-	          _react2.default.createElement('i', { className: 'fa fa-newspaper-o' }),
-	          'Published By: ',
-	          _react2.default.createElement(
-	            'span',
-	            { className: 'credit-name' },
-	            publisher
-	          )
+	          'span',
+	          { className: 'credit-name' },
+	          publisher
 	        )
 	      )
 	    )

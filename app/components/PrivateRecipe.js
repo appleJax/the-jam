@@ -138,7 +138,7 @@ const PrivateRecipe = ({
           }
         >
         </i>
-        <div className='recipe__spacer'></div>
+        <div className='spacer'></div>
         {status}
         {starIcons}
       </div>

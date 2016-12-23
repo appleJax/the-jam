@@ -29,7 +29,8 @@ const getVisibleRecipes = (recipes, visibilityFilter, sort) => {
           recipe.servings,
           ...recipe.ingredients,
           ...recipe.directions,
-          recipe.author
+          recipe.author,
+          recipe.publisher
         ].join(' ')
 
       return text.match(new RegExp(regex, 'i'));
