@@ -28982,8 +28982,8 @@
 	  store = (0, _configureStore2.default)(preloadedState);
 
 	  if (preloadedState.auth.isAuthenticated) {
-	    const user = {};
-	    user.name = preloadedState.auth.email;
+	    const request = {};
+	    request.user = preloadedState.auth.email;
 
 	    (0, _isomorphicFetch2.default)(`https://thejam.herokuapp.com/recipes`, {
 	      method: 'POST',
@@ -28993,7 +28993,7 @@
 	      },
 	      mode: 'cors',
 	      cache: 'default',
-	      body: JSON.stringify(user)
+	      body: JSON.stringify(request)
 	    }).then(response => {
 	      if (response.status >= 400) {
 	        throw new Error("Bad response from server");
@@ -60423,7 +60423,7 @@
 	      showDetails: false
 	    });
 
-	    return (0, _isomorphicFetch2.default)(`https://thejam.herokuapp.com/edit`, {
+	    (0, _isomorphicFetch2.default)(`https://thejam.herokuapp.com/edit`, {
 	      method: 'POST',
 	      headers: {
 	        'Accept': 'application/json',
@@ -60433,6 +60433,52 @@
 	      cache: 'default',
 	      body: JSON.stringify({ user, recipe: newRecipe })
 	    }).catch(console.error);
+
+	    if (recipe.published) {
+	      (0, _isomorphicFetch2.default)(`https://thejam.herokuapp.com/find`, {
+	        method: 'POST',
+	        headers: {
+	          'Accept': 'application/json',
+	          'Content-type': 'application/json'
+	        },
+	        mode: 'cors',
+	        cache: 'default',
+	        body: JSON.stringify({ user: 'public', recipe: { id: recipe.id } })
+	      }).then(response => {
+	        if (response.status >= 400) {
+	          throw new Error("Bad response from server");
+	        }
+	        return response.json();
+	      }).then(response => {
+	        console.log('Recipe:', recipe);
+	        console.log('Response:', response);
+	        const tempRecipe = recipe,
+	              oldPubRecipe = response;
+	        delete oldPubRecipe._id;
+	        delete tempRecipe.published;
+	        delete tempRecipe.stars;
+
+	        if (tempRecipe.author == 'Me' || tempRecipe.author == 'me') {
+	          tempRecipe.author = oldPubRecipe.publisher;
+	        }
+
+	        const newPubRecipe = _extends({}, oldPubRecipe, tempRecipe);
+
+	        dispatch((0, _sync.editRecipe)(newPubRecipe, 'public'));
+	        newPubRecipe.showDetails = false;
+
+	        (0, _isomorphicFetch2.default)(`https://thejam.herokuapp.com/edit`, {
+	          method: 'POST',
+	          headers: {
+	            'Accept': 'application/json',
+	            'Content-type': 'application/json'
+	          },
+	          mode: 'cors',
+	          cache: 'default',
+	          body: JSON.stringify({ user: 'public', recipe: newPubRecipe })
+	        });
+	      }).catch(console.error);
+	    }
 	  };
 	};
 
@@ -60706,8 +60752,8 @@
 	    ingredients,
 	    directions,
 	    notes,
-	    published,
 	    author,
+	    published,
 	    showDetails
 	  } = recipe;
 

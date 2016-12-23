@@ -220,9 +220,31 @@ module.exports = (app) => {
       MongoClient.connect(url, (err, db) => {
         assert.equal(null, err);
 
-        const collection = db.collection(req.body.name);
+        const collection = db.collection(req.body.user);
 
         collection.find({}).toArray((err, docs) => {
+          assert.equal(null, err);
+          res.json(docs);
+          db.close();
+          res.end();
+        })
+      });
+    }
+  });
+
+  app.all('/find', (req, res) => {
+    if (req.method == 'OPTIONS') {
+      const headers = setHeaders();
+      res.writeHead(200, headers);
+      res.end();
+    } else if (req.method == 'POST') {
+      MongoClient.connect(url, (err, db) => {
+        assert.equal(null, err);
+
+        const collection = db.collection(req.body.user),
+              recipe = req.body.recipe;
+
+        collection.find({id: recipe.id}).toArray((err, docs) => {
           assert.equal(null, err);
           res.json(docs);
           db.close();

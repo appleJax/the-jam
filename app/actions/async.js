@@ -61,7 +61,7 @@ export const editUserRecipe = (user, recipe, active) => {
       showDetails: false
     }
 
-    return fetch(`https://thejam.herokuapp.com/edit`,
+    fetch(`https://thejam.herokuapp.com/edit`,
       {
         method: 'POST',
         headers: {
@@ -74,6 +74,62 @@ export const editUserRecipe = (user, recipe, active) => {
       }
     )
     .catch(console.error)
+
+    if (recipe.published) {
+      fetch(`https://thejam.herokuapp.com/find`,
+        {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-type': 'application/json'
+          },
+          mode: 'cors',
+          cache: 'default',
+          body: JSON.stringify({user: 'public', recipe: {id: recipe.id}})
+        }
+      )
+      .then(response => {
+        if (response.status >= 400) {
+          throw new Error("Bad response from server")
+        }
+        return response.json()
+      })
+      .then(response => {
+        console.log('Recipe:', recipe)
+        console.log('Response:', response)
+        const tempRecipe = recipe,
+              oldPubRecipe = response
+        delete oldPubRecipe._id
+        delete tempRecipe.published
+        delete tempRecipe.stars
+
+        if (tempRecipe.author == 'Me' || tempRecipe.author == 'me') {
+          tempRecipe.author = oldPubRecipe.publisher
+        }
+
+        const newPubRecipe = {
+          ...oldPubRecipe,
+          ...tempRecipe
+        }
+
+        dispatch(editRecipe(newPubRecipe, 'public'))
+        newPubRecipe.showDetails = false
+
+        fetch(`https://thejam.herokuapp.com/edit`,
+          {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Content-type': 'application/json'
+            },
+            mode: 'cors',
+            cache: 'default',
+            body: JSON.stringify({user: 'public', recipe: newPubRecipe})
+          }
+        )
+      })
+      .catch(console.error)
+    }
   }
 }
 

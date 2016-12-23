@@ -23,8 +23,8 @@ const PrivateRecipe = ({
     ingredients,
     directions,
     notes,
-    published,
     author,
+    published,
     showDetails
   } = recipe
 

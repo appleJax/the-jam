@@ -13,8 +13,8 @@ try {
   store = configureStore(preloadedState)
 
   if (preloadedState.auth.isAuthenticated) {
-    const user = {}
-    user.name = preloadedState.auth.email
+    const request = {}
+    request.user = preloadedState.auth.email
 
     fetch(`https://thejam.herokuapp.com/recipes`,
       {
@@ -25,7 +25,7 @@ try {
         },
         mode: 'cors',
         cache: 'default',
-        body: JSON.stringify(user)
+        body: JSON.stringify(request)
       }
     )
     .then(response => {
