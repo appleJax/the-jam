@@ -2654,7 +2654,7 @@ nav {
 .recipe-body__notes-title {
   font-family: 'Architects Daughter', 'sans-serif'; }
 
-.recipe-body__notes {
+.recipe-body__notes p {
   color: #333;
   font-size: 20px;
   font-family: 'Architects Daughter', 'sans-serif'; }

@@ -60732,12 +60732,6 @@
 	    direction
 	  ));
 
-	  const formattedNotes = notes.map(line => _react2.default.createElement(
-	    'p',
-	    null,
-	    line
-	  ));
-
 	  const status = published ? _react2.default.createElement(
 	    'div',
 	    {
@@ -60839,7 +60833,7 @@
 	        servings: servings,
 	        ingredientList: ingredientList,
 	        directionList: directionList,
-	        notes: formattedNotes
+	        notes: notes
 	      }),
 	      _react2.default.createElement(
 	        'div',
@@ -60953,7 +60947,11 @@
 	    _react2.default.createElement(
 	      'div',
 	      { className: 'recipe-body__notes' },
-	      notes
+	      notes.map(line => _react2.default.createElement(
+	        'p',
+	        null,
+	        line
+	      ))
 	    )
 	  )
 	);
@@ -61028,12 +61026,6 @@
 	    'li',
 	    { key: i },
 	    direction
-	  ));
-
-	  const formattedNotes = notes.map(line => _react2.default.createElement(
-	    'p',
-	    null,
-	    line
 	  ));
 
 	  const totalVotes = Object.keys(votes).length,
@@ -61122,7 +61114,7 @@
 	        servings: servings,
 	        ingredientList: ingredientList,
 	        directionList: directionList,
-	        notes: formattedNotes
+	        notes: notes
 	      })
 	    ),
 	    showDetails && _react2.default.createElement('div', { className: 'spacer credits-spacer' }),

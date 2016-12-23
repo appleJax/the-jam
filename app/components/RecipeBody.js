@@ -38,7 +38,11 @@ const RecipeBody = ({
         Notes:
       </h3>
       <div className='recipe-body__notes'>
-        {notes}
+        {notes.map(
+          line =>
+            <p>{line}</p>
+         )
+        }
       </div>
     </div>
     }

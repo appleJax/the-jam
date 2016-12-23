@@ -53,11 +53,6 @@ const PrivateRecipe = ({
       <li key={i}>{direction}</li>
   )
 
-  const formattedNotes = notes.map(
-    line =>
-      <p>{line}</p>
-  )
-
   const status = published ?
     <div
       className='recipe__button--unpublish'
@@ -157,7 +152,7 @@ const PrivateRecipe = ({
           servings={servings}
           ingredientList={ingredientList}
           directionList={directionList}
-          notes={formattedNotes}
+          notes={notes}
         />
         <div
           className='recipe__button--edit'
