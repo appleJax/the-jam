@@ -60732,6 +60732,8 @@
 	    direction
 	  ));
 
+	  const formattedNotes = notes.join('\n');
+
 	  const status = published ? _react2.default.createElement(
 	    'div',
 	    {
@@ -60833,7 +60835,7 @@
 	        servings: servings,
 	        ingredientList: ingredientList,
 	        directionList: directionList,
-	        notes: notes
+	        notes: formattedNotes
 	      }),
 	      _react2.default.createElement(
 	        'div',
@@ -61020,6 +61022,8 @@
 	    direction
 	  ));
 
+	  const formattedNotes = notes.join('\n');
+
 	  const totalVotes = Object.keys(votes).length,
 	        starIcons = [];
 
@@ -61106,7 +61110,7 @@
 	        servings: servings,
 	        ingredientList: ingredientList,
 	        directionList: directionList,
-	        notes: notes
+	        notes: formattedNotes
 	      })
 	    ),
 	    showDetails && _react2.default.createElement('div', { className: 'spacer credits-spacer' }),

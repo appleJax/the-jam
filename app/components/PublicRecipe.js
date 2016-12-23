@@ -55,6 +55,8 @@ const PublicRecipe = ({
       <li key={i}>{direction}</li>
   )
 
+  const formattedNotes = notes.join('\n')
+
   const totalVotes = Object.keys(votes).length,
         starIcons = []
 
@@ -137,7 +139,7 @@ const PublicRecipe = ({
           servings={servings}
           ingredientList={ingredientList}
           directionList={directionList}
-          notes={notes}
+          notes={formattedNotes}
         />
       </div>
       }

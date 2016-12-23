@@ -53,6 +53,8 @@ const PrivateRecipe = ({
       <li key={i}>{direction}</li>
   )
 
+  const formattedNotes = notes.join('\n')
+
   const status = published ?
     <div
       className='recipe__button--unpublish'
@@ -152,7 +154,7 @@ const PrivateRecipe = ({
           servings={servings}
           ingredientList={ingredientList}
           directionList={directionList}
-          notes={notes}
+          notes={formattedNotes}
         />
         <div
           className='recipe__button--edit'

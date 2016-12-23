@@ -2587,9 +2587,7 @@ nav {
 
 .recipe__button--publish,
 .recipe__button--unpublish {
-  border: 1px solid #f79783;
   border-radius: 5px;
-  box-shadow: 0 0 8px #f46f53 inset;
   cursor: pointer;
   display: inline;
   font-size: 18px;
@@ -2601,9 +2599,13 @@ nav {
     margin-right: 10px; }
 
 .recipe__button--publish {
+  border: 1px solid #F14723;
+  box-shadow: 0 0 8px #F14723 inset;
   color: #F14723; }
 
 .recipe__button--unpublish {
+  border: 1px solid #f79783;
+  box-shadow: 0 0 8px #f46f53 inset;
   color: #f46f53; }
 
 .fa-star,
