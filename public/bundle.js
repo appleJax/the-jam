@@ -61055,7 +61055,9 @@
 	        ingredientList: ingredientList,
 	        directionList: directionList
 	      })
-	    ) && _react2.default.createElement('div', { className: 'spacer' }) && _react2.default.createElement(
+	    ),
+	    showDetails && _react2.default.createElement('div', { className: 'spacer' }),
+	    showDetails && _react2.default.createElement(
 	      'div',
 	      { className: 'recipe__credits' },
 	      _react2.default.createElement(

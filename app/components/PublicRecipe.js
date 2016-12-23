@@ -134,8 +134,12 @@ const PublicRecipe = ({
           ingredientList={ingredientList}
           directionList={directionList}
         />
-      </div> &&
-      <div className="spacer"></div> &&
+      </div>
+      }
+      {showDetails &&
+      <div className="spacer"></div>
+      }
+      {showDetails &&
       <div className='recipe__credits'>
         <div className='recipe__credits__author'>
           <i className='fa fa-id-card-o'></i>
