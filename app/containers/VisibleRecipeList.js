@@ -8,8 +8,7 @@ import {
   editUserRecipe,
   publishRecipe,
   unpublishRecipe,
-  addToUserRecipes,
-  voteForRecipe
+  addToUserRecipes
 } from '../actions/async'
 import RecipeList from '../components/RecipeList'
 
@@ -70,7 +69,7 @@ const mapStateToProps = (state) => {
     recipes: getVisibleRecipes(state.recipes, state.visibilityFilter, state.sort),
     visibilityFilter: state.visibilityFilter,
     user: state.auth.email,
-    name: state.auth.name,
+    username: state.auth.name,
     privateView: state.visibilityFilter.active == 'private',
     loggedIn: state.auth.isAuthenticated
   }
@@ -92,17 +91,14 @@ const mapDispatchTProps = (dispatch) =>
       dispatch(populateModal(dialogue, content))
     },
 
-    publishRecipe: (user, recipe, author) =>
-      dispatch(publishRecipe(user, recipe, author)),
+    publishRecipe: (user, recipe, publisher) =>
+      dispatch(publishRecipe(user, recipe, publisher)),
 
     unpublishRecipe: (user, recipe) =>
       dispatch(unpublishRecipe(user, recipe)),
 
     addToUserRecipes: (user, recipe) =>
-      dispatch(addToUserRecipes(user, recipe)),
-
-    voteForRecipe: (user, vote, recipe) =>
-      dispatch(voteForRecipe(user, vote, recipe))
+      dispatch(addToUserRecipes(user, recipe))
   })
 
 const VisibleRecipeList = connect(

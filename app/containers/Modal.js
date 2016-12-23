@@ -4,7 +4,6 @@ import {
   editUserRecipe,
   deleteUserRecipe,
   voteForRecipe,
-  publishRecipe,
   unpublishRecipe
 } from '../actions/async'
 import { closeModal } from '../actions/sync'
@@ -38,9 +37,6 @@ const mapDispatchToProps = (dispatch) =>
 
     voteForRecipe: (user, vote, recipe) =>
       dispatch(voteForRecipe(user, vote, recipe)),
-
-    publishRecipe: (user, recipe) =>
-      dispatch(publishRecipe(user, recipe)),
 
     unpublishRecipe: (user, recipe) =>
       dispatch(unpublishRecipe(user, recipe)),

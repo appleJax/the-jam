@@ -9,8 +9,11 @@ const RecipeBody = ({
 }) => (
   <div>
     {time &&
-      <div className='recipe-body__time'>
-        <i className='fa fa-clock-o'></i> {time}
+      <div className='recipe-body__time-div'>
+        <i className='fa fa-clock-o'></i>
+        <span className='recipe-body__time'>
+          {time}
+        </span>
       </div>
     }
     <div className='recipe-body__ingredients'>

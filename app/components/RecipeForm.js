@@ -22,6 +22,7 @@ class RecipeForm extends React.Component {
       tempRecipe.tags = content.tags.join(',')
       tempRecipe.ingredients = content.ingredients.join('\n')
       tempRecipe.directions = content.directions.join('\n\n')
+      tempRecipe.notes = content.notes.join('\n')
       this.state = {
         ...newContent,
         ...tempRecipe,
@@ -46,28 +47,33 @@ class RecipeForm extends React.Component {
 
   save() {
     let recipe = this.state;
-    recipe.name = recipe.name.trim() || 'New Recipe';
+    recipe.name = recipe.name.trim() || 'New Recipe'
 
     recipe.tags = recipe.tags ?
       recipe.tags.split(',')
         .map(tag =>
           tag.toLowerCase()
              .trim())
-        .filter(tag => tag !== '') : [];
+        .filter(tag => tag !== '') : []
 
-    recipe.servings = recipe.servings || 1;
+    recipe.servings = recipe.servings || 1
 
-    recipe.ingredients = recipe.ingredients ?
+    recipe.ingredients = recipe.ingredients.trim() ?
       recipe.ingredients.split('\n')
         .map(ingredient =>
           ingredient.trim())
-        .filter(ingredient => ingredient !== '') : ['None'];
+        .filter(ingredient => ingredient !== '') : ['None']
 
-    recipe.directions = recipe.directions ?
+    recipe.directions = recipe.directions.trim() ?
       recipe.directions.split('\n')
         .map(direction =>
           direction.trim())
-        .filter(direction => direction !== '') : ['None'];
+        .filter(direction => direction !== '') : ['None']
+
+    recipe.notes = recipe.notes.trim() ?
+      recipe.notes.split('\n') : ''
+
+    recipe.author = recipe.author.trim() || 'Me'
 
     if (typeof this.content == 'object') {
       this.editRecipe(this.user, recipe, this.active)

@@ -8656,7 +8656,7 @@
 
 /***/ },
 /* 316 */
-[720, 317, 318],
+[719, 317, 318],
 /* 317 */
 /***/ function(module, exports) {
 
@@ -9137,7 +9137,7 @@
 
 /***/ },
 /* 321 */
-[721, 322],
+[720, 322],
 /* 322 */
 /***/ function(module, exports) {
 
@@ -14043,7 +14043,7 @@
 
 /***/ },
 /* 357 */
-[721, 358],
+[720, 358],
 /* 358 */
 322,
 /* 359 */
@@ -14284,7 +14284,7 @@
 
 /***/ },
 /* 363 */
-[720, 345, 347],
+[719, 345, 347],
 /* 364 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -60054,7 +60054,7 @@
 
 	var _Modal2 = _interopRequireDefault(_Modal);
 
-	var _Footer = __webpack_require__(719);
+	var _Footer = __webpack_require__(718);
 
 	var _Footer2 = _interopRequireDefault(_Footer);
 
@@ -60327,7 +60327,7 @@
 	    recipes: getVisibleRecipes(state.recipes, state.visibilityFilter, state.sort),
 	    visibilityFilter: state.visibilityFilter,
 	    user: state.auth.email,
-	    name: state.auth.name,
+	    username: state.auth.name,
 	    privateView: state.visibilityFilter.active == 'private',
 	    loggedIn: state.auth.isAuthenticated
 	  };
@@ -60345,13 +60345,11 @@
 	    dispatch((0, _sync.populateModal)(dialogue, content));
 	  },
 
-	  publishRecipe: (user, recipe, author) => dispatch((0, _async.publishRecipe)(user, recipe, author)),
+	  publishRecipe: (user, recipe, publisher) => dispatch((0, _async.publishRecipe)(user, recipe, publisher)),
 
 	  unpublishRecipe: (user, recipe) => dispatch((0, _async.unpublishRecipe)(user, recipe)),
 
-	  addToUserRecipes: (user, recipe) => dispatch((0, _async.addToUserRecipes)(user, recipe)),
-
-	  voteForRecipe: (user, vote, recipe) => dispatch((0, _async.voteForRecipe)(user, vote, recipe))
+	  addToUserRecipes: (user, recipe) => dispatch((0, _async.addToUserRecipes)(user, recipe))
 	});
 
 	const VisibleRecipeList = (0, _reactRedux.connect)(mapStateToProps, mapDispatchTProps)(_RecipeList2.default);
@@ -60453,21 +60451,25 @@
 	  }).catch(console.error);
 	};
 
-	const publishRecipe = exports.publishRecipe = (user, recipe) => dispatch => {
+	const publishRecipe = exports.publishRecipe = (user, recipe, publisher) => dispatch => {
 	  const publicRecipe = _extends({}, recipe, {
-	    votes: {}
+	    votes: {},
+	    publisher
 	  });
 	  delete publicRecipe._id;
 
+	  if (recipe.author == 'Me' || recipe.author == 'me') {
+	    publicRecipe.author = publisher;
+	  }
+
 	  if (recipe.stars > 0) {
-	    publicRecipe.votes[recipe.publisher] = recipe.stars;
+	    publicRecipe.votes[publisher] = recipe.stars;
 	  }
 
 	  const privateRecipe = _extends({}, recipe, {
 	    published: true
 	  });
 	  delete privateRecipe._id;
-	  delete privateRecipe.publisher;
 
 	  dispatch((0, _sync.addRecipe)(publicRecipe, 'public'));
 	  dispatch((0, _sync.editRecipe)(privateRecipe, 'private'));
@@ -60618,13 +60620,14 @@
 	  recipes,
 	  visibilityFilter,
 	  user,
-	  name,
+	  username,
 	  privateView,
 	  loggedIn,
 	  setFilterContent,
 	  editRecipe,
 	  toggleDetails,
 	  populateModal,
+	  publishRecipe,
 	  addToUserRecipes
 	}) => {
 	  return _react2.default.createElement(
@@ -60640,14 +60643,14 @@
 	      editRecipe: editRecipe,
 	      toggleDetails: () => toggleDetails(recipe.id, visibilityFilter.active),
 	      populateModal: () => populateModal('recipe', recipe),
-	      publishConfirm: () => populateModal('publish', recipe),
+	      publishRecipe: () => publishRecipe(user, recipe, username),
 	      unpublishConfirm: () => populateModal('unpublish', recipe)
 	    }) : _react2.default.createElement(_PublicRecipe2.default, {
 	      key: i,
 	      recipe: recipe,
 	      visibilityFilter: visibilityFilter,
 	      user: user,
-	      username: name,
+	      username: username,
 	      loggedIn: loggedIn,
 	      setFilterContent: setFilterContent,
 	      toggleDetails: () => toggleDetails(recipe.id, visibilityFilter.active),
@@ -60690,7 +60693,7 @@
 	  editRecipe,
 	  toggleDetails,
 	  populateModal,
-	  publishConfirm,
+	  publishRecipe,
 	  unpublishConfirm
 	}) => {
 	  const {
@@ -60741,7 +60744,7 @@
 	    'div',
 	    {
 	      className: 'recipe__button--publish',
-	      onClick: publishConfirm
+	      onClick: publishRecipe
 	    },
 	    _react2.default.createElement('i', { className: 'fa fa-newspaper-o' }),
 	    'Publish'
@@ -60889,10 +60892,13 @@
 	  null,
 	  time && _react2.default.createElement(
 	    'div',
-	    { className: 'recipe-body__time' },
+	    { className: 'recipe-body__time-div' },
 	    _react2.default.createElement('i', { className: 'fa fa-clock-o' }),
-	    ' ',
-	    time
+	    _react2.default.createElement(
+	      'span',
+	      { className: 'recipe-body__time' },
+	      time
+	    )
 	  ),
 	  _react2.default.createElement(
 	    'div',
@@ -61181,8 +61187,6 @@
 
 	  voteForRecipe: (user, vote, recipe) => dispatch((0, _async.voteForRecipe)(user, vote, recipe)),
 
-	  publishRecipe: (user, recipe) => dispatch((0, _async.publishRecipe)(user, recipe)),
-
 	  unpublishRecipe: (user, recipe) => dispatch((0, _async.unpublishRecipe)(user, recipe)),
 
 	  login: () => dispatch((0, _auth.auth0Login)())
@@ -61222,11 +61226,7 @@
 
 	var _LoginDialogue2 = _interopRequireDefault(_LoginDialogue);
 
-	var _PublishDialogue = __webpack_require__(717);
-
-	var _PublishDialogue2 = _interopRequireDefault(_PublishDialogue);
-
-	var _UnpublishDialogue = __webpack_require__(718);
+	var _UnpublishDialogue = __webpack_require__(717);
 
 	var _UnpublishDialogue2 = _interopRequireDefault(_UnpublishDialogue);
 
@@ -61243,7 +61243,6 @@
 	  deleteRecipe,
 	  closeModal,
 	  voteForRecipe,
-	  publishRecipe,
 	  unpublishRecipe,
 	  login
 	}) => {
@@ -61277,15 +61276,6 @@
 	    case 'login':
 	      dialogueBox = _react2.default.createElement(_LoginDialogue2.default, {
 	        login: login,
-	        closeModal: closeModal
-	      });
-	      break;
-	    case 'publish':
-	      dialogueBox = _react2.default.createElement(_PublishDialogue2.default, {
-	        recipe: content,
-	        user: user,
-	        username: username,
-	        publishRecipe: publishRecipe,
 	        closeModal: closeModal
 	      });
 	      break;
@@ -61403,6 +61393,7 @@
 	      tempRecipe.tags = content.tags.join(',');
 	      tempRecipe.ingredients = content.ingredients.join('\n');
 	      tempRecipe.directions = content.directions.join('\n\n');
+	      tempRecipe.notes = content.notes.join('\n');
 	      this.state = _extends({}, newContent, tempRecipe);
 	    } else {
 	      this.state = {
@@ -61429,9 +61420,13 @@
 
 	    recipe.servings = recipe.servings || 1;
 
-	    recipe.ingredients = recipe.ingredients ? recipe.ingredients.split('\n').map(ingredient => ingredient.trim()).filter(ingredient => ingredient !== '') : ['None'];
+	    recipe.ingredients = recipe.ingredients.trim() ? recipe.ingredients.split('\n').map(ingredient => ingredient.trim()).filter(ingredient => ingredient !== '') : ['None'];
 
-	    recipe.directions = recipe.directions ? recipe.directions.split('\n').map(direction => direction.trim()).filter(direction => direction !== '') : ['None'];
+	    recipe.directions = recipe.directions.trim() ? recipe.directions.split('\n').map(direction => direction.trim()).filter(direction => direction !== '') : ['None'];
+
+	    recipe.notes = recipe.notes.trim() ? recipe.notes.split('\n') : '';
+
+	    recipe.author = recipe.author.trim() || 'Me';
 
 	    if (typeof this.content == 'object') {
 	      this.editRecipe(this.user, recipe, this.active);
@@ -61791,122 +61786,6 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	class PublishDialogue extends _react2.default.Component {
-	  constructor(props) {
-	    super(props);
-	    this.recipe = props.recipe;
-	    this.user = props.user;
-	    this.username = props.username;
-	    this.publishRecipe = props.publishRecipe;
-	    this.closeModal = props.closeModal;
-
-	    this.save = this.save.bind(this);
-
-	    this.state = {
-	      author: ''
-	    };
-	  }
-
-	  save() {
-	    const newRecipe = this.recipe,
-	          author = this.state.author.trim();
-
-	    newRecipe.author = author || this.username;
-	    newRecipe.publisher = this.username;
-
-	    this.publishRecipe(this.user, newRecipe);
-	    this.closeModal();
-	  }
-
-	  render() {
-	    return _react2.default.createElement(
-	      'div',
-	      {
-	        className: 'confirm-dialogue',
-	        onClick: e => e.stopPropagation()
-	      },
-	      _react2.default.createElement(
-	        'h3',
-	        {
-	          className: 'confirm-dialogue__message'
-	        },
-	        'Publish Recipe'
-	      ),
-	      _react2.default.createElement(
-	        'p',
-	        {
-	          className: 'confirm-dialogue__description'
-	        },
-	        'Not an original recipe?',
-	        _react2.default.createElement('br', null),
-	        'Give the chef some credit...'
-	      ),
-	      _react2.default.createElement(
-	        'form',
-	        {
-	          onSubmit: e => {
-	            e.preventDefault();
-	            this.save();
-	          }
-	        },
-	        _react2.default.createElement(
-	          'label',
-	          {
-	            className: 'publish-dialogue__author-name',
-	            htmlFor: 'author'
-	          },
-	          'Original Author:'
-	        ),
-	        _react2.default.createElement('input', {
-	          type: 'text',
-	          name: 'author',
-	          className: 'publish-dialogue__author-input',
-	          value: this.state.author,
-	          onChange: e => this.setState({ author: e.target.value })
-	        })
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'confirm-dialogue__button-bar' },
-	        _react2.default.createElement(
-	          'div',
-	          {
-	            className: 'confirm-dialogue__button confirm-dialogue__button--accept',
-	            onClick: this.save
-	          },
-	          'Publish'
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          {
-	            className: 'confirm-dialogue__button confirm-dialogue__button--cancel',
-	            onClick: this.closeModal
-	          },
-	          'Cancel'
-	        )
-	      )
-	    );
-	  }
-	}
-
-	exports.default = PublishDialogue;
-
-/***/ },
-/* 718 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(312);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 	const UnpublishDialogue = ({
 	  unpublishRecipe,
 	  closeModal
@@ -61954,7 +61833,7 @@
 	exports.default = UnpublishDialogue;
 
 /***/ },
-/* 719 */
+/* 718 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -61978,7 +61857,7 @@
 	exports.default = Footer;
 
 /***/ },
-/* 720 */
+/* 719 */
 /***/ function(module, exports, __webpack_require__, __webpack_module_template_argument_0__, __webpack_module_template_argument_1__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -62107,7 +61986,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(308)))
 
 /***/ },
-/* 721 */
+/* 720 */
 /***/ function(module, exports, __webpack_require__, __webpack_module_template_argument_0__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
