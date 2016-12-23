@@ -55,10 +55,9 @@ const PublicRecipe = ({
       <li key={i}>{direction}</li>
   )
 
-  const formattedNotes = (
-    <div>
-      <p>{notes.join('</p><p>')}</p>
-    </div>
+  const formattedNotes = notes.map(
+    line =>
+      <p>{line}</p>
   )
 
   const totalVotes = Object.keys(votes).length,

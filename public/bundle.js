@@ -60732,7 +60732,11 @@
 	    direction
 	  ));
 
-	  const formattedNotes = notes.join('\n');
+	  const formattedNotes = notes.map(line => _react2.default.createElement(
+	    'p',
+	    null,
+	    line
+	  ));
 
 	  const status = published ? _react2.default.createElement(
 	    'div',
@@ -61022,15 +61026,11 @@
 	    direction
 	  ));
 
-	  const formattedNotes = _react2.default.createElement(
-	    'div',
+	  const formattedNotes = notes.map(line => _react2.default.createElement(
+	    'p',
 	    null,
-	    _react2.default.createElement(
-	      'p',
-	      null,
-	      notes.join('</p><p>')
-	    )
-	  );
+	    line
+	  ));
 
 	  const totalVotes = Object.keys(votes).length,
 	        starIcons = [];

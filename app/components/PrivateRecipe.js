@@ -53,7 +53,10 @@ const PrivateRecipe = ({
       <li key={i}>{direction}</li>
   )
 
-  const formattedNotes = notes.join('\n')
+  const formattedNotes = notes.map(
+    line =>
+      <p>{line}</p>
+  )
 
   const status = published ?
     <div
