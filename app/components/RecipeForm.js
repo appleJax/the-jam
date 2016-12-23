@@ -32,10 +32,13 @@ class RecipeForm extends React.Component {
         id: Date.now(),
         name: '',
         tags: '',
+        time: '',
         stars: 0,
         servings: 1,
         ingredients: '',
         directions: '',
+        notes: '',
+        author: '',
         showDetails: true
       }
     }
@@ -58,13 +61,13 @@ class RecipeForm extends React.Component {
       recipe.ingredients.split('\n')
         .map(ingredient =>
           ingredient.trim())
-        .filter(ingredient => ingredient !== '') : [];
+        .filter(ingredient => ingredient !== '') : ['None'];
 
     recipe.directions = recipe.directions ?
       recipe.directions.split('\n')
         .map(direction =>
           direction.trim())
-        .filter(direction => direction !== '') : [];
+        .filter(direction => direction !== '') : ['None'];
 
     if (typeof this.content == 'object') {
       this.editRecipe(this.user, recipe, this.active)
@@ -109,6 +112,16 @@ class RecipeForm extends React.Component {
             onChange={(e) => this.setState({tags: e.target.value})}
           />
 
+          <label htmlFor='time'>
+            Time Commitment:
+          </label>
+          <input
+            type='text'
+            name='time'
+            value={this.state.time}
+            onChange={(e) => this.setState({time: e.target.value})}
+          />
+
           <div className='recipe-form__servings-group'>
             <label className='recipe-form__servings-label' htmlFor='servings'>
               Servings:
@@ -145,6 +158,26 @@ class RecipeForm extends React.Component {
             name='directions'
             value={this.state.directions}
             onChange={(e) => this.setState({directions: e.target.value})}
+          />
+
+          <label htmlFor='notes'>
+            Notes:
+          </label>
+          <textarea
+            rows='14'
+            name='notes'
+            value={this.state.notes}
+            onChange={(e) => this.setState({notes: e.target.value})}
+          />
+
+          <label htmlFor='author'>
+            Author:<span className='parens'>(not your recipe? give credit here)</span>
+          </label>
+          <input
+            type='text'
+            name='time'
+            value={this.state.author}
+            onChange={(e) => this.setState({author: e.target.value})}
           />
 
           <div className='recipe-form__buttons'>

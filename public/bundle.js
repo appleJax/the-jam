@@ -60455,16 +60455,18 @@
 
 	const publishRecipe = exports.publishRecipe = (user, recipe) => dispatch => {
 	  const publicRecipe = _extends({}, recipe, {
-	    stars: 0,
 	    votes: {}
 	  });
 	  delete publicRecipe._id;
+
+	  if (recipe.stars > 0) {
+	    publicRecipe.votes[recipe.publisher] = recipe.stars;
+	  }
 
 	  const privateRecipe = _extends({}, recipe, {
 	    published: true
 	  });
 	  delete privateRecipe._id;
-	  delete privateRecipe.author;
 	  delete privateRecipe.publisher;
 
 	  dispatch((0, _sync.addRecipe)(publicRecipe, 'public'));
@@ -60752,7 +60754,7 @@
 	        'data-value': i,
 	        onClick: e => {
 	          const editedRecipe = recipe,
-	                newStars = e.target.dataset.value;
+	                newStars = Number(e.target.dataset.value);
 
 	          delete editedRecipe._id;
 
@@ -60770,7 +60772,7 @@
 	        'data-value': i,
 	        onClick: e => {
 	          const editedRecipe = recipe;
-	          editedRecipe.stars = e.target.dataset.value;
+	          editedRecipe.stars = Number(e.target.dataset.value);
 	          delete editedRecipe._id;
 
 	          editRecipe(user, editedRecipe, visibilityFilter.active);
@@ -61380,10 +61382,13 @@
 	        id: Date.now(),
 	        name: '',
 	        tags: '',
+	        time: '',
 	        stars: 0,
 	        servings: 1,
 	        ingredients: '',
 	        directions: '',
+	        notes: '',
+	        author: '',
 	        showDetails: true
 	      };
 	    }
@@ -61397,9 +61402,9 @@
 
 	    recipe.servings = recipe.servings || 1;
 
-	    recipe.ingredients = recipe.ingredients ? recipe.ingredients.split('\n').map(ingredient => ingredient.trim()).filter(ingredient => ingredient !== '') : [];
+	    recipe.ingredients = recipe.ingredients ? recipe.ingredients.split('\n').map(ingredient => ingredient.trim()).filter(ingredient => ingredient !== '') : ['None'];
 
-	    recipe.directions = recipe.directions ? recipe.directions.split('\n').map(direction => direction.trim()).filter(direction => direction !== '') : [];
+	    recipe.directions = recipe.directions ? recipe.directions.split('\n').map(direction => direction.trim()).filter(direction => direction !== '') : ['None'];
 
 	    if (typeof this.content == 'object') {
 	      this.editRecipe(this.user, recipe, this.active);
@@ -61458,6 +61463,17 @@
 	          onChange: e => this.setState({ tags: e.target.value })
 	        }),
 	        _react2.default.createElement(
+	          'label',
+	          { htmlFor: 'time' },
+	          'Time Commitment:'
+	        ),
+	        _react2.default.createElement('input', {
+	          type: 'text',
+	          name: 'time',
+	          value: this.state.time,
+	          onChange: e => this.setState({ time: e.target.value })
+	        }),
+	        _react2.default.createElement(
 	          'div',
 	          { className: 'recipe-form__servings-group' },
 	          _react2.default.createElement(
@@ -61509,6 +61525,33 @@
 	          name: 'directions',
 	          value: this.state.directions,
 	          onChange: e => this.setState({ directions: e.target.value })
+	        }),
+	        _react2.default.createElement(
+	          'label',
+	          { htmlFor: 'notes' },
+	          'Notes:'
+	        ),
+	        _react2.default.createElement('textarea', {
+	          rows: '14',
+	          name: 'notes',
+	          value: this.state.notes,
+	          onChange: e => this.setState({ notes: e.target.value })
+	        }),
+	        _react2.default.createElement(
+	          'label',
+	          { htmlFor: 'author' },
+	          'Author:',
+	          _react2.default.createElement(
+	            'span',
+	            { className: 'parens' },
+	            '(not your recipe? give credit here)'
+	          )
+	        ),
+	        _react2.default.createElement('input', {
+	          type: 'text',
+	          name: 'time',
+	          value: this.state.author,
+	          onChange: e => this.setState({ author: e.target.value })
 	        }),
 	        _react2.default.createElement(
 	          'div',
