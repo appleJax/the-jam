@@ -60948,7 +60948,10 @@
 	    ),
 	    _react2.default.createElement(
 	      'textarea',
-	      { readonly: true },
+	      {
+	        className: 'recipe-body__notes-textarea',
+	        readonly: true
+	      },
 	      notes
 	    )
 	  )
