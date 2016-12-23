@@ -100,17 +100,19 @@ export const publishRecipe = (user, recipe) =>
   dispatch => {
     const publicRecipe = {
       ...recipe,
-      stars: 0,
       votes: {},
     }
     delete publicRecipe._id
+
+    if (recipe.stars > 0) {
+      publicRecipe.votes[recipe.publisher] = recipe.stars
+    }
 
     const privateRecipe = {
       ...recipe,
       published: true
     }
     delete privateRecipe._id
-    delete privateRecipe.author
     delete privateRecipe.publisher
 
     dispatch(addRecipe(publicRecipe, 'public'))

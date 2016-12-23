@@ -77,7 +77,7 @@ const PrivateRecipe = ({
           data-value={i}
           onClick={ e => {
             const editedRecipe = recipe,
-              newStars = e.target.dataset.value
+              newStars = Number(e.target.dataset.value)
 
             delete editedRecipe._id
 
@@ -99,7 +99,7 @@ const PrivateRecipe = ({
           data-value={i}
           onClick={ e => {
             const editedRecipe = recipe
-            editedRecipe.stars = e.target.dataset.value
+            editedRecipe.stars = Number(e.target.dataset.value)
             delete editedRecipe._id
 
             editRecipe(user, editedRecipe, visibilityFilter.active)
