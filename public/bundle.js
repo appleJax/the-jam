@@ -60906,7 +60906,8 @@
 	    _react2.default.createElement(
 	      'h3',
 	      null,
-	      'Ingredients:'
+	      _react2.default.createElement('i', { className: 'fa fa-shopping-basket' }),
+	      ' Ingredients:'
 	    ),
 	    _react2.default.createElement(
 	      'span',
@@ -60928,7 +60929,8 @@
 	    _react2.default.createElement(
 	      'h3',
 	      null,
-	      'Directions:'
+	      _react2.default.createElement('i', { className: 'fa fa-map-signs' }),
+	      ' Directions:'
 	    ),
 	    _react2.default.createElement(
 	      'ol',

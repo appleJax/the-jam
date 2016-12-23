@@ -17,7 +17,7 @@ const RecipeBody = ({
       </div>
     }
     <div className='recipe-body__ingredients'>
-      <h3>Ingredients:</h3>
+      <h3><i className='fa fa-shopping-basket'></i> Ingredients:</h3>
       <span className='recipe-body__servings'>
         {servings} {servings ? 'serving' : ''}
         {servings > 1 ? 's' : ''}
@@ -27,7 +27,7 @@ const RecipeBody = ({
       </ul>
     </div>
     <div className='recipe-body__directions'>
-      <h3>Directions:</h3>
+      <h3><i className='fa fa-map-signs'></i> Directions:</h3>
       <ol>
         {directionList}
       </ol>
