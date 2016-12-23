@@ -22,7 +22,7 @@ class RecipeForm extends React.Component {
       tempRecipe.tags = content.tags.join(',')
       tempRecipe.ingredients = content.ingredients.join('\n')
       tempRecipe.directions = content.directions.join('\n\n')
-      tempRecipe.notes = content.notes.join('\n')
+      tempRecipe.notes = content.notes.join('\n\n')
       this.state = {
         ...newContent,
         ...tempRecipe,

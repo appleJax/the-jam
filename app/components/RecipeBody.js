@@ -32,15 +32,15 @@ const RecipeBody = ({
         {directionList}
       </ol>
     </div>
-    {notes &&
+    {notes.length > 0 &&
     <div>
       <h3 className='recipe-body__notes-title'>
         Notes:
       </h3>
       <div className='recipe-body__notes'>
         {notes.map(
-          line =>
-            <p>{line}</p>
+          (line, i) =>
+            <p key={i}>{line}</p>
          )
         }
       </div>

@@ -60936,7 +60936,7 @@
 	      directionList
 	    )
 	  ),
-	  notes && _react2.default.createElement(
+	  notes.length > 0 && _react2.default.createElement(
 	    'div',
 	    null,
 	    _react2.default.createElement(
@@ -60947,9 +60947,9 @@
 	    _react2.default.createElement(
 	      'div',
 	      { className: 'recipe-body__notes' },
-	      notes.map(line => _react2.default.createElement(
+	      notes.map((line, i) => _react2.default.createElement(
 	        'p',
-	        null,
+	        { key: i },
 	        line
 	      ))
 	    )
@@ -61401,7 +61401,7 @@
 	      tempRecipe.tags = content.tags.join(',');
 	      tempRecipe.ingredients = content.ingredients.join('\n');
 	      tempRecipe.directions = content.directions.join('\n\n');
-	      tempRecipe.notes = content.notes.join('\n');
+	      tempRecipe.notes = content.notes.join('\n\n');
 	      this.state = _extends({}, newContent, tempRecipe);
 	    } else {
 	      this.state = {
