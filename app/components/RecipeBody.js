@@ -33,9 +33,13 @@ const RecipeBody = ({
       </ol>
     </div>
     {notes &&
-    <div className='recipe-body__notes'>
-      <h3>Notes:</h3>
-      {notes}
+    <div>
+      <h3 className='recipe-body__notes-title'>
+        Notes:
+      </h3>
+      <div className='recipe-body__notes'>
+        {notes}
+      </div>
     </div>
     }
   </div>

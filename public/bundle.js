@@ -60944,13 +60944,17 @@
 	  ),
 	  notes && _react2.default.createElement(
 	    'div',
-	    { className: 'recipe-body__notes' },
+	    null,
 	    _react2.default.createElement(
 	      'h3',
-	      null,
+	      { className: 'recipe-body__notes-title' },
 	      'Notes:'
 	    ),
-	    notes
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'recipe-body__notes' },
+	      notes
+	    )
 	  )
 	);
 
@@ -61436,7 +61440,7 @@
 
 	    recipe.directions = recipe.directions.trim() ? recipe.directions.split('\n').map(direction => direction.trim()).filter(direction => direction !== '') : ['None'];
 
-	    recipe.notes = recipe.notes.trim() ? recipe.notes.split('\n') : '';
+	    recipe.notes = recipe.notes.trim() ? recipe.notes.split('\n').map(line => line.trim()).filter(line => line !== '') : [];
 
 	    recipe.author = recipe.author.trim() || 'Me';
 
@@ -61472,7 +61476,8 @@
 	        _react2.default.createElement(
 	          'label',
 	          { htmlFor: 'title' },
-	          'Name:'
+	          _react2.default.createElement('i', { className: 'fa fa-file-text-o' }),
+	          ' Name:'
 	        ),
 	        _react2.default.createElement('input', {
 	          type: 'text',
@@ -61533,7 +61538,8 @@
 	        _react2.default.createElement(
 	          'label',
 	          { htmlFor: 'ingredients' },
-	          'Ingredients:',
+	          _react2.default.createElement('i', { className: 'fa fa-shopping-basket' }),
+	          ' Ingredients:',
 	          _react2.default.createElement(
 	            'span',
 	            { className: 'parens' },
@@ -61549,7 +61555,8 @@
 	        _react2.default.createElement(
 	          'label',
 	          { htmlFor: 'directions' },
-	          'Directions:',
+	          _react2.default.createElement('i', { className: 'fa fa-map-signs' }),
+	          ' Directions:',
 	          _react2.default.createElement(
 	            'span',
 	            { className: 'parens' },
@@ -61565,7 +61572,8 @@
 	        _react2.default.createElement(
 	          'label',
 	          { htmlFor: 'notes' },
-	          'Notes:'
+	          _react2.default.createElement('i', { className: 'fa fa-pencil' }),
+	          ' Notes:'
 	        ),
 	        _react2.default.createElement('textarea', {
 	          rows: '14',
@@ -61576,7 +61584,8 @@
 	        _react2.default.createElement(
 	          'label',
 	          { htmlFor: 'author' },
-	          'Author:',
+	          _react2.default.createElement('i', { className: 'fa fa-magic' }),
+	          ' Author:',
 	          _react2.default.createElement(
 	            'span',
 	            { className: 'parens' },

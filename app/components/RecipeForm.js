@@ -71,7 +71,10 @@ class RecipeForm extends React.Component {
         .filter(direction => direction !== '') : ['None']
 
     recipe.notes = recipe.notes.trim() ?
-      recipe.notes.split('\n') : ''
+      recipe.notes.split('\n')
+        .map(line =>
+          line.trim())
+        .filter(line => line !== '') : []
 
     recipe.author = recipe.author.trim() || 'Me'
 
@@ -100,7 +103,9 @@ class RecipeForm extends React.Component {
           {typeof this.content == 'object' ? 'Edit': 'New'} Recipe
         </div>
         <form className='recipe-form'>
-          <label htmlFor='title'>Name:</label>
+          <label htmlFor='title'>
+            <i className='fa fa-file-text-o'></i> Name:
+          </label>
           <input
             type='text'
             name='title'
@@ -148,7 +153,8 @@ class RecipeForm extends React.Component {
           </div>
 
           <label htmlFor='ingredients'>
-            Ingredients:<span className='parens'>(one per line)</span>
+            <i className='fa fa-shopping-basket'></i> Ingredients:
+            <span className='parens'>(one per line)</span>
           </label>
           <textarea
             rows='10'
@@ -158,7 +164,8 @@ class RecipeForm extends React.Component {
           />
 
           <label htmlFor='directions'>
-            Directions:<span className='parens'>(Separated by blank lines)</span>
+            <i className='fa fa-map-signs'></i> Directions:
+            <span className='parens'>(Separated by blank lines)</span>
           </label>
           <textarea
             rows='14'
@@ -168,7 +175,7 @@ class RecipeForm extends React.Component {
           />
 
           <label htmlFor='notes'>
-            Notes:
+            <i className='fa fa-pencil'></i> Notes:
           </label>
           <textarea
             rows='14'
@@ -178,7 +185,8 @@ class RecipeForm extends React.Component {
           />
 
           <label htmlFor='author'>
-            Author:<span className='parens'>(not your recipe? give credit here)</span>
+            <i className='fa fa-magic'></i> Author:
+            <span className='parens'>(not your recipe? give credit here)</span>
           </label>
           <input
             type='text'
