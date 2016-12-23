@@ -112,7 +112,7 @@ const PublicRecipe = ({
           }
         >
         </i>
-        <div className='spacer control-bar-spacer'></div>
+        <div className='spacer'></div>
         <div
           className='recipe__votes'
         >
@@ -127,6 +127,7 @@ const PublicRecipe = ({
           {starIcons}
         </div>
       </div>
+      <div className='spacer control-bar-spacer'></div>
       {showDetails &&
       <div className='recipe__body'>
         <RecipeBody

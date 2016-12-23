@@ -60817,6 +60817,7 @@
 	      status,
 	      starIcons
 	    ),
+	    _react2.default.createElement('div', { className: 'spacer control-bar-spacer' }),
 	    showDetails && _react2.default.createElement(
 	      'div',
 	      null,
@@ -60832,6 +60833,22 @@
 	          onClick: populateModal
 	        },
 	        _react2.default.createElement('i', { className: 'fa fa-pencil' })
+	      )
+	    ),
+	    showDetails && _react2.default.createElement('div', { className: 'spacer credits-spacer' }),
+	    showDetails && _react2.default.createElement(
+	      'div',
+	      { className: 'recipe__credits' },
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'recipe__credits__author' },
+	        _react2.default.createElement('i', { className: 'fa fa-id-card-o' }),
+	        'Recipe By: ',
+	        _react2.default.createElement(
+	          'span',
+	          { className: 'credit-name' },
+	          author
+	        )
 	      )
 	    )
 	  );
@@ -61029,7 +61046,7 @@
 	        onClick: toggleDetails,
 	        className: showDetails ? 'recipe__expand-toggle fa fa-toggle-up fa-lg' : 'recipe__expand-toggle fa fa-ellipsis-h fa-lg'
 	      }),
-	      _react2.default.createElement('div', { className: 'spacer control-bar-spacer' }),
+	      _react2.default.createElement('div', { className: 'spacer' }),
 	      _react2.default.createElement(
 	        'div',
 	        {
@@ -61047,6 +61064,7 @@
 	        starIcons
 	      )
 	    ),
+	    _react2.default.createElement('div', { className: 'spacer control-bar-spacer' }),
 	    showDetails && _react2.default.createElement(
 	      'div',
 	      { className: 'recipe__body' },

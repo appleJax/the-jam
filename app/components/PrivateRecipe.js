@@ -142,19 +142,31 @@ const PrivateRecipe = ({
         {status}
         {starIcons}
       </div>
+      <div className='spacer control-bar-spacer'></div>
       {showDetails &&
       <div>
-      <RecipeBody
-        servings={servings}
-        ingredientList={ingredientList}
-        directionList={directionList}
-      />
-      <div
-        className='recipe__button--edit'
-        onClick={populateModal}
-      >
-        <i className='fa fa-pencil'></i>
+        <RecipeBody
+          servings={servings}
+          ingredientList={ingredientList}
+          directionList={directionList}
+        />
+        <div
+          className='recipe__button--edit'
+          onClick={populateModal}
+        >
+          <i className='fa fa-pencil'></i>
+        </div>
       </div>
+      }
+      {showDetails &&
+      <div className="spacer credits-spacer"></div>
+      }
+      {showDetails &&
+      <div className='recipe__credits'>
+        <div className='recipe__credits__author'>
+          <i className='fa fa-id-card-o'></i>
+          Recipe By: <span className='credit-name'>{author}</span>
+        </div>
       </div>
       }
     </li>
