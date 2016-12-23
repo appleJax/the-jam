@@ -104,7 +104,7 @@ export const editUserRecipe = (user, recipe, active) => {
         delete tempRecipe.stars
 
         if (tempRecipe.author == 'Me' || tempRecipe.author == 'me') {
-          tempRecipe.author = oldPubRecipe.publisher
+          oldPubRecipe.author = oldPubRecipe.publisher
         }
 
         const newPubRecipe = {

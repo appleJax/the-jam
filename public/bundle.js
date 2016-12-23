@@ -60459,7 +60459,7 @@
 	        delete tempRecipe.stars;
 
 	        if (tempRecipe.author == 'Me' || tempRecipe.author == 'me') {
-	          tempRecipe.author = oldPubRecipe.publisher;
+	          oldPubRecipe.author = oldPubRecipe.publisher;
 	        }
 
 	        const newPubRecipe = _extends({}, oldPubRecipe, tempRecipe);
