@@ -60946,14 +60946,7 @@
 	      null,
 	      'Notes:'
 	    ),
-	    _react2.default.createElement(
-	      'textarea',
-	      {
-	        className: 'recipe-body__notes-textarea',
-	        readonly: true
-	      },
-	      notes
-	    )
+	    notes
 	  )
 	);
 
@@ -61029,7 +61022,15 @@
 	    direction
 	  ));
 
-	  const formattedNotes = notes.join('\n');
+	  const formattedNotes = _react2.default.createElement(
+	    'div',
+	    null,
+	    _react2.default.createElement(
+	      'p',
+	      null,
+	      notes.join('</p><p>')
+	    )
+	  );
 
 	  const totalVotes = Object.keys(votes).length,
 	        starIcons = [];

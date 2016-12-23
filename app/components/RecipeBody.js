@@ -35,12 +35,7 @@ const RecipeBody = ({
     {notes &&
     <div className='recipe-body__notes'>
       <h3>Notes:</h3>
-      <textarea
-        className='recipe-body__notes-textarea'
-        readonly
-      >
-        {notes}
-      </textarea>
+      {notes}
     </div>
     }
   </div>

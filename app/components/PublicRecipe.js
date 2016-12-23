@@ -55,7 +55,11 @@ const PublicRecipe = ({
       <li key={i}>{direction}</li>
   )
 
-  const formattedNotes = notes.join('\n')
+  const formattedNotes = (
+    <div>
+      <p>{notes.join('</p><p>')}</p>
+    </div>
+  )
 
   const totalVotes = Object.keys(votes).length,
         starIcons = []
