@@ -2600,7 +2600,7 @@ nav {
 
 .recipe__button--publish {
   border: 1px solid #F14723;
-  box-shadow: 0 0 8px #F14723 inset;
+  box-shadow: 0 0 10px #F14723 inset;
   color: #F14723; }
 
 .recipe__button--unpublish {

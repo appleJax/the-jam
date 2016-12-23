@@ -109,7 +109,8 @@ class RecipeForm extends React.Component {
           />
 
           <label htmlFor='tags'>
-            Tags:<span className='parens'>(separated by commas)</span>
+            <i className='fa fa-tags'></i> Tags:
+            <span className='parens'>(separated by commas)</span>
           </label>
           <input
             type='text'

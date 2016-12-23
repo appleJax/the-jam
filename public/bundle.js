@@ -60946,7 +60946,11 @@
 	      null,
 	      'Notes:'
 	    ),
-	    notes
+	    _react2.default.createElement(
+	      'textarea',
+	      { readonly: true },
+	      notes
+	    )
 	  )
 	);
 
@@ -61475,7 +61479,8 @@
 	        _react2.default.createElement(
 	          'label',
 	          { htmlFor: 'tags' },
-	          'Tags:',
+	          _react2.default.createElement('i', { className: 'fa fa-tags' }),
+	          ' Tags:',
 	          _react2.default.createElement(
 	            'span',
 	            { className: 'parens' },
