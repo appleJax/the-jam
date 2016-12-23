@@ -61029,7 +61029,7 @@
 	        onClick: toggleDetails,
 	        className: showDetails ? 'recipe__expand-toggle fa fa-toggle-up fa-lg' : 'recipe__expand-toggle fa fa-ellipsis-h fa-lg'
 	      }),
-	      _react2.default.createElement('div', { className: 'recipe__spacer' }),
+	      _react2.default.createElement('div', { className: 'spacer' }),
 	      _react2.default.createElement(
 	        'div',
 	        {
@@ -61049,12 +61049,13 @@
 	    ),
 	    showDetails && _react2.default.createElement(
 	      'div',
-	      null,
+	      { className: 'recipe__body' },
 	      _react2.default.createElement(_RecipeBody2.default, {
 	        servings: servings,
 	        ingredientList: ingredientList,
 	        directionList: directionList
 	      }),
+	      _react2.default.createElement('div', { className: 'spacer' }),
 	      _react2.default.createElement(
 	        'div',
 	        { className: 'recipe__credits' },

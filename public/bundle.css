@@ -2572,9 +2572,6 @@ nav {
   align-items: center;
   justify-content: space-between; }
 
-.recipe__spacer {
-  flex: auto; }
-
 .recipe__expand-toggle {
   color: #444;
   cursor: pointer;
@@ -2611,6 +2608,10 @@ nav {
 
 .fa-star-o {
   color: rgba(241, 71, 35, 0.4); }
+
+.recipe__body {
+  display: flex;
+  justify-content: space-between; }
 
 .ingredients {
   margin-top: 0; }

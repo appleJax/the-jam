@@ -112,7 +112,7 @@ const PublicRecipe = ({
           }
         >
         </i>
-        <div className='recipe__spacer'></div>
+        <div className='spacer'></div>
         <div
           className='recipe__votes'
         >
@@ -128,12 +128,13 @@ const PublicRecipe = ({
         </div>
       </div>
       {showDetails &&
-      <div>
+      <div className='recipe__body'>
         <RecipeBody
           servings={servings}
           ingredientList={ingredientList}
           directionList={directionList}
         />
+        <div className="spacer"></div>
         <div className='recipe__credits'>
           <div className='recipe__credits__author'>
             <i className='fa fa-id-card-o'></i>
