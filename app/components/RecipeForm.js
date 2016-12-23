@@ -113,7 +113,7 @@ class RecipeForm extends React.Component {
           />
 
           <label htmlFor='time'>
-            Time Commitment:
+            <i className='fa fa-clock-o'></i> Time Required:
           </label>
           <input
             type='text'

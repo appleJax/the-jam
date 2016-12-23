@@ -20,11 +20,13 @@ const PublicRecipe = ({
     tags,
     stars,
     votes,
-    author,
-    publisher,
+    time,
     servings,
     ingredients,
     directions,
+    notes,
+    author,
+    publisher,
     showDetails
   } = recipe
 
@@ -131,9 +133,11 @@ const PublicRecipe = ({
       {showDetails &&
       <div className='recipe__body'>
         <RecipeBody
+          time={time}
           servings={servings}
           ingredientList={ingredientList}
           directionList={directionList}
+          notes={notes}
         />
       </div>
       }

@@ -18,9 +18,11 @@ const PrivateRecipe = ({
     name,
     tags,
     stars,
+    time,
     servings,
     ingredients,
     directions,
+    notes,
     published,
     author,
     showDetails
@@ -146,9 +148,11 @@ const PrivateRecipe = ({
       {showDetails &&
       <div>
         <RecipeBody
+          time={time}
           servings={servings}
           ingredientList={ingredientList}
           directionList={directionList}
+          notes={notes}
         />
         <div
           className='recipe__button--edit'

@@ -60698,9 +60698,11 @@
 	    name,
 	    tags,
 	    stars,
+	    time,
 	    servings,
 	    ingredients,
 	    directions,
+	    notes,
 	    published,
 	    author,
 	    showDetails
@@ -60824,9 +60826,11 @@
 	      'div',
 	      null,
 	      _react2.default.createElement(_RecipeBody2.default, {
+	        time: time,
 	        servings: servings,
 	        ingredientList: ingredientList,
-	        directionList: directionList
+	        directionList: directionList,
+	        notes: notes
 	      }),
 	      _react2.default.createElement(
 	        'div',
@@ -60875,15 +60879,24 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	const RecipeBody = ({
+	  time,
 	  servings,
 	  ingredientList,
-	  directionList
+	  directionList,
+	  notes
 	}) => _react2.default.createElement(
 	  'div',
 	  null,
+	  time && _react2.default.createElement(
+	    'div',
+	    { className: 'recipe-body__time' },
+	    _react2.default.createElement('i', { className: 'fa fa-clock-o' }),
+	    ' ',
+	    time
+	  ),
 	  _react2.default.createElement(
 	    'div',
-	    { className: 'ingredients' },
+	    { className: 'recipe-body__ingredients' },
 	    _react2.default.createElement(
 	      'h3',
 	      null,
@@ -60891,7 +60904,7 @@
 	    ),
 	    _react2.default.createElement(
 	      'span',
-	      { className: 'servings' },
+	      { className: 'recipe-body__servings' },
 	      servings,
 	      ' ',
 	      servings ? 'serving' : '',
@@ -60905,7 +60918,7 @@
 	  ),
 	  _react2.default.createElement(
 	    'div',
-	    { className: 'directions' },
+	    { className: 'recipe-body__directions' },
 	    _react2.default.createElement(
 	      'h3',
 	      null,
@@ -60916,6 +60929,16 @@
 	      null,
 	      directionList
 	    )
+	  ),
+	  notes && _react2.default.createElement(
+	    'div',
+	    { className: 'recipe-body__notes' },
+	    _react2.default.createElement(
+	      'h3',
+	      null,
+	      'Notes:'
+	    ),
+	    notes
 	  )
 	);
 
@@ -60960,11 +60983,13 @@
 	    tags,
 	    stars,
 	    votes,
-	    author,
-	    publisher,
+	    time,
 	    servings,
 	    ingredients,
 	    directions,
+	    notes,
+	    author,
+	    publisher,
 	    showDetails
 	  } = recipe;
 
@@ -61071,9 +61096,11 @@
 	      'div',
 	      { className: 'recipe__body' },
 	      _react2.default.createElement(_RecipeBody2.default, {
+	        time: time,
 	        servings: servings,
 	        ingredientList: ingredientList,
-	        directionList: directionList
+	        directionList: directionList,
+	        notes: notes
 	      })
 	    ),
 	    showDetails && _react2.default.createElement('div', { className: 'spacer credits-spacer' }),
@@ -61465,7 +61492,8 @@
 	        _react2.default.createElement(
 	          'label',
 	          { htmlFor: 'time' },
-	          'Time Commitment:'
+	          _react2.default.createElement('i', { className: 'fa fa-clock-o' }),
+	          ' Time Required:'
 	        ),
 	        _react2.default.createElement('input', {
 	          type: 'text',

@@ -2620,17 +2620,17 @@ nav {
   justify-content: space-between;
   flex-direction: column; }
 
-.ingredients {
+.recipe-body__ingredients {
   margin-top: 0; }
-  .ingredients ul {
+  .recipe-body__ingredients ul {
     list-style-type: disc;
     margin-top: 10px;
     padding-left: 18px; }
 
-.directions ol {
+.recipe-body__directions ol {
   margin: 12px 0 0 5px; }
 
-.servings {
+.recipe-body__servings {
   color: #555;
   font-size: 17px; }
 
@@ -2767,6 +2767,9 @@ footer {
 
 .recipe-form__servings-input {
   max-width: 50px; }
+
+.recipe-form__buttons {
+  margin-top: 40px; }
 
 .recipe-form__save,
 .recipe-form__cancel {
