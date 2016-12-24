@@ -60450,7 +60450,7 @@
 	        }
 	        return response.json();
 	      }).then(response => {
-	        const tempRecipe = recipe,
+	        const tempRecipe = _extends({}, recipe),
 	              oldPubRecipe = response;
 	        delete oldPubRecipe._id;
 	        delete tempRecipe.published;

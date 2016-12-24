@@ -95,7 +95,7 @@ export const editUserRecipe = (user, recipe, active) => {
         return response.json()
       })
       .then(response => {
-        const tempRecipe = recipe,
+        const tempRecipe = {...recipe},
               oldPubRecipe = response
         delete oldPubRecipe._id
         delete tempRecipe.published
