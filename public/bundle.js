@@ -60461,9 +60461,6 @@
 	        }
 
 	        const newPubRecipe = _extends({}, oldPubRecipe, tempRecipe);
-	        console.log('Recipe:', recipe);
-	        console.log('Response:', response);
-	        console.log('New Pub Recipe:', newPubRecipe);
 
 	        dispatch((0, _sync.editRecipe)(newPubRecipe, 'public'));
 	        newPubRecipe.showDetails = false;
@@ -60521,8 +60518,12 @@
 	  dispatch((0, _sync.addRecipe)(publicRecipe, 'public'));
 	  dispatch((0, _sync.editRecipe)(privateRecipe, 'private'));
 
-	  publicRecipe.showDetails = false;
-	  privateRecipe.showDetails = false;
+	  const newPublicRecipe = _extends({}, publicRecipe, {
+	    showDetails: false
+	  }),
+	        newPrivateRecipe = _extends({}, privateRecipe, {
+	    showDetails: false
+	  });
 
 	  (0, _isomorphicFetch2.default)(`https://thejam.herokuapp.com/new`, {
 	    method: 'POST',
@@ -60532,7 +60533,7 @@
 	    },
 	    mode: 'cors',
 	    cache: 'default',
-	    body: JSON.stringify({ user: 'public', recipe: publicRecipe })
+	    body: JSON.stringify({ user: 'public', recipe: newPublicRecipe })
 	  }).catch(console.error);
 
 	  (0, _isomorphicFetch2.default)(`https://thejam.herokuapp.com/edit`, {
@@ -60543,7 +60544,7 @@
 	    },
 	    mode: 'cors',
 	    cache: 'default',
-	    body: JSON.stringify({ user, recipe: privateRecipe })
+	    body: JSON.stringify({ user, recipe: newPrivateRecipe })
 	  }).catch(console.error);
 	};
 
@@ -60556,7 +60557,9 @@
 	  dispatch((0, _sync.deleteRecipe)(recipe, 'public'));
 	  dispatch((0, _sync.editRecipe)(newRecipe, 'private'));
 
-	  newRecipe.showDetails = false;
+	  const newPrivateRecipe = _extends({}, newRecipe, {
+	    showDetails: false
+	  });
 
 	  (0, _isomorphicFetch2.default)(`https://thejam.herokuapp.com/delete`, {
 	    method: 'POST',
@@ -60577,7 +60580,7 @@
 	    },
 	    mode: 'cors',
 	    cache: 'default',
-	    body: JSON.stringify({ user, recipe: newRecipe })
+	    body: JSON.stringify({ user, recipe: newPrivateRecipe })
 	  }).catch(console.error);
 	};
 
@@ -60685,14 +60688,13 @@
 	      recipe: recipe,
 	      visibilityFilter: visibilityFilter,
 	      user: user,
-	      username: username,
 	      setFilterContent: setFilterContent,
 	      confirmDelete: () => populateModal('confirm', recipe.id),
 	      editRecipe: editRecipe,
 	      toggleDetails: () => toggleDetails(recipe.id, visibilityFilter.active),
 	      populateModal: () => populateModal('recipe', recipe),
-	      publishRecipe: publishRecipe,
-	      unpublishConfirm: populateModal
+	      publishRecipe: () => publishRecipe(user, recipe, username),
+	      unpublishConfirm: () => populateModal('unpublish', recipe)
 	    }) : _react2.default.createElement(_PublicRecipe2.default, {
 	      key: i,
 	      recipe: recipe,
@@ -60736,7 +60738,6 @@
 	  recipe,
 	  visibilityFilter,
 	  user,
-	  username,
 	  setFilterContent,
 	  confirmDelete,
 	  editRecipe,
@@ -60785,7 +60786,7 @@
 	    'div',
 	    {
 	      className: 'recipe__button--unpublish',
-	      onClick: () => unpublishConfirm('unpublish', recipe)
+	      onClick: unpublishConfirm
 	    },
 	    _react2.default.createElement('i', { className: 'fa fa-check-circle' }),
 	    'Published'
@@ -60793,7 +60794,7 @@
 	    'div',
 	    {
 	      className: 'recipe__button--publish',
-	      onClick: () => publishRecipe(user, recipe, username)
+	      onClick: publishRecipe
 	    },
 	    _react2.default.createElement('i', { className: 'fa fa-newspaper-o' }),
 	    'Publish'

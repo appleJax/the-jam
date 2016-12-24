@@ -109,9 +109,6 @@ export const editUserRecipe = (user, recipe, active) => {
           ...oldPubRecipe,
           ...tempRecipe
         }
-        console.log('Recipe:', recipe)
-        console.log('Response:', response)
-        console.log('New Pub Recipe:',newPubRecipe)
 
         dispatch(editRecipe(newPubRecipe, 'public'))
         newPubRecipe.showDetails = false
@@ -179,8 +176,14 @@ export const publishRecipe = (user, recipe, publisher) =>
     dispatch(addRecipe(publicRecipe, 'public'))
     dispatch(editRecipe(privateRecipe, 'private'))
 
-    publicRecipe.showDetails = false
-    privateRecipe.showDetails = false
+    const newPublicRecipe = {
+      ...publicRecipe,
+      showDetails: false
+    },
+      newPrivateRecipe = {
+        ...privateRecipe,
+        showDetails: false
+      }
 
     fetch(`https://thejam.herokuapp.com/new`,
       {
@@ -191,7 +194,7 @@ export const publishRecipe = (user, recipe, publisher) =>
         },
         mode: 'cors',
         cache: 'default',
-        body: JSON.stringify({user: 'public', recipe: publicRecipe})
+        body: JSON.stringify({user: 'public', recipe: newPublicRecipe})
       }
     )
     .catch(console.error)
@@ -205,7 +208,7 @@ export const publishRecipe = (user, recipe, publisher) =>
         },
         mode: 'cors',
         cache: 'default',
-        body: JSON.stringify({user, recipe: privateRecipe})
+        body: JSON.stringify({user, recipe: newPrivateRecipe})
       }
     )
     .catch(console.error)
@@ -222,7 +225,10 @@ export const unpublishRecipe = (user, recipe) =>
     dispatch(deleteRecipe(recipe, 'public'))
     dispatch(editRecipe(newRecipe, 'private'))
 
-    newRecipe.showDetails = false
+    const newPrivateRecipe = {
+      ...newRecipe,
+      showDetails: false
+    }
 
     fetch(`https://thejam.herokuapp.com/delete`,
       {
@@ -248,7 +254,7 @@ export const unpublishRecipe = (user, recipe) =>
         },
         mode: 'cors',
         cache: 'default',
-        body: JSON.stringify({user, recipe: newRecipe})
+        body: JSON.stringify({user, recipe: newPrivateRecipe})
       }
     )
     .catch(console.error)

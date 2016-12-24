@@ -25,14 +25,13 @@ const RecipeList = ({
           recipe={recipe}
           visibilityFilter={visibilityFilter}
           user={user}
-          username={username}
           setFilterContent={setFilterContent}
           confirmDelete={() => populateModal('confirm', recipe.id)}
           editRecipe={editRecipe}
           toggleDetails={() => toggleDetails(recipe.id, visibilityFilter.active)}
           populateModal={() => populateModal('recipe', recipe)}
-          publishRecipe={publishRecipe}
-          unpublishConfirm={populateModal}
+          publishRecipe={() => publishRecipe(user, recipe, username)}
+          unpublishConfirm={() => populateModal('unpublish', recipe)}
         /> :
         <PublicRecipe
           key={i}
