@@ -2818,17 +2818,19 @@ footer {
   box-shadow: 0 0 10px #8c2009 inset, 1px 1px 5px #aaa;
   color: #fde7e3;
   margin-top: -10px;
-  padding: 15px; }
+  padding: 15px;
+  text-shadow: 1px 1px #8c2009; }
   .recipe-form__save:hover {
     background: #ec360f; }
 
 .recipe-form__cancel {
   background: white;
   box-shadow: 0 0 10px gray inset;
-  color: #f77;
+  color: #f55;
   margin-right: 40px;
   padding: 18px;
-  text-align: center; }
+  text-align: center;
+  text-shadow: 1px 1px #eee; }
   .recipe-form__cancel:hover {
     background: #f2f2f2; }
   .recipe-form__cancel i {
