@@ -35,8 +35,8 @@ const mapDispatchToProps = (dispatch) =>
       dispatch(closeModal())
     },
 
-    voteForRecipe: (user, vote, recipe) =>
-      dispatch(voteForRecipe(user, vote, recipe)),
+    voteForRecipe: (user, vote, recipe, email) =>
+      dispatch(voteForRecipe(user, vote, recipe, email)),
 
     unpublishRecipe: (user, recipe) =>
       dispatch(unpublishRecipe(user, recipe)),

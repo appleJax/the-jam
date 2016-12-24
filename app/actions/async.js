@@ -97,9 +97,20 @@ export const editUserRecipe = (user, recipe, active) => {
       .then(response => {
         const tempRecipe = {...recipe},
               oldPubRecipe = response,
-              publisher = oldPubRecipe.publisher
+              publisher = oldPubRecipe.publisher,
+              vote = tempRecipe.stars,
+              votes = oldPubRecipe.votes
 
-        oldPubRecipe.votes[publisher] = tempRecipe.stars
+        votes[publisher] = vote
+        if (vote == 0) delete votes[publisher]
+
+        const totalVotes = Object.keys(votes).length
+        let totalStars = 0
+
+        for (let voter in votes) totalStars += votes[voter]
+
+        const stars = Math.ceil(totalStars / totalVotes)
+
         delete oldPubRecipe._id
         delete tempRecipe.published
         delete tempRecipe.stars
@@ -110,7 +121,9 @@ export const editUserRecipe = (user, recipe, active) => {
 
         const newPubRecipe = {
           ...oldPubRecipe,
-          ...tempRecipe
+          ...tempRecipe,
+          votes,
+          stars
         }
 
         dispatch(editRecipe(newPubRecipe, 'public'))
@@ -293,7 +306,7 @@ export const addToUserRecipes = (user, recipe) =>
     .catch(console.error)
   }
 
-export const voteForRecipe = (user, vote, recipe) =>
+export const voteForRecipe = (user, vote, recipe, email) =>
   dispatch => {
     const votes = recipe.votes
     votes[user] = vote
@@ -314,7 +327,11 @@ export const voteForRecipe = (user, vote, recipe) =>
     delete newRecipe._id
 
     dispatch(editRecipe(newRecipe, 'public'))
-    newRecipe.showDetails = false
+
+    const dbRecipe = {
+      ...newRecipe,
+      showDetails: false
+    }
 
     fetch(`https://thejam.herokuapp.com/edit`,
       {
@@ -325,8 +342,55 @@ export const voteForRecipe = (user, vote, recipe) =>
         },
         mode: 'cors',
         cache: 'default',
-        body: JSON.stringify({user: 'public', recipe: newRecipe})
+        body: JSON.stringify({user: 'public', recipe: dbRecipe})
       }
     )
     .catch(console.error)
+
+    if (recipe.publisher == user) {
+      fetch(`https://thejam.herokuapp.com/find`,
+        {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-type': 'application/json'
+          },
+          mode: 'cors',
+          cache: 'default',
+          body: JSON.stringify({user: email, recipe: {id: recipe.id}})
+        }
+      )
+      .then(response => {
+        if (response.status >= 400) {
+          throw new Error("Bad response from server")
+        }
+        return response.json()
+      })
+      .then(response => {
+        const privateRecipe = response
+        privateRecipe.stars = vote
+
+        delete privateRecipe._id
+
+        dispatch(editRecipe(privateRecipe, 'private'))
+        const newPrivateRecipe = {
+          ...privateRecipe,
+          showDetails: false
+        }
+
+        fetch(`https://thejam.herokuapp.com/edit`,
+          {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Content-type': 'application/json'
+            },
+            mode: 'cors',
+            cache: 'default',
+            body: JSON.stringify({user: email, recipe: newPrivateRecipe})
+          }
+        )
+      })
+      .catch(console.error)
+    }
   }

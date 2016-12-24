@@ -40,6 +40,7 @@ const ModalOverlay = ({
       break
     case 'vote':
       dialogueBox = <VoteDialogue
+        user={user}
         username={username}
         recipe={content}
         voteForRecipe={voteForRecipe}

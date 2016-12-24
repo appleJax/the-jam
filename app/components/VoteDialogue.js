@@ -17,6 +17,7 @@ class VoteDialogue extends React.Component {
 
   render() {
     const {
+      user,
       username,
       recipe,
       voteForRecipe,
@@ -83,7 +84,7 @@ class VoteDialogue extends React.Component {
         <div
           className='confirm-dialogue__button confirm-dialogue__button--accept'
           onClick={() => {
-            voteForRecipe(username, this.state.stars, recipe)
+            voteForRecipe(username, this.state.stars, recipe, user)
             closeModal()
           }}
         >

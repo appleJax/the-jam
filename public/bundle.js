@@ -60452,9 +60452,20 @@
 	      }).then(response => {
 	        const tempRecipe = _extends({}, recipe),
 	              oldPubRecipe = response,
-	              publisher = oldPubRecipe.publisher;
+	              publisher = oldPubRecipe.publisher,
+	              vote = tempRecipe.stars,
+	              votes = oldPubRecipe.votes;
 
-	        oldPubRecipe.votes[publisher] = tempRecipe.stars;
+	        votes[publisher] = vote;
+	        if (vote == 0) delete votes[publisher];
+
+	        const totalVotes = Object.keys(votes).length;
+	        let totalStars = 0;
+
+	        for (let voter in votes) totalStars += votes[voter];
+
+	        const stars = Math.ceil(totalStars / totalVotes);
+
 	        delete oldPubRecipe._id;
 	        delete tempRecipe.published;
 	        delete tempRecipe.stars;
@@ -60463,7 +60474,10 @@
 	          tempRecipe.author = oldPubRecipe.publisher;
 	        }
 
-	        const newPubRecipe = _extends({}, oldPubRecipe, tempRecipe);
+	        const newPubRecipe = _extends({}, oldPubRecipe, tempRecipe, {
+	          votes,
+	          stars
+	        });
 
 	        dispatch((0, _sync.editRecipe)(newPubRecipe, 'public'));
 	        newPubRecipe.showDetails = false;
@@ -60612,7 +60626,7 @@
 	  }).catch(console.error);
 	};
 
-	const voteForRecipe = exports.voteForRecipe = (user, vote, recipe) => dispatch => {
+	const voteForRecipe = exports.voteForRecipe = (user, vote, recipe, email) => dispatch => {
 	  const votes = recipe.votes;
 	  votes[user] = vote;
 	  if (vote == 0) delete votes[user];
@@ -60631,7 +60645,10 @@
 	  delete newRecipe._id;
 
 	  dispatch((0, _sync.editRecipe)(newRecipe, 'public'));
-	  newRecipe.showDetails = false;
+
+	  const dbRecipe = _extends({}, newRecipe, {
+	    showDetails: false
+	  });
 
 	  (0, _isomorphicFetch2.default)(`https://thejam.herokuapp.com/edit`, {
 	    method: 'POST',
@@ -60641,8 +60658,47 @@
 	    },
 	    mode: 'cors',
 	    cache: 'default',
-	    body: JSON.stringify({ user: 'public', recipe: newRecipe })
+	    body: JSON.stringify({ user: 'public', recipe: dbRecipe })
 	  }).catch(console.error);
+
+	  if (recipe.publisher == user) {
+	    (0, _isomorphicFetch2.default)(`https://thejam.herokuapp.com/find`, {
+	      method: 'POST',
+	      headers: {
+	        'Accept': 'application/json',
+	        'Content-type': 'application/json'
+	      },
+	      mode: 'cors',
+	      cache: 'default',
+	      body: JSON.stringify({ user: email, recipe: { id: recipe.id } })
+	    }).then(response => {
+	      if (response.status >= 400) {
+	        throw new Error("Bad response from server");
+	      }
+	      return response.json();
+	    }).then(response => {
+	      const privateRecipe = response;
+	      privateRecipe.stars = vote;
+
+	      delete privateRecipe._id;
+
+	      dispatch((0, _sync.editRecipe)(privateRecipe, 'private'));
+	      const newPrivateRecipe = _extends({}, privateRecipe, {
+	        showDetails: false
+	      });
+
+	      (0, _isomorphicFetch2.default)(`https://thejam.herokuapp.com/edit`, {
+	        method: 'POST',
+	        headers: {
+	          'Accept': 'application/json',
+	          'Content-type': 'application/json'
+	        },
+	        mode: 'cors',
+	        cache: 'default',
+	        body: JSON.stringify({ user: email, recipe: newPrivateRecipe })
+	      });
+	    }).catch(console.error);
+	  }
 	};
 
 /***/ },
@@ -61250,7 +61306,7 @@
 	    dispatch((0, _sync.closeModal)());
 	  },
 
-	  voteForRecipe: (user, vote, recipe) => dispatch((0, _async.voteForRecipe)(user, vote, recipe)),
+	  voteForRecipe: (user, vote, recipe, email) => dispatch((0, _async.voteForRecipe)(user, vote, recipe, email)),
 
 	  unpublishRecipe: (user, recipe) => dispatch((0, _async.unpublishRecipe)(user, recipe)),
 
@@ -61332,6 +61388,7 @@
 	      break;
 	    case 'vote':
 	      dialogueBox = _react2.default.createElement(_VoteDialogue2.default, {
+	        user: user,
 	        username: username,
 	        recipe: content,
 	        voteForRecipe: voteForRecipe,
@@ -61714,6 +61771,7 @@
 
 	  render() {
 	    const {
+	      user,
 	      username,
 	      recipe,
 	      voteForRecipe,
@@ -61783,7 +61841,7 @@
 	          {
 	            className: 'confirm-dialogue__button confirm-dialogue__button--accept',
 	            onClick: () => {
-	              voteForRecipe(username, this.state.stars, recipe);
+	              voteForRecipe(username, this.state.stars, recipe, user);
 	              closeModal();
 	            }
 	          },
