@@ -58,7 +58,7 @@
 
 .recipe-form__save,
 .recipe-form__cancel
-  border-radius: 50%
+  border-radius: 10px
   color: #fff
   cursor: pointer
   display: flex
@@ -66,22 +66,23 @@
   justify-content: center
   font-weight: bold
 
+.button-icon
+  margin-right: 10px
+
 .recipe-form__save
   background: $nav-bg
-  box-shadow: 0 0 5px darken($nav-bg, 25%) inset, 1px 1px 5px #aaa
+  box-shadow: 0 0 10px darken($nav-bg, 25%) inset, 1px 1px 5px #aaa
   color: lighten($nav-bg, 40%)
   margin-top: -10px
-  height: 45px
-  width: 45px
+  padding: 15px
   @include hover-change($nav-bg)
 
 .recipe-form__cancel
   background: white
-  box-shadow: 0 0 6px darken(white, 50%) inset
+  box-shadow: 0 0 10px darken(white, 50%) inset
   color: #f77
   margin-right: 40px
-  height: 48px
-  width: 48px
+  padding: 18px
   text-align: center
   @include hover-change(white)
   i

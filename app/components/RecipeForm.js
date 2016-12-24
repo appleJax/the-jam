@@ -204,13 +204,15 @@ class RecipeForm extends React.Component {
               className='recipe-form__cancel'
               onClick={closeModal}
             >
-              <i className='fa fa-times fa-lg'></i>
+              <i className='button-icon fa fa-times fa-lg'></i>
+              Cancel
             </div>
             <div
               className='recipe-form__save'
               onClick={this.save}
             >
-              <i className='fa fa-check fa-lg'></i>
+              <i className='button-icon fa fa-check fa-lg'></i>
+              Save
             </div>
           </div>
         </form>

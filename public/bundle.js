@@ -61656,7 +61656,8 @@
 	              className: 'recipe-form__cancel',
 	              onClick: closeModal
 	            },
-	            _react2.default.createElement('i', { className: 'fa fa-times fa-lg' })
+	            _react2.default.createElement('i', { className: 'button-icon fa fa-times fa-lg' }),
+	            'Cancel'
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -61664,7 +61665,8 @@
 	              className: 'recipe-form__save',
 	              onClick: this.save
 	            },
-	            _react2.default.createElement('i', { className: 'fa fa-check fa-lg' })
+	            _react2.default.createElement('i', { className: 'button-icon fa fa-check fa-lg' }),
+	            'Save'
 	          )
 	        )
 	      )
