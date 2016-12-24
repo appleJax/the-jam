@@ -95,8 +95,6 @@ export const editUserRecipe = (user, recipe, active) => {
         return response.json()
       })
       .then(response => {
-        console.log('Recipe:', recipe)
-        console.log('Response:', response)
         const tempRecipe = recipe,
               oldPubRecipe = response
         delete oldPubRecipe._id
@@ -104,13 +102,16 @@ export const editUserRecipe = (user, recipe, active) => {
         delete tempRecipe.stars
 
         if (tempRecipe.author == 'Me' || tempRecipe.author == 'me') {
-          oldPubRecipe.author = oldPubRecipe.publisher
+          tempRecipe.author = oldPubRecipe.publisher
         }
 
         const newPubRecipe = {
           ...oldPubRecipe,
           ...tempRecipe
         }
+        console.log('Recipe:', recipe)
+        console.log('Response:', response)
+        console.log('New Pub Recipe:',newPubRecipe)
 
         dispatch(editRecipe(newPubRecipe, 'public'))
         newPubRecipe.showDetails = false
