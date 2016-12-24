@@ -61462,6 +61462,7 @@
 	        name: '',
 	        tags: '',
 	        time: '',
+	        calories: 0,
 	        stars: 0,
 	        servings: 1,
 	        ingredients: '',
@@ -61652,18 +61653,18 @@
 	          _react2.default.createElement(
 	            'div',
 	            {
-	              className: 'recipe-form__save',
-	              onClick: this.save
-	            },
-	            _react2.default.createElement('i', { className: 'fa fa-check fa-lg' })
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            {
 	              className: 'recipe-form__cancel',
 	              onClick: closeModal
 	            },
 	            _react2.default.createElement('i', { className: 'fa fa-times fa-lg' })
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            {
+	              className: 'recipe-form__save',
+	              onClick: this.save
+	            },
+	            _react2.default.createElement('i', { className: 'fa fa-check fa-lg' })
 	          )
 	        )
 	      )

@@ -34,6 +34,7 @@ class RecipeForm extends React.Component {
         name: '',
         tags: '',
         time: '',
+        calories: 0,
         stars: 0,
         servings: 1,
         ingredients: '',
@@ -200,16 +201,16 @@ class RecipeForm extends React.Component {
 
           <div className='recipe-form__buttons'>
             <div
-              className='recipe-form__save'
-              onClick={this.save}
-            >
-              <i className='fa fa-check fa-lg'></i>
-            </div>
-            <div
               className='recipe-form__cancel'
               onClick={closeModal}
             >
               <i className='fa fa-times fa-lg'></i>
+            </div>
+            <div
+              className='recipe-form__save'
+              onClick={this.save}
+            >
+              <i className='fa fa-check fa-lg'></i>
             </div>
           </div>
         </form>
