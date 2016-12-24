@@ -75,6 +75,12 @@ class VoteDialogue extends React.Component {
       </div>
       <div className='confirm-dialogue__button-bar'>
         <div
+          className='confirm-dialogue__button confirm-dialogue__button--cancel'
+          onClick={closeModal}
+        >
+          Cancel
+        </div>
+        <div
           className='confirm-dialogue__button confirm-dialogue__button--accept'
           onClick={() => {
             voteForRecipe(username, this.state.stars, recipe)
@@ -82,12 +88,6 @@ class VoteDialogue extends React.Component {
           }}
         >
           Vote
-        </div>
-        <div
-          className='confirm-dialogue__button confirm-dialogue__button--cancel'
-          onClick={closeModal}
-        >
-          Cancel
         </div>
       </div>
     </div>

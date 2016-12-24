@@ -154,12 +154,6 @@ const PrivateRecipe = ({
           directionList={directionList}
           notes={notes}
         />
-        <div
-          className='recipe__button--edit'
-          onClick={populateModal}
-        >
-          <i className='fa fa-pencil'></i>
-        </div>
       </div>
       }
       {showDetails &&
@@ -170,6 +164,12 @@ const PrivateRecipe = ({
         <div className='recipe__credits__author'>
           <i className='fa fa-id-card-o'></i>
           Recipe By: <span className='credit-name'>{author}</span>
+        </div>
+        <div
+          className='recipe__button--edit'
+          onClick={populateModal}
+        >
+          <i className='fa fa-pencil'></i>
         </div>
       </div>
       }

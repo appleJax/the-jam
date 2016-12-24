@@ -2670,6 +2670,7 @@ h3 {
   flex-grow: 20; }
 
 .recipe__credits {
+  align-items: center;
   background: #f46f53;
   border-radius: 0 0 5px 5px;
   color: white;
@@ -2690,19 +2691,18 @@ h3 {
   white-space: nowrap; }
 
 .recipe__button--edit {
-  background: #F14723;
+  background: white;
   border-radius: 50%;
-  box-shadow: 0 0 5px #aaa;
-  color: white;
+  box-shadow: 0 0 5px #aaa inset, 1px 1px 3px #e6e6e6;
+  color: #F14723;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 25px 0 0 5px;
   height: 44px;
   width: 44px; }
   .recipe__button--edit:hover {
-    background: #ec360f; }
+    background: #f2f2f2; }
 
 footer {
   background: #444;

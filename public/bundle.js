@@ -60884,15 +60884,7 @@
 	        ingredientList: ingredientList,
 	        directionList: directionList,
 	        notes: notes
-	      }),
-	      _react2.default.createElement(
-	        'div',
-	        {
-	          className: 'recipe__button--edit',
-	          onClick: populateModal
-	        },
-	        _react2.default.createElement('i', { className: 'fa fa-pencil' })
-	      )
+	      })
 	    ),
 	    showDetails && _react2.default.createElement('div', { className: 'spacer credits-spacer' }),
 	    showDetails && _react2.default.createElement(
@@ -60908,6 +60900,14 @@
 	          { className: 'credit-name' },
 	          author
 	        )
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        {
+	          className: 'recipe__button--edit',
+	          onClick: populateModal
+	        },
+	        _react2.default.createElement('i', { className: 'fa fa-pencil' })
 	      )
 	    )
 	  );
@@ -61765,6 +61765,14 @@
 	        _react2.default.createElement(
 	          'div',
 	          {
+	            className: 'confirm-dialogue__button confirm-dialogue__button--cancel',
+	            onClick: closeModal
+	          },
+	          'Cancel'
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          {
 	            className: 'confirm-dialogue__button confirm-dialogue__button--accept',
 	            onClick: () => {
 	              voteForRecipe(username, this.state.stars, recipe);
@@ -61772,14 +61780,6 @@
 	            }
 	          },
 	          'Vote'
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          {
-	            className: 'confirm-dialogue__button confirm-dialogue__button--cancel',
-	            onClick: closeModal
-	          },
-	          'Cancel'
 	        )
 	      )
 	    );
@@ -61823,18 +61823,18 @@
 	  _react2.default.createElement(
 	    'div',
 	    {
-	      className: 'confirm-dialogue__button confirm-dialogue__button--accept',
-	      onClick: login
-	    },
-	    'Sign In'
-	  ),
-	  _react2.default.createElement(
-	    'div',
-	    {
 	      className: 'confirm-dialogue__button confirm-dialogue__button--cancel',
 	      onClick: closeModal
 	    },
 	    'Cancel'
+	  ),
+	  _react2.default.createElement(
+	    'div',
+	    {
+	      className: 'confirm-dialogue__button confirm-dialogue__button--accept',
+	      onClick: login
+	    },
+	    'Sign In'
 	  )
 	);
 

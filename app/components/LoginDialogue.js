@@ -16,16 +16,16 @@ const LoginDialogue = ({
       Sign In to Vote
     </h3>
       <div
-        className='confirm-dialogue__button confirm-dialogue__button--accept'
-        onClick={login}
-      >
-        Sign In
-      </div>
-      <div
         className='confirm-dialogue__button confirm-dialogue__button--cancel'
         onClick={closeModal}
       >
         Cancel
+      </div>
+      <div
+        className='confirm-dialogue__button confirm-dialogue__button--accept'
+        onClick={login}
+      >
+        Sign In
       </div>
   </div>
 )
