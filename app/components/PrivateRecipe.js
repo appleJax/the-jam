@@ -131,6 +131,9 @@ const PrivateRecipe = ({
         </ul>
       </div>
       <div className='recipe__control-bar'>
+        {starIcons}
+        {status}
+        <div className='spacer'></div>
         <i
           onClick={toggleDetails}
           className={
@@ -140,9 +143,6 @@ const PrivateRecipe = ({
           }
         >
         </i>
-        <div className='spacer'></div>
-        {status}
-        {starIcons}
       </div>
       <div className='spacer control-bar-spacer'></div>
       {showDetails &&

@@ -60866,13 +60866,13 @@
 	    _react2.default.createElement(
 	      'div',
 	      { className: 'recipe__control-bar' },
+	      starIcons,
+	      status,
+	      _react2.default.createElement('div', { className: 'spacer' }),
 	      _react2.default.createElement('i', {
 	        onClick: toggleDetails,
 	        className: showDetails ? 'recipe__expand-toggle fa fa-toggle-up fa-lg' : 'recipe__expand-toggle fa fa-ellipsis-h fa-lg'
-	      }),
-	      _react2.default.createElement('div', { className: 'spacer' }),
-	      status,
-	      starIcons
+	      })
 	    ),
 	    _react2.default.createElement('div', { className: 'spacer control-bar-spacer' }),
 	    showDetails && _react2.default.createElement(
@@ -61136,11 +61136,13 @@
 	    _react2.default.createElement(
 	      'div',
 	      { className: 'recipe__control-bar' },
-	      _react2.default.createElement('i', {
-	        onClick: toggleDetails,
-	        className: showDetails ? 'recipe__expand-toggle fa fa-toggle-up fa-lg' : 'recipe__expand-toggle fa fa-ellipsis-h fa-lg'
-	      }),
-	      _react2.default.createElement('div', { className: 'spacer' }),
+	      _react2.default.createElement(
+	        'div',
+	        {
+	          onClick: loggedIn ? voteDialogue : loginDialogue
+	        },
+	        starIcons
+	      ),
 	      _react2.default.createElement(
 	        'div',
 	        {
@@ -61150,13 +61152,11 @@
 	        ' Vote',
 	        totalVotes != 1 && 's'
 	      ),
-	      _react2.default.createElement(
-	        'div',
-	        {
-	          onClick: loggedIn ? voteDialogue : loginDialogue
-	        },
-	        starIcons
-	      )
+	      _react2.default.createElement('div', { className: 'spacer' }),
+	      _react2.default.createElement('i', {
+	        onClick: toggleDetails,
+	        className: showDetails ? 'recipe__expand-toggle fa fa-toggle-up fa-lg' : 'recipe__expand-toggle fa fa-ellipsis-h fa-lg'
+	      })
 	    ),
 	    _react2.default.createElement('div', { className: 'spacer control-bar-spacer' }),
 	    showDetails && _react2.default.createElement(

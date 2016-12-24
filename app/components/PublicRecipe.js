@@ -105,6 +105,20 @@ const PublicRecipe = ({
         </ul>
       </div>
       <div className='recipe__control-bar'>
+        <div
+          onClick={loggedIn ?
+            voteDialogue :
+            loginDialogue
+          }
+        >
+          {starIcons}
+        </div>
+        <div
+          className='recipe__votes'
+        >
+          {totalVotes} Vote{totalVotes != 1 && 's'}
+        </div>
+        <div className='spacer'></div>
         <i
           onClick={toggleDetails}
           className={
@@ -114,20 +128,6 @@ const PublicRecipe = ({
           }
         >
         </i>
-        <div className='spacer'></div>
-        <div
-          className='recipe__votes'
-        >
-          {totalVotes} Vote{totalVotes != 1 && 's'}
-        </div>
-        <div
-          onClick={loggedIn ?
-            voteDialogue :
-            loginDialogue
-          }
-        >
-          {starIcons}
-        </div>
       </div>
       <div className='spacer control-bar-spacer'></div>
       {showDetails &&
