@@ -60991,7 +60991,8 @@
 	    _react2.default.createElement(
 	      'h3',
 	      { className: 'recipe-body__notes-title' },
-	      'Notes:'
+	      _react2.default.createElement('i', { className: 'fa fa-pencil' }),
+	      ' Notes:'
 	    ),
 	    _react2.default.createElement(
 	      'div',

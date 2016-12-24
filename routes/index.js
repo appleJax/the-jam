@@ -242,14 +242,14 @@ module.exports = (app) => {
         assert.equal(null, err);
 
         const collection = db.collection(req.body.user),
-              recipe = req.body.recipe,
-              doc = collection.findOne({id: recipe.id});
+              recipe = req.body.recipe;
 
-        if (doc) {
-          res.json(doc);
+        collection.find({id: recipe.id}).toArray((err, docs) => {
+          assert.equal(null, err);
+          res.json(docs[0]);
           db.close();
           res.end();
-        }
+        })
       })
     }
   });

@@ -35,7 +35,7 @@ const RecipeBody = ({
     {notes.length > 0 &&
     <div>
       <h3 className='recipe-body__notes-title'>
-        Notes:
+        <i className='fa fa-pencil'></i> Notes:
       </h3>
       <div className='recipe-body__notes'>
         {notes.map(
