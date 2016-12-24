@@ -40,6 +40,7 @@ class RecipeForm extends React.Component {
         directions: '',
         notes: '',
         author: '',
+        published: false,
         showDetails: true
       }
     }
@@ -55,6 +56,8 @@ class RecipeForm extends React.Component {
           tag.toLowerCase()
              .trim())
         .filter(tag => tag !== '') : []
+
+    recipe.time = recipe.time.trim()
 
     recipe.servings = recipe.servings || 1
 

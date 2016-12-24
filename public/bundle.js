@@ -61465,6 +61465,7 @@
 	        directions: '',
 	        notes: '',
 	        author: '',
+	        published: false,
 	        showDetails: true
 	      };
 	    }
@@ -61475,6 +61476,8 @@
 	    recipe.name = recipe.name.trim() || 'New Recipe';
 
 	    recipe.tags = recipe.tags ? recipe.tags.split(',').map(tag => tag.toLowerCase().trim()).filter(tag => tag !== '') : [];
+
+	    recipe.time = recipe.time.trim();
 
 	    recipe.servings = recipe.servings || 1;
 
