@@ -246,6 +246,7 @@ module.exports = (app) => {
 
         collection.find({id: recipe.id}).toArray((err, docs) => {
           assert.equal(null, err);
+          console.log(docs[0]);
           res.json(docs[0]);
           db.close();
           res.end();
