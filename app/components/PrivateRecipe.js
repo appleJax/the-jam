@@ -5,6 +5,7 @@ const PrivateRecipe = ({
   recipe,
   visibilityFilter,
   user,
+  username,
   setFilterContent,
   confirmDelete,
   editRecipe,
@@ -56,14 +57,14 @@ const PrivateRecipe = ({
   const status = published ?
     <div
       className='recipe__button--unpublish'
-      onClick={unpublishConfirm}
+      onClick={() => unpublishConfirm('unpublish', recipe)}
     >
       <i className='fa fa-check-circle'></i>
       Published
     </div> :
     <div
       className='recipe__button--publish'
-      onClick={publishRecipe}
+      onClick={() => publishRecipe(user, recipe, username)}
     >
       <i className='fa fa-newspaper-o'></i>
       Publish

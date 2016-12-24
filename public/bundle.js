@@ -60685,13 +60685,14 @@
 	      recipe: recipe,
 	      visibilityFilter: visibilityFilter,
 	      user: user,
+	      username: username,
 	      setFilterContent: setFilterContent,
 	      confirmDelete: () => populateModal('confirm', recipe.id),
 	      editRecipe: editRecipe,
 	      toggleDetails: () => toggleDetails(recipe.id, visibilityFilter.active),
 	      populateModal: () => populateModal('recipe', recipe),
-	      publishRecipe: () => publishRecipe(user, recipe, username),
-	      unpublishConfirm: () => populateModal('unpublish', recipe)
+	      publishRecipe: publishRecipe,
+	      unpublishConfirm: populateModal
 	    }) : _react2.default.createElement(_PublicRecipe2.default, {
 	      key: i,
 	      recipe: recipe,
@@ -60735,6 +60736,7 @@
 	  recipe,
 	  visibilityFilter,
 	  user,
+	  username,
 	  setFilterContent,
 	  confirmDelete,
 	  editRecipe,
@@ -60783,7 +60785,7 @@
 	    'div',
 	    {
 	      className: 'recipe__button--unpublish',
-	      onClick: unpublishConfirm
+	      onClick: () => unpublishConfirm('unpublish', recipe)
 	    },
 	    _react2.default.createElement('i', { className: 'fa fa-check-circle' }),
 	    'Published'
@@ -60791,7 +60793,7 @@
 	    'div',
 	    {
 	      className: 'recipe__button--publish',
-	      onClick: publishRecipe
+	      onClick: () => publishRecipe(user, recipe, username)
 	    },
 	    _react2.default.createElement('i', { className: 'fa fa-newspaper-o' }),
 	    'Publish'
