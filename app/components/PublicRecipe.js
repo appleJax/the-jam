@@ -145,7 +145,7 @@ const PublicRecipe = ({
       <div className="spacer credits-spacer"></div>
       }
       {showDetails &&
-      <div className='recipe__credits'>
+      <div className='recipe__credits recipe__credits--public'>
         <div className='recipe__credits__author'>
           <i className='fa fa-id-card-o'></i>
           Recipe By: <span className='credit-name'>{author}</span>

@@ -2675,15 +2675,21 @@ h3 {
   border-radius: 0 0 5px 5px;
   color: white;
   display: flex;
-  flex-wrap: wrap-reverse;
   font-size: 16px;
-  justify-content: flex-end;
   margin: 25px -15px -15px -15px;
   padding: 8px 15px; }
   .recipe__credits i {
     margin-right: 8px; }
   .recipe__credits .credit-name {
     margin-left: 5px; }
+
+.recipe__credits--public {
+  flex-wrap: wrap;
+  justify-content: space-between; }
+
+.recipe__credits--private {
+  flex-wrap: wrap-reverse;
+  justify-content: flex-end; }
 
 .recipe__credits__author,
 .recipe__credits__publisher {
@@ -2831,7 +2837,7 @@ footer {
   box-shadow: 0 0 10px gray inset;
   color: #f55;
   margin-right: 40px;
-  padding: 18px;
+  padding: 15px;
   text-align: center;
   text-shadow: 1px 1px #eee; }
   .recipe-form__cancel:hover {

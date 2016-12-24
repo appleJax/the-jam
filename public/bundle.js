@@ -60948,7 +60948,7 @@
 	    showDetails && _react2.default.createElement('div', { className: 'spacer credits-spacer' }),
 	    showDetails && _react2.default.createElement(
 	      'div',
-	      { className: 'recipe__credits' },
+	      { className: 'recipe__credits recipe__credits--private' },
 	      _react2.default.createElement(
 	        'div',
 	        { className: 'recipe__credits__author' },
@@ -61233,7 +61233,7 @@
 	    showDetails && _react2.default.createElement('div', { className: 'spacer credits-spacer' }),
 	    showDetails && _react2.default.createElement(
 	      'div',
-	      { className: 'recipe__credits' },
+	      { className: 'recipe__credits recipe__credits--public' },
 	      _react2.default.createElement(
 	        'div',
 	        { className: 'recipe__credits__author' },
