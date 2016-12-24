@@ -165,6 +165,7 @@ const PrivateRecipe = ({
           <i className='fa fa-id-card-o'></i>
           Recipe By: <span className='credit-name'>{author}</span>
         </div>
+        <div className='spacer'></div>
         <div
           className='recipe__button--edit'
           onClick={populateModal}

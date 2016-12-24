@@ -134,6 +134,7 @@ class RecipeForm extends React.Component {
           <input
             type='text'
             name='time'
+            className='recipe-form__number-input'
             value={this.state.time}
             onChange={(e) => this.setState({time: e.target.value})}
           />

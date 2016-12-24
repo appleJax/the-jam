@@ -60451,7 +60451,10 @@
 	        return response.json();
 	      }).then(response => {
 	        const tempRecipe = _extends({}, recipe),
-	              oldPubRecipe = response;
+	              oldPubRecipe = response,
+	              publisher = oldPubRecipe.publisher;
+
+	        oldPubRecipe.votes[publisher] = tempRecipe.stars;
 	        delete oldPubRecipe._id;
 	        delete tempRecipe.published;
 	        delete tempRecipe.stars;
@@ -60901,6 +60904,7 @@
 	          author
 	        )
 	      ),
+	      _react2.default.createElement('div', { className: 'spacer' }),
 	      _react2.default.createElement(
 	        'div',
 	        {
@@ -61560,6 +61564,7 @@
 	        _react2.default.createElement('input', {
 	          type: 'text',
 	          name: 'time',
+	          className: 'recipe-form__number-input',
 	          value: this.state.time,
 	          onChange: e => this.setState({ time: e.target.value })
 	        }),

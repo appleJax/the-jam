@@ -2675,15 +2675,15 @@ h3 {
   border-radius: 0 0 5px 5px;
   color: white;
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: wrap-reverse;
   font-size: 16px;
-  justify-content: space-between;
+  justify-content: flex-end;
   margin: 25px -15px -15px -15px;
   padding: 8px 15px; }
   .recipe__credits i {
     margin-right: 8px; }
   .recipe__credits .credit-name {
-    margin-left: 15px; }
+    margin-left: 5px; }
 
 .recipe__credits__author,
 .recipe__credits__publisher {
@@ -2761,7 +2761,7 @@ footer {
     color: #333;
     display: block;
     font-size: 20px;
-    margin: 5px 0 25px;
+    margin: 5px auto 25px;
     padding: 5px;
     resize: vertical;
     width: 95%; }
@@ -2786,6 +2786,9 @@ footer {
   float: left;
   margin: 2px 15px 0 0; }
 
+.recipe-form__number-input {
+  margin-left: 0; }
+
 .parens {
   display: block;
   font-family: 'Architects Daughter', 'sans-serif';
@@ -2798,7 +2801,7 @@ footer {
   display: flex;
   align-items: baseline;
   justify-content: flex-end;
-  margin: 45px 25px 0 0; }
+  margin: 45px 10px 0 0; }
 
 .recipe-form__save,
 .recipe-form__cancel {

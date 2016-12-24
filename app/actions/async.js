@@ -96,7 +96,10 @@ export const editUserRecipe = (user, recipe, active) => {
       })
       .then(response => {
         const tempRecipe = {...recipe},
-              oldPubRecipe = response
+              oldPubRecipe = response,
+              publisher = oldPubRecipe.publisher
+
+        oldPubRecipe.votes[publisher] = tempRecipe.stars
         delete oldPubRecipe._id
         delete tempRecipe.published
         delete tempRecipe.stars
