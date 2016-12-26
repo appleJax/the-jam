@@ -197,7 +197,11 @@ class RecipeForm extends React.Component {
                 value={this.state.time.hours}
                 onChange={(e) => {
                   // Disable decimals
-                  if (e.which == 190) return e.preventDefault()
+                  console.log(e.which)
+                  if (e.which == 190) {
+                    e.preventDefault()
+                    return
+                  }
 
                   this.setState(
                     {time: {
