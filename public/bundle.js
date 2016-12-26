@@ -60317,6 +60317,7 @@
 	        return b.stars - a.stars;
 	      }
 	      if (timeA == 0) return 1;
+	      if (timeB == 0) return -1;
 	      return timeA - timeB;
 	    } else if (sort.time && sort.stars && sort.desc) {
 	      const timeA = a.time.hours * 60 + a.time.minutes,
@@ -60328,6 +60329,7 @@
 	        return b.stars - a.stars;
 	      }
 	      if (timeA == 0) return 1;
+	      if (timeB == 0) return -1;
 	      return timeA - timeB;
 	    } else if (sort.time && sort.stars) {
 	      const timeA = a.time.hours * 60 + a.time.minutes,
@@ -60336,6 +60338,7 @@
 	        return b.stars - a.stars;
 	      }
 	      if (timeA == 0) return 1;
+	      if (timeB == 0) return -1;
 	      return timeA - timeB;
 	    } else if (sort.time && sort.asc) {
 	      const timeA = a.time.hours * 60 + a.time.minutes,
@@ -60344,6 +60347,7 @@
 	        return a.name < b.name ? -1 : a.name > b.name ? 1 : 0;
 	      }
 	      if (timeA == 0) return 1;
+	      if (timeB == 0) return -1;
 	      return timeA - timeB;
 	    } else if (sort.time && sort.desc) {
 	      const timeA = a.time.hours * 60 + a.time.minutes,
@@ -60352,6 +60356,7 @@
 	        return a.name > b.name ? -1 : a.name < b.name ? 1 : 0;
 	      }
 	      if (timeA == 0) return 1;
+	      if (timeB == 0) return -1;
 	      return timeA - timeB;
 	    } else if (sort.stars && sort.asc) {
 	      if (a.stars == b.stars) {
@@ -60375,6 +60380,7 @@
 	      const timeA = a.time.hours * 60 + a.time.minutes,
 	            timeB = b.time.hours * 60 + b.time.minutes;
 	      if (timeA == 0) return 1;
+	      if (timeB == 0) return -1;
 	      return timeA - timeB;
 	    } else {
 	      return 0;
