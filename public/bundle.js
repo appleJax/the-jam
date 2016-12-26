@@ -61679,7 +61679,6 @@
 	              value: this.state.time.hours,
 	              onKeyDown: e => {
 	                // Disable decimals and 'e' key
-	                // Disable leading zeros
 	                if (e.which == 190 || e.which == 69) e.preventDefault();
 	              },
 	              onChange: e => {
@@ -61711,9 +61710,19 @@
 	              max: '60',
 	              min: '0',
 	              value: this.state.time.minutes,
-	              onChange: e => this.setState({ time: _extends({}, this.state.time, {
-	                  minutes: e.target.value
-	                }) })
+	              onKeyDown: e => {
+	                // Disable decimals and 'e' key
+	                if (e.which == 190 || e.which == 69) e.preventDefault();
+	              },
+	              onChange: e => {
+	                let val = Number(e.target.value);
+	                if (val < 1) val = 0;
+
+	                this.setState({ time: _extends({}, this.state.time, {
+	                    minutes: val
+	                  })
+	                });
+	              }
 	            })
 	          )
 	        ),
@@ -61739,7 +61748,16 @@
 	          min: '0',
 	          className: 'recipe-form__input recipe-form__input--number recipe-form__input--calories',
 	          value: this.state.calories,
-	          onChange: e => this.setState({ calories: e.target.value })
+	          onKeyDown: e => {
+	            // Disable decimals and 'e' key
+	            if (e.which == 190 || e.which == 69) e.preventDefault();
+	          },
+	          onChange: e => {
+	            let val = Number(e.target.value);
+	            if (val < 1) val = 0;
+
+	            this.setState({ calories: val });
+	          }
 	        }),
 	        _react2.default.createElement(
 	          'div',
@@ -61759,9 +61777,15 @@
 	            min: '1',
 	            className: 'recipe-form__input recipe-form__input--number',
 	            value: this.state.servings,
+	            onKeyDown: e => {
+	              // Disable decimals and 'e' key
+	              if (e.which == 190 || e.which == 69) e.preventDefault();
+	            },
 	            onChange: e => {
-	              let val = e.target.value;
-	              this.setState({ servings: val > 0 || val === '' ? val : 1 });
+	              let val = Number(e.target.value);
+	              if (val < 1) val = 1;
+
+	              this.setState({ servings: val });
 	            }
 	          })
 	        ),
