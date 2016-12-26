@@ -61677,14 +61677,19 @@
 	              className: 'recipe-form__input recipe-form__input--number recipe-form__input--hours',
 	              min: '0',
 	              value: this.state.time.hours,
-	              onChange: e => this.setState({ time: _extends({}, this.state.time, {
-	                  hours: e.target.value
-	                }) })
+	              onChange: e => {
+	                // Disable decimals
+	                if (e.which == 190) return e.preventDefault();
+
+	                this.setState({ time: _extends({}, this.state.time, {
+	                    hours: e.target.value
+	                  }) });
+	              }
 	            })
 	          ),
 	          _react2.default.createElement(
 	            'div',
-	            { classNam: 'recipe-form__time-div' },
+	            { className: 'recipe-form__time-div' },
 	            _react2.default.createElement(
 	              'label',
 	              {

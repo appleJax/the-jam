@@ -195,16 +195,19 @@ class RecipeForm extends React.Component {
                 className='recipe-form__input recipe-form__input--number recipe-form__input--hours'
                 min='0'
                 value={this.state.time.hours}
-                onChange={(e) =>
+                onChange={(e) => {
+                  // Disable decimals
+                  if (e.which == 190) return e.preventDefault()
+
                   this.setState(
                     {time: {
                       ...this.state.time,
                       hours: e.target.value
-                    }}
-                  )}
+                    }})
+                }}
               />
             </div>
-            <div classNam='recipe-form__time-div'>
+            <div className='recipe-form__time-div'>
               <label
                 htmlFor='minutes'
                 className='recipe-form__label recipe-form__label--sub'

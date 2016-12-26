@@ -2821,7 +2821,9 @@ footer {
 .recipe-form__time-bar {
   align-items: baseline;
   display: flex;
-  justify-content: flex-start; }
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  padding-left: 20px; }
 
 .recipe-form__time-div {
   white-space: nowrap; }
@@ -2833,7 +2835,8 @@ footer {
 .recipe-form__stars {
   align-items: center;
   display: flex;
-  justify-content: flex-start; }
+  justify-content: flex-start;
+  margin-bottom: 20px; }
 
 .recipe-form__buttons {
   display: flex;
