@@ -21,6 +21,7 @@ const PublicRecipe = ({
     stars,
     votes,
     time,
+    calories,
     servings,
     ingredients,
     directions,
@@ -134,6 +135,7 @@ const PublicRecipe = ({
       <div className='recipe__body'>
         <RecipeBody
           time={time}
+          calories={calories}
           servings={servings}
           ingredientList={ingredientList}
           directionList={directionList}

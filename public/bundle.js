@@ -60811,6 +60811,7 @@
 	    tags,
 	    stars,
 	    time,
+	    calories,
 	    servings,
 	    ingredients,
 	    directions,
@@ -60939,6 +60940,7 @@
 	      null,
 	      _react2.default.createElement(_RecipeBody2.default, {
 	        time: time,
+	        calories: calories,
 	        servings: servings,
 	        ingredientList: ingredientList,
 	        directionList: directionList,
@@ -60993,81 +60995,100 @@
 
 	const RecipeBody = ({
 	  time,
+	  calories,
 	  servings,
 	  ingredientList,
 	  directionList,
 	  notes
-	}) => _react2.default.createElement(
-	  'div',
-	  null,
-	  time && _react2.default.createElement(
+	}) => {
+	  const hours = time.hours,
+	        minutes = time.minutes,
+	        hasTime = time.hours != 0 && time.minutes != 0,
+	        printHours = hours > 0 ? hours == 1 ? hours + ' hr ' : hours + ' hrs ' : '',
+	        printMinutes = minutes > 0 ? minutes == 1 ? minutes + ' min ' : minutes + ' mins ' : '',
+	        timeDiv = hasTime ? _react2.default.createElement(
 	    'div',
 	    { className: 'recipe-body__time-div' },
 	    _react2.default.createElement('i', { className: 'fa fa-clock-o' }),
 	    _react2.default.createElement(
 	      'span',
 	      { className: 'recipe-body__time' },
-	      time
+	      printHours,
+	      printMinutes
 	    )
-	  ),
-	  _react2.default.createElement(
+	  ) : '',
+	        calDiv = calories > 0 ? _react2.default.createElement(
 	    'div',
-	    { className: 'recipe-body__ingredients' },
-	    _react2.default.createElement(
-	      'h3',
-	      null,
-	      _react2.default.createElement('i', { className: 'fa fa-shopping-basket' }),
-	      ' Ingredients:'
-	    ),
-	    _react2.default.createElement(
-	      'span',
-	      { className: 'recipe-body__servings' },
-	      servings,
-	      ' ',
-	      servings ? 'serving' : '',
-	      servings > 1 ? 's' : ''
-	    ),
-	    _react2.default.createElement(
-	      'ul',
-	      null,
-	      ingredientList
-	    )
-	  ),
-	  _react2.default.createElement(
-	    'div',
-	    { className: 'recipe-body__directions' },
-	    _react2.default.createElement(
-	      'h3',
-	      null,
-	      _react2.default.createElement('i', { className: 'fa fa-map-signs' }),
-	      ' Directions:'
-	    ),
-	    _react2.default.createElement(
-	      'ol',
-	      null,
-	      directionList
-	    )
-	  ),
-	  notes.length > 0 && _react2.default.createElement(
+	    { className: 'recipe-body__calories-div' },
+	    calories,
+	    ' cal',
+	    calories == 1 ? '' : 's'
+	  ) : '';
+
+	  return _react2.default.createElement(
 	    'div',
 	    null,
+	    timeDiv,
+	    calDiv,
 	    _react2.default.createElement(
-	      'h3',
-	      { className: 'recipe-body__notes-title' },
-	      _react2.default.createElement('i', { className: 'fa fa-pencil' }),
-	      ' Notes:'
+	      'div',
+	      { className: 'recipe-body__ingredients' },
+	      _react2.default.createElement(
+	        'h3',
+	        null,
+	        _react2.default.createElement('i', { className: 'fa fa-shopping-basket' }),
+	        ' Ingredients:'
+	      ),
+	      _react2.default.createElement(
+	        'span',
+	        { className: 'recipe-body__servings' },
+	        servings,
+	        ' ',
+	        servings ? 'serving' : '',
+	        servings > 1 ? 's' : ''
+	      ),
+	      _react2.default.createElement(
+	        'ul',
+	        null,
+	        ingredientList
+	      )
 	    ),
 	    _react2.default.createElement(
 	      'div',
-	      { className: 'recipe-body__notes' },
-	      notes.map((line, i) => _react2.default.createElement(
-	        'p',
-	        { key: i },
-	        line
-	      ))
+	      { className: 'recipe-body__directions' },
+	      _react2.default.createElement(
+	        'h3',
+	        null,
+	        _react2.default.createElement('i', { className: 'fa fa-map-signs' }),
+	        ' Directions:'
+	      ),
+	      _react2.default.createElement(
+	        'ol',
+	        null,
+	        directionList
+	      )
+	    ),
+	    notes.length > 0 && _react2.default.createElement(
+	      'div',
+	      null,
+	      _react2.default.createElement(
+	        'h3',
+	        { className: 'recipe-body__notes-title' },
+	        _react2.default.createElement('i', { className: 'fa fa-pencil' }),
+	        ' Notes:'
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'recipe-body__notes' },
+	        notes.map((line, i) => _react2.default.createElement(
+	          'p',
+	          { key: i },
+	          line
+	        ))
+	      )
 	    )
-	  )
-	);
+	  );
+	};
 
 	exports.default = RecipeBody;
 
@@ -61111,6 +61132,7 @@
 	    stars,
 	    votes,
 	    time,
+	    calories,
 	    servings,
 	    ingredients,
 	    directions,
@@ -61224,6 +61246,7 @@
 	      { className: 'recipe__body' },
 	      _react2.default.createElement(_RecipeBody2.default, {
 	        time: time,
+	        calories: calories,
 	        servings: servings,
 	        ingredientList: ingredientList,
 	        directionList: directionList,
@@ -61545,8 +61568,6 @@
 
 	    recipe.tags = recipe.tags ? recipe.tags.split(',').map(tag => tag.toLowerCase().trim()).filter(tag => tag !== '') : [];
 
-	    recipe.servings = recipe.servings || 1;
-
 	    recipe.ingredients = recipe.ingredients.trim() ? recipe.ingredients.split('\n').map(ingredient => ingredient.trim()).filter(ingredient => ingredient !== '') : ['None'];
 
 	    recipe.directions = recipe.directions.trim() ? recipe.directions.split('\n').map(direction => direction.trim()).filter(direction => direction !== '') : ['None'];
@@ -61707,7 +61728,7 @@
 	              type: 'number',
 	              name: 'minutes',
 	              className: 'recipe-form__input recipe-form__input--number recipe-form__input--minutes',
-	              max: '60',
+	              max: '59',
 	              min: '0',
 	              value: this.state.time.minutes,
 	              onKeyDown: e => {
@@ -61716,7 +61737,11 @@
 	              },
 	              onChange: e => {
 	                let val = Number(e.target.value);
-	                if (val < 1) val = 0;
+	                if (val < 1) {
+	                  val = 0;
+	                } else if (val > 59) {
+	                  val = 59;
+	                }
 
 	                this.setState({ time: _extends({}, this.state.time, {
 	                    minutes: val

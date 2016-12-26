@@ -19,6 +19,7 @@ const PrivateRecipe = ({
     tags,
     stars,
     time,
+    calories,
     servings,
     ingredients,
     directions,
@@ -149,6 +150,7 @@ const PrivateRecipe = ({
       <div>
         <RecipeBody
           time={time}
+          calories={calories}
           servings={servings}
           ingredientList={ingredientList}
           directionList={directionList}

@@ -61,8 +61,6 @@ class RecipeForm extends React.Component {
              .trim())
         .filter(tag => tag !== '') : []
 
-    recipe.servings = recipe.servings || 1
-
     recipe.ingredients = recipe.ingredients.trim() ?
       recipe.ingredients.split('\n')
         .map(ingredient =>
@@ -223,7 +221,7 @@ class RecipeForm extends React.Component {
                 type='number'
                 name='minutes'
                 className='recipe-form__input recipe-form__input--number recipe-form__input--minutes'
-                max='60'
+                max='59'
                 min='0'
                 value={this.state.time.minutes}
                 onKeyDown={(e) => {
@@ -232,7 +230,11 @@ class RecipeForm extends React.Component {
                 }}
                 onChange={(e) => {
                   let val = Number(e.target.value)
-                  if (val < 1) val = 0
+                  if (val < 1) {
+                    val = 0
+                  } else if (val > 59) {
+                    val = 59
+                  }
 
                   this.setState(
                     {time: {
