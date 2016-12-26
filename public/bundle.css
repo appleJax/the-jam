@@ -2627,12 +2627,15 @@ nav {
   justify-content: space-between;
   flex-direction: column; }
 
-.recipe-body__time-div {
+.recipe-body__stats-bar {
+  font-size: 18px;
   margin: 25px 0 -10px; }
 
-.recipe-body__time {
-  font-size: 18px;
-  margin-left: 10px; }
+.recipe-body__stats-div {
+  margin-right: 15px; }
+
+.recipe-body__stats-div__icon {
+  margin-right: 10px; }
 
 .recipe-body__ingredients {
   margin-top: 0; }

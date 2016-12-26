@@ -16,22 +16,22 @@ const RecipeBody = ({
         printMinutes = minutes > 0 ?
           (minutes == 1 ? minutes + ' min ' : minutes + ' mins ') : '',
         timeDiv = hasTime ?
-          <div className='recipe-body__time-div'>
-            <i className='fa fa-clock-o'></i>
-            <span className='recipe-body__time'>
-              {printHours}
-              {printMinutes}
-            </span>
+          <div className='recipe-body__stats-div'>
+            <i className='recipe-body__stats-div__icon fa fa-clock-o'></i>
+            {printHours}
+            {printMinutes}
           </div> : '',
         calDiv = calories > 0 ?
-          <div className='recipe-body__calories-div'>
+          <div className='recipe-body__stats-div'>
             {calories} cal{calories == 1 ? '' : 's'}
           </div>: ''
 
   return (
     <div>
-      {timeDiv}
-      {calDiv}
+      <div className='recipe-body__stats-bar'>
+        {timeDiv}
+        {calDiv}
+      </div>
       <div className='recipe-body__ingredients'>
         <h3><i className='fa fa-shopping-basket'></i> Ingredients:</h3>
         <span className='recipe-body__servings'>

@@ -61008,18 +61008,14 @@
 	        printMinutes = minutes > 0 ? minutes == 1 ? minutes + ' min ' : minutes + ' mins ' : '',
 	        timeDiv = hasTime ? _react2.default.createElement(
 	    'div',
-	    { className: 'recipe-body__time-div' },
-	    _react2.default.createElement('i', { className: 'fa fa-clock-o' }),
-	    _react2.default.createElement(
-	      'span',
-	      { className: 'recipe-body__time' },
-	      printHours,
-	      printMinutes
-	    )
+	    { className: 'recipe-body__stats-div' },
+	    _react2.default.createElement('i', { className: 'recipe-body__stats-div__icon fa fa-clock-o' }),
+	    printHours,
+	    printMinutes
 	  ) : '',
 	        calDiv = calories > 0 ? _react2.default.createElement(
 	    'div',
-	    { className: 'recipe-body__calories-div' },
+	    { className: 'recipe-body__stats-div' },
 	    calories,
 	    ' cal',
 	    calories == 1 ? '' : 's'
@@ -61028,8 +61024,12 @@
 	  return _react2.default.createElement(
 	    'div',
 	    null,
-	    timeDiv,
-	    calDiv,
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'recipe-body__stats-bar' },
+	      timeDiv,
+	      calDiv
+	    ),
 	    _react2.default.createElement(
 	      'div',
 	      { className: 'recipe-body__ingredients' },
