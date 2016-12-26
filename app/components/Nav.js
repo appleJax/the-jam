@@ -102,7 +102,7 @@ const Nav = ({
           onClick={() => setSort('TIME')}
           className={sort.time ?
             'active sort fa fa-clock-o fa-lg' :
-            'sort fa fa-star fa-lg'
+            'sort fa fa-clock-o fa-lg'
           }
           ></i>
       </div>

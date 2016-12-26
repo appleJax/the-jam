@@ -44,6 +44,7 @@ const getVisibleRecipes = (recipes, visibilityFilter, sort) => {
         }
         return b.stars - a.stars
       }
+      if (timeA == 0) return 1
       return timeA - timeB
 
     } else if (sort.time && sort.stars && sort.desc) {
@@ -55,6 +56,7 @@ const getVisibleRecipes = (recipes, visibilityFilter, sort) => {
         }
         return b.stars - a.stars
       }
+      if (timeA == 0) return 1
       return timeA - timeB
 
     } else if (sort.time && sort.stars) {
@@ -63,6 +65,7 @@ const getVisibleRecipes = (recipes, visibilityFilter, sort) => {
       if (timeA == timeB) {
         return b.stars - a.stars
       }
+      if (timeA == 0) return 1
       return timeA - timeB
 
     } else if (sort.time && sort.asc) {
@@ -71,6 +74,7 @@ const getVisibleRecipes = (recipes, visibilityFilter, sort) => {
       if (timeA == timeB) {
         return a.name < b.name ? -1 : a.name > b.name ? 1 : 0
       }
+      if (timeA == 0) return 1
       return timeA - timeB
 
     } else if (sort.time && sort.desc) {
@@ -79,6 +83,7 @@ const getVisibleRecipes = (recipes, visibilityFilter, sort) => {
       if (timeA == timeB) {
         return a.name > b.name ? -1 : a.name < b.name ? 1 : 0
       }
+      if (timeA == 0) return 1
       return timeA - timeB
 
     } else if (sort.stars && sort.asc) {
@@ -107,6 +112,7 @@ const getVisibleRecipes = (recipes, visibilityFilter, sort) => {
     } else if (sort.time) {
       const timeA = a.time.hours * 60 + a.time.minutes,
             timeB = b.time.hours * 60 + b.time.minutes
+      if (timeA == 0) return 1
       return timeA - timeB
 
     } else {
