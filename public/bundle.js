@@ -61577,7 +61577,7 @@
 	          key: i,
 	          'data-value': i,
 	          onClick: e => {
-	            const val = Number(e.target.dataset.value);
+	            let val = Number(e.target.dataset.value);
 
 	            if (val == 1) {
 	              val = 0;
@@ -61612,36 +61612,48 @@
 	        { className: 'recipe-form' },
 	        _react2.default.createElement(
 	          'label',
-	          { htmlFor: 'title' },
+	          {
+	            htmlFor: 'title',
+	            className: 'recipe-form__label'
+	          },
 	          _react2.default.createElement('i', { className: 'fa fa-file-text-o' }),
 	          ' Name:'
 	        ),
 	        _react2.default.createElement('input', {
 	          type: 'text',
 	          name: 'title',
+	          className: 'recipe-form__input',
 	          value: this.state.name,
 	          onChange: e => this.setState({ name: e.target.value })
 	        }),
 	        _react2.default.createElement(
 	          'label',
-	          { htmlFor: 'tags' },
+	          {
+	            htmlFor: 'tags',
+	            className: 'recipe-form__label'
+	          },
 	          _react2.default.createElement('i', { className: 'fa fa-tags' }),
 	          ' Tags:',
 	          _react2.default.createElement(
 	            'span',
-	            { className: 'parens' },
+	            {
+	              className: 'recipe-form__label recipe-form__label--parens'
+	            },
 	            '(separated by commas)'
 	          )
 	        ),
 	        _react2.default.createElement('input', {
 	          type: 'text',
 	          name: 'tags',
+	          className: 'recipe-form__input',
 	          value: this.state.tags,
 	          onChange: e => this.setState({ tags: e.target.value })
 	        }),
 	        _react2.default.createElement(
 	          'label',
-	          null,
+	          {
+	            className: 'recipe-form__label'
+	          },
 	          _react2.default.createElement('i', { className: 'fa fa-clock-o' }),
 	          ' Time Required:'
 	        ),
@@ -61655,14 +61667,14 @@
 	              'label',
 	              {
 	                htmlFor: 'hours',
-	                className: 'recipe-form__sub-label'
+	                className: 'recipe-form__label recipe-form__label--sub'
 	              },
 	              'Hours:'
 	            ),
 	            _react2.default.createElement('input', {
 	              type: 'number',
 	              name: 'hours',
-	              className: 'recipe-form__number-input recipe-form__hours-input',
+	              className: 'recipe-form__input recipe-form__input--number recipe-form__input--hours',
 	              min: '0',
 	              value: this.state.time.hours,
 	              onChange: e => this.setState({ time: _extends({}, this.state.time, {
@@ -61677,14 +61689,14 @@
 	              'label',
 	              {
 	                htmlFor: 'minutes',
-	                className: 'recipe-form__sub-label'
+	                className: 'recipe-form__label recipe-form__label--sub'
 	              },
 	              'Minutes:'
 	            ),
 	            _react2.default.createElement('input', {
 	              type: 'number',
 	              name: 'minutes',
-	              className: 'recipe-form__number-input recipe-form__minutes-input',
+	              className: 'recipe-form__input recipe-form__input--number recipe-form__input--minutes',
 	              max: '60',
 	              min: '0',
 	              value: this.state.time.minutes,
@@ -61696,12 +61708,17 @@
 	        ),
 	        _react2.default.createElement(
 	          'label',
-	          { className: 'recipe-form__number-label', htmlFor: 'calories' },
+	          {
+	            htmlFor: 'calories',
+	            className: 'recipe-form__label recipe-form__label--number'
+	          },
 	          'Calories:',
 	          _react2.default.createElement('br', null),
 	          _react2.default.createElement(
 	            'span',
-	            { className: 'parens' },
+	            {
+	              className: 'recipe-form__label recipe-form__label--parens'
+	            },
 	            '(per serving)'
 	          )
 	        ),
@@ -61709,7 +61726,7 @@
 	          type: 'number',
 	          name: 'calories',
 	          min: '0',
-	          className: 'recipe-form__number-input recipe-form__calories-input',
+	          className: 'recipe-form__input recipe-form__input--number recipe-form__input--calories',
 	          value: this.state.calories,
 	          onChange: e => this.setState({ calories: e.target.value })
 	        }),
@@ -61718,7 +61735,10 @@
 	          { className: 'recipe-form__servings-group' },
 	          _react2.default.createElement(
 	            'label',
-	            { className: 'recipe-form__number-label', htmlFor: 'servings' },
+	            {
+	              htmlFor: 'servings',
+	              className: 'recipe-form__label recipe-form__label--number'
+	            },
 	            'Servings:'
 	          ),
 	          _react2.default.createElement('input', {
@@ -61726,7 +61746,7 @@
 	            name: 'servings',
 	            max: '999',
 	            min: '1',
-	            className: 'recipe-form__number-input',
+	            className: 'recipe-form__input recipe-form__input--number',
 	            value: this.state.servings,
 	            onChange: e => {
 	              let val = e.target.value;
@@ -61736,41 +61756,56 @@
 	        ),
 	        _react2.default.createElement(
 	          'label',
-	          { htmlFor: 'ingredients' },
+	          {
+	            htmlFor: 'ingredients',
+	            className: 'recipe-form__label'
+	          },
 	          _react2.default.createElement('i', { className: 'fa fa-shopping-basket' }),
 	          ' Ingredients:',
 	          _react2.default.createElement(
 	            'span',
-	            { className: 'parens' },
+	            {
+	              className: 'recipe-form__label recipe-form__label--parens'
+	            },
 	            '(one per line)'
 	          )
 	        ),
 	        _react2.default.createElement('textarea', {
 	          rows: '10',
 	          name: 'ingredients',
+	          className: 'recipe-form__input',
 	          value: this.state.ingredients,
 	          onChange: e => this.setState({ ingredients: e.target.value })
 	        }),
 	        _react2.default.createElement(
 	          'label',
-	          { htmlFor: 'directions' },
+	          {
+	            htmlFor: 'directions',
+	            className: 'recipe-form__label'
+	          },
 	          _react2.default.createElement('i', { className: 'fa fa-map-signs' }),
 	          ' Directions:',
 	          _react2.default.createElement(
 	            'span',
-	            { className: 'parens' },
+	            {
+	              className: 'recipe-form__label recipe-form__label--parens'
+	            },
 	            '(Separated by blank lines)'
 	          )
 	        ),
 	        _react2.default.createElement('textarea', {
 	          rows: '14',
 	          name: 'directions',
+	          className: 'recipe-form__input',
 	          value: this.state.directions,
 	          onChange: e => this.setState({ directions: e.target.value })
 	        }),
 	        _react2.default.createElement(
 	          'label',
-	          { htmlFor: 'notes' },
+	          {
+	            htmlFor: 'notes',
+	            className: 'recipe-form__label'
+	          },
 	          _react2.default.createElement('i', { className: 'fa fa-pencil' }),
 	          ' Notes:'
 	        ),
@@ -61778,22 +61813,37 @@
 	          rows: '14',
 	          name: 'notes',
 	          value: this.state.notes,
+	          className: 'recipe-form__input',
 	          onChange: e => this.setState({ notes: e.target.value })
 	        }),
 	        _react2.default.createElement(
 	          'label',
-	          { className: 'recipe-form__number-label', htmlFor: 'stars' },
+	          {
+	            htmlFor: 'stars',
+	            className: 'recipe-form__label recipe-form__label--number'
+	          },
 	          'Stars:'
 	        ),
-	        starIcons,
+	        _react2.default.createElement(
+	          'div',
+	          {
+	            className: 'recipe-form__stars'
+	          },
+	          starIcons
+	        ),
 	        _react2.default.createElement(
 	          'label',
-	          { htmlFor: 'author' },
+	          {
+	            htmlFor: 'author',
+	            className: 'recipe-form__label'
+	          },
 	          _react2.default.createElement('i', { className: 'fa fa-magic' }),
 	          ' Author:',
 	          _react2.default.createElement(
 	            'span',
-	            { className: 'parens' },
+	            {
+	              className: 'recipe-form__label recipe-form__label--parens'
+	            },
 	            '(not your recipe? give credit here)'
 	          )
 	        ),
@@ -61801,6 +61851,7 @@
 	          type: 'text',
 	          name: 'time',
 	          value: this.state.author,
+	          className: 'recipe-form__input',
 	          onChange: e => this.setState({ author: e.target.value })
 	        }),
 	        _react2.default.createElement(

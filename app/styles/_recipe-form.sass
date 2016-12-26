@@ -10,36 +10,59 @@
 .recipe-form
   margin: 20px 0 15px 0
   padding: 5px 15px 20px 15px
-  label
-    font-family: 'Architects Daughter', 'sans-serif'
-    font-size: 26px
-    font-weight: bold
-  input, textarea
-    background: lighten($nav-bg, 45%)
-    border: none
-    border-radius: 5px
-    box-shadow: 0 0 2px #555
-    color: #333
-    display: block
-    font-size: 20px
-    margin: 5px auto 25px
-    padding: 5px
-    resize: vertical
-    width: 95%
   textarea[name='directions']
     margin-bottom: 30px
-  .recipe-form__number-input
-    display: inline
-    margin-left: 0
-    width: 50px
 
 .recipe-form__title
   @include dialogue-header
   font-family: 'Architects Daughter', 'sans-serif'
   font-size: 30px
 
-.recipe-form__sub-label
+.recipe-form__label
+  font-family: 'Architects Daughter', 'sans-serif'
+  font-size: 26px
+  font-weight: bold
+
+.recipe-form__label--sub
   font-size: 24px
+
+.recipe-form__label--number
+  float: left
+  margin: 2px 15px 0 0
+
+.recipe-form__label--parens
+  display: block
+  font-family: 'Architects Daughter', 'sans-serif'
+  font-size: 18px
+
+.recipe-form__input
+  background: lighten($nav-bg, 45%)
+  border: none
+  border-radius: 5px
+  box-shadow: 0 0 2px #555
+  color: #333
+  display: block
+  font-size: 20px
+  margin: 5px auto 25px
+  padding: 5px
+  resize: vertical
+  width: 95%
+
+.recipe-form__input--number
+  display: inline
+  margin-left: 0
+  width: 50px
+
+.recipe-form__input--hours
+  margin: 5px 20px 5px 15px
+
+.recipe-form__input--minutes
+  width: 38px
+
+.recipe-form__input--calories
+  display: block
+  margin-top: 15px
+  width: 120px
 
 .recipe-form__time-bar
   align-items: baseline
@@ -49,29 +72,12 @@
 .recipe-form__time-div
   white-space: nowrap
 
-.recipe-form__hours-input
-  margin: 5px 20px 5px 15px
-
-.recipe-form__minutes-input
-  width: 38px
-
-.recipe-form__calories-input
-  display: block
-  margin-top: 15px
-  width: 120px
-
 .recipe-form__servings-group
   display: inline
   margin: 25px 0
 
-.recipe-form__number-label
-  float: left
-  margin: 2px 15px 0 0
-
-.parens
+.recipe-form__stars
   display: block
-  font-family: 'Architects Daughter', 'sans-serif'
-  font-size: 18px
 
 .recipe-form__buttons
   display: flex

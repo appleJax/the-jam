@@ -2755,28 +2755,8 @@ footer {
 .recipe-form {
   margin: 20px 0 15px 0;
   padding: 5px 15px 20px 15px; }
-  .recipe-form label {
-    font-family: 'Architects Daughter', 'sans-serif';
-    font-size: 26px;
-    font-weight: bold; }
-  .recipe-form input, .recipe-form textarea {
-    background: #fffbfb;
-    border: none;
-    border-radius: 5px;
-    box-shadow: 0 0 2px #555;
-    color: #333;
-    display: block;
-    font-size: 20px;
-    margin: 5px auto 25px;
-    padding: 5px;
-    resize: vertical;
-    width: 95%; }
   .recipe-form textarea[name='directions'] {
     margin-bottom: 30px; }
-  .recipe-form .recipe-form__number-input {
-    display: inline;
-    margin-left: 0;
-    width: 50px; }
 
 .recipe-form__title {
   background: #F14723;
@@ -2788,8 +2768,51 @@ footer {
   font-family: 'Architects Daughter', 'sans-serif';
   font-size: 30px; }
 
-.recipe-form__sub-label {
+.recipe-form__label {
+  font-family: 'Architects Daughter', 'sans-serif';
+  font-size: 26px;
+  font-weight: bold; }
+
+.recipe-form__label--sub {
   font-size: 24px; }
+
+.recipe-form__label--number {
+  float: left;
+  margin: 2px 15px 0 0; }
+
+.recipe-form__label--parens {
+  display: block;
+  font-family: 'Architects Daughter', 'sans-serif';
+  font-size: 18px; }
+
+.recipe-form__input {
+  background: #fffbfb;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 0 2px #555;
+  color: #333;
+  display: block;
+  font-size: 20px;
+  margin: 5px auto 25px;
+  padding: 5px;
+  resize: vertical;
+  width: 95%; }
+
+.recipe-form__input--number {
+  display: inline;
+  margin-left: 0;
+  width: 50px; }
+
+.recipe-form__input--hours {
+  margin: 5px 20px 5px 15px; }
+
+.recipe-form__input--minutes {
+  width: 38px; }
+
+.recipe-form__input--calories {
+  display: block;
+  margin-top: 15px;
+  width: 120px; }
 
 .recipe-form__time-bar {
   align-items: baseline;
@@ -2799,29 +2822,12 @@ footer {
 .recipe-form__time-div {
   white-space: nowrap; }
 
-.recipe-form__hours-input {
-  margin: 5px 20px 5px 15px; }
-
-.recipe-form__minutes-input {
-  width: 38px; }
-
-.recipe-form__calories-input {
-  display: block;
-  margin-top: 15px;
-  width: 120px; }
-
 .recipe-form__servings-group {
   display: inline;
   margin: 25px 0; }
 
-.recipe-form__number-label {
-  float: left;
-  margin: 2px 15px 0 0; }
-
-.parens {
-  display: block;
-  font-family: 'Architects Daughter', 'sans-serif';
-  font-size: 18px; }
+.recipe-form__stars {
+  display: block; }
 
 .recipe-form__buttons {
   display: flex;
