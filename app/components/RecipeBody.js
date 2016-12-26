@@ -10,7 +10,7 @@ const RecipeBody = ({
 }) => {
   const hours = time.hours,
         minutes = time.minutes,
-        hasTime = (time.hours != 0 && time.minutes != 0),
+        hasTime = (time.hours != 0 || time.minutes != 0),
         printHours = hours > 0 ?
           (hours == 1 ? hours + ' hr ' : hours + ' hrs ') : '',
         printMinutes = minutes > 0 ?

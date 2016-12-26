@@ -286,8 +286,8 @@ export const addToUserRecipes = (user, recipe) =>
       id: Date.now()
     }
     delete newRecipe.votes
-    delete newRecipe.author
     delete newRecipe._id
+    delete newRecipe.publisher
 
     dispatch(addRecipe(newRecipe, 'private'))
 

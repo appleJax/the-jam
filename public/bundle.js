@@ -60609,8 +60609,8 @@
 	    id: Date.now()
 	  });
 	  delete newRecipe.votes;
-	  delete newRecipe.author;
 	  delete newRecipe._id;
+	  delete newRecipe.publisher;
 
 	  dispatch((0, _sync.addRecipe)(newRecipe, 'private'));
 
@@ -61003,7 +61003,7 @@
 	}) => {
 	  const hours = time.hours,
 	        minutes = time.minutes,
-	        hasTime = time.hours != 0 && time.minutes != 0,
+	        hasTime = time.hours != 0 || time.minutes != 0,
 	        printHours = hours > 0 ? hours == 1 ? hours + ' hr ' : hours + ' hrs ' : '',
 	        printMinutes = minutes > 0 ? minutes == 1 ? minutes + ' min ' : minutes + ' mins ' : '',
 	        timeDiv = hasTime ? _react2.default.createElement(
