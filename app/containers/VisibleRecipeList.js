@@ -35,7 +35,53 @@ const getVisibleRecipes = (recipes, visibilityFilter, sort) => {
       return text.match(new RegExp(regex, 'i'));
     }
   ).sort((a, b) => {
-    if (sort.stars && sort.asc) {
+    if (sort.time && sort.stars && sort.asc) {
+      const timeA = a.time.hours * 60 + a.time.minutes,
+            timeB = b.time.hours * 60 + b.time.minutes
+      if (timeA == timeB) {
+        if (a.stars == b.stars) {
+          return a.name < b.name ? -1 : a.name > b.name ? 1 : 0
+        }
+        return b.stars - a.stars
+      }
+      return timeA - timeB
+
+    } else if (sort.time && sort.stars && sort.desc) {
+      const timeA = a.time.hours * 60 + a.time.minutes,
+            timeB = b.time.hours * 60 + b.time.minutes
+      if (timeA == timeB) {
+        if (a.stars == b.stars) {
+          return a.name > b.name ? -1 : a.name < b.name ? 1 : 0
+        }
+        return b.stars - a.stars
+      }
+      return timeA - timeB
+
+    } else if (sort.time && sort.stars) {
+      const timeA = a.time.hours * 60 + a.time.minutes,
+            timeB = b.time.hours * 60 + b.time.minutes
+      if (timeA == timeB) {
+        return b.stars - a.stars
+      }
+      return timeA - timeB
+
+    } else if (sort.time && sort.asc) {
+      const timeA = a.time.hours * 60 + a.time.minutes,
+            timeB = b.time.hours * 60 + b.time.minutes
+      if (timeA == timeB) {
+        return a.name < b.name ? -1 : a.name > b.name ? 1 : 0
+      }
+      return timeA - timeB
+
+    } else if (sort.time && sort.desc) {
+      const timeA = a.time.hours * 60 + a.time.minutes,
+            timeB = b.time.hours * 60 + b.time.minutes
+      if (timeA == timeB) {
+        return a.name > b.name ? -1 : a.name < b.name ? 1 : 0
+      }
+      return timeA - timeB
+
+    } else if (sort.stars && sort.asc) {
       if (a.stars == b.stars) {
         return a.name < b.name ? -1 : a.name > b.name ? 1 : 0
       }
@@ -57,6 +103,11 @@ const getVisibleRecipes = (recipes, visibilityFilter, sort) => {
 
     } else if (sort.stars) {
       return b.stars - a.stars
+
+    } else if (sort.time) {
+      const timeA = a.time.hours * 60 + a.time.minutes,
+            timeB = b.time.hours * 60 + b.time.minutes
+      return timeA - timeB
 
     } else {
       return 0

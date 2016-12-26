@@ -59958,6 +59958,7 @@
 	var _sync = __webpack_require__(697);
 
 	const sort = (state = {
+	  time: false,
 	  stars: false,
 	  asc: false,
 	  desc: false
@@ -59965,6 +59966,10 @@
 	  switch (action.type) {
 	    case _sync.SET_SORT:
 	      switch (action.sortBy) {
+	        case 'TIME':
+	          return _extends({}, state, {
+	            time: !state.time
+	          });
 	        case 'STARS':
 	          return _extends({}, state, {
 	            stars: !state.stars
@@ -60251,6 +60256,10 @@
 	      _react2.default.createElement('i', {
 	        onClick: () => setSort('STARS'),
 	        className: sort.stars ? 'active sort fa fa-star fa-lg' : 'sort fa fa-star fa-lg'
+	      }),
+	      _react2.default.createElement('i', {
+	        onClick: () => setSort('TIME'),
+	        className: sort.time ? 'active sort fa fa-clock-o fa-lg' : 'sort fa fa-star fa-lg'
 	      })
 	    ),
 	    visibilityFilter.active == 'private' && _react2.default.createElement(
@@ -60298,7 +60307,48 @@
 
 	    return text.match(new RegExp(regex, 'i'));
 	  }).sort((a, b) => {
-	    if (sort.stars && sort.asc) {
+	    if (sort.time && sort.stars && sort.asc) {
+	      const timeA = a.time.hours * 60 + a.time.minutes,
+	            timeB = b.time.hours * 60 + b.time.minutes;
+	      if (timeA == timeB) {
+	        if (a.stars == b.stars) {
+	          return a.name < b.name ? -1 : a.name > b.name ? 1 : 0;
+	        }
+	        return b.stars - a.stars;
+	      }
+	      return timeA - timeB;
+	    } else if (sort.time && sort.stars && sort.desc) {
+	      const timeA = a.time.hours * 60 + a.time.minutes,
+	            timeB = b.time.hours * 60 + b.time.minutes;
+	      if (timeA == timeB) {
+	        if (a.stars == b.stars) {
+	          return a.name > b.name ? -1 : a.name < b.name ? 1 : 0;
+	        }
+	        return b.stars - a.stars;
+	      }
+	      return timeA - timeB;
+	    } else if (sort.time && sort.stars) {
+	      const timeA = a.time.hours * 60 + a.time.minutes,
+	            timeB = b.time.hours * 60 + b.time.minutes;
+	      if (timeA == timeB) {
+	        return b.stars - a.stars;
+	      }
+	      return timeA - timeB;
+	    } else if (sort.time && sort.asc) {
+	      const timeA = a.time.hours * 60 + a.time.minutes,
+	            timeB = b.time.hours * 60 + b.time.minutes;
+	      if (timeA == timeB) {
+	        return a.name < b.name ? -1 : a.name > b.name ? 1 : 0;
+	      }
+	      return timeA - timeB;
+	    } else if (sort.time && sort.desc) {
+	      const timeA = a.time.hours * 60 + a.time.minutes,
+	            timeB = b.time.hours * 60 + b.time.minutes;
+	      if (timeA == timeB) {
+	        return a.name > b.name ? -1 : a.name < b.name ? 1 : 0;
+	      }
+	      return timeA - timeB;
+	    } else if (sort.stars && sort.asc) {
 	      if (a.stars == b.stars) {
 	        return a.name < b.name ? -1 : a.name > b.name ? 1 : 0;
 	      }
@@ -60316,6 +60366,10 @@
 	      return a.name > b.name ? -1 : 1;
 	    } else if (sort.stars) {
 	      return b.stars - a.stars;
+	    } else if (sort.time) {
+	      const timeA = a.time.hours * 60 + a.time.minutes,
+	            timeB = b.time.hours * 60 + b.time.minutes;
+	      return timeA - timeB;
 	    } else {
 	      return 0;
 	    }

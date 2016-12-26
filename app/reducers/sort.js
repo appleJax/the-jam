@@ -2,6 +2,7 @@ import { SET_SORT } from '../actions/sync'
 
 const sort = (
   state = {
+    time: false,
     stars: false,
     asc: false,
     desc: false
@@ -11,6 +12,11 @@ const sort = (
   switch (action.type) {
     case SET_SORT:
       switch (action.sortBy) {
+        case 'TIME':
+          return {
+            ...state,
+            time: !state.time
+          }
         case 'STARS':
           return {
             ...state,

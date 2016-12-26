@@ -98,6 +98,13 @@ const Nav = ({
             'sort fa fa-star fa-lg'
           }
           ></i>
+        <i
+          onClick={() => setSort('TIME')}
+          className={sort.time ?
+            'active sort fa fa-clock-o fa-lg' :
+            'sort fa fa-star fa-lg'
+          }
+          ></i>
       </div>
       {visibilityFilter.active == 'private' &&
       <div
