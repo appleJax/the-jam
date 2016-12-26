@@ -61522,7 +61522,10 @@
 	        id: Date.now(),
 	        name: '',
 	        tags: '',
-	        time: '',
+	        time: {
+	          hours: 0,
+	          minutes: 0
+	        },
 	        calories: 0,
 	        stars: 0,
 	        servings: 1,
@@ -61541,8 +61544,6 @@
 	    recipe.name = recipe.name.trim() || 'New Recipe';
 
 	    recipe.tags = recipe.tags ? recipe.tags.split(',').map(tag => tag.toLowerCase().trim()).filter(tag => tag !== '') : [];
-
-	    recipe.time = recipe.time.trim();
 
 	    recipe.servings = recipe.servings || 1;
 
@@ -61614,23 +61615,61 @@
 	        }),
 	        _react2.default.createElement(
 	          'label',
-	          { htmlFor: 'time' },
+	          null,
 	          _react2.default.createElement('i', { className: 'fa fa-clock-o' }),
 	          ' Time Required:'
 	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'recipe-form__time-bar' },
+	          _react2.default.createElement(
+	            'label',
+	            { htmlFor: 'hours' },
+	            'Hours:'
+	          ),
+	          _react2.default.createElement('input', {
+	            type: 'number',
+	            name: 'hours',
+	            min: '0',
+	            value: this.state.time.hours,
+	            onChange: e => this.setState({ time: _extends({}, this.state.time, {
+	                hours: e.target.value
+	              }) })
+	          }),
+	          _react2.default.createElement(
+	            'label',
+	            { htmlFor: 'minutes' },
+	            'Minutes:'
+	          ),
+	          _react2.default.createElement('input', {
+	            type: 'number',
+	            name: 'minutes',
+	            min: '0',
+	            value: this.state.time.minutes,
+	            onChange: e => this.setState({ time: _extends({}, this.state.time, {
+	                minutes: e.target.value
+	              }) })
+	          })
+	        ),
+	        _react2.default.createElement(
+	          'label',
+	          { className: 'recipe-form__number-label', htmlFor: 'calories' },
+	          'Calories:'
+	        ),
 	        _react2.default.createElement('input', {
-	          type: 'text',
-	          name: 'time',
+	          type: 'number',
+	          name: 'calories',
+	          min: '0',
 	          className: 'recipe-form__number-input',
-	          value: this.state.time,
-	          onChange: e => this.setState({ time: e.target.value })
+	          value: this.state.calories,
+	          onChange: e => this.setState({ calories: e.target.value })
 	        }),
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'recipe-form__servings-group' },
 	          _react2.default.createElement(
 	            'label',
-	            { className: 'recipe-form__servings-label', htmlFor: 'servings' },
+	            { className: 'recipe-form__number-label', htmlFor: 'servings' },
 	            'Servings:'
 	          ),
 	          _react2.default.createElement('input', {
@@ -61638,7 +61677,7 @@
 	            name: 'servings',
 	            max: '999',
 	            min: '1',
-	            className: 'recipe-form__servings-input',
+	            className: 'recipe-form__number-input',
 	            value: this.state.servings,
 	            onChange: e => {
 	              let val = e.target.value;
@@ -61691,6 +61730,29 @@
 	          name: 'notes',
 	          value: this.state.notes,
 	          onChange: e => this.setState({ notes: e.target.value })
+	        }),
+	        _react2.default.createElement(
+	          'label',
+	          { className: 'recipe-form__number-label', htmlFor: 'stars' },
+	          'Stars:'
+	        ),
+	        _react2.default.createElement('input', {
+	          type: 'number',
+	          name: 'stars',
+	          max: '5',
+	          min: '0',
+	          step: '1',
+	          className: 'recipe-form__number-input',
+	          value: this.state.stars,
+	          onChange: e => {
+	            let val = e.target.value;
+	            if (val < 0) {
+	              val = 0;
+	            } else if (val > 5) {
+	              val = 5;
+	            }
+	            this.setState({ stars: val });
+	          }
 	        }),
 	        _react2.default.createElement(
 	          'label',

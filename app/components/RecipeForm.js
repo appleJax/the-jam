@@ -33,7 +33,10 @@ class RecipeForm extends React.Component {
         id: Date.now(),
         name: '',
         tags: '',
-        time: '',
+        time: {
+          hours: 0,
+          minutes: 0
+        },
         calories: 0,
         stars: 0,
         servings: 1,
@@ -57,8 +60,6 @@ class RecipeForm extends React.Component {
           tag.toLowerCase()
              .trim())
         .filter(tag => tag !== '') : []
-
-    recipe.time = recipe.time.trim()
 
     recipe.servings = recipe.servings || 1
 
@@ -128,19 +129,58 @@ class RecipeForm extends React.Component {
             onChange={(e) => this.setState({tags: e.target.value})}
           />
 
-          <label htmlFor='time'>
+          <label>
             <i className='fa fa-clock-o'></i> Time Required:
           </label>
+          <div className='recipe-form__time-bar'>
+            <label htmlFor='hours'>
+              Hours:
+            </label>
+            <input
+              type='number'
+              name='hours'
+              min='0'
+              value={this.state.time.hours}
+              onChange={(e) =>
+                this.setState(
+                  {time: {
+                    ...this.state.time,
+                    hours: e.target.value
+                  }}
+                )}
+            />
+            <label htmlFor='minutes'>
+              Minutes:
+            </label>
+            <input
+              type='number'
+              name='minutes'
+              min='0'
+              value={this.state.time.minutes}
+              onChange={(e) =>
+                this.setState(
+                  {time: {
+                    ...this.state.time,
+                    minutes: e.target.value
+                  }}
+                )}
+            />
+          </div>
+
+          <label className='recipe-form__number-label' htmlFor='calories'>
+            Calories:
+          </label>
           <input
-            type='text'
-            name='time'
+            type='number'
+            name='calories'
+            min='0'
             className='recipe-form__number-input'
-            value={this.state.time}
-            onChange={(e) => this.setState({time: e.target.value})}
+            value={this.state.calories}
+            onChange={(e) => this.setState({calories: e.target.value})}
           />
 
           <div className='recipe-form__servings-group'>
-            <label className='recipe-form__servings-label' htmlFor='servings'>
+            <label className='recipe-form__number-label' htmlFor='servings'>
               Servings:
             </label>
             <input
@@ -148,7 +188,7 @@ class RecipeForm extends React.Component {
               name='servings'
               max='999'
               min='1'
-              className='recipe-form__servings-input'
+              className='recipe-form__number-input'
               value={this.state.servings}
               onChange={(e) => {
                 let val = e.target.value;
@@ -187,6 +227,28 @@ class RecipeForm extends React.Component {
             name='notes'
             value={this.state.notes}
             onChange={(e) => this.setState({notes: e.target.value})}
+          />
+
+          <label className='recipe-form__number-label' htmlFor='stars'>
+            Stars:
+          </label>
+          <input
+            type='number'
+            name='stars'
+            max='5'
+            min='0'
+            step='1'
+            className='recipe-form__number-input'
+            value={this.state.stars}
+            onChange={(e) => {
+              let val = e.target.value
+              if (val < 0) {
+                val = 0
+              } else if (val > 5) {
+                val = 5
+              }
+              this.setState({stars: val})
+            }}
           />
 
           <label htmlFor='author'>

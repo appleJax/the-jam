@@ -2773,6 +2773,9 @@ footer {
     width: 95%; }
   .recipe-form textarea[name='directions'] {
     margin-bottom: 30px; }
+  .recipe-form .recipe-form__number-input {
+    margin-left: 0;
+    max-width: 50px; }
 
 .recipe-form__title {
   background: #F14723;
@@ -2784,24 +2787,23 @@ footer {
   font-family: 'Architects Daughter', 'sans-serif';
   font-size: 30px; }
 
+.recipe-form__time-bar {
+  align-items: center;
+  display: flex;
+  justify-content: flex-start; }
+
 .recipe-form__servings-group {
   display: inline;
   margin: 25px 0; }
 
-.recipe-form__servings-label {
+.recipe-form__number-label {
   float: left;
   margin: 2px 15px 0 0; }
-
-.recipe-form__number-input {
-  margin-left: 0; }
 
 .parens {
   display: block;
   font-family: 'Architects Daughter', 'sans-serif';
   font-size: 18px; }
-
-.recipe-form__servings-input {
-  max-width: 50px; }
 
 .recipe-form__buttons {
   display: flex;
