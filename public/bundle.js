@@ -61678,9 +61678,9 @@
 	              min: '0',
 	              value: this.state.time.hours,
 	              onKeyDown: e => {
-	                // Disable decimals
-	                console.log(e.which);
-	                if (e.which == 190) e.preventDefault();
+	                // Disable decimals and 'e' key
+	                // Disable leading zeros
+	                if (e.which == 190 || e.which == 69 || this.state.time.hours == 0 && e.which == 48) e.preventDefault();
 	              },
 	              onChange: e => this.setState({ time: _extends({}, this.state.time, {
 	                  hours: e.target.value
