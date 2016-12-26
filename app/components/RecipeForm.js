@@ -97,10 +97,45 @@ class RecipeForm extends React.Component {
       closeModal
     } = this.props
 
+    const starIcons = []
+
+    for (let i = 1; i <= 5; i++) {
+      if (i <= this.state.stars) {
+        starIcons.push(
+          <i className='fa fa-star fa-lg'
+            key={i}
+            data-value={i}
+            onClick={(e) => {
+              const val = Number(e.target.dataset.value)
+
+              if (val == 1) {
+                val = 0
+
+              }
+
+              this.setState({stars: val})
+            }}
+          >
+          </i>
+        )
+      } else {
+        starIcons.push(
+          <i className='fa fa-star-o fa-lg'
+            key={i}
+            data-value={i}
+            onClick={(e) =>
+              this.setState({stars: Number(e.target.dataset.value)})
+            }
+          >
+          </i>
+        )
+      }
+    }
+
     return (
       <div
         className='recipe-form--container'
-        onClick={e =>
+        onClick={(e) =>
           e.stopPropagation()
         }
       >
@@ -133,48 +168,62 @@ class RecipeForm extends React.Component {
             <i className='fa fa-clock-o'></i> Time Required:
           </label>
           <div className='recipe-form__time-bar'>
-            <label htmlFor='hours'>
-              Hours:
-            </label>
-            <input
-              type='number'
-              name='hours'
-              min='0'
-              value={this.state.time.hours}
-              onChange={(e) =>
-                this.setState(
-                  {time: {
-                    ...this.state.time,
-                    hours: e.target.value
-                  }}
-                )}
-            />
-            <label htmlFor='minutes'>
-              Minutes:
-            </label>
-            <input
-              type='number'
-              name='minutes'
-              min='0'
-              value={this.state.time.minutes}
-              onChange={(e) =>
-                this.setState(
-                  {time: {
-                    ...this.state.time,
-                    minutes: e.target.value
-                  }}
-                )}
-            />
+            <div classNam='recipe-form__time-div'>
+              <label
+                htmlFor='hours'
+                className='recipe-form__sub-label'
+              >
+                Hours:
+              </label>
+              <input
+                type='number'
+                name='hours'
+                className='recipe-form__number-input recipe-form__hours-input'
+                min='0'
+                value={this.state.time.hours}
+                onChange={(e) =>
+                  this.setState(
+                    {time: {
+                      ...this.state.time,
+                      hours: e.target.value
+                    }}
+                  )}
+              />
+            </div>
+            <div classNam='recipe-form__time-div'>
+              <label
+                htmlFor='minutes'
+                className='recipe-form__sub-label'
+              >
+                Minutes:
+              </label>
+              <input
+                type='number'
+                name='minutes'
+                className='recipe-form__number-input recipe-form__minutes-input'
+                max='60'
+                min='0'
+                value={this.state.time.minutes}
+                onChange={(e) =>
+                  this.setState(
+                    {time: {
+                      ...this.state.time,
+                      minutes: e.target.value
+                    }}
+                  )}
+              />
+            </div>
           </div>
 
           <label className='recipe-form__number-label' htmlFor='calories'>
-            Calories:
+            Calories:<br />
+            <span className='parens'>(per serving)</span>
           </label>
           <input
             type='number'
             name='calories'
             min='0'
-            className='recipe-form__number-input'
+            className='recipe-form__number-input recipe-form__calories-input'
             value={this.state.calories}
             onChange={(e) => this.setState({calories: e.target.value})}
           />
@@ -232,24 +281,7 @@ class RecipeForm extends React.Component {
           <label className='recipe-form__number-label' htmlFor='stars'>
             Stars:
           </label>
-          <input
-            type='number'
-            name='stars'
-            max='5'
-            min='0'
-            step='1'
-            className='recipe-form__number-input'
-            value={this.state.stars}
-            onChange={(e) => {
-              let val = e.target.value
-              if (val < 0) {
-                val = 0
-              } else if (val > 5) {
-                val = 5
-              }
-              this.setState({stars: val})
-            }}
-          />
+          {starIcons}
 
           <label htmlFor='author'>
             <i className='fa fa-magic'></i> Author:

@@ -61569,6 +61569,32 @@
 	      closeModal
 	    } = this.props;
 
+	    const starIcons = [];
+
+	    for (let i = 1; i <= 5; i++) {
+	      if (i <= this.state.stars) {
+	        starIcons.push(_react2.default.createElement('i', { className: 'fa fa-star fa-lg',
+	          key: i,
+	          'data-value': i,
+	          onClick: e => {
+	            const val = Number(e.target.dataset.value);
+
+	            if (val == 1) {
+	              val = 0;
+	            }
+
+	            this.setState({ stars: val });
+	          }
+	        }));
+	      } else {
+	        starIcons.push(_react2.default.createElement('i', { className: 'fa fa-star-o fa-lg',
+	          key: i,
+	          'data-value': i,
+	          onClick: e => this.setState({ stars: Number(e.target.dataset.value) })
+	        }));
+	      }
+	    }
+
 	    return _react2.default.createElement(
 	      'div',
 	      {
@@ -61623,44 +61649,67 @@
 	          'div',
 	          { className: 'recipe-form__time-bar' },
 	          _react2.default.createElement(
-	            'label',
-	            { htmlFor: 'hours' },
-	            'Hours:'
+	            'div',
+	            { classNam: 'recipe-form__time-div' },
+	            _react2.default.createElement(
+	              'label',
+	              {
+	                htmlFor: 'hours',
+	                className: 'recipe-form__sub-label'
+	              },
+	              'Hours:'
+	            ),
+	            _react2.default.createElement('input', {
+	              type: 'number',
+	              name: 'hours',
+	              className: 'recipe-form__number-input recipe-form__hours-input',
+	              min: '0',
+	              value: this.state.time.hours,
+	              onChange: e => this.setState({ time: _extends({}, this.state.time, {
+	                  hours: e.target.value
+	                }) })
+	            })
 	          ),
-	          _react2.default.createElement('input', {
-	            type: 'number',
-	            name: 'hours',
-	            min: '0',
-	            value: this.state.time.hours,
-	            onChange: e => this.setState({ time: _extends({}, this.state.time, {
-	                hours: e.target.value
-	              }) })
-	          }),
 	          _react2.default.createElement(
-	            'label',
-	            { htmlFor: 'minutes' },
-	            'Minutes:'
-	          ),
-	          _react2.default.createElement('input', {
-	            type: 'number',
-	            name: 'minutes',
-	            min: '0',
-	            value: this.state.time.minutes,
-	            onChange: e => this.setState({ time: _extends({}, this.state.time, {
-	                minutes: e.target.value
-	              }) })
-	          })
+	            'div',
+	            { classNam: 'recipe-form__time-div' },
+	            _react2.default.createElement(
+	              'label',
+	              {
+	                htmlFor: 'minutes',
+	                className: 'recipe-form__sub-label'
+	              },
+	              'Minutes:'
+	            ),
+	            _react2.default.createElement('input', {
+	              type: 'number',
+	              name: 'minutes',
+	              className: 'recipe-form__number-input recipe-form__minutes-input',
+	              max: '60',
+	              min: '0',
+	              value: this.state.time.minutes,
+	              onChange: e => this.setState({ time: _extends({}, this.state.time, {
+	                  minutes: e.target.value
+	                }) })
+	            })
+	          )
 	        ),
 	        _react2.default.createElement(
 	          'label',
 	          { className: 'recipe-form__number-label', htmlFor: 'calories' },
-	          'Calories:'
+	          'Calories:',
+	          _react2.default.createElement('br', null),
+	          _react2.default.createElement(
+	            'span',
+	            { className: 'parens' },
+	            '(per serving)'
+	          )
 	        ),
 	        _react2.default.createElement('input', {
 	          type: 'number',
 	          name: 'calories',
 	          min: '0',
-	          className: 'recipe-form__number-input',
+	          className: 'recipe-form__number-input recipe-form__calories-input',
 	          value: this.state.calories,
 	          onChange: e => this.setState({ calories: e.target.value })
 	        }),
@@ -61736,24 +61785,7 @@
 	          { className: 'recipe-form__number-label', htmlFor: 'stars' },
 	          'Stars:'
 	        ),
-	        _react2.default.createElement('input', {
-	          type: 'number',
-	          name: 'stars',
-	          max: '5',
-	          min: '0',
-	          step: '1',
-	          className: 'recipe-form__number-input',
-	          value: this.state.stars,
-	          onChange: e => {
-	            let val = e.target.value;
-	            if (val < 0) {
-	              val = 0;
-	            } else if (val > 5) {
-	              val = 5;
-	            }
-	            this.setState({ stars: val });
-	          }
-	        }),
+	        starIcons,
 	        _react2.default.createElement(
 	          'label',
 	          { htmlFor: 'author' },
