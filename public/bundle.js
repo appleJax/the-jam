@@ -61677,18 +61677,15 @@
 	              className: 'recipe-form__input recipe-form__input--number recipe-form__input--hours',
 	              min: '0',
 	              value: this.state.time.hours,
-	              onChange: e => {
+	              onKeyDown: e => {
 	                // Disable decimals
 	                console.log(e.which);
-	                if (e.which == 190) {
-	                  e.preventDefault();
-	                  return;
-	                }
-
-	                this.setState({ time: _extends({}, this.state.time, {
-	                    hours: e.target.value
-	                  }) });
-	              }
+	                if (e.which == 190) e.preventDefault();
+	              },
+	              onChange: e => this.setState({ time: _extends({}, this.state.time, {
+	                  hours: e.target.value
+	                })
+	              })
 	            })
 	          ),
 	          _react2.default.createElement(
