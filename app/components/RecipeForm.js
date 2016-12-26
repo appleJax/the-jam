@@ -195,30 +195,22 @@ class RecipeForm extends React.Component {
                 className='recipe-form__input recipe-form__input--number recipe-form__input--hours'
                 min='0'
                 value={this.state.time.hours}
-                onBlur={(e) => {
-                  if (e.target.value == '')
-                    this.setState(
-                      {time: {
-                        ...this.state.time,
-                        hours: 0
-                      }
-                    })
-                }}
                 onKeyDown={(e) => {
                   // Disable decimals and 'e' key
                   // Disable leading zeros
-                  if (e.which == 190 || e.which == 69 ||
-                     (this.state.time.hours == 0 && e.which == 48)
-                  ) e.preventDefault()
+                  if (e.which == 190 || e.which == 69) e.preventDefault()
                 }}
-                onChange={(e) =>
+                onChange={(e) => {
+                  let val = Number(e.target.value)
+                  if (val < 1) val = 0
+
                   this.setState(
                     {time: {
                       ...this.state.time,
-                      hours: e.target.value
+                      hours: val
                     }
                   })
-                }
+                }}
               />
             </div>
             <div className='recipe-form__time-div'>
