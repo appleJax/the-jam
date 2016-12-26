@@ -2799,14 +2799,18 @@ footer {
   width: 95%; }
 
 .recipe-form__input--number {
-  display: inline;
   margin-left: 0;
   width: 50px; }
+
+.recipe-form__input--hours,
+.recipe-form__input--minutes {
+  display: inline; }
 
 .recipe-form__input--hours {
   margin: 5px 20px 5px 15px; }
 
 .recipe-form__input--minutes {
+  margin-left: 15px;
   width: 38px; }
 
 .recipe-form__input--calories {
@@ -2827,7 +2831,9 @@ footer {
   margin: 25px 0; }
 
 .recipe-form__stars {
-  display: block; }
+  align-items: center;
+  display: flex;
+  justify-content: flex-start; }
 
 .recipe-form__buttons {
   display: flex;

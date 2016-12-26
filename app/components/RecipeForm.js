@@ -182,7 +182,7 @@ class RecipeForm extends React.Component {
             <i className='fa fa-clock-o'></i> Time Required:
           </label>
           <div className='recipe-form__time-bar'>
-            <div classNam='recipe-form__time-div'>
+            <div className='recipe-form__time-div'>
               <label
                 htmlFor='hours'
                 className='recipe-form__label recipe-form__label--sub'
@@ -322,16 +322,16 @@ class RecipeForm extends React.Component {
             onChange={(e) => this.setState({notes: e.target.value})}
           />
 
-          <label
-            htmlFor='stars'
-            className='recipe-form__label recipe-form__label--number'
-          >
-            Stars:
-          </label>
           <div
             className='recipe-form__stars'
           >
-            {starIcons}
+            <label
+              htmlFor='stars'
+              className='recipe-form__label recipe-form__label--number'
+            >
+              Stars:
+            </label>
+              {starIcons}
           </div>
 
           <label

@@ -61662,7 +61662,7 @@
 	          { className: 'recipe-form__time-bar' },
 	          _react2.default.createElement(
 	            'div',
-	            { classNam: 'recipe-form__time-div' },
+	            { className: 'recipe-form__time-div' },
 	            _react2.default.createElement(
 	              'label',
 	              {
@@ -61817,18 +61817,18 @@
 	          onChange: e => this.setState({ notes: e.target.value })
 	        }),
 	        _react2.default.createElement(
-	          'label',
-	          {
-	            htmlFor: 'stars',
-	            className: 'recipe-form__label recipe-form__label--number'
-	          },
-	          'Stars:'
-	        ),
-	        _react2.default.createElement(
 	          'div',
 	          {
 	            className: 'recipe-form__stars'
 	          },
+	          _react2.default.createElement(
+	            'label',
+	            {
+	              htmlFor: 'stars',
+	              className: 'recipe-form__label recipe-form__label--number'
+	            },
+	            'Stars:'
+	          ),
 	          starIcons
 	        ),
 	        _react2.default.createElement(
