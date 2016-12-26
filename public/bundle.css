@@ -2461,7 +2461,7 @@ nav {
     border-radius: 5px;
     color: white;
     cursor: pointer;
-    margin-right: 30px;
+    margin-right: 15px;
     padding: 12px; }
     .nav__controls .sort:hover {
       background: rgba(255, 255, 255, 0.5);
@@ -2484,7 +2484,6 @@ nav {
   align-items: center;
   justify-content: center;
   height: 40px;
-  margin-left: 8px;
   text-shadow: 1px 1px #bbb;
   width: 40px; }
   .nav__add-recipe:hover {
