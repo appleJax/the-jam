@@ -61821,7 +61821,7 @@
 	          'label',
 	          {
 	            htmlFor: 'calories',
-	            className: 'recipe-form__label recipe-form__label--number'
+	            className: 'recipe-form__label recipe-form__label--number recipe-form__label--calories'
 	          },
 	          'Calories:',
 	          _react2.default.createElement('br', null),

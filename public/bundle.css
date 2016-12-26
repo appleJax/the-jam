@@ -2783,7 +2783,10 @@ footer {
 
 .recipe-form__label--number {
   float: left;
-  margin: 2px 15px 0 0; }
+  margin: 2px 18px 0 0; }
+
+.recipe-form__label--calories {
+  margin-right: 15px; }
 
 .recipe-form__label--parens {
   display: block;
@@ -2826,6 +2829,7 @@ footer {
 .recipe-form__time-bar {
   align-items: baseline;
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
   justify-content: flex-start;
   padding-left: 20px; }
