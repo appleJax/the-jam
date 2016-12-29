@@ -61020,7 +61020,7 @@
 	      _react2.default.createElement(
 	        'div',
 	        { className: 'recipe__credits__author' },
-	        _react2.default.createElement('i', { className: 'fa fa-id-card-o' }),
+	        _react2.default.createElement('i', { className: 'recipe__credits__icon fa fa-id-card-o' }),
 	        'Recipe By: ',
 	        _react2.default.createElement(
 	          'span',
@@ -61035,7 +61035,7 @@
 	          className: 'recipe__delete-button',
 	          onClick: confirmDelete
 	        },
-	        _react2.default.createElement('i', { className: 'fa fa-times' })
+	        _react2.default.createElement('i', { className: 'fa fa-times fa-lg' })
 	      )
 	    )
 	  );
@@ -61326,7 +61326,7 @@
 	      _react2.default.createElement(
 	        'div',
 	        { className: 'recipe__credits__author' },
-	        _react2.default.createElement('i', { className: 'fa fa-id-card-o' }),
+	        _react2.default.createElement('i', { className: 'recipe__credits__icon fa fa-id-card-o' }),
 	        'Recipe By: ',
 	        _react2.default.createElement(
 	          'span',
@@ -61337,7 +61337,7 @@
 	      _react2.default.createElement(
 	        'div',
 	        { className: 'recipe__credits__publisher' },
-	        _react2.default.createElement('i', { className: 'fa fa-newspaper-o' }),
+	        _react2.default.createElement('i', { className: 'recipe__credits__icon fa fa-newspaper-o' }),
 	        'Published By: ',
 	        _react2.default.createElement(
 	          'span',

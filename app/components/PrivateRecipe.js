@@ -164,7 +164,7 @@ const PrivateRecipe = ({
       {showDetails &&
       <div className='recipe__credits recipe__credits--private'>
         <div className='recipe__credits__author'>
-          <i className='fa fa-id-card-o'></i>
+          <i className='recipe__credits__icon fa fa-id-card-o'></i>
           Recipe By: <span className='credit-name'>{author}</span>
         </div>
         <div className='spacer'></div>
@@ -172,7 +172,7 @@ const PrivateRecipe = ({
           className='recipe__delete-button'
           onClick={confirmDelete}
         >
-          <i className='fa fa-times'></i>
+          <i className='fa fa-times fa-lg'></i>
         </div>
       </div>
       }

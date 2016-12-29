@@ -33,8 +33,6 @@
   justify-content: center
   width: 44px
   @include hover-change(white)
-  i
-    padding-left: 8px
 
 .recipe__name
   text-shadow: 1px 1px white
@@ -191,10 +189,11 @@ h3
   font-size: 16px
   margin: 25px -15px -15px -15px
   padding: 8px 15px
-  i
-    margin-right: 8px
   .credit-name
     margin-left: 5px
+
+.recipe__credits__icon
+  margin-right: 8px
 
 .recipe__credits--public
   flex-wrap: wrap
@@ -210,10 +209,10 @@ h3
   white-space: nowrap
 
 .recipe__delete-button
-  background: lighten($nav-bg, 10%)
+  background: lighten($nav-bg, 40%)
   border-radius: 50%
   box-shadow: 0 0 3px darken($nav-bg, 10%)
-  color: lighten($nav-bg, 35%)
+  color: $nav-bg
   cursor: pointer
   display: flex
   align-items: center

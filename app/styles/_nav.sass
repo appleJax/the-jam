@@ -53,6 +53,8 @@ nav
 
 .nav__searchbox
   border-radius: 5px
+  box-shadow: 0 0 15px $purple
+  color: $purple
   font-size: 28px
   margin: 0 -3px 0 -28px
   max-width: 720px
@@ -60,8 +62,9 @@ nav
   position: static
   width: 102%
   z-index: 0.5
+  &:empty
+    box-shadow: none
   &:focus
-    background: lighten($nav-bg, 40%)
     outline: none
 
 .fa-search

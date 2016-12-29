@@ -2403,6 +2403,8 @@ nav {
 
 .nav__searchbox {
   border-radius: 5px;
+  box-shadow: 0 0 15px #9043b3;
+  color: #9043b3;
   font-size: 28px;
   margin: 0 -3px 0 -28px;
   max-width: 720px;
@@ -2410,8 +2412,9 @@ nav {
   position: static;
   width: 102%;
   z-index: 0.5; }
+  .nav__searchbox:empty {
+    box-shadow: none; }
   .nav__searchbox:focus {
-    background: #fde7e3;
     outline: none; }
 
 .fa-search {
@@ -2528,8 +2531,6 @@ nav {
   width: 44px; }
   .recipe__button--edit:hover {
     background: #f2f2f2; }
-  .recipe__button--edit i {
-    padding-left: 8px; }
 
 .recipe__name {
   text-shadow: 1px 1px white;
@@ -2687,10 +2688,11 @@ h3 {
   font-size: 16px;
   margin: 25px -15px -15px -15px;
   padding: 8px 15px; }
-  .recipe__credits i {
-    margin-right: 8px; }
   .recipe__credits .credit-name {
     margin-left: 5px; }
+
+.recipe__credits__icon {
+  margin-right: 8px; }
 
 .recipe__credits--public {
   flex-wrap: wrap;
@@ -2706,10 +2708,10 @@ h3 {
   white-space: nowrap; }
 
 .recipe__delete-button {
-  background: #f46f53;
+  background: #fde7e3;
   border-radius: 50%;
   box-shadow: 0 0 3px #d4300d;
-  color: #fcd3cb;
+  color: #F14723;
   cursor: pointer;
   display: flex;
   align-items: center;

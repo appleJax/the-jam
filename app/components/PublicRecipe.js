@@ -149,11 +149,11 @@ const PublicRecipe = ({
       {showDetails &&
       <div className='recipe__credits recipe__credits--public'>
         <div className='recipe__credits__author'>
-          <i className='fa fa-id-card-o'></i>
+          <i className='recipe__credits__icon fa fa-id-card-o'></i>
           Recipe By: <span className='credit-name'>{author}</span>
         </div>
         <div className='recipe__credits__publisher'>
-          <i className='fa fa-newspaper-o'></i>
+          <i className='recipe__credits__icon fa fa-newspaper-o'></i>
           Published By: <span className='credit-name'>{publisher}</span>
         </div>
       </div>
