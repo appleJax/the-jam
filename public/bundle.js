@@ -60973,10 +60973,10 @@
 	      _react2.default.createElement(
 	        'div',
 	        {
-	          className: 'recipe__delete-button',
-	          onClick: confirmDelete
+	          className: 'recipe__button--edit',
+	          onClick: populateModal
 	        },
-	        _react2.default.createElement('i', { className: 'fa fa-times' })
+	        _react2.default.createElement('i', { className: 'fa fa-pencil' })
 	      ),
 	      _react2.default.createElement(
 	        'h2',
@@ -61032,10 +61032,10 @@
 	      _react2.default.createElement(
 	        'div',
 	        {
-	          className: 'recipe__button--edit',
-	          onClick: populateModal
+	          className: 'recipe__delete-button',
+	          onClick: confirmDelete
 	        },
-	        _react2.default.createElement('i', { className: 'fa fa-pencil' })
+	        _react2.default.createElement('i', { className: 'fa fa-times' })
 	      )
 	    )
 	  );

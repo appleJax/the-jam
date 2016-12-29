@@ -20,23 +20,26 @@
   margin: -15px -15px 15px -15px
   padding: 15px 15px 3px 15px
 
+.recipe__button--edit
+  align-items: center
+  background: white
+  border-radius: 50%
+  box-shadow: 0 0 5px #aaa inset, 1px 1px 3px darken($nav-bg, 25%)
+  color: $nav-bg
+  cursor: pointer
+  display: flex
+  float: right
+  height: 44px
+  justify-content: center
+  width: 44px
+  @include hover-change(white)
+  i
+    padding-left: 8px
+
 .recipe__name
   text-shadow: 1px 1px white
   margin: 0 0 5px
   width: 90%
-
-.recipe__delete-button
-  background: lighten($nav-bg, 10%)
-  border-radius: 50%
-  box-shadow: 0 0 3px darken($nav-bg, 10%)
-  color: lighten($nav-bg, 35%)
-  cursor: pointer
-  display: flex
-  align-items: center
-  justify-content: center
-  float: right
-  padding: 3px 5px
-  margin-right: -7px
 
 .recipe__button--mine-unpub,
 .recipe__button--add-to-my-recipes
@@ -206,17 +209,14 @@ h3
   margin: 8px 0
   white-space: nowrap
 
-.recipe__button--edit
-  background: white
+.recipe__delete-button
+  background: lighten($nav-bg, 10%)
   border-radius: 50%
-  box-shadow: 0 0 5px #aaa inset, 1px 1px 3px darken($nav-bg, 25%)
-  color: $nav-bg
+  box-shadow: 0 0 3px darken($nav-bg, 10%)
+  color: lighten($nav-bg, 35%)
   cursor: pointer
   display: flex
   align-items: center
   justify-content: center
-  height: 44px
-  width: 44px
-  @include hover-change(white)
-  i
-    padding-left: 8px
+  padding: 3px 5px
+  margin-right: -7px

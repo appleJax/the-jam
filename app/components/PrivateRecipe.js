@@ -119,10 +119,10 @@ const PrivateRecipe = ({
     >
       <div className='recipe__header'>
         <div
-          className='recipe__delete-button'
-          onClick={confirmDelete}
+          className='recipe__button--edit'
+          onClick={populateModal}
         >
-          <i className='fa fa-times'></i>
+          <i className='fa fa-pencil'></i>
         </div>
         <h2 className='recipe__name'>
           {name}
@@ -169,10 +169,10 @@ const PrivateRecipe = ({
         </div>
         <div className='spacer'></div>
         <div
-          className='recipe__button--edit'
-          onClick={populateModal}
+          className='recipe__delete-button'
+          onClick={confirmDelete}
         >
-          <i className='fa fa-pencil'></i>
+          <i className='fa fa-times'></i>
         </div>
       </div>
       }
