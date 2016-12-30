@@ -2520,7 +2520,6 @@ nav {
   bottom: 0;
   color: #F14723;
   display: none;
-  font-family: 'Architects Daughter', 'sans-serif';
   font-size: 50px;
   height: 100%;
   left: 0;
@@ -2528,7 +2527,7 @@ nav {
   position: absolute;
   right: 0;
   top: 0;
-  text-shadow: 2px 2px 5px #a4250a, 0 0 15px #999;
+  text-shadow: 2px 2px 5px #a4250a, 0 0 15px #464646;
   width: 100%;
   z-index: 2; }
 
@@ -2536,10 +2535,10 @@ nav {
   border-bottom: 5px solid rgba(241, 71, 35, 0.5);
   height: fit-content;
   margin-top: 20px;
-  padding-bottom: 30px; }
+  padding-bottom: 10px; }
 
 .addToUserAnime--visible {
-  animation: add-to-user-animation 2s;
+  animation: add-to-user-animation 2.3s;
   display: flex;
   justify-content: center;
   text-align: center; }

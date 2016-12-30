@@ -291,9 +291,9 @@ export const addToUserRecipes = (user, recipe) =>
     delete newRecipe.publisher
 
     dispatch(toggleAddToUserAnime(recipe.id))
-    // setTimeout(() => {
-    //   dispatch(toggleAddToUserAnime(''))
-    // }, 2000)
+    setTimeout(() => {
+      dispatch(toggleAddToUserAnime(''))
+    }, 2300)
     dispatch(addRecipe(newRecipe, 'private'))
 
     return fetch(`https://thejam.herokuapp.com/new`,

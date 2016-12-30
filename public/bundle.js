@@ -60719,9 +60719,9 @@
 	  delete newRecipe.publisher;
 
 	  dispatch((0, _sync.toggleAddToUserAnime)(recipe.id));
-	  // setTimeout(() => {
-	  //   dispatch(toggleAddToUserAnime(''))
-	  // }, 2000)
+	  setTimeout(() => {
+	    dispatch((0, _sync.toggleAddToUserAnime)(''));
+	  }, 2300);
 	  dispatch((0, _sync.addRecipe)(newRecipe, 'private'));
 
 	  return (0, _isomorphicFetch2.default)(`https://thejam.herokuapp.com/new`, {
