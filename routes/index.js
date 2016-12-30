@@ -36,6 +36,9 @@ module.exports = (app) => {
         const recipes = docs;
 
         let preloadedState = {
+          animation: {
+            addToUserRecipes: ''
+          },
           auth: {
             isAuthenticated: false,
             isFetching: false,
