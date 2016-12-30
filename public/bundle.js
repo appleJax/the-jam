@@ -61230,13 +61230,13 @@
 	  user,
 	  username,
 	  loggedIn,
+	  addToUserAnime,
 	  setFilterContent,
 	  toggleDetails,
 	  addToUserRecipes,
 	  unpublishConfirm,
 	  voteDialogue,
-	  loginDialogue,
-	  addToUserAnime
+	  loginDialogue
 	}) => {
 	  const {
 	    id,
@@ -61254,6 +61254,9 @@
 	    publisher,
 	    showDetails
 	  } = recipe;
+
+	  console.log('id:', id);
+	  console.log('anime:', addToUserAnime);
 
 	  const tagList = tags.map((tag, i) => _react2.default.createElement(
 	    'li',
@@ -61309,6 +61312,8 @@
 	    _react2.default.createElement('i', { className: 'fa fa-cloud-download' })
 	  );
 
+	  const animationClass = addToUserAnime == id ? 'addToUserAnime--hidden addToUserAnime--visible' : 'addToUserAnime--hidden';
+
 	  return _react2.default.createElement(
 	    'li',
 	    {
@@ -61317,7 +61322,7 @@
 	    _react2.default.createElement(
 	      'div',
 	      {
-	        className: addToUserAnime == recipe.id ? 'addToUserAnime--hidden addToUserAnime--visible' : 'addToUserAnime--hidden'
+	        className: animationClass
 	      },
 	      _react2.default.createElement('i', { className: 'fa fa-check fa-lg' }),
 	      'Added To My Recipes!'

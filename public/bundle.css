@@ -2512,6 +2512,7 @@ nav {
   margin: 0 auto 15px;
   max-width: 630px;
   padding: 15px;
+  position: relative;
   width: 100%; }
 
 .addToUserAnime--hidden {
@@ -2531,9 +2532,9 @@ nav {
   z-index: 2; }
 
 .addToUserAnime--visible {
-  animation: addToUserAnimation 2s; }
+  animation: add-to-user-animation 2s; }
 
-@keyframes addToUserAnimation {
+@keyframes add-to-user-animation {
   0% {
     opacity: 0; }
   30% {

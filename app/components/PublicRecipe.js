@@ -7,13 +7,13 @@ const PublicRecipe = ({
   user,
   username,
   loggedIn,
+  addToUserAnime,
   setFilterContent,
   toggleDetails,
   addToUserRecipes,
   unpublishConfirm,
   voteDialogue,
-  loginDialogue,
-  addToUserAnime
+  loginDialogue
 }) => {
   const {
     id,
@@ -31,6 +31,9 @@ const PublicRecipe = ({
     publisher,
     showDetails
   } = recipe
+
+  console.log('id:', id)
+  console.log('anime:', addToUserAnime)
 
   const tagList = tags.map(
     (tag, i) =>
@@ -94,16 +97,16 @@ const PublicRecipe = ({
       <i className='fa fa-cloud-download'></i>
     </div>
 
+    const animationClass = addToUserAnime == id ?
+      'addToUserAnime--hidden addToUserAnime--visible' :
+      'addToUserAnime--hidden'
+
   return (
     <li
       className='recipe'
     >
       <div
-        className={
-          addToUserAnime == recipe.id ?
-          'addToUserAnime--hidden addToUserAnime--visible' :
-          'addToUserAnime--hidden'
-        }
+        className={animationClass}
       >
         <i className='fa fa-check fa-lg'></i>
         Added To My Recipes!
