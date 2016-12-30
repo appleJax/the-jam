@@ -105,8 +105,10 @@ const PublicRecipe = ({
             'addToUserAnime--hidden'
         }
       >
-        <i className='fa fa-check fa-lg'></i>
-        Added To My Recipes!
+        <div className='addToUserAnime__content'>
+          <i className='fa fa-check fa-lg'></i>
+          Added To My Recipes!
+        </div>
       </div>
       <div className='recipe__header'>
         {loggedIn && upperIcon}

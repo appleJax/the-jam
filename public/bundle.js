@@ -60719,9 +60719,9 @@
 	  delete newRecipe.publisher;
 
 	  dispatch((0, _sync.toggleAddToUserAnime)(recipe.id));
-	  // setTimeout(() => {
-	  //   dispatch(toggleAddToUserAnime(''))
-	  // }, 2000)
+	  setTimeout(() => {
+	    dispatch((0, _sync.toggleAddToUserAnime)(''));
+	  }, 2000);
 	  dispatch((0, _sync.addRecipe)(newRecipe, 'private'));
 
 	  return (0, _isomorphicFetch2.default)(`https://thejam.herokuapp.com/new`, {
@@ -61319,8 +61319,12 @@
 	      {
 	        className: addToUserAnime == id ? 'addToUserAnime--hidden addToUserAnime--visible' : 'addToUserAnime--hidden'
 	      },
-	      _react2.default.createElement('i', { className: 'fa fa-check fa-lg' }),
-	      'Added To My Recipes!'
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'addToUserAnime__content' },
+	        _react2.default.createElement('i', { className: 'fa fa-check fa-lg' }),
+	        'Added To My Recipes!'
+	      )
 	    ),
 	    _react2.default.createElement(
 	      'div',
