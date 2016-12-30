@@ -2519,6 +2519,7 @@ nav {
   background: rgba(0, 0, 0, 0.5);
   bottom: 0;
   color: #F14723;
+  display: none;
   font-family: 'Architects Daughter', 'sans-serif';
   font-size: 30px;
   height: 100%;
@@ -2532,6 +2533,7 @@ nav {
   z-index: 2; }
 
 .addToUserAnime--visible {
+  display: inline-block;
   animation: add-to-user-animation 2s; }
 
 @keyframes add-to-user-animation {
