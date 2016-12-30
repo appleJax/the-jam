@@ -134,15 +134,18 @@ const PublicRecipe = ({
           {totalVotes} Vote{totalVotes != 1 && 's'}
         </div>
         <div className='spacer'></div>
-        <i
+        <div
           onClick={toggleDetails}
-          className={
-            showDetails ?
-            'recipe__expand-toggle fa fa-toggle-up fa-lg' :
-            'recipe__expand-toggle fa fa-ellipsis-h fa-lg'
-          }
         >
-        </i>
+          <i
+            className={
+              showDetails ?
+              'recipe__expand-toggle fa fa-toggle-up fa-lg' :
+              'recipe__expand-toggle fa fa-ellipsis-h fa-lg'
+            }
+          >
+          </i>
+        </div>
       </div>
       <div className='spacer control-bar-spacer'></div>
       {showDetails &&
