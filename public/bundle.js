@@ -61314,6 +61314,7 @@
 
 	  const animationClass = addToUserAnime == id ? 'addToUserAnime--hidden addToUserAnime--visible' : 'addToUserAnime--hidden';
 
+	  console.log('anime class:', animationClass);
 	  return _react2.default.createElement(
 	    'li',
 	    {

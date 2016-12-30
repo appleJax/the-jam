@@ -101,6 +101,7 @@ const PublicRecipe = ({
       'addToUserAnime--hidden addToUserAnime--visible' :
       'addToUserAnime--hidden'
 
+    console.log('anime class:', animationClass)
   return (
     <li
       className='recipe'
