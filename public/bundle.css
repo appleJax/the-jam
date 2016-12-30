@@ -2533,8 +2533,11 @@ nav {
   z-index: 2; }
 
 .addToUserAnime--visible {
-  display: inline-block;
-  animation: add-to-user-animation 2s; }
+  align-items: center;
+  animation: add-to-user-animation 2s;
+  display: flex;
+  justify-content: center;
+  text-align: center; }
 
 @keyframes add-to-user-animation {
   0% {

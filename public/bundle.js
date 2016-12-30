@@ -60719,9 +60719,9 @@
 	  delete newRecipe.publisher;
 
 	  dispatch((0, _sync.toggleAddToUserAnime)(recipe.id));
-	  setTimeout(() => {
-	    dispatch((0, _sync.toggleAddToUserAnime)(''));
-	  }, 2000);
+	  // setTimeout(() => {
+	  //   dispatch(toggleAddToUserAnime(''))
+	  // }, 2000)
 	  dispatch((0, _sync.addRecipe)(newRecipe, 'private'));
 
 	  return (0, _isomorphicFetch2.default)(`https://thejam.herokuapp.com/new`, {
@@ -61255,9 +61255,6 @@
 	    showDetails
 	  } = recipe;
 
-	  console.log('id:', id);
-	  console.log('anime:', addToUserAnime);
-
 	  const tagList = tags.map((tag, i) => _react2.default.createElement(
 	    'li',
 	    {
@@ -61312,9 +61309,6 @@
 	    _react2.default.createElement('i', { className: 'fa fa-cloud-download' })
 	  );
 
-	  const animationClass = addToUserAnime == id ? 'addToUserAnime--hidden addToUserAnime--visible' : 'addToUserAnime--hidden';
-
-	  console.log('anime class:', animationClass);
 	  return _react2.default.createElement(
 	    'li',
 	    {
@@ -61323,7 +61317,7 @@
 	    _react2.default.createElement(
 	      'div',
 	      {
-	        className: animationClass
+	        className: addToUserAnime == id ? 'addToUserAnime--hidden addToUserAnime--visible' : 'addToUserAnime--hidden'
 	      },
 	      _react2.default.createElement('i', { className: 'fa fa-check fa-lg' }),
 	      'Added To My Recipes!'
