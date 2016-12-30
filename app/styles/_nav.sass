@@ -53,7 +53,7 @@ nav
 
 .nav__searchbox
   border-radius: 5px
-  box-shadow: 0 0 15px $purple
+  box-shadow: 0 0 15px $purple inset
   color: $purple
   font-size: 28px
   margin: 0 -3px 0 -28px
@@ -62,9 +62,10 @@ nav
   position: static
   width: 102%
   z-index: 0.5
-  &:empty
+  &:invalid
     box-shadow: none
   &:focus
+    background: lighten($purple, 40%)
     outline: none
 
 .fa-search

@@ -60216,7 +60216,8 @@
 	        const filter = e.target.value.split(' ');
 
 	        setFilterContent(filter);
-	      }
+	      },
+	      required: true
 	    })
 	  ),
 	  loggedIn && _react2.default.createElement(

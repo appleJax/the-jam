@@ -51,6 +51,7 @@ const Nav = ({
 
           setFilterContent(filter)
         }}
+        required
       />
     </div>
     {loggedIn &&
