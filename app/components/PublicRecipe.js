@@ -12,7 +12,8 @@ const PublicRecipe = ({
   addToUserRecipes,
   unpublishConfirm,
   voteDialogue,
-  loginDialogue
+  loginDialogue,
+  addToUserAnime
 }) => {
   const {
     id,
@@ -95,7 +96,15 @@ const PublicRecipe = ({
 
   return (
     <li
-      className='recipe'>
+      className='recipe'
+    >
+      <div
+        id='addToUserAnime'
+        className={addToUserAnime ? 'addToUserAnime' : ''}
+      >
+        <i className='fa fa-check fa-lg'></i>
+        Added To My Recipes!
+      </div>
       <div className='recipe__header'>
         {loggedIn && upperIcon}
         <h2 className='recipe__name'>

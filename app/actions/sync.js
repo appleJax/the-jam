@@ -8,6 +8,7 @@ export const SET_FILTER_RECIPES = 'SET_FILTER_RECIPES'
 export const SET_SORT = 'SET_SORT'
 export const CLOSE_MODAL = 'CLOSE_MODAL'
 export const POPULATE_MODAL = 'POPULATE_MODAL'
+export const TOGGLE_ADD_TO_USER_ANIME = 'TOGGLE_ADD_TO_USER_ANIME'
 
 export const addRecipe = (recipe, active) =>
   ({
@@ -71,4 +72,9 @@ export const populateModal = (dialogue, content) =>
     type: POPULATE_MODAL,
     dialogue,
     content
+  })
+
+export const toggleAddToUserAnime = () =>
+  ({
+    type: TOGGLE_ADD_TO_USER_ANIME
   })

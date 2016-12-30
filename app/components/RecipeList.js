@@ -9,6 +9,7 @@ const RecipeList = ({
   username,
   privateView,
   loggedIn,
+  addToUserAnime,
   setFilterContent,
   editRecipe,
   toggleDetails,
@@ -40,6 +41,7 @@ const RecipeList = ({
           user={user}
           username={username}
           loggedIn={loggedIn}
+          addToUserAnime={addToUserAnime}
           setFilterContent={setFilterContent}
           toggleDetails={() => toggleDetails(recipe.id, visibilityFilter.active)}
           addToUserRecipes={() => addToUserRecipes(user, recipe)}

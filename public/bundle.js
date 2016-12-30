@@ -8656,7 +8656,7 @@
 
 /***/ },
 /* 316 */
-[719, 317, 318],
+[720, 317, 318],
 /* 317 */
 /***/ function(module, exports) {
 
@@ -9137,7 +9137,7 @@
 
 /***/ },
 /* 321 */
-[720, 322],
+[721, 322],
 /* 322 */
 /***/ function(module, exports) {
 
@@ -14043,7 +14043,7 @@
 
 /***/ },
 /* 357 */
-[720, 358],
+[721, 358],
 /* 358 */
 322,
 /* 359 */
@@ -14284,7 +14284,7 @@
 
 /***/ },
 /* 363 */
-[719, 345, 347],
+[720, 345, 347],
 /* 364 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -28966,7 +28966,7 @@
 
 	var _configureStore2 = _interopRequireDefault(_configureStore);
 
-	var _App = __webpack_require__(702);
+	var _App = __webpack_require__(703);
 
 	var _App2 = _interopRequireDefault(_App);
 
@@ -32259,6 +32259,10 @@
 
 	var _modal2 = _interopRequireDefault(_modal);
 
+	var _animation = __webpack_require__(702);
+
+	var _animation2 = _interopRequireDefault(_animation);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	const rootReducer = (0, _redux.combineReducers)({
@@ -32266,7 +32270,8 @@
 	  recipes: _recipes2.default,
 	  visibilityFilter: _visibilityFilter2.default,
 	  sort: _sort2.default,
-	  modal: _modal2.default
+	  modal: _modal2.default,
+	  animation: _animation2.default
 	});
 
 	exports.default = rootReducer;
@@ -59784,6 +59789,7 @@
 	const SET_SORT = exports.SET_SORT = 'SET_SORT';
 	const CLOSE_MODAL = exports.CLOSE_MODAL = 'CLOSE_MODAL';
 	const POPULATE_MODAL = exports.POPULATE_MODAL = 'POPULATE_MODAL';
+	const TOGGLE_ADD_TO_USER_ANIME = exports.TOGGLE_ADD_TO_USER_ANIME = 'TOGGLE_ADD_TO_USER_ANIME';
 
 	const addRecipe = exports.addRecipe = (recipe, active) => ({
 	  type: ADD_RECIPE,
@@ -59837,6 +59843,10 @@
 	  type: POPULATE_MODAL,
 	  dialogue,
 	  content
+	});
+
+	const toggleAddToUserAnime = exports.toggleAddToUserAnime = () => ({
+	  type: TOGGLE_ADD_TO_USER_ANIME
 	});
 
 /***/ },
@@ -60041,25 +60051,52 @@
 	  value: true
 	});
 
+	var _sync = __webpack_require__(697);
+
+	const animation = (state = {
+	  addToUserRecipes: false
+	}, action) => {
+	  switch (action.type) {
+	    case _sync.TOGGLE_ADD_TO_USER_ANIME:
+	      return {
+	        addToUserRecipes: !state.addToUserRecipes
+	      };
+	    default:
+	      return state;
+	  }
+	};
+
+	exports.default = animation;
+
+/***/ },
+/* 703 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
 	var _react = __webpack_require__(312);
 
 	var _react2 = _interopRequireDefault(_react);
 
 	var _reactRedux = __webpack_require__(495);
 
-	var _NavContainer = __webpack_require__(703);
+	var _NavContainer = __webpack_require__(704);
 
 	var _NavContainer2 = _interopRequireDefault(_NavContainer);
 
-	var _VisibleRecipeList = __webpack_require__(705);
+	var _VisibleRecipeList = __webpack_require__(706);
 
 	var _VisibleRecipeList2 = _interopRequireDefault(_VisibleRecipeList);
 
-	var _Modal = __webpack_require__(711);
+	var _Modal = __webpack_require__(712);
 
 	var _Modal2 = _interopRequireDefault(_Modal);
 
-	var _Footer = __webpack_require__(718);
+	var _Footer = __webpack_require__(719);
 
 	var _Footer2 = _interopRequireDefault(_Footer);
 
@@ -60088,7 +60125,7 @@
 	exports.default = App;
 
 /***/ },
-/* 703 */
+/* 704 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60103,7 +60140,7 @@
 
 	var _auth = __webpack_require__(536);
 
-	var _Nav = __webpack_require__(704);
+	var _Nav = __webpack_require__(705);
 
 	var _Nav2 = _interopRequireDefault(_Nav);
 
@@ -60141,7 +60178,7 @@
 	exports.default = NavContainer;
 
 /***/ },
-/* 704 */
+/* 705 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60277,7 +60314,7 @@
 	exports.default = Nav;
 
 /***/ },
-/* 705 */
+/* 706 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60290,9 +60327,9 @@
 
 	var _sync = __webpack_require__(697);
 
-	var _async = __webpack_require__(706);
+	var _async = __webpack_require__(707);
 
-	var _RecipeList = __webpack_require__(707);
+	var _RecipeList = __webpack_require__(708);
 
 	var _RecipeList2 = _interopRequireDefault(_RecipeList);
 
@@ -60396,7 +60433,8 @@
 	    user: state.auth.email,
 	    username: state.auth.name,
 	    privateView: state.visibilityFilter.active == 'private',
-	    loggedIn: state.auth.isAuthenticated
+	    loggedIn: state.auth.isAuthenticated,
+	    addToUserAnime: state.animation.addToUserRecipes
 	  };
 	};
 
@@ -60424,7 +60462,7 @@
 	exports.default = VisibleRecipeList;
 
 /***/ },
-/* 706 */
+/* 707 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60679,6 +60717,10 @@
 	  delete newRecipe._id;
 	  delete newRecipe.publisher;
 
+	  dispatch((0, _sync.toggleAddToUserAnime)());
+	  setTimeout(() => {
+	    dispatch((0, _sync.toggleAddToUserAnime)());
+	  }, 2000);
 	  dispatch((0, _sync.addRecipe)(newRecipe, 'private'));
 
 	  return (0, _isomorphicFetch2.default)(`https://thejam.herokuapp.com/new`, {
@@ -60769,7 +60811,7 @@
 	};
 
 /***/ },
-/* 707 */
+/* 708 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60782,11 +60824,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _PrivateRecipe = __webpack_require__(708);
+	var _PrivateRecipe = __webpack_require__(709);
 
 	var _PrivateRecipe2 = _interopRequireDefault(_PrivateRecipe);
 
-	var _PublicRecipe = __webpack_require__(710);
+	var _PublicRecipe = __webpack_require__(711);
 
 	var _PublicRecipe2 = _interopRequireDefault(_PublicRecipe);
 
@@ -60799,6 +60841,7 @@
 	  username,
 	  privateView,
 	  loggedIn,
+	  addToUserAnime,
 	  setFilterContent,
 	  editRecipe,
 	  toggleDetails,
@@ -60828,6 +60871,7 @@
 	      user: user,
 	      username: username,
 	      loggedIn: loggedIn,
+	      addToUserAnime: addToUserAnime,
 	      setFilterContent: setFilterContent,
 	      toggleDetails: () => toggleDetails(recipe.id, visibilityFilter.active),
 	      addToUserRecipes: () => addToUserRecipes(user, recipe),
@@ -60841,7 +60885,7 @@
 	exports.default = RecipeList;
 
 /***/ },
-/* 708 */
+/* 709 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60854,7 +60898,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _RecipeBody = __webpack_require__(709);
+	var _RecipeBody = __webpack_require__(710);
 
 	var _RecipeBody2 = _interopRequireDefault(_RecipeBody);
 
@@ -61045,7 +61089,7 @@
 	exports.default = PrivateRecipe;
 
 /***/ },
-/* 709 */
+/* 710 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -61160,7 +61204,7 @@
 	exports.default = RecipeBody;
 
 /***/ },
-/* 710 */
+/* 711 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -61173,7 +61217,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _RecipeBody = __webpack_require__(709);
+	var _RecipeBody = __webpack_require__(710);
 
 	var _RecipeBody2 = _interopRequireDefault(_RecipeBody);
 
@@ -61190,7 +61234,8 @@
 	  addToUserRecipes,
 	  unpublishConfirm,
 	  voteDialogue,
-	  loginDialogue
+	  loginDialogue,
+	  addToUserAnime
 	}) => {
 	  const {
 	    id,
@@ -61266,7 +61311,17 @@
 	  return _react2.default.createElement(
 	    'li',
 	    {
-	      className: 'recipe' },
+	      className: 'recipe'
+	    },
+	    _react2.default.createElement(
+	      'div',
+	      {
+	        id: 'addToUserAnime',
+	        className: addToUserAnime ? 'addToUserAnime' : ''
+	      },
+	      _react2.default.createElement('i', { className: 'fa fa-check fa-lg' }),
+	      'Added To My Recipes!'
+	    ),
 	    _react2.default.createElement(
 	      'div',
 	      { className: 'recipe__header' },
@@ -61353,7 +61408,7 @@
 	exports.default = PublicRecipe;
 
 /***/ },
-/* 711 */
+/* 712 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -61364,13 +61419,13 @@
 
 	var _reactRedux = __webpack_require__(495);
 
-	var _async = __webpack_require__(706);
+	var _async = __webpack_require__(707);
 
 	var _sync = __webpack_require__(697);
 
 	var _auth = __webpack_require__(536);
 
-	var _ModalOverlay = __webpack_require__(712);
+	var _ModalOverlay = __webpack_require__(713);
 
 	var _ModalOverlay2 = _interopRequireDefault(_ModalOverlay);
 
@@ -61408,7 +61463,7 @@
 	exports.default = Modal;
 
 /***/ },
-/* 712 */
+/* 713 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -61421,23 +61476,23 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _ConfirmDialogue = __webpack_require__(713);
+	var _ConfirmDialogue = __webpack_require__(714);
 
 	var _ConfirmDialogue2 = _interopRequireDefault(_ConfirmDialogue);
 
-	var _RecipeForm = __webpack_require__(714);
+	var _RecipeForm = __webpack_require__(715);
 
 	var _RecipeForm2 = _interopRequireDefault(_RecipeForm);
 
-	var _VoteDialogue = __webpack_require__(715);
+	var _VoteDialogue = __webpack_require__(716);
 
 	var _VoteDialogue2 = _interopRequireDefault(_VoteDialogue);
 
-	var _LoginDialogue = __webpack_require__(716);
+	var _LoginDialogue = __webpack_require__(717);
 
 	var _LoginDialogue2 = _interopRequireDefault(_LoginDialogue);
 
-	var _UnpublishDialogue = __webpack_require__(717);
+	var _UnpublishDialogue = __webpack_require__(718);
 
 	var _UnpublishDialogue2 = _interopRequireDefault(_UnpublishDialogue);
 
@@ -61511,7 +61566,7 @@
 	exports.default = ModalOverlay;
 
 /***/ },
-/* 713 */
+/* 714 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -61566,7 +61621,7 @@
 	exports.default = ConfirmDialogue;
 
 /***/ },
-/* 714 */
+/* 715 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -62011,7 +62066,7 @@
 	exports.default = RecipeForm;
 
 /***/ },
-/* 715 */
+/* 716 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -62127,7 +62182,7 @@
 	exports.default = VoteDialogue;
 
 /***/ },
-/* 716 */
+/* 717 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -62179,7 +62234,7 @@
 	exports.default = LoginDialogue;
 
 /***/ },
-/* 717 */
+/* 718 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -62241,7 +62296,7 @@
 	exports.default = UnpublishDialogue;
 
 /***/ },
-/* 718 */
+/* 719 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -62265,7 +62320,7 @@
 	exports.default = Footer;
 
 /***/ },
-/* 719 */
+/* 720 */
 /***/ function(module, exports, __webpack_require__, __webpack_module_template_argument_0__, __webpack_module_template_argument_1__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -62394,7 +62449,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(308)))
 
 /***/ },
-/* 720 */
+/* 721 */
 /***/ function(module, exports, __webpack_require__, __webpack_module_template_argument_0__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**

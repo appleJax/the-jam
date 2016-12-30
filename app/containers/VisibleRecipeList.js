@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import {
   populateModal,
   setFilterContent,
-  toggleDetails
+  toggleDetails,
 } from '../actions/sync'
 import {
   editUserRecipe,
@@ -134,7 +134,8 @@ const mapStateToProps = (state) => {
     user: state.auth.email,
     username: state.auth.name,
     privateView: state.visibilityFilter.active == 'private',
-    loggedIn: state.auth.isAuthenticated
+    loggedIn: state.auth.isAuthenticated,
+    addToUserAnime: state.animation.addToUserRecipes
   }
 }
 

@@ -2514,6 +2514,35 @@ nav {
   padding: 15px;
   width: 100%; }
 
+#addToUserAnime {
+  background: rgba(0, 0, 0, 0.5);
+  bottom: 0;
+  color: #F14723;
+  font-family: 'Architects Daughter', 'sans-serif';
+  font-size: 30px;
+  height: 100%;
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  text-shadow: 1px 1px white;
+  width: 100%;
+  z-index: 2; }
+
+.addToUserAnime {
+  animation: addToUserAnimation 2s; }
+
+@keyframes addToUserAnimation {
+  0% {
+    opacity: 0; }
+  30% {
+    opacity: 1; }
+  60% {
+    opacity: 1; }
+  100% {
+    opacity: 0; } }
+
 .recipe__header {
   background: #fcd3cb;
   border-radius: 5px 5px 0 0;

@@ -3,7 +3,8 @@ import {
   addRecipe,
   editRecipe,
   deleteRecipe,
-  populateUserRecipes
+  populateUserRecipes,
+  toggleAddToUserAnime
 } from './sync'
 
 export const fetchRecipes = (user) => {
@@ -289,6 +290,10 @@ export const addToUserRecipes = (user, recipe) =>
     delete newRecipe._id
     delete newRecipe.publisher
 
+    dispatch(toggleAddToUserAnime())
+    setTimeout(() => {
+      dispatch(toggleAddToUserAnime())
+    }, 2000)
     dispatch(addRecipe(newRecipe, 'private'))
 
     return fetch(`https://thejam.herokuapp.com/new`,
