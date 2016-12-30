@@ -2415,7 +2415,7 @@ nav {
   .nav__searchbox:invalid {
     box-shadow: none; }
   .nav__searchbox:focus {
-    background: #e6d3ef;
+    background: #fbf8fd;
     outline: none; }
 
 .fa-search {
