@@ -59845,8 +59845,9 @@
 	  content
 	});
 
-	const toggleAddToUserAnime = exports.toggleAddToUserAnime = () => ({
-	  type: TOGGLE_ADD_TO_USER_ANIME
+	const toggleAddToUserAnime = exports.toggleAddToUserAnime = id => ({
+	  type: TOGGLE_ADD_TO_USER_ANIME,
+	  id
 	});
 
 /***/ },
@@ -60054,12 +60055,12 @@
 	var _sync = __webpack_require__(697);
 
 	const animation = (state = {
-	  addToUserRecipes: false
+	  addToUserRecipes: ''
 	}, action) => {
 	  switch (action.type) {
 	    case _sync.TOGGLE_ADD_TO_USER_ANIME:
 	      return {
-	        addToUserRecipes: !state.addToUserRecipes
+	        addToUserRecipes: action.id
 	      };
 	    default:
 	      return state;
@@ -60717,9 +60718,9 @@
 	  delete newRecipe._id;
 	  delete newRecipe.publisher;
 
-	  dispatch((0, _sync.toggleAddToUserAnime)());
+	  dispatch((0, _sync.toggleAddToUserAnime)(recipe.id));
 	  setTimeout(() => {
-	    dispatch((0, _sync.toggleAddToUserAnime)());
+	    dispatch((0, _sync.toggleAddToUserAnime)(''));
 	  }, 2000);
 	  dispatch((0, _sync.addRecipe)(newRecipe, 'private'));
 
@@ -61316,8 +61317,7 @@
 	    _react2.default.createElement(
 	      'div',
 	      {
-	        id: 'addToUserAnime',
-	        className: addToUserAnime ? 'addToUserAnime' : ''
+	        className: addToUserAnime == recipe.id ? 'addToUserAnime--hidden addToUserAnime--visible' : 'addToUserAnime--hidden'
 	      },
 	      _react2.default.createElement('i', { className: 'fa fa-check fa-lg' }),
 	      'Added To My Recipes!'

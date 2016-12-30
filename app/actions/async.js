@@ -290,9 +290,9 @@ export const addToUserRecipes = (user, recipe) =>
     delete newRecipe._id
     delete newRecipe.publisher
 
-    dispatch(toggleAddToUserAnime())
+    dispatch(toggleAddToUserAnime(recipe.id))
     setTimeout(() => {
-      dispatch(toggleAddToUserAnime())
+      dispatch(toggleAddToUserAnime(''))
     }, 2000)
     dispatch(addRecipe(newRecipe, 'private'))
 

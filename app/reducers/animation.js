@@ -4,14 +4,14 @@ import {
 
 const animation = (
   state = {
-    addToUserRecipes: false
+    addToUserRecipes: ''
   },
   action
 ) => {
   switch (action.type) {
     case TOGGLE_ADD_TO_USER_ANIME:
       return {
-        addToUserRecipes: !state.addToUserRecipes
+        addToUserRecipes: action.id
       };
     default:
       return state;

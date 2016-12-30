@@ -99,8 +99,11 @@ const PublicRecipe = ({
       className='recipe'
     >
       <div
-        id='addToUserAnime'
-        className={addToUserAnime ? 'addToUserAnime' : ''}
+        className={
+          addToUserAnime == recipe.id ?
+          'addToUserAnime--hidden addToUserAnime--visible' :
+          'addToUserAnime--hidden'
+        }
       >
         <i className='fa fa-check fa-lg'></i>
         Added To My Recipes!

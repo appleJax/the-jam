@@ -2514,7 +2514,7 @@ nav {
   padding: 15px;
   width: 100%; }
 
-#addToUserAnime {
+.addToUserAnime--hidden {
   background: rgba(0, 0, 0, 0.5);
   bottom: 0;
   color: #F14723;
@@ -2530,7 +2530,7 @@ nav {
   width: 100%;
   z-index: 2; }
 
-.addToUserAnime {
+.addToUserAnime--visible {
   animation: addToUserAnimation 2s; }
 
 @keyframes addToUserAnimation {

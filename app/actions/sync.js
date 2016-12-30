@@ -74,7 +74,8 @@ export const populateModal = (dialogue, content) =>
     content
   })
 
-export const toggleAddToUserAnime = () =>
+export const toggleAddToUserAnime = (id) =>
   ({
-    type: TOGGLE_ADD_TO_USER_ANIME
+    type: TOGGLE_ADD_TO_USER_ANIME,
+    id
   })
