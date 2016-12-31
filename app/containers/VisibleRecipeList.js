@@ -6,6 +6,7 @@ import {
 } from '../actions/sync'
 import {
   editUserRecipe,
+  duplicateRecipe,
   publishRecipe,
   unpublishRecipe,
   addToUserRecipes
@@ -146,6 +147,9 @@ const mapDispatchTProps = (dispatch) =>
 
     editRecipe: (user, recipe, active) =>
       dispatch(editUserRecipe(user, recipe, active)),
+
+    duplicateRecipe: (user, recipe) =>
+      dispatch(duplicateRecipe(user, recipe)),
 
     toggleDetails: (id, active) =>
       dispatch(toggleDetails(id, active)),

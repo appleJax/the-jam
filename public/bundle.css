@@ -2734,7 +2734,7 @@ h3 {
   display: flex;
   font-size: 16px;
   margin: 25px -15px -15px -15px;
-  padding: 8px 15px; }
+  padding: 6px 15px; }
   .recipe__credits .credit-name {
     margin-left: 5px; }
 
@@ -2751,7 +2751,7 @@ h3 {
 
 .recipe__credits__author,
 .recipe__credits__publisher {
-  margin: 8px 0;
+  margin: 10px 0;
   white-space: nowrap; }
 
 .recipe__footer-buttons {
@@ -2767,7 +2767,7 @@ h3 {
   color: #F14723;
   cursor: pointer;
   display: flex;
-  height: 52px;
+  height: 51px;
   justify-content: center;
   margin-bottom: -8px;
   margin-top: -8px;

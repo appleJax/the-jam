@@ -60444,6 +60444,8 @@
 
 	  editRecipe: (user, recipe, active) => dispatch((0, _async.editUserRecipe)(user, recipe, active)),
 
+	  duplicateRecipe: (user, recipe) => dispatch((0, _async.duplicateRecipe)(user, recipe)),
+
 	  toggleDetails: (id, active) => dispatch((0, _sync.toggleDetails)(id, active)),
 
 	  populateModal: (dialogue, content) => {
@@ -60471,7 +60473,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.voteForRecipe = exports.addToUserRecipes = exports.unpublishRecipe = exports.publishRecipe = exports.deleteUserRecipe = exports.editUserRecipe = exports.addUserRecipe = exports.fetchRecipes = undefined;
+	exports.voteForRecipe = exports.addToUserRecipes = exports.unpublishRecipe = exports.publishRecipe = exports.deleteUserRecipe = exports.editUserRecipe = exports.duplicateRecipe = exports.addUserRecipe = exports.fetchRecipes = undefined;
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -60519,6 +60521,33 @@
 	      body: JSON.stringify({ user, recipe: newRecipe })
 	    }).catch(console.error);
 	  };
+	};
+
+	const duplicateRecipe = exports.duplicateRecipe = (user, recipe) => dispatch => {
+	  const newRecipe = _extends({}, recipe, {
+	    id: Date.now(),
+	    published: false,
+	    canPublish: true,
+	    showDetails: false,
+	    name: 'Copy of ' + recipe.name
+	  });
+	  delete newRecipe._id;
+	  const altRecipe = _extends({}, newRecipe, {
+	    name: ''
+	  });
+	  dispatch(addUserRecipe(user, newRecipe, 'private'));
+	  dispatch((0, _sync.populateModal)('recipe', altRecipe));
+
+	  return (0, _isomorphicFetch2.default)(`https://thejam.herokuapp.com/new`, {
+	    method: 'POST',
+	    headers: {
+	      'Accept': 'application/json',
+	      'Content-type': 'application/json'
+	    },
+	    mode: 'cors',
+	    cache: 'default',
+	    body: JSON.stringify({ user, recipe: newRecipe })
+	  }).catch(console.error);
 	};
 
 	const editUserRecipe = exports.editUserRecipe = (user, recipe, active) => {
@@ -60847,6 +60876,7 @@
 	  addToUserAnime,
 	  setFilterContent,
 	  editRecipe,
+	  duplicateRecipe,
 	  toggleDetails,
 	  populateModal,
 	  publishRecipe,
@@ -60863,6 +60893,7 @@
 	      setFilterContent: setFilterContent,
 	      confirmDelete: () => populateModal('confirm', recipe.id),
 	      editRecipe: editRecipe,
+	      duplicateRecipe: () => duplicateRecipe(user, recipe),
 	      toggleDetails: () => toggleDetails(recipe.id, visibilityFilter.active),
 	      populateModal: () => populateModal('recipe', recipe),
 	      publishRecipe: () => publishRecipe(user, recipe, username),
@@ -60914,6 +60945,7 @@
 	  setFilterContent,
 	  confirmDelete,
 	  editRecipe,
+	  duplicateRecipe,
 	  toggleDetails,
 	  populateModal,
 	  publishRecipe,
@@ -61097,7 +61129,7 @@
 	          'div',
 	          {
 	            className: 'recipe__button--footer',
-	            onClick: confirmDelete
+	            onClick: duplicateRecipe
 	          },
 	          _react2.default.createElement('i', { className: 'fa fa-clone fa-lg' })
 	        ),

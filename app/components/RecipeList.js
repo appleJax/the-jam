@@ -12,6 +12,7 @@ const RecipeList = ({
   addToUserAnime,
   setFilterContent,
   editRecipe,
+  duplicateRecipe,
   toggleDetails,
   populateModal,
   publishRecipe,
@@ -29,6 +30,7 @@ const RecipeList = ({
           setFilterContent={setFilterContent}
           confirmDelete={() => populateModal('confirm', recipe.id)}
           editRecipe={editRecipe}
+          duplicateRecipe={() => duplicateRecipe(user, recipe)}
           toggleDetails={() => toggleDetails(recipe.id, visibilityFilter.active)}
           populateModal={() => populateModal('recipe', recipe)}
           publishRecipe={() => publishRecipe(user, recipe, username)}

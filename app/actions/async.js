@@ -4,7 +4,8 @@ import {
   editRecipe,
   deleteRecipe,
   populateUserRecipes,
-  toggleAddToUserAnime
+  toggleAddToUserAnime,
+  populateModal
 } from './sync'
 
 export const fetchRecipes = (user) => {
@@ -52,6 +53,39 @@ export const addUserRecipe = (user, recipe, active) => {
     .catch(console.error)
   }
 }
+
+export const duplicateRecipe = (user, recipe) =>
+  dispatch => {
+    const newRecipe = {
+      ...recipe,
+      id: Date.now(),
+      published: false,
+      canPublish: true,
+      showDetails: false,
+      name: 'Copy of ' + recipe.name
+    }
+    delete newRecipe._id
+    const altRecipe = {
+      ...newRecipe,
+      name: ''
+    }
+    dispatch(addUserRecipe(user, newRecipe, 'private'))
+    dispatch(populateModal('recipe', altRecipe))
+
+    return fetch(`https://thejam.herokuapp.com/new`,
+      {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-type': 'application/json'
+        },
+        mode: 'cors',
+        cache: 'default',
+        body: JSON.stringify({user, recipe: newRecipe})
+      }
+    )
+    .catch(console.error)
+  }
 
 export const editUserRecipe = (user, recipe, active) => {
   return dispatch => {

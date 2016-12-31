@@ -8,6 +8,7 @@ const PrivateRecipe = ({
   setFilterContent,
   confirmDelete,
   editRecipe,
+  duplicateRecipe,
   toggleDetails,
   populateModal,
   publishRecipe,
@@ -182,7 +183,7 @@ const PrivateRecipe = ({
         <div className='recipe__footer-buttons'>
           <div
             className='recipe__button--footer'
-            onClick={confirmDelete}
+            onClick={duplicateRecipe}
           >
             <i className='fa fa-clone fa-lg'></i>
           </div>
