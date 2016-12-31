@@ -25,6 +25,7 @@ const PrivateRecipe = ({
     directions,
     notes,
     author,
+    canPublish,
     published,
     showDetails
   } = recipe
