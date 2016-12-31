@@ -60976,7 +60976,7 @@
 	  ) : _react2.default.createElement(
 	    'div',
 	    {
-	      className: 'recipe__button--passive'
+	      className: 'recipe__button--passive recipe__button--disabled'
 	    },
 	    _react2.default.createElement('i', { className: 'fa fa-cloud-download' }),
 	    'Downloaded'
@@ -61093,7 +61093,15 @@
 	      _react2.default.createElement(
 	        'div',
 	        {
-	          className: 'recipe__delete-button',
+	          className: 'recipe__button--footer',
+	          onClick: confirmDelete
+	        },
+	        _react2.default.createElement('i', { className: 'fa fa-clone fa-lg' })
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        {
+	          className: 'recipe__button--footer recipe__button--delete',
 	          onClick: confirmDelete
 	        },
 	        _react2.default.createElement('i', { className: 'fa fa-times fa-lg' })

@@ -72,7 +72,7 @@ const PrivateRecipe = ({
         Publish
       </div>) :
       <div
-        className='recipe__button--passive'
+        className='recipe__button--passive recipe__button--disabled'
       >
         <i className='fa fa-cloud-download'></i>
         Downloaded
@@ -180,7 +180,13 @@ const PrivateRecipe = ({
         </div>
         <div className='spacer'></div>
         <div
-          className='recipe__delete-button'
+          className='recipe__button--footer'
+          onClick={confirmDelete}
+        >
+          <i className='fa fa-clone fa-lg'></i>
+        </div>
+        <div
+          className='recipe__button--footer recipe__button--delete'
           onClick={confirmDelete}
         >
           <i className='fa fa-times fa-lg'></i>

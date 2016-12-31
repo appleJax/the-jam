@@ -152,6 +152,9 @@
   box-shadow: 0 0 8px lighten($nav-bg, 10%) inset
   color: lighten($nav-bg, 10%)
 
+.recipe__button--disabled
+  cursor: default
+
 .fa-star,
 .fa-star-o
   cursor: pointer
@@ -220,7 +223,7 @@ h3
   flex-grow: 20
 
 .recipe__credits
-  align-items: center
+  align-items: stretch
   background: lighten($nav-bg, 10%)
   border-radius: 0 0 5px 5px
   color: lighten($nav-bg, 50%)
@@ -247,15 +250,16 @@ h3
   margin: 8px 0
   white-space: nowrap
 
-.recipe__delete-button
+.recipe__button--footer
   align-items: center
-  background: lighten($nav-bg, 40%)
-  border-radius: 50%
-  box-shadow: 0 0 3px darken($nav-bg, 10%)
+  background: white
+  border-radius: 0 0 5px 0
+  box-shadow: 0 0 10px $nav-bg inset
   color: $nav-bg
   cursor: pointer
   display: flex
-  height: 35px
   justify-content: center
-  margin-right: -7px
-  width: 35px
+  width: 40px
+
+.recipe__button--delete
+  margin-right: -15px

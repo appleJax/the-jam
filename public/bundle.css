@@ -2332,6 +2332,7 @@
 
 html, body {
   margin: 0;
+  overflow-x: hidden;
   padding: 0; }
 
 .container {
@@ -2654,6 +2655,9 @@ nav {
   box-shadow: 0 0 8px #f46f53 inset;
   color: #f46f53; }
 
+.recipe__button--disabled {
+  cursor: default; }
+
 .fa-star,
 .fa-star-o {
   cursor: pointer;
@@ -2722,7 +2726,7 @@ h3 {
   flex-grow: 20; }
 
 .recipe__credits {
-  align-items: center;
+  align-items: stretch;
   background: #f46f53;
   border-radius: 0 0 5px 5px;
   color: white;
@@ -2749,18 +2753,19 @@ h3 {
   margin: 8px 0;
   white-space: nowrap; }
 
-.recipe__delete-button {
+.recipe__button--footer {
   align-items: center;
-  background: #fde7e3;
-  border-radius: 50%;
-  box-shadow: 0 0 3px #d4300d;
+  background: white;
+  border-radius: 0 0 5px 0;
+  box-shadow: 0 0 10px #F14723 inset;
   color: #F14723;
   cursor: pointer;
   display: flex;
-  height: 35px;
   justify-content: center;
-  margin-right: -7px;
-  width: 35px; }
+  width: 40px; }
+
+.recipe__button--delete {
+  margin-right: -15px; }
 
 footer {
   background: #444;
