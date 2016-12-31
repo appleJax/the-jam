@@ -60,17 +60,13 @@ export const duplicateRecipe = (user, recipe) =>
       ...recipe,
       id: Date.now(),
       published: false,
-      canPublish: true,
       showDetails: false,
       name: 'Copy of ' + recipe.name
     }
     delete newRecipe._id
-    const altRecipe = {
-      ...newRecipe,
-      name: ''
-    }
+
     dispatch(addUserRecipe(user, newRecipe, 'private'))
-    dispatch(populateModal('recipe', altRecipe))
+    dispatch(populateModal('recipe', newRecipe))
 
     return fetch(`https://thejam.herokuapp.com/new`,
       {

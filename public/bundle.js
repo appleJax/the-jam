@@ -60527,16 +60527,13 @@
 	  const newRecipe = _extends({}, recipe, {
 	    id: Date.now(),
 	    published: false,
-	    canPublish: true,
 	    showDetails: false,
 	    name: 'Copy of ' + recipe.name
 	  });
 	  delete newRecipe._id;
-	  const altRecipe = _extends({}, newRecipe, {
-	    name: ''
-	  });
+
 	  dispatch(addUserRecipe(user, newRecipe, 'private'));
-	  dispatch((0, _sync.populateModal)('recipe', altRecipe));
+	  dispatch((0, _sync.populateModal)('recipe', newRecipe));
 
 	  return (0, _isomorphicFetch2.default)(`https://thejam.herokuapp.com/new`, {
 	    method: 'POST',
