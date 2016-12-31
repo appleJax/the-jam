@@ -33,6 +33,7 @@ const ModalOverlay = ({
         content={content}
         active={active}
         user={user}
+        username={username}
         addRecipe={addRecipe}
         editRecipe={editRecipe}
         closeModal={closeModal}

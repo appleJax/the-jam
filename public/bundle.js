@@ -60624,6 +60624,7 @@
 	    publisher
 	  });
 	  delete publicRecipe._id;
+	  delete publicRecipe.canPublish;
 
 	  if (recipe.author == 'Me' || recipe.author == 'me') {
 	    publicRecipe.author = publisher;
@@ -60710,6 +60711,7 @@
 	const addToUserRecipes = exports.addToUserRecipes = (user, recipe) => dispatch => {
 	  const newRecipe = _extends({}, recipe, {
 	    stars: 0,
+	    canPublish: false,
 	    published: false,
 	    showDetails: false,
 	    id: Date.now()
@@ -60954,10 +60956,10 @@
 	    direction
 	  ));
 
-	  const status = published ? _react2.default.createElement(
+	  const status = canPublish ? published ? _react2.default.createElement(
 	    'div',
 	    {
-	      className: 'recipe__button--unpublish',
+	      className: 'recipe__button--passive',
 	      onClick: unpublishConfirm
 	    },
 	    _react2.default.createElement('i', { className: 'fa fa-check-circle' }),
@@ -60970,6 +60972,13 @@
 	    },
 	    _react2.default.createElement('i', { className: 'fa fa-newspaper-o' }),
 	    'Publish'
+	  ) : _react2.default.createElement(
+	    'div',
+	    {
+	      className: 'recipe__button--passive'
+	    },
+	    _react2.default.createElement('i', { className: 'fa fa-cloud-download' }),
+	    'Downloaded'
 	  );
 
 	  const starIcons = [];
@@ -61540,6 +61549,7 @@
 	        content: content,
 	        active: active,
 	        user: user,
+	        username: username,
 	        addRecipe: addRecipe,
 	        editRecipe: editRecipe,
 	        closeModal: closeModal
@@ -61656,7 +61666,8 @@
 	  constructor(props) {
 	    super(props);
 	    const {
-	      content
+	      content,
+	      username
 	    } = props;
 	    this.active = props.active;
 	    this.content = props.content;
@@ -61675,6 +61686,7 @@
 	      tempRecipe.ingredients = content.ingredients.join('\n');
 	      tempRecipe.directions = content.directions.join('\n\n');
 	      tempRecipe.notes = content.notes.join('\n\n');
+	      this.oldContent = tempRecipe.ingredients + tempRecipe.directions;
 	      this.state = _extends({}, newContent, tempRecipe);
 	    } else {
 	      this.state = {
@@ -61692,6 +61704,8 @@
 	        directions: '',
 	        notes: '',
 	        author: '',
+	        createdBy: username,
+	        canPublish: true,
 	        published: false,
 	        showDetails: true
 	      };
@@ -61711,6 +61725,14 @@
 	    recipe.notes = recipe.notes.trim() ? recipe.notes.split('\n').map(line => line.trim()).filter(line => line !== '') : [];
 
 	    recipe.author = recipe.author.trim() || 'Me';
+
+	    const newIngredients = recipe.ingredients.join('\n'),
+	          newDirections = recipe.directions.join('\n\n'),
+	          newContent = newIngredients + newDirections;
+
+	    if (newContent != this.oldContent) {
+	      recipe.canPublish = true;
+	    }
 
 	    if (typeof this.content == 'object') {
 	      this.editRecipe(this.user, recipe, this.active);

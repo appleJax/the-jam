@@ -175,6 +175,7 @@ export const publishRecipe = (user, recipe, publisher) =>
       publisher
     }
     delete publicRecipe._id
+    delete publicRecipe.canPublish
 
     if (recipe.author == 'Me' || recipe.author == 'me') {
       publicRecipe.author = publisher
@@ -282,6 +283,7 @@ export const addToUserRecipes = (user, recipe) =>
     const newRecipe = {
       ...recipe,
       stars: 0,
+      canPublish: false,
       published: false,
       showDetails: false,
       id: Date.now()

@@ -4,7 +4,8 @@ class RecipeForm extends React.Component {
   constructor(props) {
     super(props)
     const {
-      content
+      content,
+      username
     } = props
     this.active = props.active
     this.content = props.content
@@ -23,6 +24,7 @@ class RecipeForm extends React.Component {
       tempRecipe.ingredients = content.ingredients.join('\n')
       tempRecipe.directions = content.directions.join('\n\n')
       tempRecipe.notes = content.notes.join('\n\n')
+      this.oldContent = tempRecipe.ingredients + tempRecipe.directions
       this.state = {
         ...newContent,
         ...tempRecipe,
@@ -44,6 +46,8 @@ class RecipeForm extends React.Component {
         directions: '',
         notes: '',
         author: '',
+        createdBy: username,
+        canPublish: true,
         published: false,
         showDetails: true
       }
@@ -80,6 +84,14 @@ class RecipeForm extends React.Component {
         .filter(line => line !== '') : []
 
     recipe.author = recipe.author.trim() || 'Me'
+
+    const newIngredients = recipe.ingredients.join('\n'),
+          newDirections = recipe.directions.join('\n\n'),
+          newContent = newIngredients + newDirections
+
+    if (newContent != this.oldContent) {
+      recipe.canPublish = true
+    }
 
     if (typeof this.content == 'object') {
       this.editRecipe(this.user, recipe, this.active)

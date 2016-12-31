@@ -54,21 +54,28 @@ const PrivateRecipe = ({
       <li key={i}>{direction}</li>
   )
 
-  const status = published ?
-    <div
-      className='recipe__button--unpublish'
-      onClick={unpublishConfirm}
-    >
-      <i className='fa fa-check-circle'></i>
-      Published
-    </div> :
-    <div
-      className='recipe__button--publish'
-      onClick={publishRecipe}
-    >
-      <i className='fa fa-newspaper-o'></i>
-      Publish
-    </div>
+  const status = canPublish ?
+    (published ?
+      <div
+        className='recipe__button--passive'
+        onClick={unpublishConfirm}
+      >
+        <i className='fa fa-check-circle'></i>
+        Published
+      </div> :
+      <div
+        className='recipe__button--publish'
+        onClick={publishRecipe}
+      >
+        <i className='fa fa-newspaper-o'></i>
+        Publish
+      </div>) :
+      <div
+        className='recipe__button--passive'
+      >
+        <i className='fa fa-cloud-download'></i>
+        Downloaded
+      </div>
 
   const starIcons = []
 

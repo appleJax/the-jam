@@ -2632,7 +2632,7 @@ nav {
   margin-left: 15px; }
 
 .recipe__button--publish,
-.recipe__button--unpublish {
+.recipe__button--passive {
   border-radius: 5px;
   cursor: pointer;
   display: inline;
@@ -2641,7 +2641,7 @@ nav {
   padding: 5px;
   text-align: center; }
   .recipe__button--publish i,
-  .recipe__button--unpublish i {
+  .recipe__button--passive i {
     margin-right: 10px; }
 
 .recipe__button--publish {
@@ -2649,7 +2649,7 @@ nav {
   box-shadow: 0 0 10px #F14723 inset;
   color: #F14723; }
 
-.recipe__button--unpublish {
+.recipe__button--passive {
   border: 1px solid #f79783;
   box-shadow: 0 0 8px #f46f53 inset;
   color: #f46f53; }
