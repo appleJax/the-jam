@@ -61092,19 +61092,23 @@
 	      _react2.default.createElement('div', { className: 'spacer' }),
 	      _react2.default.createElement(
 	        'div',
-	        {
-	          className: 'recipe__button--footer',
-	          onClick: confirmDelete
-	        },
-	        _react2.default.createElement('i', { className: 'fa fa-clone fa-lg' })
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        {
-	          className: 'recipe__button--footer recipe__button--delete',
-	          onClick: confirmDelete
-	        },
-	        _react2.default.createElement('i', { className: 'fa fa-times fa-lg' })
+	        { className: 'recipe__footer-buttons' },
+	        _react2.default.createElement(
+	          'div',
+	          {
+	            className: 'recipe__button--footer',
+	            onClick: confirmDelete
+	          },
+	          _react2.default.createElement('i', { className: 'fa fa-clone fa-lg' })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          {
+	            className: 'recipe__button--footer recipe__button--delete',
+	            onClick: confirmDelete
+	          },
+	          _react2.default.createElement('i', { className: 'fa fa-times fa-lg' })
+	        )
 	      )
 	    )
 	  );

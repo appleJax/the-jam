@@ -11,6 +11,7 @@
   justify-content: space-between
   margin: 0 auto 15px
   max-width: 630px
+  overflow: hidden
   padding: 15px
   position: relative
   width: 100%
@@ -223,7 +224,7 @@ h3
   flex-grow: 20
 
 .recipe__credits
-  align-items: stretch
+  align-items: center
   background: lighten($nav-bg, 10%)
   border-radius: 0 0 5px 5px
   color: lighten($nav-bg, 50%)
@@ -242,12 +243,17 @@ h3
   justify-content: space-between
 
 .recipe__credits--private
-  flex-wrap: wrap-reverse
+  flex-wrap: wrap
   justify-content: flex-end
 
 .recipe__credits__author,
 .recipe__credits__publisher
   margin: 8px 0
+  white-space: nowrap
+
+.recipe__footer-buttons
+  display: flex
+  margin-right: -15px
   white-space: nowrap
 
 .recipe__button--footer
@@ -258,8 +264,8 @@ h3
   color: $nav-bg
   cursor: pointer
   display: flex
+  height: 52px
   justify-content: center
-  width: 40px
-
-.recipe__button--delete
-  margin-right: -15px
+  margin-bottom: -8px
+  margin-top: -8px
+  width: 50px

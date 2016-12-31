@@ -179,17 +179,19 @@ const PrivateRecipe = ({
           Recipe By: <span className='credit-name'>{author}</span>
         </div>
         <div className='spacer'></div>
-        <div
-          className='recipe__button--footer'
-          onClick={confirmDelete}
-        >
-          <i className='fa fa-clone fa-lg'></i>
-        </div>
-        <div
-          className='recipe__button--footer recipe__button--delete'
-          onClick={confirmDelete}
-        >
-          <i className='fa fa-times fa-lg'></i>
+        <div className='recipe__footer-buttons'>
+          <div
+            className='recipe__button--footer'
+            onClick={confirmDelete}
+          >
+            <i className='fa fa-clone fa-lg'></i>
+          </div>
+          <div
+            className='recipe__button--footer recipe__button--delete'
+            onClick={confirmDelete}
+          >
+            <i className='fa fa-times fa-lg'></i>
+          </div>
         </div>
       </div>
       }
