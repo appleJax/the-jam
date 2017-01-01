@@ -123,7 +123,7 @@ const getVisibleRecipes = (recipes, visibilityFilter, sort) => {
       return timeA - timeB
 
     } else {
-      return 0
+      return 1
     }
   })
 }

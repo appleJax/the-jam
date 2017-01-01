@@ -60422,7 +60422,7 @@
 	      if (timeB == 0) return -1;
 	      return timeA - timeB;
 	    } else {
-	      return 0;
+	      return 1;
 	    }
 	  });
 	};
@@ -60527,13 +60527,21 @@
 	  const newRecipe = _extends({}, recipe, {
 	    id: Date.now(),
 	    published: false,
-	    showDetails: false,
 	    name: 'Copy of ' + recipe.name
 	  });
 	  delete newRecipe._id;
 
 	  dispatch(addUserRecipe(user, newRecipe, 'private'));
 	  dispatch((0, _sync.populateModal)('recipe', newRecipe));
+
+	  const altRecipe = _extends({}, recipe, {
+	    showDetails: false
+	  }),
+	        altNewRecipe = _extends({}, newRecipe, {
+	    showDetails: false
+	  });
+
+	  dispatch((0, _sync.editRecipe)(altRecipe, 'private'));
 
 	  return (0, _isomorphicFetch2.default)(`https://thejam.herokuapp.com/new`, {
 	    method: 'POST',
@@ -60543,7 +60551,7 @@
 	    },
 	    mode: 'cors',
 	    cache: 'default',
-	    body: JSON.stringify({ user, recipe: newRecipe })
+	    body: JSON.stringify({ user, recipe: altNewRecipe })
 	  }).catch(console.error);
 	};
 
