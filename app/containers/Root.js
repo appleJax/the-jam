@@ -14,7 +14,7 @@ try {
 
   if (preloadedState.auth.isAuthenticated) {
     const request = {}
-    request.user = preloadedState.auth.email
+    request.user = preloadedState.auth.email || preloadedState.auth.name
 
     fetch(`https://thejam.herokuapp.com/recipes`,
       {

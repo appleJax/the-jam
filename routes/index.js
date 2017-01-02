@@ -224,6 +224,7 @@ module.exports = (app) => {
     } else if (req.method == 'POST') {
       MongoClient.connect(url, (err, db) => {
         assert.equal(null, err);
+        console.log('Collection Name:', req.body.user);
 
         const collection = db.collection(req.body.user);
 
