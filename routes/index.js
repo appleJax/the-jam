@@ -115,8 +115,8 @@ module.exports = (app) => {
 
           if (result && result.idTokenPayload) {
             var idTokenPayload = result.idTokenPayload,
-              name = idTokenPayload.name ? idTokenPayload.name.replace(/\.$/, '') : null,
-              username = idTokenPayload.username ? idTokenPayload.username.replace(/\.$/, '') : null,
+              name = idTokenPayload.name ? idTokenPayload.name.replace(/\\.$/, '') : null,
+              username = idTokenPayload.username ? idTokenPayload.username.replace(/\\.$/, '') : null,
               profile = {
                 name: name,
                 email: idTokenPayload.email,
