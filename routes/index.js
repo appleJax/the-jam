@@ -115,10 +115,12 @@ module.exports = (app) => {
 
           if (result && result.idTokenPayload) {
             var idTokenPayload = result.idTokenPayload,
+              name = idTokenPayload.name.replace(/\.$/, ''),
+              username = idTokenPayload.username.replace(/\.$/, ''),
               profile = {
-                name: idTokenPayload.name.replace(/\./, ''),
+                name: name,
                 email: idTokenPayload.email,
-                username: idTokenPayload.username.replace(/\./, '')
+                username: username
               };
             window.localStorage.setItem('idToken', result.idToken);
             window.localStorage.setItem('profile', JSON.stringify(profile));
