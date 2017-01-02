@@ -60659,6 +60659,7 @@
 	  });
 	  delete publicRecipe._id;
 	  delete publicRecipe.canPublish;
+	  delete publicRecipe.published;
 
 	  if (recipe.author == 'Me' || recipe.author == 'me') {
 	    publicRecipe.author = publisher;
