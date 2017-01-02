@@ -132,7 +132,7 @@ const mapStateToProps = (state) => {
   return {
     recipes: getVisibleRecipes(state.recipes, state.visibilityFilter, state.sort),
     visibilityFilter: state.visibilityFilter,
-    user: state.auth.email,
+    user: state.auth.email || state.auth.name,
     username: state.auth.name,
     privateView: state.visibilityFilter.active == 'private',
     loggedIn: state.auth.isAuthenticated,
