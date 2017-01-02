@@ -2810,7 +2810,7 @@ footer {
 
 .recipe-form {
   margin: 20px 0 15px 0;
-  padding: 5px 15px 20px 15px; }
+  padding: 5px 15px 80px 15px; }
   .recipe-form textarea[name='directions'] {
     margin-bottom: 30px; }
 
@@ -2899,10 +2899,17 @@ footer {
   margin-bottom: 20px; }
 
 .recipe-form__buttons {
-  display: flex;
   align-items: baseline;
+  background: #fcd3cb;
+  border-top: 3px solid #999;
+  bottom: 0;
+  display: flex;
   justify-content: flex-end;
-  margin: 45px 10px 0 0; }
+  margin: 45px 10px 0 0;
+  max-width: 660px;
+  padding: 20px 0;
+  position: fixed;
+  width: 95%; }
 
 .recipe-form__save,
 .recipe-form__cancel {
