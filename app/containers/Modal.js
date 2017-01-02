@@ -15,7 +15,7 @@ const mapStateToProps = (state) =>
     dialogue: state.modal.dialogue,
     content: state.modal.content,
     active: state.visibilityFilter.active,
-    user: state.auth.email,
+    user: state.auth.email || state.auth.name,
     username: state.auth.name
   })
 
