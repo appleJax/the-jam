@@ -155,8 +155,10 @@ module.exports = (app) => {
         assert.equal(null, err);
 
         const recipe = req.body.recipe,
-              user = req.body.user || 'public',
-              collection = db.collection(user);
+              user = req.body.user || 'public'
+
+        console.log('Collection Name:', user);
+        const collection = db.collection(user);
 
         collection.insert(recipe, (err, result) => {
           assert.equal(null, err);
