@@ -60978,7 +60978,15 @@
 	    'li',
 	    {
 	      key: i,
-	      onClick: e => setFilterContent(visibilityFilter.content.concat(e.target.innerHTML))
+	      onClick: e => {
+	        const tagWord = e.target.innerHTML;
+
+	        if (visibilityFilter.content.includes(tagWord)) {
+	          return;
+	        } else {
+	          setFilterContent(visibilityFilter.content.concat(tagWord));
+	        }
+	      }
 	    },
 	    tag
 	  ));
