@@ -110,7 +110,7 @@ const Nav = ({
       {visibilityFilter.active == 'private' &&
       <div
         className='nav__add-recipe'
-        onClick={populateModal}
+        onClick={() => populateModal('recipe', 'new')}
       >
         <i className='fa fa-plus fa-lg'></i>
       </div>

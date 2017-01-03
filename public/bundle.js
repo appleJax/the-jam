@@ -60302,7 +60302,7 @@
 	      'div',
 	      {
 	        className: 'nav__add-recipe',
-	        onClick: populateModal
+	        onClick: () => populateModal('recipe', 'new')
 	      },
 	      _react2.default.createElement('i', { className: 'fa fa-plus fa-lg' })
 	    )
