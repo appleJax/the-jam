@@ -1,4 +1,5 @@
 import fetch from 'isomorphic-fetch'
+import uuidV4 from 'uuid/v4'
 import {
   addRecipe,
   editRecipe,
@@ -57,7 +58,7 @@ export const duplicateRecipe = (user, recipe) => {
   return dispatch => {
     const newRecipe = {
       ...recipe,
-      id: Date.now(),
+      id: uuidV4(),
       published: false,
       name: 'Copy of ' + recipe.name
     }
@@ -327,7 +328,7 @@ export const addToUserRecipes = (user, recipe) =>
       canPublish: false,
       published: false,
       showDetails: false,
-      id: Date.now()
+      id: uuidV4()
     }
     delete newRecipe.votes
     delete newRecipe._id

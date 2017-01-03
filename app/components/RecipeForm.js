@@ -1,4 +1,5 @@
 import React from 'react'
+import uuidV4 from 'uuid/v4'
 
 class RecipeForm extends React.Component {
   constructor(props) {
@@ -32,7 +33,7 @@ class RecipeForm extends React.Component {
 
     } else {
       this.state = {
-        id: Date.now(),
+        id: uuidV4(),
         name: '',
         tags: '',
         time: {

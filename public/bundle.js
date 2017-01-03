@@ -8656,7 +8656,7 @@
 
 /***/ },
 /* 316 */
-[720, 317, 318],
+[723, 317, 318],
 /* 317 */
 /***/ function(module, exports) {
 
@@ -9137,7 +9137,7 @@
 
 /***/ },
 /* 321 */
-[721, 322],
+[724, 322],
 /* 322 */
 /***/ function(module, exports) {
 
@@ -14043,7 +14043,7 @@
 
 /***/ },
 /* 357 */
-[721, 358],
+[724, 358],
 /* 358 */
 322,
 /* 359 */
@@ -14284,7 +14284,7 @@
 
 /***/ },
 /* 363 */
-[720, 345, 347],
+[723, 345, 347],
 /* 364 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -60091,11 +60091,11 @@
 
 	var _VisibleRecipeList2 = _interopRequireDefault(_VisibleRecipeList);
 
-	var _Modal = __webpack_require__(712);
+	var _Modal = __webpack_require__(715);
 
 	var _Modal2 = _interopRequireDefault(_Modal);
 
-	var _Footer = __webpack_require__(719);
+	var _Footer = __webpack_require__(722);
 
 	var _Footer2 = _interopRequireDefault(_Footer);
 
@@ -60320,7 +60320,7 @@
 
 	var _async = __webpack_require__(707);
 
-	var _RecipeList = __webpack_require__(708);
+	var _RecipeList = __webpack_require__(711);
 
 	var _RecipeList2 = _interopRequireDefault(_RecipeList);
 
@@ -60469,6 +60469,10 @@
 
 	var _isomorphicFetch2 = _interopRequireDefault(_isomorphicFetch);
 
+	var _v = __webpack_require__(708);
+
+	var _v2 = _interopRequireDefault(_v);
+
 	var _sync = __webpack_require__(697);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -60513,7 +60517,7 @@
 	const duplicateRecipe = exports.duplicateRecipe = (user, recipe) => {
 	  return dispatch => {
 	    const newRecipe = _extends({}, recipe, {
-	      id: Date.now(),
+	      id: (0, _v2.default)(),
 	      published: false,
 	      name: 'Copy of ' + recipe.name
 	    });
@@ -60738,7 +60742,7 @@
 	    canPublish: false,
 	    published: false,
 	    showDetails: false,
-	    id: Date.now()
+	    id: (0, _v2.default)()
 	  });
 	  delete newRecipe.votes;
 	  delete newRecipe._id;
@@ -60841,6 +60845,110 @@
 /* 708 */
 /***/ function(module, exports, __webpack_require__) {
 
+	var rng = __webpack_require__(709);
+	var bytesToUuid = __webpack_require__(710);
+
+	function v4(options, buf, offset) {
+	  var i = buf && offset || 0;
+
+	  if (typeof(options) == 'string') {
+	    buf = options == 'binary' ? new Array(16) : null;
+	    options = null;
+	  }
+	  options = options || {};
+
+	  var rnds = options.random || (options.rng || rng)();
+
+	  // Per 4.4, set bits for version and `clock_seq_hi_and_reserved`
+	  rnds[6] = (rnds[6] & 0x0f) | 0x40;
+	  rnds[8] = (rnds[8] & 0x3f) | 0x80;
+
+	  // Copy bytes to buffer, if provided
+	  if (buf) {
+	    for (var ii = 0; ii < 16; ++ii) {
+	      buf[i + ii] = rnds[ii];
+	    }
+	  }
+
+	  return buf || bytesToUuid(rnds);
+	}
+
+	module.exports = v4;
+
+
+/***/ },
+/* 709 */
+/***/ function(module, exports) {
+
+	/* WEBPACK VAR INJECTION */(function(global) {// Unique ID creation requires a high quality random # generator.  In the
+	// browser this is a little complicated due to unknown quality of Math.random()
+	// and inconsistent support for the `crypto` API.  We do the best we can via
+	// feature-detection
+	var rng;
+
+	var crypto = global.crypto || global.msCrypto; // for IE 11
+	if (crypto && crypto.getRandomValues) {
+	  // WHATWG crypto RNG - http://wiki.whatwg.org/wiki/Crypto
+	  var rnds8 = new Uint8Array(16);
+	  rng = function whatwgRNG() {
+	    crypto.getRandomValues(rnds8);
+	    return rnds8;
+	  };
+	}
+
+	if (!rng) {
+	  // Math.random()-based (RNG)
+	  //
+	  // If all else fails, use Math.random().  It's fast, but is of unspecified
+	  // quality.
+	  var  rnds = new Array(16);
+	  rng = function() {
+	    for (var i = 0, r; i < 16; i++) {
+	      if ((i & 0x03) === 0) r = Math.random() * 0x100000000;
+	      rnds[i] = r >>> ((i & 0x03) << 3) & 0xff;
+	    }
+
+	    return rnds;
+	  };
+	}
+
+	module.exports = rng;
+
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
+
+/***/ },
+/* 710 */
+/***/ function(module, exports) {
+
+	/**
+	 * Convert array of 16 byte values to UUID string format of the form:
+	 * XXXXXXXX-XXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
+	 */
+	var byteToHex = [];
+	for (var i = 0; i < 256; ++i) {
+	  byteToHex[i] = (i + 0x100).toString(16).substr(1);
+	}
+
+	function bytesToUuid(buf, offset) {
+	  var i = offset || 0;
+	  var bth = byteToHex;
+	  return  bth[buf[i++]] + bth[buf[i++]] +
+	          bth[buf[i++]] + bth[buf[i++]] + '-' +
+	          bth[buf[i++]] + bth[buf[i++]] + '-' +
+	          bth[buf[i++]] + bth[buf[i++]] + '-' +
+	          bth[buf[i++]] + bth[buf[i++]] + '-' +
+	          bth[buf[i++]] + bth[buf[i++]] +
+	          bth[buf[i++]] + bth[buf[i++]] +
+	          bth[buf[i++]] + bth[buf[i++]];
+	}
+
+	module.exports = bytesToUuid;
+
+
+/***/ },
+/* 711 */
+/***/ function(module, exports, __webpack_require__) {
+
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
@@ -60851,11 +60959,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _PrivateRecipe = __webpack_require__(709);
+	var _PrivateRecipe = __webpack_require__(712);
 
 	var _PrivateRecipe2 = _interopRequireDefault(_PrivateRecipe);
 
-	var _PublicRecipe = __webpack_require__(711);
+	var _PublicRecipe = __webpack_require__(714);
 
 	var _PublicRecipe2 = _interopRequireDefault(_PublicRecipe);
 
@@ -60914,7 +61022,7 @@
 	exports.default = RecipeList;
 
 /***/ },
-/* 709 */
+/* 712 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60927,7 +61035,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _RecipeBody = __webpack_require__(710);
+	var _RecipeBody = __webpack_require__(713);
 
 	var _RecipeBody2 = _interopRequireDefault(_RecipeBody);
 
@@ -61152,7 +61260,7 @@
 	exports.default = PrivateRecipe;
 
 /***/ },
-/* 710 */
+/* 713 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -61267,7 +61375,7 @@
 	exports.default = RecipeBody;
 
 /***/ },
-/* 711 */
+/* 714 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -61280,7 +61388,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _RecipeBody = __webpack_require__(710);
+	var _RecipeBody = __webpack_require__(713);
 
 	var _RecipeBody2 = _interopRequireDefault(_RecipeBody);
 
@@ -61479,7 +61587,7 @@
 	exports.default = PublicRecipe;
 
 /***/ },
-/* 712 */
+/* 715 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -61496,7 +61604,7 @@
 
 	var _auth = __webpack_require__(536);
 
-	var _ModalOverlay = __webpack_require__(713);
+	var _ModalOverlay = __webpack_require__(716);
 
 	var _ModalOverlay2 = _interopRequireDefault(_ModalOverlay);
 
@@ -61534,7 +61642,7 @@
 	exports.default = Modal;
 
 /***/ },
-/* 713 */
+/* 716 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -61547,23 +61655,23 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _ConfirmDialogue = __webpack_require__(714);
+	var _ConfirmDialogue = __webpack_require__(717);
 
 	var _ConfirmDialogue2 = _interopRequireDefault(_ConfirmDialogue);
 
-	var _RecipeForm = __webpack_require__(715);
+	var _RecipeForm = __webpack_require__(718);
 
 	var _RecipeForm2 = _interopRequireDefault(_RecipeForm);
 
-	var _VoteDialogue = __webpack_require__(716);
+	var _VoteDialogue = __webpack_require__(719);
 
 	var _VoteDialogue2 = _interopRequireDefault(_VoteDialogue);
 
-	var _LoginDialogue = __webpack_require__(717);
+	var _LoginDialogue = __webpack_require__(720);
 
 	var _LoginDialogue2 = _interopRequireDefault(_LoginDialogue);
 
-	var _UnpublishDialogue = __webpack_require__(718);
+	var _UnpublishDialogue = __webpack_require__(721);
 
 	var _UnpublishDialogue2 = _interopRequireDefault(_UnpublishDialogue);
 
@@ -61638,7 +61746,7 @@
 	exports.default = ModalOverlay;
 
 /***/ },
-/* 714 */
+/* 717 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -61693,7 +61801,7 @@
 	exports.default = ConfirmDialogue;
 
 /***/ },
-/* 715 */
+/* 718 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -61707,6 +61815,10 @@
 	var _react = __webpack_require__(312);
 
 	var _react2 = _interopRequireDefault(_react);
+
+	var _v = __webpack_require__(708);
+
+	var _v2 = _interopRequireDefault(_v);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -61738,7 +61850,7 @@
 	      this.state = _extends({}, newContent, tempRecipe);
 	    } else {
 	      this.state = {
-	        id: Date.now(),
+	        id: (0, _v2.default)(),
 	        name: '',
 	        tags: '',
 	        time: {
@@ -62150,7 +62262,7 @@
 	exports.default = RecipeForm;
 
 /***/ },
-/* 716 */
+/* 719 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -62266,7 +62378,7 @@
 	exports.default = VoteDialogue;
 
 /***/ },
-/* 717 */
+/* 720 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -62318,7 +62430,7 @@
 	exports.default = LoginDialogue;
 
 /***/ },
-/* 718 */
+/* 721 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -62380,7 +62492,7 @@
 	exports.default = UnpublishDialogue;
 
 /***/ },
-/* 719 */
+/* 722 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -62404,7 +62516,7 @@
 	exports.default = Footer;
 
 /***/ },
-/* 720 */
+/* 723 */
 /***/ function(module, exports, __webpack_require__, __webpack_module_template_argument_0__, __webpack_module_template_argument_1__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -62533,7 +62645,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(308)))
 
 /***/ },
-/* 721 */
+/* 724 */
 /***/ function(module, exports, __webpack_require__, __webpack_module_template_argument_0__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**

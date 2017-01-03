@@ -27,6 +27,7 @@
     "jwt-decode": "^2.1.0",
     "localforage": "^1.4.3",
     "mongodb": "^2.2.15",
+    "node-uuid": "^1.4.7",
     "normalize-scss": "^6.0.0",
     "normalize.css": "^5.0.0",
     "react": "^15.4.1",
@@ -35,6 +36,7 @@
     "redux": "^3.6.0",
     "redux-logger": "^2.7.4",
     "redux-thunk": "^2.1.0",
+    "uuid": "^3.0.1",
     "xhr2": "^0.1.3"
   },
   "devDependencies": {
