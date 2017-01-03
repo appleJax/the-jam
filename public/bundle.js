@@ -29007,13 +29007,11 @@
 	  store = (0, _configureStore2.default)();
 	}
 
-	const Root = () => {
-	  return _react2.default.createElement(
-	    _reactRedux.Provider,
-	    { store: store },
-	    _react2.default.createElement(_App2.default, null)
-	  );
-	};
+	const Root = () => _react2.default.createElement(
+	  _reactRedux.Provider,
+	  { store: store },
+	  _react2.default.createElement(_App2.default, null)
+	);
 
 	exports.default = Root;
 
@@ -60103,23 +60101,19 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	let App = ({ modal }) => {
-	  return _react2.default.createElement(
-	    'div',
-	    { className: 'container' },
-	    _react2.default.createElement(_NavContainer2.default, null),
-	    _react2.default.createElement(_VisibleRecipeList2.default, null),
-	    modal ? _react2.default.createElement(_Modal2.default, null) : '',
-	    _react2.default.createElement('div', { className: 'spacer' }),
-	    _react2.default.createElement(_Footer2.default, null)
-	  );
-	};
+	let App = ({ modal }) => _react2.default.createElement(
+	  'div',
+	  { className: 'container' },
+	  _react2.default.createElement(_NavContainer2.default, null),
+	  _react2.default.createElement(_VisibleRecipeList2.default, null),
+	  modal ? _react2.default.createElement(_Modal2.default, null) : '',
+	  _react2.default.createElement('div', { className: 'spacer' }),
+	  _react2.default.createElement(_Footer2.default, null)
+	);
 
-	const mapStateToProps = state => {
-	  return {
-	    modal: state.modal.show
-	  };
-	};
+	const mapStateToProps = state => ({
+	  modal: state.modal.show
+	});
 
 	App = (0, _reactRedux.connect)(mapStateToProps, null)(App);
 
@@ -60147,32 +60141,28 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	const mapStateToProps = state => {
-	  return {
-	    visibilityFilter: state.visibilityFilter,
-	    sort: state.sort,
-	    loggedIn: state.auth.isAuthenticated,
-	    name: state.auth.name
-	  };
-	};
+	const mapStateToProps = state => ({
+	  visibilityFilter: state.visibilityFilter,
+	  sort: state.sort,
+	  loggedIn: state.auth.isAuthenticated,
+	  name: state.auth.name
+	});
 
-	const mapDispatchToProps = dispatch => {
-	  return {
-	    setFilterContent: filter => dispatch((0, _sync.setFilterContent)(filter)),
+	const mapDispatchToProps = dispatch => ({
+	  setFilterContent: filter => dispatch((0, _sync.setFilterContent)(filter)),
 
-	    setFilterRecipes: recipes => dispatch((0, _sync.setFilterRecipes)(recipes)),
+	  setFilterRecipes: recipes => dispatch((0, _sync.setFilterRecipes)(recipes)),
 
-	    setSort: sortBy => dispatch((0, _sync.setSort)(sortBy)),
+	  setSort: sortBy => dispatch((0, _sync.setSort)(sortBy)),
 
-	    populateModal: () => {
-	      document.body.classList.add('no-scroll');
-	      dispatch((0, _sync.populateModal)('recipe', 'new'));
-	    },
+	  populateModal: () => {
+	    document.body.classList.add('no-scroll');
+	    dispatch((0, _sync.populateModal)('recipe', 'new'));
+	  },
 
-	    login: () => dispatch((0, _auth.auth0Login)()),
-	    logout: () => dispatch((0, _auth.logoutUser)())
-	  };
-	};
+	  login: () => dispatch((0, _auth.auth0Login)()),
+	  logout: () => dispatch((0, _auth.logoutUser)())
+	});
 
 	const NavContainer = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_Nav2.default);
 
@@ -60427,17 +60417,15 @@
 	  });
 	};
 
-	const mapStateToProps = state => {
-	  return {
-	    recipes: getVisibleRecipes(state.recipes, state.visibilityFilter, state.sort),
-	    visibilityFilter: state.visibilityFilter,
-	    user: state.auth.email || state.auth.name,
-	    username: state.auth.name,
-	    privateView: state.visibilityFilter.active == 'private',
-	    loggedIn: state.auth.isAuthenticated,
-	    addToUserAnime: state.animation.addToUserRecipes
-	  };
-	};
+	const mapStateToProps = state => ({
+	  recipes: getVisibleRecipes(state.recipes, state.visibilityFilter, state.sort),
+	  visibilityFilter: state.visibilityFilter,
+	  user: state.auth.email || state.auth.name,
+	  username: state.auth.name,
+	  privateView: state.visibilityFilter.active == 'private',
+	  loggedIn: state.auth.isAuthenticated,
+	  addToUserAnime: state.animation.addToUserRecipes
+	});
 
 	const mapDispatchTProps = dispatch => ({
 	  setFilterContent: filter => dispatch((0, _sync.setFilterContent)(filter)),
@@ -60488,8 +60476,7 @@
 	const fetchRecipes = exports.fetchRecipes = user => {
 	  return dispatch => {
 	    // update UI... (todo)
-
-	    return (0, _isomorphicFetch2.default)(`https://thejam.herokuapp.com/recipes`, {
+	    (0, _isomorphicFetch2.default)(`https://thejam.herokuapp.com/recipes`, {
 	      method: 'POST',
 	      headers: {
 	        'Accept': 'application/json',
@@ -60523,36 +60510,38 @@
 	  };
 	};
 
-	const duplicateRecipe = exports.duplicateRecipe = (user, recipe) => dispatch => {
-	  const newRecipe = _extends({}, recipe, {
-	    id: Date.now(),
-	    published: false,
-	    name: 'Copy of ' + recipe.name
-	  });
-	  delete newRecipe._id;
+	const duplicateRecipe = exports.duplicateRecipe = (user, recipe) => {
+	  return dispatch => {
+	    const newRecipe = _extends({}, recipe, {
+	      id: Date.now(),
+	      published: false,
+	      name: 'Copy of ' + recipe.name
+	    });
+	    delete newRecipe._id;
 
-	  dispatch(addUserRecipe(user, newRecipe, 'private'));
-	  dispatch((0, _sync.populateModal)('recipe', newRecipe));
+	    dispatch(addUserRecipe(user, newRecipe, 'private'));
+	    dispatch((0, _sync.populateModal)('recipe', newRecipe));
 
-	  const altRecipe = _extends({}, recipe, {
-	    showDetails: false
-	  }),
-	        altNewRecipe = _extends({}, newRecipe, {
-	    showDetails: false
-	  });
+	    const altRecipe = _extends({}, recipe, {
+	      showDetails: false
+	    }),
+	          altNewRecipe = _extends({}, newRecipe, {
+	      showDetails: false
+	    });
 
-	  dispatch((0, _sync.editRecipe)(altRecipe, 'private'));
+	    dispatch((0, _sync.editRecipe)(altRecipe, 'private'));
 
-	  return (0, _isomorphicFetch2.default)(`https://thejam.herokuapp.com/new`, {
-	    method: 'POST',
-	    headers: {
-	      'Accept': 'application/json',
-	      'Content-type': 'application/json'
-	    },
-	    mode: 'cors',
-	    cache: 'default',
-	    body: JSON.stringify({ user, recipe: altNewRecipe })
-	  }).catch(console.error);
+	    return (0, _isomorphicFetch2.default)(`https://thejam.herokuapp.com/new`, {
+	      method: 'POST',
+	      headers: {
+	        'Accept': 'application/json',
+	        'Content-type': 'application/json'
+	      },
+	      mode: 'cors',
+	      cache: 'default',
+	      body: JSON.stringify({ user, recipe: altNewRecipe })
+	    }).catch(console.error);
+	  };
 	};
 
 	const editUserRecipe = exports.editUserRecipe = (user, recipe, active) => {

@@ -5,25 +5,22 @@ import VisibleRecipeList from './VisibleRecipeList'
 import Modal from './Modal'
 import Footer from '../components/Footer'
 
-let App = ({ modal }) => {
-  return (
-    <div className="container">
-      <NavContainer />
-      <VisibleRecipeList />
-      {
-        modal ? <Modal /> : ''
-      }
-      <div className="spacer"></div>
-      <Footer />
-    </div>
-  )
-}
+let App = ({ modal }) => (
+  <div className="container">
+    <NavContainer />
+    <VisibleRecipeList />
+    {
+      modal ? <Modal /> : ''
+    }
+    <div className="spacer"></div>
+    <Footer />
+  </div>
+)
 
-const mapStateToProps = (state) => {
-  return {
+const mapStateToProps = (state) =>
+  ({
     modal: state.modal.show
-  }
-}
+  })
 
 App = connect(
   mapStateToProps,

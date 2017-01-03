@@ -11,17 +11,16 @@ import {
 } from '../actions/auth'
 import Nav from '../components/Nav'
 
-const mapStateToProps = (state) => {
-  return {
+const mapStateToProps = (state) =>
+  ({
     visibilityFilter: state.visibilityFilter,
     sort: state.sort,
     loggedIn: state.auth.isAuthenticated,
     name: state.auth.name
-  }
-}
+  })
 
-const mapDispatchToProps = (dispatch) => {
-  return {
+const mapDispatchToProps = (dispatch) =>
+  ({
     setFilterContent: (filter) =>
       dispatch(setFilterContent(filter)),
 
@@ -38,8 +37,7 @@ const mapDispatchToProps = (dispatch) => {
 
     login: () => dispatch(auth0Login()),
     logout: () => dispatch(logoutUser())
-  }
-}
+  })
 
 const NavContainer = connect(
   mapStateToProps,

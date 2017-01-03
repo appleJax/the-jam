@@ -128,8 +128,8 @@ const getVisibleRecipes = (recipes, visibilityFilter, sort) => {
   })
 }
 
-const mapStateToProps = (state) => {
-  return {
+const mapStateToProps = (state) =>
+  ({
     recipes: getVisibleRecipes(state.recipes, state.visibilityFilter, state.sort),
     visibilityFilter: state.visibilityFilter,
     user: state.auth.email || state.auth.name,
@@ -137,8 +137,7 @@ const mapStateToProps = (state) => {
     privateView: state.visibilityFilter.active == 'private',
     loggedIn: state.auth.isAuthenticated,
     addToUserAnime: state.animation.addToUserRecipes
-  }
-}
+  })
 
 const mapDispatchTProps = (dispatch) =>
   ({

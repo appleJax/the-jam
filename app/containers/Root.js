@@ -43,12 +43,10 @@ try {
   store = configureStore()
 }
 
-const Root = () => {
-  return (
-    <Provider store={store}>
-      <App />
-    </Provider>
-  )
-}
+const Root = () => (
+  <Provider store={store}>
+    <App />
+  </Provider>
+)
 
 export default Root

@@ -159,7 +159,6 @@ module.exports = (app) => {
         const recipe = req.body.recipe,
               user = req.body.user || 'public'
 
-        console.log('Collection Name:', user);
         const collection = db.collection(user);
 
         collection.insert(recipe, (err, result) => {
@@ -226,7 +225,6 @@ module.exports = (app) => {
     } else if (req.method == 'POST') {
       MongoClient.connect(url, (err, db) => {
         assert.equal(null, err);
-        console.log('Collection Name:', req.body.user);
 
         const collection = db.collection(req.body.user);
 
@@ -254,7 +252,6 @@ module.exports = (app) => {
 
         collection.find({id: recipe.id}).toArray((err, docs) => {
           assert.equal(null, err);
-          console.log(docs[0]);
           res.json(docs[0]);
           db.close();
           res.end();

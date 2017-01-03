@@ -11,8 +11,7 @@ import {
 export const fetchRecipes = (user) => {
   return dispatch => {
     // update UI... (todo)
-
-    return fetch(`https://thejam.herokuapp.com/recipes`,
+    fetch(`https://thejam.herokuapp.com/recipes`,
       {
         method: 'POST',
         headers: {
@@ -54,8 +53,8 @@ export const addUserRecipe = (user, recipe, active) => {
   }
 }
 
-export const duplicateRecipe = (user, recipe) =>
-  dispatch => {
+export const duplicateRecipe = (user, recipe) => {
+  return dispatch => {
     const newRecipe = {
       ...recipe,
       id: Date.now(),
@@ -92,6 +91,7 @@ export const duplicateRecipe = (user, recipe) =>
     )
     .catch(console.error)
   }
+}
 
 export const editUserRecipe = (user, recipe, active) => {
   return dispatch => {
