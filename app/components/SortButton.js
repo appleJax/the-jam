@@ -1,5 +1,4 @@
 import React from 'react'
 
-const SortButton = () => {
-  return <i></i>
-}
+const SortButton = () =>
+  <i></i>

@@ -62,17 +62,23 @@ export const setSort = (sortBy) =>
     sortBy
   })
 
-export const closeModal = () =>
-  ({
-    type: CLOSE_MODAL
-  })
+export const closeModal = () => {
+  document.body.classList.remove('no-scroll')
 
-export const populateModal = (dialogue, content) =>
-  ({
+  return {
+    type: CLOSE_MODAL
+  }
+}
+
+export const populateModal = (dialogue, content) => {
+  document.body.classList.add('no-scroll')
+
+  return {
     type: POPULATE_MODAL,
     dialogue,
     content
-  })
+  }
+}
 
 export const toggleAddToUserAnime = (id) =>
   ({

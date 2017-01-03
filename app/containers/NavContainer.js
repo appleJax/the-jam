@@ -19,25 +19,14 @@ const mapStateToProps = (state) =>
     name: state.auth.name
   })
 
-const mapDispatchToProps = (dispatch) =>
-  ({
-    setFilterContent: (filter) =>
-      dispatch(setFilterContent(filter)),
-
-    setFilterRecipes: (recipes) =>
-      dispatch(setFilterRecipes(recipes)),
-
-    setSort: (sortBy) =>
-      dispatch(setSort(sortBy)),
-
-    populateModal: () => {
-      document.body.classList.add('no-scroll')
-      dispatch(populateModal('recipe', 'new'))
-    },
-
-    login: () => dispatch(auth0Login()),
-    logout: () => dispatch(logoutUser())
-  })
+const mapDispatchToProps = {
+  setFilterContent,
+  setFilterRecipes,
+  setSort,
+  populateModal,
+  login: auth0Login,
+  logout: logoutUser
+}
 
 const NavContainer = connect(
   mapStateToProps,

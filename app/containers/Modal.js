@@ -19,30 +19,15 @@ const mapStateToProps = (state) =>
     username: state.auth.name
   })
 
-const mapDispatchToProps = (dispatch) =>
-  ({
-    addRecipe: (user, recipe, active) =>
-      dispatch(addUserRecipe(user, recipe, active)),
-
-    editRecipe: (user, recipe, active) =>
-      dispatch(editUserRecipe(user, recipe, active)),
-
-    deleteRecipe: (user, id, active) =>
-      dispatch(deleteUserRecipe(user, id, active)),
-
-    closeModal: () => {
-      document.body.classList.remove('no-scroll')
-      dispatch(closeModal())
-    },
-
-    voteForRecipe: (user, vote, recipe, email) =>
-      dispatch(voteForRecipe(user, vote, recipe, email)),
-
-    unpublishRecipe: (user, recipe) =>
-      dispatch(unpublishRecipe(user, recipe)),
-
-    login: () => dispatch(auth0Login())
-  })
+const mapDispatchToProps = {
+  addRecipe: addUserRecipe,
+  editRecipe: editUserRecipe,
+  deleteRecipe: deleteUserRecipe,
+  closeModal,
+  voteForRecipe,
+  unpublishRecipe,
+  login: auth0Login
+}
 
 const Modal = connect(
   mapStateToProps,

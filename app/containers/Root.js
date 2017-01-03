@@ -4,6 +4,7 @@ import { Provider } from 'react-redux'
 import configureStore from '../configureStore'
 import App from './App'
 import { populateUserRecipes } from '../actions/sync'
+import { Router, Route, browserHistory } from 'react-router'
 
 let store = ''
 
@@ -45,7 +46,9 @@ try {
 
 const Root = () => (
   <Provider store={store}>
-    <App />
+    <Router history={browserHistory}>
+      <Route path='/' component={App} />
+    </Router>
   </Provider>
 )
 

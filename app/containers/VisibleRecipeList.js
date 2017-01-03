@@ -139,34 +139,16 @@ const mapStateToProps = (state) =>
     addToUserAnime: state.animation.addToUserRecipes
   })
 
-const mapDispatchTProps = (dispatch) =>
-  ({
-    setFilterContent: (filter) =>
-      dispatch(setFilterContent(filter)),
-
-    editRecipe: (user, recipe, active) =>
-      dispatch(editUserRecipe(user, recipe, active)),
-
-    duplicateRecipe: (user, recipe) =>
-      dispatch(duplicateRecipe(user, recipe)),
-
-    toggleDetails: (id, active) =>
-      dispatch(toggleDetails(id, active)),
-
-    populateModal: (dialogue, content) => {
-      document.body.classList.add('no-scroll')
-      dispatch(populateModal(dialogue, content))
-    },
-
-    publishRecipe: (user, recipe, publisher) =>
-      dispatch(publishRecipe(user, recipe, publisher)),
-
-    unpublishRecipe: (user, recipe) =>
-      dispatch(unpublishRecipe(user, recipe)),
-
-    addToUserRecipes: (user, recipe) =>
-      dispatch(addToUserRecipes(user, recipe))
-  })
+const mapDispatchTProps = {
+  setFilterContent,
+  editRecipe: editUserRecipe,
+  duplicateRecipe,
+  toggleDetails,
+  populateModal,
+  publishRecipe,
+  unpublishRecipe,
+  addToUserRecipes
+}
 
 const VisibleRecipeList = connect(
   mapStateToProps,
