@@ -9,8 +9,8 @@ import {
   populateModal
 } from './sync'
 
-export const fetchRecipes = (user) => {
-  return dispatch => {
+export const fetchRecipes = (user) =>
+  dispatch => {
     // update UI... (todo)
     fetch(`https://thejam.herokuapp.com/recipes`,
       {
@@ -27,10 +27,9 @@ export const fetchRecipes = (user) => {
     .then(json => dispatch(populateUserRecipes(json)))
     .catch(console.error)
   }
-}
 
-export const addUserRecipe = (user, recipe, active) => {
-  return dispatch => {
+export const addUserRecipe = (user, recipe, active) =>
+  dispatch => {
     dispatch(addRecipe(recipe, active))
 
     const newRecipe = {
@@ -52,10 +51,9 @@ export const addUserRecipe = (user, recipe, active) => {
     )
     .catch(console.error)
   }
-}
 
-export const duplicateRecipe = (user, recipe) => {
-  return dispatch => {
+export const duplicateRecipe = (user, recipe) =>
+  dispatch => {
     const newRecipe = {
       ...recipe,
       id: uuidV4(),
@@ -92,10 +90,9 @@ export const duplicateRecipe = (user, recipe) => {
     )
     .catch(console.error)
   }
-}
 
-export const editUserRecipe = (user, recipe, active) => {
-  return dispatch => {
+export const editUserRecipe = (user, recipe, active) =>
+  dispatch => {
     dispatch(editRecipe(recipe, active))
 
     const newRecipe = {
@@ -187,7 +184,6 @@ export const editUserRecipe = (user, recipe, active) => {
       .catch(console.error)
     }
   }
-}
 
 export const deleteUserRecipe = (user, recipe, active) =>
   dispatch => {

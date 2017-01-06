@@ -60474,86 +60474,91 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	const fetchRecipes = exports.fetchRecipes = user => {
-	  return dispatch => {
-	    // update UI... (todo)
-	    (0, _isomorphicFetch2.default)(`https://thejam.herokuapp.com/recipes`, {
-	      method: 'POST',
-	      headers: {
-	        'Accept': 'application/json',
-	        'Content-type': 'application/json'
-	      },
-	      mode: 'cors',
-	      cache: 'default',
-	      body: JSON.stringify(user)
-	    }).then(json => dispatch((0, _sync.populateUserRecipes)(json))).catch(console.error);
-	  };
+	const fetchRecipes = exports.fetchRecipes = user => dispatch => {
+	  // update UI... (todo)
+	  (0, _isomorphicFetch2.default)(`https://thejam.herokuapp.com/recipes`, {
+	    method: 'POST',
+	    headers: {
+	      'Accept': 'application/json',
+	      'Content-type': 'application/json'
+	    },
+	    mode: 'cors',
+	    cache: 'default',
+	    body: JSON.stringify(user)
+	  }).then(json => dispatch((0, _sync.populateUserRecipes)(json))).catch(console.error);
 	};
 
-	const addUserRecipe = exports.addUserRecipe = (user, recipe, active) => {
-	  return dispatch => {
-	    dispatch((0, _sync.addRecipe)(recipe, active));
+	const addUserRecipe = exports.addUserRecipe = (user, recipe, active) => dispatch => {
+	  dispatch((0, _sync.addRecipe)(recipe, active));
 
-	    const newRecipe = _extends({}, recipe, {
-	      showDetails: false
-	    });
+	  const newRecipe = _extends({}, recipe, {
+	    showDetails: false
+	  });
 
-	    return (0, _isomorphicFetch2.default)(`https://thejam.herokuapp.com/new`, {
-	      method: 'POST',
-	      headers: {
-	        'Accept': 'application/json',
-	        'Content-type': 'application/json'
-	      },
-	      mode: 'cors',
-	      cache: 'default',
-	      body: JSON.stringify({ user, recipe: newRecipe })
-	    }).catch(console.error);
-	  };
+	  return (0, _isomorphicFetch2.default)(`https://thejam.herokuapp.com/new`, {
+	    method: 'POST',
+	    headers: {
+	      'Accept': 'application/json',
+	      'Content-type': 'application/json'
+	    },
+	    mode: 'cors',
+	    cache: 'default',
+	    body: JSON.stringify({ user, recipe: newRecipe })
+	  }).catch(console.error);
 	};
 
-	const duplicateRecipe = exports.duplicateRecipe = (user, recipe) => {
-	  return dispatch => {
-	    const newRecipe = _extends({}, recipe, {
-	      id: (0, _v2.default)(),
-	      published: false,
-	      name: 'Copy of ' + recipe.name
-	    });
-	    delete newRecipe._id;
+	const duplicateRecipe = exports.duplicateRecipe = (user, recipe) => dispatch => {
+	  const newRecipe = _extends({}, recipe, {
+	    id: (0, _v2.default)(),
+	    published: false,
+	    name: 'Copy of ' + recipe.name
+	  });
+	  delete newRecipe._id;
 
-	    dispatch(addUserRecipe(user, newRecipe, 'private'));
-	    dispatch((0, _sync.populateModal)('recipe', newRecipe));
+	  dispatch(addUserRecipe(user, newRecipe, 'private'));
+	  dispatch((0, _sync.populateModal)('recipe', newRecipe));
 
-	    const altRecipe = _extends({}, recipe, {
-	      showDetails: false
-	    }),
-	          altNewRecipe = _extends({}, newRecipe, {
-	      showDetails: false
-	    });
+	  const altRecipe = _extends({}, recipe, {
+	    showDetails: false
+	  }),
+	        altNewRecipe = _extends({}, newRecipe, {
+	    showDetails: false
+	  });
 
-	    dispatch((0, _sync.editRecipe)(altRecipe, 'private'));
+	  dispatch((0, _sync.editRecipe)(altRecipe, 'private'));
 
-	    return (0, _isomorphicFetch2.default)(`https://thejam.herokuapp.com/new`, {
-	      method: 'POST',
-	      headers: {
-	        'Accept': 'application/json',
-	        'Content-type': 'application/json'
-	      },
-	      mode: 'cors',
-	      cache: 'default',
-	      body: JSON.stringify({ user, recipe: altNewRecipe })
-	    }).catch(console.error);
-	  };
+	  return (0, _isomorphicFetch2.default)(`https://thejam.herokuapp.com/new`, {
+	    method: 'POST',
+	    headers: {
+	      'Accept': 'application/json',
+	      'Content-type': 'application/json'
+	    },
+	    mode: 'cors',
+	    cache: 'default',
+	    body: JSON.stringify({ user, recipe: altNewRecipe })
+	  }).catch(console.error);
 	};
 
-	const editUserRecipe = exports.editUserRecipe = (user, recipe, active) => {
-	  return dispatch => {
-	    dispatch((0, _sync.editRecipe)(recipe, active));
+	const editUserRecipe = exports.editUserRecipe = (user, recipe, active) => dispatch => {
+	  dispatch((0, _sync.editRecipe)(recipe, active));
 
-	    const newRecipe = _extends({}, recipe, {
-	      showDetails: false
-	    });
+	  const newRecipe = _extends({}, recipe, {
+	    showDetails: false
+	  });
 
-	    (0, _isomorphicFetch2.default)(`https://thejam.herokuapp.com/edit`, {
+	  (0, _isomorphicFetch2.default)(`https://thejam.herokuapp.com/edit`, {
+	    method: 'POST',
+	    headers: {
+	      'Accept': 'application/json',
+	      'Content-type': 'application/json'
+	    },
+	    mode: 'cors',
+	    cache: 'default',
+	    body: JSON.stringify({ user, recipe: newRecipe })
+	  }).catch(console.error);
+
+	  if (recipe.published) {
+	    (0, _isomorphicFetch2.default)(`https://thejam.herokuapp.com/find`, {
 	      method: 'POST',
 	      headers: {
 	        'Accept': 'application/json',
@@ -60561,11 +60566,46 @@
 	      },
 	      mode: 'cors',
 	      cache: 'default',
-	      body: JSON.stringify({ user, recipe: newRecipe })
-	    }).catch(console.error);
+	      body: JSON.stringify({ user: 'public', recipe: { id: recipe.id } })
+	    }).then(response => {
+	      if (response.status >= 400) {
+	        throw new Error("Bad response from server");
+	      }
+	      return response.json();
+	    }).then(response => {
+	      const tempRecipe = _extends({}, recipe),
+	            oldPubRecipe = response,
+	            publisher = oldPubRecipe.publisher,
+	            vote = tempRecipe.stars,
+	            votes = oldPubRecipe.votes;
 
-	    if (recipe.published) {
-	      (0, _isomorphicFetch2.default)(`https://thejam.herokuapp.com/find`, {
+	      votes[publisher] = vote;
+	      if (vote == 0) delete votes[publisher];
+
+	      const totalVotes = Object.keys(votes).length;
+	      let totalStars = 0;
+
+	      for (let voter in votes) totalStars += votes[voter];
+
+	      const stars = Math.ceil(totalStars / totalVotes);
+
+	      delete oldPubRecipe._id;
+	      delete tempRecipe.published;
+	      delete tempRecipe.stars;
+
+	      if (tempRecipe.author == 'Me' || tempRecipe.author == 'me') {
+	        tempRecipe.author = oldPubRecipe.publisher;
+	      }
+
+	      const newPubRecipe = _extends({}, oldPubRecipe, tempRecipe, {
+	        votes,
+	        stars
+	      });
+
+	      dispatch((0, _sync.editRecipe)(newPubRecipe, 'public'));
+	      newPubRecipe.showDetails = false;
+
+	      (0, _isomorphicFetch2.default)(`https://thejam.herokuapp.com/edit`, {
 	        method: 'POST',
 	        headers: {
 	          'Accept': 'application/json',
@@ -60573,58 +60613,10 @@
 	        },
 	        mode: 'cors',
 	        cache: 'default',
-	        body: JSON.stringify({ user: 'public', recipe: { id: recipe.id } })
-	      }).then(response => {
-	        if (response.status >= 400) {
-	          throw new Error("Bad response from server");
-	        }
-	        return response.json();
-	      }).then(response => {
-	        const tempRecipe = _extends({}, recipe),
-	              oldPubRecipe = response,
-	              publisher = oldPubRecipe.publisher,
-	              vote = tempRecipe.stars,
-	              votes = oldPubRecipe.votes;
-
-	        votes[publisher] = vote;
-	        if (vote == 0) delete votes[publisher];
-
-	        const totalVotes = Object.keys(votes).length;
-	        let totalStars = 0;
-
-	        for (let voter in votes) totalStars += votes[voter];
-
-	        const stars = Math.ceil(totalStars / totalVotes);
-
-	        delete oldPubRecipe._id;
-	        delete tempRecipe.published;
-	        delete tempRecipe.stars;
-
-	        if (tempRecipe.author == 'Me' || tempRecipe.author == 'me') {
-	          tempRecipe.author = oldPubRecipe.publisher;
-	        }
-
-	        const newPubRecipe = _extends({}, oldPubRecipe, tempRecipe, {
-	          votes,
-	          stars
-	        });
-
-	        dispatch((0, _sync.editRecipe)(newPubRecipe, 'public'));
-	        newPubRecipe.showDetails = false;
-
-	        (0, _isomorphicFetch2.default)(`https://thejam.herokuapp.com/edit`, {
-	          method: 'POST',
-	          headers: {
-	            'Accept': 'application/json',
-	            'Content-type': 'application/json'
-	          },
-	          mode: 'cors',
-	          cache: 'default',
-	          body: JSON.stringify({ user: 'public', recipe: newPubRecipe })
-	        });
-	      }).catch(console.error);
-	    }
-	  };
+	        body: JSON.stringify({ user: 'public', recipe: newPubRecipe })
+	      });
+	    }).catch(console.error);
+	  }
 	};
 
 	const deleteUserRecipe = exports.deleteUserRecipe = (user, recipe, active) => dispatch => {
