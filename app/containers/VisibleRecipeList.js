@@ -16,7 +16,7 @@ import RecipeList from '../components/RecipeList'
 const getVisibleRecipes = (recipes, visibilityFilter, sort) => {
   const regex = visibilityFilter.content
                 .filter(val => val !== '')
-                .map(word => `/\\b${word}/`)
+                .map(word => `\\b${word}`)
                 .join('|')
 
   const activeRecipes = recipes[visibilityFilter.active]

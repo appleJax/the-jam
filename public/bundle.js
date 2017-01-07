@@ -60334,7 +60334,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	const getVisibleRecipes = (recipes, visibilityFilter, sort) => {
-	  const regex = visibilityFilter.content.filter(val => val !== '').map(word => `/\\b${ word }/`).join('|');
+	  const regex = visibilityFilter.content.filter(val => val !== '').map(word => `\\b${ word }`).join('|');
 
 	  const activeRecipes = recipes[visibilityFilter.active];
 
