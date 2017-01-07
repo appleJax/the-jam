@@ -60339,7 +60339,7 @@
 	  const activeRecipes = recipes[visibilityFilter.active];
 
 	  return activeRecipes.filter(recipe => {
-	    const text = [recipe.name, ...tags, recipe.servings, ...recipe.ingredients, ...recipe.directions, recipe.author, recipe.publisher].join(' ');
+	    const text = [recipe.name, ...recipe.tags, recipe.servings, ...recipe.ingredients, ...recipe.directions, recipe.author, recipe.publisher].join(' ');
 
 	    return text.match(new RegExp(regex, 'i'));
 	  }).sort((a, b) => {

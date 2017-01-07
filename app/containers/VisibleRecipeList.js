@@ -26,7 +26,7 @@ const getVisibleRecipes = (recipes, visibilityFilter, sort) => {
       recipe => {
         const text = [
           recipe.name,
-          ...tags,
+          ...recipe.tags,
           recipe.servings,
           ...recipe.ingredients,
           ...recipe.directions,
