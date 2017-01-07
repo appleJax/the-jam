@@ -60334,12 +60334,12 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	const getVisibleRecipes = (recipes, visibilityFilter, sort) => {
-	  const regex = visibilityFilter.content.filter(val => val !== '').join('|');
+	  const regex = visibilityFilter.content.filter(val => val !== '').map(word => `/\\b${ word }/`).join('|');
 
 	  const activeRecipes = recipes[visibilityFilter.active];
 
 	  return activeRecipes.filter(recipe => {
-	    const text = [recipe.name, ...recipe.tags, recipe.servings, ...recipe.ingredients, ...recipe.directions, recipe.author, recipe.publisher].join(' ');
+	    const text = [recipe.name, ...tags, recipe.servings, ...recipe.ingredients, ...recipe.directions, recipe.author, recipe.publisher].join(' ');
 
 	    return text.match(new RegExp(regex, 'i'));
 	  }).sort((a, b) => {
@@ -60475,7 +60475,6 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	const fetchRecipes = exports.fetchRecipes = user => dispatch => {
-	  // update UI... (todo)
 	  (0, _isomorphicFetch2.default)(`https://thejam.herokuapp.com/recipes`, {
 	    method: 'POST',
 	    headers: {

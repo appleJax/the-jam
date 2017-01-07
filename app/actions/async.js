@@ -11,7 +11,6 @@ import {
 
 export const fetchRecipes = (user) =>
   dispatch => {
-    // update UI... (todo)
     fetch(`https://thejam.herokuapp.com/recipes`,
       {
         method: 'POST',
