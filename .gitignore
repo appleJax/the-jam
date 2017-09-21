@@ -1,5 +1,4 @@
 .DS_STORE
 .env
-env
 node_modules
 build/

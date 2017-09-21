@@ -131,8 +131,7 @@ const PrivateRecipe = ({
   const emailLink = 'mailto:?subject=' +
   encodeUrl(`${name} Recipe -- theJam`) +
   '&body=' +
-  encodeUrl(`
-RECIPE: ${name}
+  encodeUrl(`RECIPE: ${name}
 
 ${ formatStats() }
 INGREDIENTS:

@@ -1,6 +1,9 @@
 import Auth0Lock from 'auth0-lock'
 
-//import { AUTH0_ID, AUTH0_DOMAIN } from '../../env'
+import {
+  AUTH0_ID,
+  AUTH0_DOMAIN
+} from '../../env'
 
 import { setFilterRecipes } from './sync'
 
@@ -43,7 +46,7 @@ export const auth0Login = () => {
       userNameInputPlaceholder: 'username'
     }
   },
-    lock = new Auth0Lock(process.env.AUTH0_ID, process.env.AUTH0_DOMAIN, options)
+    lock = new Auth0Lock(AUTH0_ID, AUTH0_DOMAIN, options)
 
   lock.show()
 }
