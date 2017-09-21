@@ -2349,18 +2349,17 @@ body {
 
 .mail-recipe {
   align-items: center;
+  background: rgba(255, 255, 255, 0.6);
   border-radius: 5px;
-  color: #440f04;
+  color: #a4250a;
   display: flex;
   float: left;
   justify-content: center;
-  margin: 5px 10px 0 0;
-  padding: 5px;
+  margin: 10px 10px 0 0;
   text-decoration: none;
-  text-shadow: 1px 1px white;
   width: fit-content; }
   .mail-recipe:hover {
-    background: rgba(255, 255, 255, 0.6); }
+    background: rgba(255, 255, 255, 0.4); }
 
 nav {
   background: #F14723;
