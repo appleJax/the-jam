@@ -128,6 +128,26 @@ const PrivateRecipe = ({
     }
   }
 
+  const emailLink = 'mailto:?subject=' +
+  encodeUrl(`${name} Recipe -- theJam`) +
+  '&body=' +
+  encodeUrl(`
+RECIPE: ${name}
+
+${ formatStats() }
+INGREDIENTS:
+
+${ingredients.map( item => '- ' + item).join("\n")}
+
+
+DIRECTIONS:
+
+${directions.map( (item, i) => `${i + 1}. ${item}`).join("\n\n")}
+
+${ notes.length > 0 ? "\nNOTES:\n\n" + notes.join("\n") + "\n\n" : ''}
+https://thejam.herokuapp.com
+`)
+
   return (
     <li
       className='recipe'
@@ -142,6 +162,9 @@ const PrivateRecipe = ({
         <h2 className='recipe__name'>
           {name}
         </h2>
+        <a href={ emailLink } target='_blank' className='mail-recipe'>
+          <i className='fa fa-envelope-o'></i>
+        </a>
         <ul className='tags'>
           {tagList}
         </ul>

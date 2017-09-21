@@ -42,6 +42,60 @@ try {
   }
 } catch(e) {
   store = configureStore()
+  /*
+      ** For Development ONLY **
+      ** TODO: setup development db **
+
+  store = configureStore({
+    animation: {
+      addToUserRecipes: ''
+    },
+    auth: {
+      isAuthenticated: false,
+      isFetching: false,
+      id_token: null,
+      name: null,
+      email: null,
+      errorMessage: ''
+    },
+    modal: {
+      content: '',
+      dialogue: '',
+      show: false
+    },
+    recipes: {
+      public: [{
+        id: 1,
+        name: 'test',
+        stars: 3,
+        votes: 1,
+        time: {
+          hours: 0,
+          minutes: 15
+        },
+        calories: 0,
+        servings: 0,
+        tags: [],
+        ingredients: ['onions', 'tomatoes', 'garlic'],
+        directions: ['Mix ingredients together', 'Put it in the oven', 'Eat'],
+        notes: ['What', "up"],
+        author: 'Me',
+        publisher: 'Me',
+        showDetails: false
+      }],
+      private: []
+    },
+    sort: {
+      asc: false,
+      desc: false,
+      stars: false
+    },
+    visibilityFilter: {
+      active: 'public',
+      content: ['']
+    }
+  })
+  */
 }
 
 const Root = () => (

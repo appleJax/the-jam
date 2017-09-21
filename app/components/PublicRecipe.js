@@ -1,4 +1,6 @@
 import React from 'react'
+import encodeUrl from 'encodeurl'
+import { timeFormatter } from '../utils/timeFormatter'
 import RecipeBody from './RecipeBody'
 
 const PublicRecipe = ({
@@ -94,6 +96,46 @@ const PublicRecipe = ({
       <i className='fa fa-cloud-download'></i>
     </div>
 
+  const formatStats = () => {
+    const { hours, minutes, hasTime } = timeFormatter(time)
+    let result = ''
+
+    if (hasTime) {
+      result += hours + minutes
+    }
+
+    if (calories > 0)
+      result += `\n${calories} cals`
+
+    if (servings > 0)
+      result += `\n${servings} servings`
+
+    if (result)
+      result += "\n"
+
+    return result
+  }
+
+  const emailLink = 'mailto:?subject=' +
+    encodeUrl(`${name} Recipe -- theJam`) +
+    '&body=' +
+    encodeUrl(`
+RECIPE: ${name}
+
+${ formatStats() }
+INGREDIENTS:
+
+${ingredients.map( item => '- ' + item).join("\n")}
+
+
+DIRECTIONS:
+
+${directions.map( (item, i) => `${i + 1}. ${item}`).join("\n\n")}
+
+${ notes.length > 0 ? "\nNOTES:\n\n" + notes.join("\n") + "\n\n" : ''}
+https://thejam.herokuapp.com
+`)
+
   return (
     <li
       className='recipe'
@@ -115,6 +157,9 @@ const PublicRecipe = ({
         <h2 className='recipe__name'>
           {name}
         </h2>
+        <a href={ emailLink } target='_blank' className='mail-recipe'>
+          <i className='fa fa-envelope-o'></i>
+        </a>
         <ul className='tags'>
           {tagList}
         </ul>

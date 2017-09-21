@@ -1,4 +1,5 @@
 import React from 'react'
+import { timeFormatter } from '../utils/timeFormatter'
 
 const RecipeBody = ({
   time,
@@ -8,18 +9,12 @@ const RecipeBody = ({
   directionList,
   notes
 }) => {
-  const hours = time.hours,
-        minutes = time.minutes,
-        hasTime = (time.hours != 0 || time.minutes != 0),
-        printHours = hours > 0 ?
-          (hours == 1 ? hours + ' hr ' : hours + ' hrs ') : '',
-        printMinutes = minutes > 0 ?
-          (minutes == 1 ? minutes + ' min ' : minutes + ' mins ') : '',
+  const { hours, minutes, hasTime } = timeFormatter(time),
         timeDiv = hasTime ?
           <div className='recipe-body__stats-div'>
             <i className='recipe-body__stats-div__icon fa fa-clock-o'></i>
-            {printHours}
-            {printMinutes}
+            {hours}
+            {minutes}
           </div> : '',
         calDiv = calories > 0 ?
           <div className='recipe-body__stats-div'>

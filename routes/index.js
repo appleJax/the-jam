@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const MongoClient = require('mongodb').MongoClient,
   assert = require('assert'),
   React = require('react'),
