@@ -8,6 +8,9 @@
     "start": "node devServer.js",
     "deploy": "NODE_ENV=production webpack --config webpack.production.config.js"
   },
+  "engines": {
+    "node": "8.4.0"
+  },
   "author": "macaroni",
   "license": "ISC",
   "dependencies": {
