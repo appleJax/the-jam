@@ -65810,6 +65810,23 @@
 	    }
 	  }
 
+	  const formatStats = () => {
+	    const { hours, minutes, hasTime } = (0, _timeFormatter.timeFormatter)(time);
+	    let result = '';
+
+	    if (hasTime) {
+	      result += hours + minutes;
+	    }
+
+	    if (calories > 0) result += `\n${calories} cals`;
+
+	    if (servings > 0) result += `\n${servings} servings`;
+
+	    if (result) result += "\n";
+
+	    return result;
+	  };
+
 	  const emailLink = 'mailto:?subject=' + (0, _encodeurl2.default)(`${name} Recipe -- theJam`) + '&body=' + (0, _encodeurl2.default)(`RECIPE: ${name}
 
 	${formatStats()}

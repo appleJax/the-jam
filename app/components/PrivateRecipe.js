@@ -130,6 +130,26 @@ const PrivateRecipe = ({
     }
   }
 
+  const formatStats = () => {
+    const { hours, minutes, hasTime } = timeFormatter(time)
+    let result = ''
+
+    if (hasTime) {
+      result += hours + minutes
+    }
+
+    if (calories > 0)
+      result += `\n${calories} cals`
+
+    if (servings > 0)
+      result += `\n${servings} servings`
+
+    if (result)
+      result += "\n"
+
+    return result
+  }
+
   const emailLink = 'mailto:?subject=' +
   encodeUrl(`${name} Recipe -- theJam`) +
   '&body=' +
