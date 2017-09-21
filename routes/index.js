@@ -1,4 +1,4 @@
-require('dotenv').config()
+// require('dotenv').config()    // Development ONLY
 
 const MongoClient = require('mongodb').MongoClient,
   assert = require('assert'),
