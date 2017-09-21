@@ -2347,6 +2347,21 @@ body {
 .no-scroll {
   overflow: hidden; }
 
+.mail-recipe {
+  align-items: center;
+  border-radius: 5px;
+  color: #440f04;
+  display: flex;
+  float: right;
+  justify-content: center;
+  margin-bottom: 5px;
+  padding: 5px;
+  text-decoration: none;
+  text-shadow: 1px 1px white;
+  width: fit-content; }
+  .mail-recipe:hover {
+    background: rgba(255, 255, 255, 0.6); }
+
 nav {
   background: #F14723;
   box-shadow: 0 0 5px #aaa;
