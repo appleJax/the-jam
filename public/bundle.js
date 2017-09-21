@@ -65608,7 +65608,7 @@
 
 	var _PrivateRecipe2 = _interopRequireDefault(_PrivateRecipe);
 
-	var _PublicRecipe = __webpack_require__(781);
+	var _PublicRecipe = __webpack_require__(782);
 
 	var _PublicRecipe2 = _interopRequireDefault(_PublicRecipe);
 
@@ -65678,7 +65678,13 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _RecipeBody = __webpack_require__(779);
+	var _encodeurl = __webpack_require__(779);
+
+	var _encodeurl2 = _interopRequireDefault(_encodeurl);
+
+	var _timeFormatter = __webpack_require__(780);
+
+	var _RecipeBody = __webpack_require__(781);
 
 	var _RecipeBody2 = _interopRequireDefault(_RecipeBody);
 
@@ -65804,7 +65810,7 @@
 	    }
 	  }
 
-	  const emailLink = 'mailto:?subject=' + encodeUrl(`${name} Recipe -- theJam`) + '&body=' + encodeUrl(`RECIPE: ${name}
+	  const emailLink = 'mailto:?subject=' + (0, _encodeurl2.default)(`${name} Recipe -- theJam`) + '&body=' + (0, _encodeurl2.default)(`RECIPE: ${name}
 
 	${formatStats()}
 	INGREDIENTS:
@@ -65925,6 +65931,95 @@
 
 /***/ }),
 /* 779 */
+/***/ (function(module, exports) {
+
+	/*!
+	 * encodeurl
+	 * Copyright(c) 2016 Douglas Christopher Wilson
+	 * MIT Licensed
+	 */
+
+	'use strict'
+
+	/**
+	 * Module exports.
+	 * @public
+	 */
+
+	module.exports = encodeUrl
+
+	/**
+	 * RegExp to match non-URL code points, *after* encoding (i.e. not including "%")
+	 * and including invalid escape sequences.
+	 * @private
+	 */
+
+	var ENCODE_CHARS_REGEXP = /(?:[^\x21\x25\x26-\x3B\x3D\x3F-\x5B\x5D\x5F\x61-\x7A\x7E]|%(?:[^0-9A-Fa-f]|[0-9A-Fa-f][^0-9A-Fa-f]))+/g
+
+	/**
+	 * RegExp to match unmatched surrogate pair.
+	 * @private
+	 */
+
+	var UNMATCHED_SURROGATE_PAIR_REGEXP = /(^|[^\uD800-\uDBFF])[\uDC00-\uDFFF]|[\uD800-\uDBFF]([^\uDC00-\uDFFF]|$)/g
+
+	/**
+	 * String to replace unmatched surrogate pair with.
+	 * @private
+	 */
+
+	var UNMATCHED_SURROGATE_PAIR_REPLACE = '$1\uFFFD$2'
+
+	/**
+	 * Encode a URL to a percent-encoded form, excluding already-encoded sequences.
+	 *
+	 * This function will take an already-encoded URL and encode all the non-URL
+	 * code points. This function will not encode the "%" character unless it is
+	 * not part of a valid sequence (`%20` will be left as-is, but `%foo` will
+	 * be encoded as `%25foo`).
+	 *
+	 * This encode is meant to be "safe" and does not throw errors. It will try as
+	 * hard as it can to properly encode the given URL, including replacing any raw,
+	 * unpaired surrogate pairs with the Unicode replacement character prior to
+	 * encoding.
+	 *
+	 * @param {string} url
+	 * @return {string}
+	 * @public
+	 */
+
+	function encodeUrl (url) {
+	  return String(url)
+	    .replace(UNMATCHED_SURROGATE_PAIR_REGEXP, UNMATCHED_SURROGATE_PAIR_REPLACE)
+	    .replace(ENCODE_CHARS_REGEXP, encodeURI)
+	}
+
+
+/***/ }),
+/* 780 */
+/***/ (function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	const timeFormatter = exports.timeFormatter = time => {
+	  const hours = time.hours,
+	        minutes = time.minutes,
+	        hasTime = time.hours != 0 || time.minutes != 0,
+	        hourString = hours > 0 ? hours == 1 ? hours + ' hr ' : hours + ' hrs ' : '',
+	        minuteString = minutes > 0 ? minutes == 1 ? minutes + ' min ' : minutes + ' mins ' : '';
+
+	  return {
+	    hours: hourString,
+	    minutes: minuteString,
+	    hasTime
+	  };
+	};
+
+/***/ }),
+/* 781 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -66037,30 +66132,7 @@
 	exports.default = RecipeBody;
 
 /***/ }),
-/* 780 */
-/***/ (function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	const timeFormatter = exports.timeFormatter = time => {
-	  const hours = time.hours,
-	        minutes = time.minutes,
-	        hasTime = time.hours != 0 || time.minutes != 0,
-	        hourString = hours > 0 ? hours == 1 ? hours + ' hr ' : hours + ' hrs ' : '',
-	        minuteString = minutes > 0 ? minutes == 1 ? minutes + ' min ' : minutes + ' mins ' : '';
-
-	  return {
-	    hours: hourString,
-	    minutes: minuteString,
-	    hasTime
-	  };
-	};
-
-/***/ }),
-/* 781 */
+/* 782 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -66073,13 +66145,13 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _encodeurl = __webpack_require__(782);
+	var _encodeurl = __webpack_require__(779);
 
 	var _encodeurl2 = _interopRequireDefault(_encodeurl);
 
 	var _timeFormatter = __webpack_require__(780);
 
-	var _RecipeBody = __webpack_require__(779);
+	var _RecipeBody = __webpack_require__(781);
 
 	var _RecipeBody2 = _interopRequireDefault(_RecipeBody);
 
@@ -66314,72 +66386,6 @@
 	};
 
 	exports.default = PublicRecipe;
-
-/***/ }),
-/* 782 */
-/***/ (function(module, exports) {
-
-	/*!
-	 * encodeurl
-	 * Copyright(c) 2016 Douglas Christopher Wilson
-	 * MIT Licensed
-	 */
-
-	'use strict'
-
-	/**
-	 * Module exports.
-	 * @public
-	 */
-
-	module.exports = encodeUrl
-
-	/**
-	 * RegExp to match non-URL code points, *after* encoding (i.e. not including "%")
-	 * and including invalid escape sequences.
-	 * @private
-	 */
-
-	var ENCODE_CHARS_REGEXP = /(?:[^\x21\x25\x26-\x3B\x3D\x3F-\x5B\x5D\x5F\x61-\x7A\x7E]|%(?:[^0-9A-Fa-f]|[0-9A-Fa-f][^0-9A-Fa-f]))+/g
-
-	/**
-	 * RegExp to match unmatched surrogate pair.
-	 * @private
-	 */
-
-	var UNMATCHED_SURROGATE_PAIR_REGEXP = /(^|[^\uD800-\uDBFF])[\uDC00-\uDFFF]|[\uD800-\uDBFF]([^\uDC00-\uDFFF]|$)/g
-
-	/**
-	 * String to replace unmatched surrogate pair with.
-	 * @private
-	 */
-
-	var UNMATCHED_SURROGATE_PAIR_REPLACE = '$1\uFFFD$2'
-
-	/**
-	 * Encode a URL to a percent-encoded form, excluding already-encoded sequences.
-	 *
-	 * This function will take an already-encoded URL and encode all the non-URL
-	 * code points. This function will not encode the "%" character unless it is
-	 * not part of a valid sequence (`%20` will be left as-is, but `%foo` will
-	 * be encoded as `%25foo`).
-	 *
-	 * This encode is meant to be "safe" and does not throw errors. It will try as
-	 * hard as it can to properly encode the given URL, including replacing any raw,
-	 * unpaired surrogate pairs with the Unicode replacement character prior to
-	 * encoding.
-	 *
-	 * @param {string} url
-	 * @return {string}
-	 * @public
-	 */
-
-	function encodeUrl (url) {
-	  return String(url)
-	    .replace(UNMATCHED_SURROGATE_PAIR_REGEXP, UNMATCHED_SURROGATE_PAIR_REPLACE)
-	    .replace(ENCODE_CHARS_REGEXP, encodeURI)
-	}
-
 
 /***/ }),
 /* 783 */
