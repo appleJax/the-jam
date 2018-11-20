@@ -17,7 +17,7 @@ try {
     const request = {}
     request.user = preloadedState.auth.email || preloadedState.auth.name
 
-    fetch(`https://thejam.herokuapp.com/recipes`,
+    fetch(`https://thejam-recipes.herokuapp.com/recipes`,
       {
         method: 'POST',
         headers: {

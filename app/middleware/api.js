@@ -1,4 +1,4 @@
-const BASE_URL = 'https://thejam.herokuapp.com/'
+const BASE_URL = 'https://thejam-recipes.herokuapp.com/'
 
 function callApi(endpoint, authenticated) {
 

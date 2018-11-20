@@ -30,7 +30,7 @@ export const logout = () => {
 export const auth0Login = () => {
   const options = {
     auth: {
-      redirectUrl: 'https://thejam.herokuapp.com/',
+      redirectUrl: 'https://thejam-recipes.herokuapp.com/',
 //      redirectUrl: 'http://localhost:5000/',
       responseType: 'token',
       params: {
@@ -38,7 +38,7 @@ export const auth0Login = () => {
       }
     },
     theme: {
-      logo: 'https://thejam.herokuapp.com/images/hi_jam.gif'
+      logo: 'https://thejam-recipes.herokuapp.com/images/hi_jam.gif'
     },
     languageDictionary: {
       title: 'the Jam',

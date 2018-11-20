@@ -30659,7 +30659,7 @@
 	    const request = {};
 	    request.user = preloadedState.auth.email || preloadedState.auth.name;
 
-	    (0, _isomorphicFetch2.default)(`https://thejam.herokuapp.com/recipes`, {
+	    (0, _isomorphicFetch2.default)(`https://thejam-recipes.herokuapp.com/recipes`, {
 	      method: 'POST',
 	      headers: {
 	        'Accept': 'application/json',
@@ -33156,7 +33156,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	const BASE_URL = 'https://thejam.herokuapp.com/';
+	const BASE_URL = 'https://thejam-recipes.herokuapp.com/';
 
 	function callApi(endpoint, authenticated) {
 
@@ -34236,7 +34236,7 @@
 	const auth0Login = exports.auth0Login = () => {
 	  const options = {
 	    auth: {
-	      redirectUrl: 'https://thejam.herokuapp.com/',
+	      redirectUrl: 'https://thejam-recipes.herokuapp.com/',
 	      //      redirectUrl: 'http://localhost:5000/',
 	      responseType: 'token',
 	      params: {
@@ -34244,7 +34244,7 @@
 	      }
 	    },
 	    theme: {
-	      logo: 'https://thejam.herokuapp.com/images/hi_jam.gif'
+	      logo: 'https://thejam-recipes.herokuapp.com/images/hi_jam.gif'
 	    },
 	    languageDictionary: {
 	      title: 'the Jam',
@@ -65132,7 +65132,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	const fetchRecipes = exports.fetchRecipes = user => dispatch => {
-	  (0, _isomorphicFetch2.default)(`https://thejam.herokuapp.com/recipes`, {
+	  (0, _isomorphicFetch2.default)(`https://thejam-recipes.herokuapp.com/recipes`, {
 	    method: 'POST',
 	    headers: {
 	      'Accept': 'application/json',
@@ -65151,7 +65151,7 @@
 	    showDetails: false
 	  });
 
-	  return (0, _isomorphicFetch2.default)(`https://thejam.herokuapp.com/new`, {
+	  return (0, _isomorphicFetch2.default)(`https://thejam-recipes.herokuapp.com/new`, {
 	    method: 'POST',
 	    headers: {
 	      'Accept': 'application/json',
@@ -65183,7 +65183,7 @@
 
 	  dispatch((0, _sync.editRecipe)(altRecipe, 'private'));
 
-	  return (0, _isomorphicFetch2.default)(`https://thejam.herokuapp.com/new`, {
+	  return (0, _isomorphicFetch2.default)(`https://thejam-recipes.herokuapp.com/new`, {
 	    method: 'POST',
 	    headers: {
 	      'Accept': 'application/json',
@@ -65202,7 +65202,7 @@
 	    showDetails: false
 	  });
 
-	  (0, _isomorphicFetch2.default)(`https://thejam.herokuapp.com/edit`, {
+	  (0, _isomorphicFetch2.default)(`https://thejam-recipes.herokuapp.com/edit`, {
 	    method: 'POST',
 	    headers: {
 	      'Accept': 'application/json',
@@ -65214,7 +65214,7 @@
 	  }).catch(console.error);
 
 	  if (recipe.published) {
-	    (0, _isomorphicFetch2.default)(`https://thejam.herokuapp.com/find`, {
+	    (0, _isomorphicFetch2.default)(`https://thejam-recipes.herokuapp.com/find`, {
 	      method: 'POST',
 	      headers: {
 	        'Accept': 'application/json',
@@ -65261,7 +65261,7 @@
 	      dispatch((0, _sync.editRecipe)(newPubRecipe, 'public'));
 	      newPubRecipe.showDetails = false;
 
-	      (0, _isomorphicFetch2.default)(`https://thejam.herokuapp.com/edit`, {
+	      (0, _isomorphicFetch2.default)(`https://thejam-recipes.herokuapp.com/edit`, {
 	        method: 'POST',
 	        headers: {
 	          'Accept': 'application/json',
@@ -65278,7 +65278,7 @@
 	const deleteUserRecipe = exports.deleteUserRecipe = (user, recipe, active) => dispatch => {
 	  dispatch((0, _sync.deleteRecipe)(recipe, active));
 
-	  return (0, _isomorphicFetch2.default)(`https://thejam.herokuapp.com/delete`, {
+	  return (0, _isomorphicFetch2.default)(`https://thejam-recipes.herokuapp.com/delete`, {
 	    method: 'POST',
 	    headers: {
 	      'Accept': 'application/json',
@@ -65322,7 +65322,7 @@
 	    showDetails: false
 	  });
 
-	  (0, _isomorphicFetch2.default)(`https://thejam.herokuapp.com/new`, {
+	  (0, _isomorphicFetch2.default)(`https://thejam-recipes.herokuapp.com/new`, {
 	    method: 'POST',
 	    headers: {
 	      'Accept': 'application/json',
@@ -65333,7 +65333,7 @@
 	    body: JSON.stringify({ user: 'public', recipe: newPublicRecipe })
 	  }).catch(console.error);
 
-	  (0, _isomorphicFetch2.default)(`https://thejam.herokuapp.com/edit`, {
+	  (0, _isomorphicFetch2.default)(`https://thejam-recipes.herokuapp.com/edit`, {
 	    method: 'POST',
 	    headers: {
 	      'Accept': 'application/json',
@@ -65358,7 +65358,7 @@
 	    showDetails: false
 	  });
 
-	  (0, _isomorphicFetch2.default)(`https://thejam.herokuapp.com/delete`, {
+	  (0, _isomorphicFetch2.default)(`https://thejam-recipes.herokuapp.com/delete`, {
 	    method: 'POST',
 	    headers: {
 	      'Accept': 'application/json',
@@ -65369,7 +65369,7 @@
 	    body: JSON.stringify({ user: 'public', recipe })
 	  }).catch(console.error);
 
-	  (0, _isomorphicFetch2.default)(`https://thejam.herokuapp.com/edit`, {
+	  (0, _isomorphicFetch2.default)(`https://thejam-recipes.herokuapp.com/edit`, {
 	    method: 'POST',
 	    headers: {
 	      'Accept': 'application/json',
@@ -65399,7 +65399,7 @@
 	  }, 2300);
 	  dispatch((0, _sync.addRecipe)(newRecipe, 'private'));
 
-	  return (0, _isomorphicFetch2.default)(`https://thejam.herokuapp.com/new`, {
+	  return (0, _isomorphicFetch2.default)(`https://thejam-recipes.herokuapp.com/new`, {
 	    method: 'POST',
 	    headers: {
 	      'Accept': 'application/json',
@@ -65435,7 +65435,7 @@
 	    showDetails: false
 	  });
 
-	  (0, _isomorphicFetch2.default)(`https://thejam.herokuapp.com/edit`, {
+	  (0, _isomorphicFetch2.default)(`https://thejam-recipes.herokuapp.com/edit`, {
 	    method: 'POST',
 	    headers: {
 	      'Accept': 'application/json',
@@ -65447,7 +65447,7 @@
 	  }).catch(console.error);
 
 	  if (recipe.publisher == user) {
-	    (0, _isomorphicFetch2.default)(`https://thejam.herokuapp.com/find`, {
+	    (0, _isomorphicFetch2.default)(`https://thejam-recipes.herokuapp.com/find`, {
 	      method: 'POST',
 	      headers: {
 	        'Accept': 'application/json',
@@ -65472,7 +65472,7 @@
 	        showDetails: false
 	      });
 
-	      (0, _isomorphicFetch2.default)(`https://thejam.herokuapp.com/edit`, {
+	      (0, _isomorphicFetch2.default)(`https://thejam-recipes.herokuapp.com/edit`, {
 	        method: 'POST',
 	        headers: {
 	          'Accept': 'application/json',
@@ -65840,7 +65840,7 @@
 	${directions.map((item, i) => `${i + 1}. ${item}`).join("\n\n")}
 
 	${notes.length > 0 ? "\nNOTES:\n\n" + notes.join("\n") + "\n\n" : ''}
-	https://thejam.herokuapp.com
+	https://thejam-recipes.herokuapp.com
 	`);
 
 	  return _react2.default.createElement(
@@ -66289,7 +66289,7 @@
 	${directions.map((item, i) => `${i + 1}. ${item}`).join("\n\n")}
 
 	${notes.length > 0 ? "\nNOTES:\n\n" + notes.join("\n") + "\n\n" : ''}
-	https://thejam.herokuapp.com
+	https://thejam-recipes.herokuapp.com
 	`);
 
 	  return _react2.default.createElement(

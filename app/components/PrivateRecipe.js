@@ -166,7 +166,7 @@ DIRECTIONS:
 ${directions.map( (item, i) => `${i + 1}. ${item}`).join("\n\n")}
 
 ${ notes.length > 0 ? "\nNOTES:\n\n" + notes.join("\n") + "\n\n" : ''}
-https://thejam.herokuapp.com
+https://thejam-recipes.herokuapp.com
 `)
 
   return (

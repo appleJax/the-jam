@@ -11,7 +11,7 @@ import {
 
 export const fetchRecipes = (user) =>
   dispatch => {
-    fetch(`https://thejam.herokuapp.com/recipes`,
+    fetch(`https://thejam-recipes.herokuapp.com/recipes`,
       {
         method: 'POST',
         headers: {
@@ -36,7 +36,7 @@ export const addUserRecipe = (user, recipe, active) =>
       showDetails: false
     }
 
-    return fetch(`https://thejam.herokuapp.com/new`,
+    return fetch(`https://thejam-recipes.herokuapp.com/new`,
       {
         method: 'POST',
         headers: {
@@ -75,7 +75,7 @@ export const duplicateRecipe = (user, recipe) =>
 
     dispatch(editRecipe(altRecipe, 'private'))
 
-    return fetch(`https://thejam.herokuapp.com/new`,
+    return fetch(`https://thejam-recipes.herokuapp.com/new`,
       {
         method: 'POST',
         headers: {
@@ -99,7 +99,7 @@ export const editUserRecipe = (user, recipe, active) =>
       showDetails: false
     }
 
-    fetch(`https://thejam.herokuapp.com/edit`,
+    fetch(`https://thejam-recipes.herokuapp.com/edit`,
       {
         method: 'POST',
         headers: {
@@ -114,7 +114,7 @@ export const editUserRecipe = (user, recipe, active) =>
     .catch(console.error)
 
     if (recipe.published) {
-      fetch(`https://thejam.herokuapp.com/find`,
+      fetch(`https://thejam-recipes.herokuapp.com/find`,
         {
           method: 'POST',
           headers: {
@@ -167,7 +167,7 @@ export const editUserRecipe = (user, recipe, active) =>
         dispatch(editRecipe(newPubRecipe, 'public'))
         newPubRecipe.showDetails = false
 
-        fetch(`https://thejam.herokuapp.com/edit`,
+        fetch(`https://thejam-recipes.herokuapp.com/edit`,
           {
             method: 'POST',
             headers: {
@@ -188,7 +188,7 @@ export const deleteUserRecipe = (user, recipe, active) =>
   dispatch => {
     dispatch(deleteRecipe(recipe, active))
 
-    return fetch(`https://thejam.herokuapp.com/delete`,
+    return fetch(`https://thejam-recipes.herokuapp.com/delete`,
       {
         method: 'POST',
         headers: {
@@ -240,7 +240,7 @@ export const publishRecipe = (user, recipe, publisher) =>
         showDetails: false
       }
 
-    fetch(`https://thejam.herokuapp.com/new`,
+    fetch(`https://thejam-recipes.herokuapp.com/new`,
       {
         method: 'POST',
         headers: {
@@ -254,7 +254,7 @@ export const publishRecipe = (user, recipe, publisher) =>
     )
     .catch(console.error)
 
-    fetch(`https://thejam.herokuapp.com/edit`,
+    fetch(`https://thejam-recipes.herokuapp.com/edit`,
       {
         method: 'POST',
         headers: {
@@ -285,7 +285,7 @@ export const unpublishRecipe = (user, recipe) =>
       showDetails: false
     }
 
-    fetch(`https://thejam.herokuapp.com/delete`,
+    fetch(`https://thejam-recipes.herokuapp.com/delete`,
       {
         method: 'POST',
         headers: {
@@ -300,7 +300,7 @@ export const unpublishRecipe = (user, recipe) =>
     .catch(console.error)
 
 
-    fetch(`https://thejam.herokuapp.com/edit`,
+    fetch(`https://thejam-recipes.herokuapp.com/edit`,
       {
         method: 'POST',
         headers: {
@@ -335,7 +335,7 @@ export const addToUserRecipes = (user, recipe) =>
     }, 2300)
     dispatch(addRecipe(newRecipe, 'private'))
 
-    return fetch(`https://thejam.herokuapp.com/new`,
+    return fetch(`https://thejam-recipes.herokuapp.com/new`,
       {
         method: 'POST',
         headers: {
@@ -377,7 +377,7 @@ export const voteForRecipe = (user, vote, recipe, email) =>
       showDetails: false
     }
 
-    fetch(`https://thejam.herokuapp.com/edit`,
+    fetch(`https://thejam-recipes.herokuapp.com/edit`,
       {
         method: 'POST',
         headers: {
@@ -392,7 +392,7 @@ export const voteForRecipe = (user, vote, recipe, email) =>
     .catch(console.error)
 
     if (recipe.publisher == user) {
-      fetch(`https://thejam.herokuapp.com/find`,
+      fetch(`https://thejam-recipes.herokuapp.com/find`,
         {
           method: 'POST',
           headers: {
@@ -422,7 +422,7 @@ export const voteForRecipe = (user, vote, recipe, email) =>
           showDetails: false
         }
 
-        fetch(`https://thejam.herokuapp.com/edit`,
+        fetch(`https://thejam-recipes.herokuapp.com/edit`,
           {
             method: 'POST',
             headers: {
