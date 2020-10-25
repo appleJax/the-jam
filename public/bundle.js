@@ -64425,7 +64425,7 @@
 /***/ (function(module, exports) {
 
 	module.exports = {
-	  MONGO_ATLAS_URI: 'mongodb://heroku_zp06vvxg:igpq28i97rn65l594r5f7r596u@ds119718.mlab.com:19718/heroku_zp06vvxg',
+	  MONGO_ATLAS_URI: 'mongodb+srv://heroku_zp06vvxg:SyevwKeU28XMmK6y@cluster-zp06vvxg.4b8eb.mongodb.net/heroku_zp06vvxg?retryWrites=true&w=majority',
 	  AUTH0_ID: 'cScY9jmRXWFMDBvonACLTNbNL8KG7Vod',
 	  AUTH0_DOMAIN: 'thejam.auth0.com'
 	}
