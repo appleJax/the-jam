@@ -1,5 +1,5 @@
 {
-  "name": "theJam",
+  "name": "the-jam",
   "version": "0.0.1",
   "description": "An Editable Collection of Recipes",
   "main": "index.js",
@@ -9,7 +9,7 @@
     "deploy": "NODE_ENV=production webpack --config webpack.production.config.js"
   },
   "engines": {
-    "node": "8.4.0"
+    "node": "^8.4.0"
   },
   "author": "macaroni",
   "license": "ISC",
@@ -30,7 +30,7 @@
     "isomorphic-fetch": "^2.2.1",
     "jwt-decode": "^2.1.0",
     "localforage": "^1.4.3",
-    "mongodb": "^2.2.15",
+    "mongodb": "^3.6.2",
     "node-uuid": "^1.4.7",
     "normalize-scss": "^6.0.0",
     "normalize.css": "^5.0.0",

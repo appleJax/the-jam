@@ -7,7 +7,7 @@ const MongoClient = require('mongodb').MongoClient,
   configureStore = require('../app/configureStore').default,
   Provider = require('react-redux').Provider,
   App = require('../app/containers/App').default,
-  url = process.env.MONGODB_URI,
+  url = process.env.MONGO_ATLAS_URI,
   auth0Id = process.env.AUTH0_ID,
   auth0Domain = process.env.AUTH0_DOMAIN;
 
@@ -28,10 +28,11 @@ module.exports = (app) => {
 
   function handleRender(req, res) {
     //console.log(req)
-    // Get recipes from MONGODB_URI
-    MongoClient.connect(url, (err, db) => {
-      assert.equal(null, err);
+    // Get recipes from MONGO_ATLAS_URI
+    MongoClient.connect(url, (err, client) => {
+      assert.strictEqual(null, err);
 
+      const db = client.db();
       const collection = db.collection('public');
 
       collection.find({}).toArray((err, docs) => {
@@ -81,7 +82,7 @@ module.exports = (app) => {
 
         res.send(renderFullPage(html, finalState));
 
-        db.close();
+        client.close();
       });
     });
   }
@@ -155,18 +156,19 @@ module.exports = (app) => {
       res.writeHead(200, headers);
       res.end();
     } else if (req.method == 'POST') {
-      MongoClient.connect(url, (err, db) => {
-        assert.equal(null, err);
+      MongoClient.connect(url, (err, client) => {
+        assert.strictEqual(null, err);
 
         const recipe = req.body.recipe,
               user = req.body.user || 'public'
 
+        const db = client.db();
         const collection = db.collection(user);
 
-        collection.insert(recipe, (err, result) => {
-          assert.equal(null, err);
+        collection.insertOne(recipe, (err, result) => {
+          assert.strictEqual(null, err);
           res.json(result.ops[0]);
-          db.close();
+          client.close();
           res.end();
         });
       });
@@ -179,17 +181,18 @@ module.exports = (app) => {
       res.writeHead(200, headers);
       res.end();
     } else if (req.method == 'POST') {
-      MongoClient.connect(url, (err, db) => {
-        assert.equal(null, err);
+      MongoClient.connect(url, (err, client) => {
+        assert.strictEqual(null, err);
 
+        const db = client.db();
         const recipe = req.body.recipe,
               user = req.body.user || 'public',
               collection = db.collection(user);
 
-        collection.update({id: recipe.id}, recipe, (err, result) => {
-          assert.equal(null, err);
+        collection.updateOne({id: recipe.id}, recipe, (err, result) => {
+          assert.strictEqual(null, err);
           res.json(result);
-          db.close();
+          client.close();
           res.end();
         });
       });
@@ -202,17 +205,18 @@ module.exports = (app) => {
       res.writeHead(200, headers);
       res.end();
     } else if (req.method == 'POST') {
-      MongoClient.connect(url, (err, db) => {
-        assert.equal(null, err);
+      MongoClient.connect(url, (err, client) => {
+        assert.strictEqual(null, err);
 
+        const db = client.db();
         const recipe = req.body.recipe,
               user = req.body.user || 'public',
               collection = db.collection(user);
 
-        collection.remove({id: recipe.id}, (err, result) => {
-          assert.equal(null, err);
+        collection.deleteOne({id: recipe.id}, (err, result) => {
+          assert.strictEqual(null, err);
           res.json(result);
-          db.close();
+          client.close();
           res.end();
         });
       });
@@ -225,15 +229,16 @@ module.exports = (app) => {
       res.writeHead(200, headers);
       res.end();
     } else if (req.method == 'POST') {
-      MongoClient.connect(url, (err, db) => {
-        assert.equal(null, err);
+      MongoClient.connect(url, (err, client) => {
+        assert.strictEqual(null, err);
 
+        const db = client.db();
         const collection = db.collection(req.body.user);
 
         collection.find({}).toArray((err, docs) => {
-          assert.equal(null, err);
+          assert.strictEqual(null, err);
           res.json(docs);
-          db.close();
+          client.close();
           res.end();
         })
       });
@@ -246,16 +251,17 @@ module.exports = (app) => {
       res.writeHead(200, headers);
       res.end();
     } else if (req.method == 'POST') {
-      MongoClient.connect(url, (err, db) => {
-        assert.equal(null, err);
+      MongoClient.connect(url, (err, client) => {
+        assert.strictEqual(null, err);
 
+        const db = client.db();
         const collection = db.collection(req.body.user),
               recipe = req.body.recipe;
 
         collection.find({id: recipe.id}).toArray((err, docs) => {
-          assert.equal(null, err);
+          assert.strictEqual(null, err);
           res.json(docs[0]);
-          db.close();
+          client.close();
           res.end();
         })
       })
