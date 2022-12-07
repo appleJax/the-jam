@@ -25,7 +25,7 @@
     "babel-register": "^6.18.0",
     "body-parser": "^1.15.2",
     "encodeurl": "^1.0.1",
-    "express": "^4.14.0",
+    "express": "^4.17.3",
     "font-awesome": "^4.7.0",
     "isomorphic-fetch": "^2.2.1",
     "jwt-decode": "^2.1.0",
